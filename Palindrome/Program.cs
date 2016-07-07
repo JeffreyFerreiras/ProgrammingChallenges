@@ -24,9 +24,7 @@ namespace Palindrome
             for(int i = 0, j = lowerCasePhrase.Length - 1; i != j; i++, j--)
             {
                 if(lowerCasePhrase[i] != lowerCasePhrase[j])
-                {
-                    return false;
-                }
+                    return false; 
             }
             return true;
         }

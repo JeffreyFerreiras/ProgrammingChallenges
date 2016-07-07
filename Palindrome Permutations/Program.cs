@@ -20,7 +20,7 @@ namespace Palindrome_Permutations
 
         /*
         Notes:
-              This solution may not seem like the most elegant, but speed and space wise it's the most performant. 
+              This solution may not seem like the most elegant, but it's the best speed and space wise. 
         */
         static void Main(string[] args)
         {

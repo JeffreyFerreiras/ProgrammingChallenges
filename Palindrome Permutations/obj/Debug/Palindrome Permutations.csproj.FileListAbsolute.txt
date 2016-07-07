@@ -6,6 +6,5 @@ C:\Git\AlgorithmTraining\ProgrammingChallenges\Palindrome Permutations\obj\Debug
 C:\Git\ProgrammingChallenges\Palindrome Permutations\bin\Debug\Palindrome Permutations.exe.config
 C:\Git\ProgrammingChallenges\Palindrome Permutations\bin\Debug\Palindrome Permutations.exe
 C:\Git\ProgrammingChallenges\Palindrome Permutations\bin\Debug\Palindrome Permutations.pdb
-C:\Git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.csprojResolveAssemblyReference.cache
 C:\Git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.exe
 C:\Git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.pdb

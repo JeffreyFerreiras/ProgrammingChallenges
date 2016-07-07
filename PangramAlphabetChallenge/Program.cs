@@ -17,16 +17,20 @@ namespace PangramAlphabetChallenge
         static char[] alphabet = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
         public static void Main(string[] args)
         {
+            //TEST CODE
             string pangram = "The quick brown fox jumps over the lazy dog";
-            //string pangram = "The quick brown fox jumps over the lazy";
+            string pangram2 = "The quick brown fox jumps over the lazy";
 
             Console.WriteLine(FindMissingLetters(pangram));
+            Console.WriteLine(FindMissingLetters(pangram2));
             Console.ReadLine();
+            //END TEST CODE
         }
         static string FindMissingLetters(string line)
         {
-            var lettersInAphabet = alphabet.Where(c => line.ToLower().Contains(c));
-            var missingletters =  new string (alphabet.Except(lettersInAphabet).ToArray<char>());
+            //SOLUTION
+            IEnumerable<char> lettersInAphabet = alphabet.Where(c => line.ToLower().Contains(c));
+            string missingletters =  new string (alphabet.Except(lettersInAphabet).ToArray<char>());
             return lettersInAphabet.SequenceEqual(alphabet) ? "null" : missingletters;
         }
     }

@@ -21,16 +21,15 @@ namespace StringPermutations
         {
             Permutation(str, "");
         }
-
-        static void Permutation(string a, string b)
+        static void Permutation(string str, string currentString)
         {
-            if(a.Length == 0)
-                Console.WriteLine(b);
+            if(str.Length == 0)
+                Console.WriteLine(currentString);
             else
-                for(int i = 0; i < a.Length; i++)
+                for(int i = 0; i < str.Length; i++)
                 {
-                    string rem = a.Substring(0 , i) + a.Substring(i + 1);
-                    Permutation(rem, b + a[i]);
+                    string remainingChars = str.Substring(0 , i) + str.Substring(i + 1);
+                    Permutation(remainingChars, currentString + str[i]);
                 }
         }
     }

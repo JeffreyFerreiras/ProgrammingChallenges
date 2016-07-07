@@ -35,7 +35,7 @@ namespace FindElementInSortedRotatedArray
             //Test code.
             int[] rotatedArry = { 3,4,5,1,2 };
             int x = 4, left = 0, right = rotatedArry.Length -1;
-
+            // END TEST
             int indexofX = BinarySearch(rotatedArry, left, right, x);
         }
         static int BinarySearch(int[] arry, int left, int right, int target)

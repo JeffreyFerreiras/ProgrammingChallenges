@@ -28,8 +28,10 @@ Convert and print the given time in -hour format, where .
             string time = Console.ReadLine();
 
             var datetime = new DateTime();
-            if(DateTime.TryParse(time, out datetime)) Console.Write(datetime.ToString("HH:mm:ss"));
+            if(DateTime.TryParse(time, out datetime))
+                Console.Write(datetime.ToString("HH:mm:ss"));
             Console.Read();
         }
+        
     }
 }
