@@ -1,0 +1,67 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+namespace Palindrome_Permutations
+{
+    class Program
+    {
+        /**
+        Given a string, write a function to check if it's a permutation of a palindrome.
+        A palindrome is a word or phrase that is the same forwards and backwards.
+        A permutation is a rearrangement of letters. The palindrome does not need to be limited to dictionary words.
+
+            Example.
+            Input: Tact Coa
+            Output: True (taco cat, atco cta)
+        */
+
+        /*
+        Notes:
+              This solution may not seem like the most elegant, but speed and space wise it's the most performant. 
+        */
+        static void Main(string[] args)
+        {
+            bool x = isPermutationOfPalindrome("Taco cat");
+        }
+        static bool isPermutationOfPalindrome(string phrase)
+        {
+            int [] table = BuildCharFrequencyTable(phrase.Replace(" ",""));
+            return CheckMaxOneOdd(table);
+        }
+        static bool CheckMaxOneOdd(int[] table)
+        {
+            bool hasOdd = false;
+            foreach(var i in table)
+            {
+                if(i % 2 == 1)
+                {
+                    if(hasOdd)
+                        return false;
+                    hasOdd = true;
+                }
+            }
+            return true;
+        }
+        static int[] BuildCharFrequencyTable(string phrase)
+        {
+            int [] table = new int[25];
+            foreach(char c in phrase)
+            {
+                int x = GetCharNumber(c);
+                table[x]++;
+            }
+            return table;          
+        }
+        static int GetCharNumber(char c) //NOTE: in C#.NET characters have default integer values corresponding to ASCII. 
+        {
+            if('a' <= c && c <= 'z')
+                return c - 'a';
+            else if('A' <= c && c <= 'Z')
+                return c - 'A';
+            return -1;
+        }
+    }
+}

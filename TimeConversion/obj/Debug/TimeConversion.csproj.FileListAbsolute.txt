@@ -1,0 +1,10 @@
+C:\Git\AlgorithmTraining\ProgrammingChallenges\TimeConversion\bin\Debug\TimeConversion.exe.config
+C:\Git\AlgorithmTraining\ProgrammingChallenges\TimeConversion\bin\Debug\TimeConversion.exe
+C:\Git\AlgorithmTraining\ProgrammingChallenges\TimeConversion\bin\Debug\TimeConversion.pdb
+C:\Git\AlgorithmTraining\ProgrammingChallenges\TimeConversion\obj\Debug\TimeConversion.exe
+C:\Git\AlgorithmTraining\ProgrammingChallenges\TimeConversion\obj\Debug\TimeConversion.pdb
+C:\Git\ProgrammingChallenges\TimeConversion\bin\Debug\TimeConversion.exe.config
+C:\Git\ProgrammingChallenges\TimeConversion\bin\Debug\TimeConversion.exe
+C:\Git\ProgrammingChallenges\TimeConversion\bin\Debug\TimeConversion.pdb
+C:\Git\ProgrammingChallenges\TimeConversion\obj\Debug\TimeConversion.exe
+C:\Git\ProgrammingChallenges\TimeConversion\obj\Debug\TimeConversion.pdb
