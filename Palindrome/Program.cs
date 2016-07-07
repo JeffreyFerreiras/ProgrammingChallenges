@@ -21,7 +21,6 @@ namespace Palindrome
         {
             //SOLUTION
             string lowerCasePhrase = phrase.ToLower();
-
             for(int i = 0, j = lowerCasePhrase.Length - 1; i != j; i++, j--)
             {
                 if(lowerCasePhrase[i] != lowerCasePhrase[j])
