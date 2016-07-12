@@ -28,7 +28,7 @@ namespace Palindrome_Permutations
         }
         static bool isPermutationOfPalindrome(string phrase)
         {
-            int [] table = BuildCharFrequencyTable(phrase.Replace(" ",""));
+            int [] table = BuildCharTable(phrase.Replace(" ",""));
             return CheckMaxOneOdd(table);
         }
         static bool CheckMaxOneOdd(int[] table)
@@ -45,7 +45,7 @@ namespace Palindrome_Permutations
             }
             return true;
         }
-        static int[] BuildCharFrequencyTable(string phrase)
+        static int[] BuildCharTable(string phrase)
         {
             int [] table = new int[25];
             foreach(char c in phrase)
@@ -55,12 +55,12 @@ namespace Palindrome_Permutations
             }
             return table;          
         }
-        static int GetCharNumber(char c) //NOTE: in C#.NET characters have default integer values corresponding to ASCII. 
+        static int GetCharNumber(char character) //NOTE: in C#.NET characters have default integer values corresponding to ASCII numbers. 
         {
-            if('a' <= c && c <= 'z')
-                return c - 'a';
-            else if('A' <= c && c <= 'Z')
-                return c - 'A';
+            if('a' <= character && character <= 'z')
+                return character - 'a';
+            else if('A' <= character && character <= 'Z')
+                return character - 'A';
             return -1;
         }
     }

@@ -31,7 +31,6 @@ Convert and print the given time in -hour format, where .
             if(DateTime.TryParse(time, out datetime))
                 Console.Write(datetime.ToString("HH:mm:ss"));
             Console.Read();
-        }
-        
+        }    
     }
 }

@@ -21,6 +21,7 @@ For the curious, here's why 7 is a happy number: 7->49->97->130->10->1. Here's w
     class Program
     {
         static List<int> cache = new List<int>();
+
         public static void Main(string[] args)
         {
             Console.WriteLine(IsHappyNumber(Convert.ToInt32("145")));

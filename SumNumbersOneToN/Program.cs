@@ -27,7 +27,7 @@ For each line of input, print to standard output the sum of the numbers from 1 t
         {
             return Enumerable.Range(1, num).Sum(b => !(b % 5 == 0 || b % 7 == 0) ? b : 0);
         }
-        private static int IterativeAdder(int num) //SOLUTION 2
+        private static int IterativeAdder(int num) //SOLUTION 2 - This is the ideal solution..Reason: It will be more widely understood and easy to read, and has the best performance.
         {
             int sum = 1;
             for(int i = 2; i < num; ++i)
