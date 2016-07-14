@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyNumbers", "HappyNumber
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SumNumbersOneToN", "SumNumbersOneToN\SumNumbersOneToN.csproj", "{4202C4E4-B52E-40D1-8D8A-F607558CEC9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FizzBuzz", "FizzBuzz\FizzBuzz\FizzBuzz.csproj", "{A2D91FE0-01B4-4AAA-BF25-59316073226C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiagonalDifference", "DiagonalDifference\DiagonalDifference.csproj", "{AB40CF52-DEFE-4071-8CE0-0C1CE29FC5F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Staircase", "Staircase\Staircase.csproj", "{4ACCA364-8C31-4848-B12E-39B396B32225}"
@@ -47,10 +45,6 @@ Global
 		{4202C4E4-B52E-40D1-8D8A-F607558CEC9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4202C4E4-B52E-40D1-8D8A-F607558CEC9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4202C4E4-B52E-40D1-8D8A-F607558CEC9C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A2D91FE0-01B4-4AAA-BF25-59316073226C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A2D91FE0-01B4-4AAA-BF25-59316073226C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A2D91FE0-01B4-4AAA-BF25-59316073226C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A2D91FE0-01B4-4AAA-BF25-59316073226C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AB40CF52-DEFE-4071-8CE0-0C1CE29FC5F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AB40CF52-DEFE-4071-8CE0-0C1CE29FC5F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB40CF52-DEFE-4071-8CE0-0C1CE29FC5F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
