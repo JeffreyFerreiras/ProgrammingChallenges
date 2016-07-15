@@ -15,12 +15,12 @@ namespace ConsoleApplication2
         */
 
         static void Main(string[] args)
-        { 
-            //foreach(var i in Enumerable.Range(1, 100))
-            //{
-            //    Console.WriteLine(i % 3 == 0 && i % 5 == 0 ? "FizzBuzz" : i % 3 == 0 ? "Fizz" : i % 5 == 0 ? "Buzz" : i.ToString()); 
-            //}            
-            //Console.ReadLine();
+        {
+            foreach(var i in Enumerable.Range(1, 100))
+            {
+                Console.WriteLine(i % 3 == 0 && i % 5 == 0 ? "FizzBuzz" : i % 3 == 0 ? "Fizz" : i % 5 == 0 ? "Buzz" : i.ToString());
+            }
+            Console.ReadLine();
 
             FizzBuzz("3 5 15"); 
             Console.ReadLine();
@@ -39,7 +39,7 @@ namespace ConsoleApplication2
         }
         static void PrintFizzBuzz(int[] numbers)
         {
-            //SOLUTION
+            //SOLUTION 2
             string fizz = "Fizz";
             string buzz = "Buzz";
 
