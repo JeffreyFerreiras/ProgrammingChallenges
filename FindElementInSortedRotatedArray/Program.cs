@@ -13,6 +13,8 @@ namespace FindElementInSortedRotatedArray
         */
 
 /*
+Notes: Algorithm -
+
 1) Create a method and prep for a recursive bin search.
 2) Check if the array[mid] point is equal to the target, if it is, return the mid point.
 3) Error Check: that left is not bigger than right...We're doing recursion here! mmmkay.
@@ -40,7 +42,9 @@ namespace FindElementInSortedRotatedArray
         }
         static int BinarySearch(int[] arry, int left, int right, int target)
         {
-            //SOLUTION
+            //SOLUTION - Lengthy solution, but the requirement stated "lowest possible complexity(both time and space)"
+            //This solution is O(log N)
+
             int mid = (left + right)/2;
              
             if(target == arry[mid]) return mid; 

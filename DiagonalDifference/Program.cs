@@ -9,12 +9,11 @@ namespace DiagonalDifference
     class Program
     {
         /*
-Given a square matrix of size , calculate the absolute difference between the sums of its diagonals.
-Input Format
+Given a square matrix of size N, calculate the absolute difference between the sums of its diagonals.
 
 The first line contains a single integer, . The next  lines denote the matrix's rows, with each line containing space-separated integers describing the columns.
 
-Output Format
+Output
 
 Print the absolute difference between the two sums of the matrix's diagonals as a single integer.
 
@@ -24,9 +23,11 @@ Sample Input
 11 2 4
 4 5 6
 10 8 -12
+
 Sample Output
 
 15
+
 Explanation
 
 The primary diagonal is: 

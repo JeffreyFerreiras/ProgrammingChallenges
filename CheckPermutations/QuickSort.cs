@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CheckPermutations
 {
     /*
-    My QuickSort Algorithm Implementation...
+    QuickSort algorithm implementation for sorting characters.
     */
     class QuickSort
     {
@@ -20,14 +20,17 @@ namespace CheckPermutations
         private static void QuickSorter(char[] sorterArry, int leftIndex, int rightIndex)
         {
             int pivotIndex = GetPivotPoint(sorterArry, leftIndex, rightIndex);
+
             if(leftIndex < pivotIndex -1)
                 QuickSorter(sorterArry, leftIndex, pivotIndex - 1);
+
             if(pivotIndex < rightIndex)
                 QuickSorter(sorterArry, pivotIndex, rightIndex);
         }
         private static int GetPivotPoint(char[] sorterArry, int leftIndex, int rightIndex)
         {
             char pivot = sorterArry[(leftIndex + rightIndex) / 2];
+
             while(leftIndex <= rightIndex)
             {
                 while(sorterArry[leftIndex] < pivot)

@@ -18,13 +18,13 @@ namespace Staircase
 
         Input Format
 
-        A single integer, , denoting the size of the staircase.
+        A single integer denoting the size of the staircase.
 
         Output Format
 
         Print a staircase of size  using # symbols and spaces.
 
-        Note: The last line must have  spaces in it.
+        Note: The last line must have 0 spaces in it.
                 */
 
         static void Main(String[] args)

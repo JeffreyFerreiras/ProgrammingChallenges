@@ -7,7 +7,7 @@ namespace ConsoleApplication2
 {
     class Program
     {        /*
-        "Write a program that prints the numbers from 1 to 100.
+        "Write a program that prints the numbers from 1 to N.
         But for multiples of three print “Fizz” instead of the number 
             and for the multiples of five print “Buzz” instead of the number.
         
@@ -37,7 +37,7 @@ namespace ConsoleApplication2
             //END TEST CODE
             PrintFizzBuzz(numArry);
         }
-        static void PrintFizzBuzz(int[] numbers) //SOLUTION 2 (more readable)
+        static void PrintFizzBuzz(int[] numbers) //SOLUTION 2 (more readable, also takes array to customize how high the numbers go.)
         {
             string fizz = "Fizz";
             string buzz = "Buzz";
