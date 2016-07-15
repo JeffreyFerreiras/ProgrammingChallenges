@@ -32,7 +32,7 @@ namespace IsUniqueString
         }
         static bool IsUniqueStringWithoutIEnumerable(string str)
         {
-            //SOLUTION with better time and space complexity.
+            //SOLUTION with better time and space complexity. 
             if(str.Length > 128)
                 return false;
 
