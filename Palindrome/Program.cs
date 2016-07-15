@@ -9,6 +9,7 @@ namespace Palindrome
     class Program
     {
         /* Check if a string is a Palindrome */
+
         static void Main(string[] args)
         {
             //TEST CODE
@@ -19,9 +20,11 @@ namespace Palindrome
         }
         static bool IsPalindrome(string phrase)
         {
-            //SOLUTION
+            //SOLUTION - runtime is O(n/2), very quick. 
+
             string lowerCasePhrase = phrase.ToLower();
-            for(int i = 0, j = lowerCasePhrase.Length - 1; i != j; i++, j--)
+
+            for(int i = 0, j = lowerCasePhrase.Length - 1; i != j; i++, j--) 
             {
                 if(lowerCasePhrase[i] != lowerCasePhrase[j])
                     return false; 

@@ -37,9 +37,8 @@ namespace ConsoleApplication2
             //END TEST CODE
             PrintFizzBuzz(numArry);
         }
-        static void PrintFizzBuzz(int[] numbers)
+        static void PrintFizzBuzz(int[] numbers) //SOLUTION 2 (more readable)
         {
-            //SOLUTION 2
             string fizz = "Fizz";
             string buzz = "Buzz";
 

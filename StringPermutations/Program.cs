@@ -18,7 +18,7 @@ namespace StringPermutations
             Console.Read();
         }
         static void Permutation(string str)
-        {
+        {   // SOLUTION
             Permutation(str, "");
         }
         static void Permutation(string str, string currentString)

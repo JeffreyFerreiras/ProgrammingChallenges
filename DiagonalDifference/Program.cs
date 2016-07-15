@@ -55,9 +55,9 @@ Difference: |4 - 19| = 15
             }
             //End Generated code
 
-            //Solution
-            int firstDiagSum = 0;
-            int secondDiagSum = 0;
+            //SOLUTION
+            int firstDiagSum = 0, secondDiagSum = 0;
+
             for(int i = 0; i < a.Length; i++)
             {
                 firstDiagSum += a[i][i];

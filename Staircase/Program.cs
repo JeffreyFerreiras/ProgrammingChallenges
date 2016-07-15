@@ -31,7 +31,7 @@ namespace Staircase
         {
             int n = Convert.ToInt32(Console.ReadLine());
 
-            //Solution. Chosen over shorter solutions for better performance.
+            //SOLUTION.
             StringBuilder floor = new StringBuilder(n*n);
             for(int i = 1; i < n + 1; i++)
             {

@@ -26,7 +26,7 @@ namespace Palindrome_Permutations
         {
             bool x = isPermutationOfPalindrome("Taco cat");
         }
-        static bool isPermutationOfPalindrome(string phrase)
+        static bool isPermutationOfPalindrome(string phrase) //SOLUTION - Much more efficient than getting every permutation of the string. That would be O(n!) runtime.
         {
             int [] table = BuildCharTable(phrase.Replace(" ",""));
             return CheckMaxOneOdd(table);

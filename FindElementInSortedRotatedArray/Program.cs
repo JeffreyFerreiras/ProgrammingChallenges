@@ -41,7 +41,8 @@ namespace FindElementInSortedRotatedArray
         static int BinarySearch(int[] arry, int left, int right, int target)
         {
             //SOLUTION
-            int mid = (left + right)/2; 
+            int mid = (left + right)/2;
+             
             if(target == arry[mid]) return mid; 
             if(right < left) return -1; 
                        

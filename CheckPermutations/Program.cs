@@ -32,6 +32,7 @@ namespace CheckPermutations
         {
             //SOLUTION: With custom QuickSort algorithm implementation.
             //This implementation is nearly 4X faster than using OrderBy
+
             if(original.Length != permutation.Length)
                 return false;
 
@@ -46,7 +47,9 @@ namespace CheckPermutations
         static bool IsPermutationOrderBy(string s1, string s2)
         {
             //SOLUTION: in one line.
+
             return s1.Length == s2.Length ? s1.OrderBy(x => x).Equals(s2.OrderBy(x => x)) : false;
+                        
             //NOTE: OrderBy implements a QuickSort algorithm with a speed of O(n log n). It's an efficient way to sort.
         }
 

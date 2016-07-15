@@ -13,11 +13,26 @@ namespace IsUniqueString
         */
         static void Main(string[] args)
         {
-            bool b = IsUniqueString("xyzabc");
+            //TEST CODE
+            System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
+            stopwatch.Start();
+            bool first = IsUniqueString("xyzabc");
+            stopwatch.Stop(); //6276 ticks - This shows the shorter answer isn't always best for performance.
+
+            System.Diagnostics.Stopwatch stopwatch2 = new System.Diagnostics.Stopwatch();
+            stopwatch2.Start();
+            bool second = IsUniqueStringWithoutIEnumerable("xyzabc");
+            stopwatch2.Stop(); //539 ticks
+            //END TEST CODE
         }
         static bool IsUniqueString(string str)
-        { 
-            //SOLUTION
+        {
+            //SOLUTION - one liner.
+            return str.Length > 128 ? false : str.Length == str.Distinct().Count();
+        }
+        static bool IsUniqueStringWithoutIEnumerable(string str)
+        {
+            //SOLUTION with better time and space complexity.
             if(str.Length > 128)
                 return false;
 

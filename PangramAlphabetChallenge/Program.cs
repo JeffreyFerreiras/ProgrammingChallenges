@@ -28,7 +28,7 @@ namespace PangramAlphabetChallenge
         }
         static string FindMissingLetters(string line)
         {
-            //SOLUTION
+            //SOLUTION - Brought out LINQ for an efficitent yet easy to understand solution. 
             IEnumerable<char> lettersInAphabet = alphabet.Where(c => line.ToLower().Contains(c));
             string missingletters =  new string (alphabet.Except(lettersInAphabet).ToArray<char>());
             return lettersInAphabet.SequenceEqual(alphabet) ? "null" : missingletters;
