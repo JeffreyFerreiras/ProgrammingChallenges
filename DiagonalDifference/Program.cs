@@ -48,24 +48,33 @@ Difference: |4 - 19| = 15
         {
             //Generated code
             int n = Convert.ToInt32(Console.ReadLine());
-            int[][] a = new int[n][];
+            int[][] numArray = new int[n][];
             for(int a_i = 0; a_i < n; a_i++)
             {
                 string[] a_temp = Console.ReadLine().Split(' ');
-                a[a_i] = Array.ConvertAll(a_temp, Int32.Parse);
+                numArray[a_i] = Array.ConvertAll(a_temp, Int32.Parse);
             }
             //End Generated code
 
             //SOLUTION
-            int firstDiagSum = 0, secondDiagSum = 0;
-
-            for(int i = 0; i < a.Length; i++)
-            {
-                firstDiagSum += a[i][i];
-                secondDiagSum += a[(a.Length - 1) - i][i];
-            }
-            Console.WriteLine(Math.Abs(firstDiagSum - secondDiagSum));
+            PrintArrayDiagnalSum(numArray);
             Console.ReadLine();
+        }
+
+        private static void PrintArrayDiagnalSum(int[][] numArray)
+        {
+            if(numArray == null)
+                throw new NullReferenceException("Array cannot be null");
+
+            int firstDiagSum = 0,secondDiagSum = 0;
+
+            for(int i = 0; i < numArray.Length; i++)
+            {
+                firstDiagSum += numArray[i][i];
+                secondDiagSum += numArray[(numArray.Length - 1) - i][i];
+            }
+
+            Console.WriteLine(Math.Abs(firstDiagSum - secondDiagSum));
         }
     }
 }

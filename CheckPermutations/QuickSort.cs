@@ -9,9 +9,9 @@ namespace CheckPermutations
     /*
     QuickSort algorithm implementation for sorting characters.
     */
-    class QuickSort
+    public static class QuickSort
     {
-        public static string QuickSorter(string str)
+        public static string QuickSorter(this string str)
         {
             char[] sorterArry = str.ToArray();
             QuickSorter(sorterArry, 0, sorterArry.Length - 1);

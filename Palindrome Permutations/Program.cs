@@ -28,6 +28,9 @@ namespace Palindrome_Permutations
         }
         static bool isPermutationOfPalindrome(string phrase) //SOLUTION - Much more efficient than getting every permutation of the string. That would be O(n!) runtime.
         {
+            if(string.IsNullOrEmpty(phrase))
+                throw new NullReferenceException("Input string is empty");
+
             int [] table = BuildCharTable(phrase.Replace(" ",""));
             return CheckMaxOneOdd(table);
         }

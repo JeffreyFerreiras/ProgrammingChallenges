@@ -8,4 +8,3 @@ C:\Git\ProgrammingChallenges\TimeConversion\bin\Debug\TimeConversion.exe
 C:\Git\ProgrammingChallenges\TimeConversion\bin\Debug\TimeConversion.pdb
 C:\Git\ProgrammingChallenges\TimeConversion\obj\Debug\TimeConversion.exe
 C:\Git\ProgrammingChallenges\TimeConversion\obj\Debug\TimeConversion.pdb
-C:\Git\ProgrammingChallenges\TimeConversion\obj\Debug\TimeConversion.csprojResolveAssemblyReference.cache

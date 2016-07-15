@@ -40,39 +40,39 @@ Notes: Algorithm -
             // END TEST
             int indexofX = BinarySearch(rotatedArry, left, right, x);
         }
-        static int BinarySearch(int[] arry, int left, int right, int target)
+        static int BinarySearch(int[] arry, int leftIndex, int rightIndex, int target)
         {
             //SOLUTION - Lengthy solution, but the requirement stated "lowest possible complexity(both time and space)"
             //This solution is O(log N)
 
-            int mid = (left + right)/2;
+            int mid = (leftIndex + rightIndex)/2;
              
             if(target == arry[mid]) return mid; 
-            if(right < left) return -1; 
+            if(rightIndex < leftIndex) return -1; 
                        
-            if(arry[left] < arry[mid])
+            if(arry[leftIndex] < arry[mid])
             {
-                if(target >= arry[left] && target < arry[mid]) 
-                    return BinarySearch(arry, left, mid - 1, target);
+                if(target >= arry[leftIndex] && target < arry[mid]) 
+                    return BinarySearch(arry, leftIndex, mid - 1, target);
                 else
-                    return BinarySearch(arry, mid + 1, right, target);
+                    return BinarySearch(arry, mid + 1, rightIndex, target);
             }
-            else if(arry[left] > arry[mid])
+            else if(arry[leftIndex] > arry[mid])
             {
-                if(target > arry[mid] && target < arry[right])
-                    return BinarySearch(arry, mid + 1, right, target);
+                if(target > arry[mid] && target < arry[rightIndex])
+                    return BinarySearch(arry, mid + 1, rightIndex, target);
                 else
-                    return BinarySearch(arry, left, mid - 1, target);
+                    return BinarySearch(arry, leftIndex, mid - 1, target);
             }
-            else if (arry[left] == arry[mid])
+            else if (arry[leftIndex] == arry[mid])
             {
-                if(arry[mid] != arry[right])
-                    return BinarySearch(arry, mid + 1, right, target);
+                if(arry[mid] != arry[rightIndex])
+                    return BinarySearch(arry, mid + 1, rightIndex, target);
                 else
                 {
-                    int result = BinarySearch(arry, left, mid -1, target);
+                    int result = BinarySearch(arry, leftIndex, mid -1, target);
                     if(result == -1)
-                        return BinarySearch(arry, mid + 1, right, target); 
+                        return BinarySearch(arry, mid + 1, rightIndex, target); 
                     else
                         return result;
                 }

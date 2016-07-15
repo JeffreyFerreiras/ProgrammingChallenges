@@ -8,3 +8,4 @@ C:\Git\ProgrammingChallenges\DiagonalDifference\bin\Debug\DiagonalDifference.exe
 C:\Git\ProgrammingChallenges\DiagonalDifference\bin\Debug\DiagonalDifference.pdb
 C:\Git\ProgrammingChallenges\DiagonalDifference\obj\Debug\DiagonalDifference.exe
 C:\Git\ProgrammingChallenges\DiagonalDifference\obj\Debug\DiagonalDifference.pdb
+C:\Git\ProgrammingChallenges\DiagonalDifference\obj\Debug\DiagonalDifference.csprojResolveAssemblyReference.cache

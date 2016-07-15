@@ -29,6 +29,7 @@ For the curious, here's why 7 is a happy number: 7->49->97->130->10->1. Here's w
         }
         static int IsHappyNumber(int num)
         { //SOLUTION
+             
             int sumOfSquares = 0;
             while(num != 0)
             {

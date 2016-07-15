@@ -8,4 +8,3 @@ C:\Git\ProgrammingChallenges\CheckPermutations\bin\Debug\CheckPermutations.exe
 C:\Git\ProgrammingChallenges\CheckPermutations\bin\Debug\CheckPermutations.pdb
 C:\Git\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutations.exe
 C:\Git\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutations.pdb
-C:\Git\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutations.csprojResolveAssemblyReference.cache

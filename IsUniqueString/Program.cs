@@ -23,7 +23,7 @@ namespace IsUniqueString
             stopwatch2.Start();
             bool second = IsUniqueStringWithoutIEnumerable("xyzabc");
             stopwatch2.Stop(); //539 ticks
-            //END TEST CODE
+            //END TEST CODE 
         }
         static bool IsUniqueString(string str)
         {
@@ -33,7 +33,7 @@ namespace IsUniqueString
         static bool IsUniqueStringWithoutIEnumerable(string str)
         {
             //SOLUTION with better time and space complexity. 
-            if(str.Length > 128)
+            if( !string.IsNullOrEmpty(str) && str.Length > 128)
                 return false;
 
             while(str.Length > 0)

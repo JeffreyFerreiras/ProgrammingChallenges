@@ -39,6 +39,9 @@ namespace ConsoleApplication2
         }
         static void PrintFizzBuzz(int[] numbers) //SOLUTION 2 (more readable, also takes array to customize how high the numbers go.)
         {
+            if(numbers == null)
+                throw new NullReferenceException("numbers cannot be empty");
+
             string fizz = "Fizz";
             string buzz = "Buzz";
 

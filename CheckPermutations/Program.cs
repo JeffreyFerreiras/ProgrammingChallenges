@@ -32,14 +32,13 @@ namespace CheckPermutations
         {
             //SOLUTION: With custom QuickSort algorithm implementation.
             //This implementation is nearly 4X faster than using OrderBy
+            //Changed the QuickSorter to an extension method.
 
-            if(original.Length != permutation.Length)
+            bool notEmpty = !(string.IsNullOrEmpty(original) || string.IsNullOrEmpty(permutation));
+            if( notEmpty && original.Length != permutation.Length)
                 return false;
 
-            original    = QuickSort.QuickSorter(original);
-            permutation = QuickSort.QuickSorter(permutation);
-
-            if(original.Equals(permutation))
+            if(original.QuickSorter().Equals(permutation.QuickSorter()))
                 return true;
             else
                 return false;

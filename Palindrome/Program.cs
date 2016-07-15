@@ -22,6 +22,7 @@ namespace Palindrome
         {
             //SOLUTION - runtime is O(n/2), very quick. 
 
+
             string lowerCasePhrase = phrase.ToLower();
 
             for(int i = 0, j = lowerCasePhrase.Length - 1; i != j; i++, j--) 

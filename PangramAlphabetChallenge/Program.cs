@@ -28,7 +28,10 @@ namespace PangramAlphabetChallenge
         }
         static string FindMissingLetters(string line)
         {
-            //SOLUTION - Brought out LINQ for an efficitent yet easy to understand solution. 
+            //SOLUTION - Brought out LINQ for an efficitent yet easy to understand solution.
+            if(string.IsNullOrEmpty(line))
+                throw new NotImplementedException("pangram input cannot be null");
+
             IEnumerable<char> lettersInAphabet = alphabet.Where(c => line.ToLower().Contains(c));
             string missingletters =  new string (alphabet.Except(lettersInAphabet).ToArray<char>());
             return lettersInAphabet.SequenceEqual(alphabet) ? "null" : missingletters;
