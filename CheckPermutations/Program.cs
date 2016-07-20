@@ -17,12 +17,14 @@ namespace CheckPermutations
             sw.Start();
             bool isPermute = IsPermutationOrderBy("taco cat","taco cat");
             bool isPermute2 = IsPermutationOrderBy("taco cat","taco ca");
+            bool isPermute6 = IsPermutationOrderBy("taco cat",string.Empty);
             sw.Stop();
 
             System.Diagnostics.Stopwatch sw2 = new System.Diagnostics.Stopwatch();
             sw2.Start();
             bool isPermute3 = IsPermutationQuickSort("taco cat","taco cat");
             bool isPermute4 = IsPermutationQuickSort("taco cat","taco ca");
+            bool isPermute5 = IsPermutationQuickSort("taco cat","");
             sw2.Stop();
             //END TEST
         }
@@ -34,11 +36,14 @@ namespace CheckPermutations
             //This implementation is nearly 4X faster than using OrderBy
             //Changed the QuickSorter to an extension method.
 
-            bool notEmpty = !(string.IsNullOrEmpty(original) || string.IsNullOrEmpty(permutation));
+            bool notEmpty = !(string.IsNullOrEmpty(original) || !string.IsNullOrEmpty(permutation));
             if( notEmpty && original.Length != permutation.Length)
                 return false;
 
-            if(original.QuickSorter().Equals(permutation.QuickSorter()))
+            original    = original.QuickSorter();
+            permutation = permutation.QuickSorter();
+
+            if(original == permutation)
                 return true;
             else
                 return false;
@@ -46,10 +51,7 @@ namespace CheckPermutations
         static bool IsPermutationOrderBy(string s1, string s2)
         {
             //SOLUTION: in one line.
-
-            return s1.Length == s2.Length ? s1.OrderBy(x => x).Equals(s2.OrderBy(x => x)) : false;
-                        
-            //NOTE: OrderBy implements a QuickSort algorithm with a speed of O(n log n). It's an efficient way to sort.
+            return s1.Length == s2.Length ? s1.OrderBy(x => x).ToString() == s2.OrderBy(x => x).ToString() : false;
         }
 
     }

@@ -56,17 +56,17 @@ Difference: |4 - 19| = 15
             }
             //End Generated code
 
-            //SOLUTION
+            
             PrintArrayDiagnalSum(numArray);
             Console.ReadLine();
         }
 
         private static void PrintArrayDiagnalSum(int[][] numArray)
-        {
+        {//SOLUTION
             if(numArray == null)
                 throw new NullReferenceException("Array cannot be null");
 
-            int firstDiagSum = 0,secondDiagSum = 0;
+            int firstDiagSum = 0, secondDiagSum = 0;
 
             for(int i = 0; i < numArray.Length; i++)
             {

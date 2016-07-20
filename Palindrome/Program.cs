@@ -21,7 +21,8 @@ namespace Palindrome
         static bool IsPalindrome(string phrase)
         {
             //SOLUTION - runtime is O(n/2), very quick. 
-
+            if(string.IsNullOrEmpty(phrase))
+                return false;
 
             string lowerCasePhrase = phrase.ToLower();
 

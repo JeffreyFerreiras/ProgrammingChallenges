@@ -29,18 +29,26 @@ namespace Staircase
 
         static void Main(String[] args)
         {
-            int n = Convert.ToInt32(Console.ReadLine());
 
-            //SOLUTION.
-            StringBuilder floor = new StringBuilder(n*n);
-            for(int i = 1; i < n + 1; i++)
+            try
             {
-                floor.Append(' ', n - i);
-                floor.Append('#', i);
-                if(n != i) floor.Append(Environment.NewLine);
+                //SOLUTION.
+                int number = Convert.ToInt32(Console.ReadLine());
+
+                StringBuilder floor = new StringBuilder(number*number);
+                for(int i = 1; i < number + 1; i++)
+                {
+                    floor.Append(' ', number - i);
+                    floor.Append('#', i);
+                    if(number != i) floor.Append(Environment.NewLine);
+                }
+                Console.WriteLine(floor);
+                Console.ReadLine();
             }
-            Console.WriteLine(floor);
-            Console.ReadLine();
+            catch(ArgumentException e)
+            {
+                Console.Write(e);
+            }
         }
     }
 }

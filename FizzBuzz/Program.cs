@@ -22,10 +22,10 @@ namespace ConsoleApplication2
             }
             Console.ReadLine();
 
-            FizzBuzz("3 5 15"); 
+            FizzBuzzTestCode("3 5 15"); 
             Console.ReadLine();
         }
-        static void FizzBuzz(string line)
+        static void FizzBuzzTestCode(string line)
         {
             //TEST CODE
             var numbers = line.Split(' ');
