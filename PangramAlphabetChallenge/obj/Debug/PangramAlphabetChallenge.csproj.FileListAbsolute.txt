@@ -6,6 +6,5 @@ C:\Git\AlgorithmTraining\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debu
 C:\Git\ProgrammingChallenges\PangramAlphabetChallenge\bin\Debug\PangramAlphabetChallenge.exe.config
 C:\Git\ProgrammingChallenges\PangramAlphabetChallenge\bin\Debug\PangramAlphabetChallenge.exe
 C:\Git\ProgrammingChallenges\PangramAlphabetChallenge\bin\Debug\PangramAlphabetChallenge.pdb
-C:\Git\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.csprojResolveAssemblyReference.cache
 C:\Git\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.exe
 C:\Git\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.pdb

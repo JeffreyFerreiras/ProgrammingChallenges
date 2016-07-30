@@ -15,7 +15,7 @@ namespace CheckPermutations
         {   //TEST
             System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
             sw.Start();
-            bool isPermute = IsPermutationOrderBy("taco cat","taco cat");
+            bool isPermute  = IsPermutationOrderBy("taco cat","taco cat");
             bool isPermute2 = IsPermutationOrderBy("taco cat","taco ca");
             bool isPermute6 = IsPermutationOrderBy("taco cat",string.Empty);
             sw.Stop();
@@ -53,6 +53,5 @@ namespace CheckPermutations
             //SOLUTION: in one line.
             return s1.Length == s2.Length ? s1.OrderBy(x => x).ToString() == s2.OrderBy(x => x).ToString() : false;
         }
-
     }
 }

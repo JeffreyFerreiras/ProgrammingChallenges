@@ -22,8 +22,8 @@ namespace ConsoleApplication2
             }
             Console.ReadLine();
 
-            FizzBuzzTestCode("3 5 15"); 
-            Console.ReadLine();
+            //FizzBuzzTestCode("3 5 15"); 
+            //Console.ReadLine();
         }
         static void FizzBuzzTestCode(string line)
         {

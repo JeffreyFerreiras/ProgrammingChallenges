@@ -17,39 +17,40 @@ namespace CheckPermutations
             QuickSorter(sorterArry, 0, sorterArry.Length - 1);
             return new string(sorterArry);
         }
-        private static void QuickSorter(char[] sorterArry, int leftIndex, int rightIndex)
+        private static void QuickSorter(char[] array, int left, int right)
         {
-            int pivotIndex = GetPivotPoint(sorterArry, leftIndex, rightIndex);
+            int pivot = GetPivotPoint(array, left, right);
 
-            if(leftIndex < pivotIndex -1)
-                QuickSorter(sorterArry, leftIndex, pivotIndex - 1);
+            if(left < pivot -1)
+                QuickSorter(array, left, pivot - 1);
 
-            if(pivotIndex < rightIndex)
-                QuickSorter(sorterArry, pivotIndex, rightIndex);
+            if(pivot < right)
+                QuickSorter(array, pivot, right);
         }
-        private static int GetPivotPoint(char[] sorterArry, int leftIndex, int rightIndex)
+
+        private static int GetPivotPoint(char[] array, int left, int right)              
         {
-            char pivot = sorterArry[(leftIndex + rightIndex) / 2];
+            char pivot = array[(left + right) / 2];
 
-            while(leftIndex <= rightIndex)
+            while(left <= right)
             {
-                while(sorterArry[leftIndex] < pivot)
-                    leftIndex++;
-                while(sorterArry[rightIndex] > pivot)
-                    rightIndex--;      
+                while(array[left] < pivot)
+                    left++;
+                while(array[right] > pivot)
+                    right--;      
 
-                if(leftIndex <= rightIndex)
+                if(left <= right)
                 {
                     //swap values
-                    char temp = sorterArry[leftIndex];
-                    sorterArry[leftIndex] = sorterArry[rightIndex];
-                    sorterArry[rightIndex] = temp;
+                    char temp = array[left];
+                    array[left] = array[right];
+                    array[right] = temp;
 
-                    leftIndex++;
-                    rightIndex--;
+                    left++;
+                    right--;
                 }
             }
-            return leftIndex;
+            return left;
         }
     }
 }
