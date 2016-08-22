@@ -1,0 +1,6 @@
+C:\Git\ProgrammingChallenges\PolygonMaking\bin\Debug\PolygonMaking.exe.config
+C:\Git\ProgrammingChallenges\PolygonMaking\bin\Debug\PolygonMaking.exe
+C:\Git\ProgrammingChallenges\PolygonMaking\bin\Debug\PolygonMaking.pdb
+C:\Git\ProgrammingChallenges\PolygonMaking\obj\Debug\PolygonMaking.csprojResolveAssemblyReference.cache
+C:\Git\ProgrammingChallenges\PolygonMaking\obj\Debug\PolygonMaking.exe
+C:\Git\ProgrammingChallenges\PolygonMaking\obj\Debug\PolygonMaking.pdb

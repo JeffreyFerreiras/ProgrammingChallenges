@@ -13,58 +13,59 @@ namespace ReverseString
         {
             var sw = new System.Diagnostics.Stopwatch();
 
-            string str = "Some string to reverse";
+            string toReverse = "Some string to reverse";
+
             sw.Start();
-            string reversed = Reverse(str);
-            sw.Stop(); // 1700 tics
+            string reversed = Reverse(toReverse);
+            sw.Stop(); // 1700 tics slow
             ;
 
             var sw2 = new System.Diagnostics.Stopwatch();
             sw2.Start();
-            string reversed2 = ReverseWithStack(str);
-            sw2.Stop(); // 3157 tics
+            string reversed2 = ReverseWithStack(toReverse);
+            sw2.Stop(); // 3157 tics slowest
             ;
 
             var sw3 = new System.Diagnostics.Stopwatch();
             sw3.Start();
-            string reversed3 = ReverseWithStringBuilder(str, new StringBuilder());
+            string reversed3 = ReverseWithStringBuilder(toReverse, new StringBuilder());
             sw3.Stop(); //Second fastest. 836 tics
             ;
 
             var sw4 = new System.Diagnostics.Stopwatch();
             sw4.Start();
-            string reversed4 = ReverseWithArry(str);
+            string reversed4 = ReverseWithArry(toReverse);
             sw4.Stop(); //Fastest! 368 tics
             ;
         }
 
-        private static string Reverse(string str)
+        private static string Reverse(string toReverse)
         {
-            return Reverse(str, string.Empty);
+            return Reverse(toReverse, string.Empty);
         }
-        private static string Reverse(string str, string s)
+        private static string Reverse(string toReverse, string s)
         {
-            if(str.Length == 0) return s;
-            return Reverse(str.Substring(0, str.Length -1), s + str.Substring(str.Length-1));
+            if(toReverse.Length == 0) return s;
+            return Reverse(toReverse.Substring(0, toReverse.Length -1), s + toReverse.Substring(toReverse.Length-1));
         }
 
-        private static string ReverseWithStringBuilder(string str, StringBuilder sb)
+        private static string ReverseWithStringBuilder(string toReverse, StringBuilder sb)
         {
-            if(str.Length == 0) return sb.ToString();
-            return ReverseWithStringBuilder(str.Substring(0, str.Length - 1), sb.Append(str.Substring(str.Length - 1)));
+            if(toReverse.Length == 0) return sb.ToString();
+            return ReverseWithStringBuilder(toReverse.Substring(0, toReverse.Length - 1), sb.Append(toReverse.Substring(toReverse.Length - 1)));
         }
-        private static string ReverseWithStack(string str)
+        private static string ReverseWithStack(string strtoReverse)
         {
             var stack = new Stack<char>();
-            foreach(var c in str)
+            foreach(var c in strtoReverse)
             {
                 stack.Push(c);
             }
             return new string(stack.ToArray());
         }
-        private static string ReverseWithArry(string str)
+        private static string ReverseWithArry(string toReverse)
         {
-            char[] chararry = str.ToCharArray();
+            char[] chararry = toReverse.ToCharArray();
             Array.Reverse(chararry);
             return new string(chararry);
         }

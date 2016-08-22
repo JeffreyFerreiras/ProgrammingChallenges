@@ -1,0 +1,5 @@
+C:\Git\ProgrammingChallenges\ReverseLinkedList\bin\Debug\ReverseLinkedList.exe.config
+C:\Git\ProgrammingChallenges\ReverseLinkedList\bin\Debug\ReverseLinkedList.exe
+C:\Git\ProgrammingChallenges\ReverseLinkedList\bin\Debug\ReverseLinkedList.pdb
+C:\Git\ProgrammingChallenges\ReverseLinkedList\obj\Debug\ReverseLinkedList.exe
+C:\Git\ProgrammingChallenges\ReverseLinkedList\obj\Debug\ReverseLinkedList.pdb

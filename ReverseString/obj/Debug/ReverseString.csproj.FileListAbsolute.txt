@@ -1,0 +1,5 @@
+C:\Git\ProgrammingChallenges\ReverseString\bin\Debug\ReverseString.exe.config
+C:\Git\ProgrammingChallenges\ReverseString\bin\Debug\ReverseString.exe
+C:\Git\ProgrammingChallenges\ReverseString\bin\Debug\ReverseString.pdb
+C:\Git\ProgrammingChallenges\ReverseString\obj\Debug\ReverseString.exe
+C:\Git\ProgrammingChallenges\ReverseString\obj\Debug\ReverseString.pdb

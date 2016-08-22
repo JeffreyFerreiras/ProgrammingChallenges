@@ -1,0 +1,11 @@
+c:\users\ninjask\documents\visual studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\bin\Debug\ConsoleApplication2.exe
+c:\users\ninjask\documents\visual studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\bin\Debug\ConsoleApplication2.pdb
+c:\users\ninjask\documents\visual studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\bin\Debug\mscorlib.dll
+c:\users\ninjask\documents\visual studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\bin\Debug\normidna.nlp
+c:\users\ninjask\documents\visual studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\bin\Debug\normnfc.nlp
+c:\users\ninjask\documents\visual studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\bin\Debug\normnfd.nlp
+c:\users\ninjask\documents\visual studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\bin\Debug\normnfkc.nlp
+c:\users\ninjask\documents\visual studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\bin\Debug\normnfkd.nlp
+c:\users\ninjask\documents\visual studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\obj\Debug\ConsoleApplication2.csprojResolveAssemblyReference.cache
+c:\users\ninjask\documents\visual studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\obj\Debug\ConsoleApplication2.exe
+c:\users\ninjask\documents\visual studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\obj\Debug\ConsoleApplication2.pdb

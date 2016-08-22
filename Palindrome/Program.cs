@@ -20,10 +20,11 @@ namespace Palindrome
         }
         static bool IsPalindrome(string phrase)
         {
-            //SOLUTION - runtime is O(n/2), very quick. 
+            //SOLUTION - runtime is O(n/2), quick. 
             if(string.IsNullOrEmpty(phrase))
                 return false;
 
+            phrase = phrase.Replace(" ", "");
             string lowerCasePhrase = phrase.ToLower();
 
             for(int i = 0, j = lowerCasePhrase.Length - 1; i != j; i++, j--) 

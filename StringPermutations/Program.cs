@@ -24,13 +24,17 @@ namespace StringPermutations
         static void Permutation(string str, string currentString)
         {
             if(str.Length == 0)
+            {
                 Console.WriteLine(currentString);
+            }
             else
+            {
                 for(int i = 0; i < str.Length; i++)
                 {
                     string remainingChars = str.Substring(0 , i) + str.Substring(i + 1);
                     Permutation(remainingChars, currentString + str[i]);
                 }
+            }
         }
     }
 }

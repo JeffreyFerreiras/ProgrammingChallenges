@@ -1,0 +1,6 @@
+C:\Git\ProgrammingChallenges\ReducedString\bin\Debug\ReducedString.exe.config
+C:\Git\ProgrammingChallenges\ReducedString\bin\Debug\ReducedString.exe
+C:\Git\ProgrammingChallenges\ReducedString\bin\Debug\ReducedString.pdb
+C:\Git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.csprojResolveAssemblyReference.cache
+C:\Git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.exe
+C:\Git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.pdb

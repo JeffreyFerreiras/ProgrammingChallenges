@@ -8,3 +8,4 @@ C:\Git\ProgrammingChallenges\PangramAlphabetChallenge\bin\Debug\PangramAlphabetC
 C:\Git\ProgrammingChallenges\PangramAlphabetChallenge\bin\Debug\PangramAlphabetChallenge.pdb
 C:\Git\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.exe
 C:\Git\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.pdb
+C:\Git\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.csprojResolveAssemblyReference.cache

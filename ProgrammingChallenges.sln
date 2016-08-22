@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PangramAlphabetChallenge", "PangramAlphabetChallenge\PangramAlphabetChallenge.csproj", "{B6EDC1BA-C8B4-4F8F-80A1-6E3DF5107C80}"
 EndProject
@@ -32,6 +32,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReverseLinkedList", "ReverseLinkedList\ReverseLinkedList.csproj", "{162A878E-9AD6-4C6F-ABF1-B2E9D880519F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReverseString", "ReverseString\ReverseString.csproj", "{C4C6841B-A462-4DF8-95B9-3B9F04046B7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReducedString", "ReducedString\ReducedString.csproj", "{DEA04DDF-0DD8-4002-B0F8-660753FE0DF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolygonMaking", "PolygonMaking\PolygonMaking.csproj", "{22CD4B8B-962E-4250-8957-ABCAC5CD1C12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +103,14 @@ Global
 		{C4C6841B-A462-4DF8-95B9-3B9F04046B7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4C6841B-A462-4DF8-95B9-3B9F04046B7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4C6841B-A462-4DF8-95B9-3B9F04046B7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEA04DDF-0DD8-4002-B0F8-660753FE0DF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEA04DDF-0DD8-4002-B0F8-660753FE0DF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEA04DDF-0DD8-4002-B0F8-660753FE0DF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEA04DDF-0DD8-4002-B0F8-660753FE0DF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22CD4B8B-962E-4250-8957-ABCAC5CD1C12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22CD4B8B-962E-4250-8957-ABCAC5CD1C12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22CD4B8B-962E-4250-8957-ABCAC5CD1C12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22CD4B8B-962E-4250-8957-ABCAC5CD1C12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

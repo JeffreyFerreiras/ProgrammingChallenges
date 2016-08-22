@@ -56,7 +56,6 @@ Difference: |4 - 19| = 15
             }
             //End Generated code
 
-            
             PrintArrayDiagnalSum(numArray);
             Console.ReadLine();
         }

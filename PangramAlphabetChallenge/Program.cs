@@ -14,7 +14,7 @@ namespace PangramAlphabetChallenge
  For each line of input, print to standard output all the letters it is missing, in lowercase, sorted in alphabetical order. If there are no missing letters, print the string NULL.*/
     class Program
     {
-        static char[] alphabet = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+        static readonly char[] alphabet = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
         public static void Main(string[] args)
         {
             //TEST CODE
@@ -32,8 +32,9 @@ namespace PangramAlphabetChallenge
             if(string.IsNullOrEmpty(line))
                 throw new NotImplementedException("pangram input cannot be null");
 
-            IEnumerable<char> lettersInAphabet = alphabet.Where(c => line.ToLower().Contains(c));
-            string missingletters =  new string (alphabet.Except(lettersInAphabet).ToArray<char>());
+            line = line.ToLower();
+            var lettersInAphabet = alphabet.Where(c => line.Contains(c));
+            string missingletters =  new string (alphabet.Except(lettersInAphabet).ToArray());
             return lettersInAphabet.SequenceEqual(alphabet) ? "null" : missingletters;
         }
     }

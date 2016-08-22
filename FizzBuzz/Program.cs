@@ -16,50 +16,23 @@ namespace ConsoleApplication2
 
         static void Main(string[] args)
         {
-            foreach(var i in Enumerable.Range(1, 100))
-            {
-                Console.WriteLine(i % 3 == 0 && i % 5 == 0 ? "FizzBuzz" : i % 3 == 0 ? "Fizz" : i % 5 == 0 ? "Buzz" : i.ToString());
-            }
+            PrintFizzBuzz(100);
             Console.ReadLine();
-
-            //FizzBuzzTestCode("3 5 15"); 
-            //Console.ReadLine();
         }
-        static void FizzBuzzTestCode(string line)
+
+        static void PrintFizzBuzz(int n)
         {
-            //TEST CODE
-            var numbers = line.Split(' ');
-            var numArry = new int [3];
-            for(int i = 0; i < numbers.Length; i++)
+            for(int i = 1; i <= n; i++)
             {
-                numArry[i] = int.Parse(numbers[i]);
-            }
-            //END TEST CODE
-            PrintFizzBuzz(numArry);
-        }
-        static void PrintFizzBuzz(int[] numbers) //SOLUTION 2 (more readable, also takes array to customize how high the numbers go.)
-        {
-            if(numbers == null)
-                throw new NullReferenceException("numbers cannot be empty");
-
-            string fizz = "Fizz";
-            string buzz = "Buzz";
-
-            foreach(var i in Enumerable.Range(1, numbers[2]))
-            {
-                string fizzbuzz = string.Empty;
-
-                if(i % numbers[0] == 0 && i % numbers[1] == 0)
-                    fizzbuzz = fizz + buzz;
-                else if(i % numbers[0] == 0)
-                    fizzbuzz = fizz;
-                else if(i % numbers[1] == 0)
-                    fizzbuzz = buzz;
+                if(i % (3*5) == 0)
+                    Console.WriteLine("FizzBuzz");
+                else if(i % 3 == 0)
+                    Console.WriteLine("Fizz");
+                else if(i % 5 == 0)
+                    Console.WriteLine("Buzz");
                 else
-                    fizzbuzz = i.ToString();
-
-                Console.WriteLine(fizzbuzz);
-            }       
+                    Console.WriteLine(i);
+            }
         }
     }
 }
