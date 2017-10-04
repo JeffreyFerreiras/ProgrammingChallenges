@@ -25,9 +25,9 @@ Convert and print the given time in 24-hour format
 
             //SOLUTION - easy.
 
-            var datetime = new DateTime();
-            if(DateTime.TryParse(time, out datetime))
+            if (DateTime.TryParse(time, out DateTime datetime))
                 Console.Write(datetime.ToString("HH:mm:ss"));
+
             Console.Read();  
         }    
     }

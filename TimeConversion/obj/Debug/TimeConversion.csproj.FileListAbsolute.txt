@@ -8,3 +8,9 @@ C:\Git\ProgrammingChallenges\TimeConversion\bin\Debug\TimeConversion.exe
 C:\Git\ProgrammingChallenges\TimeConversion\bin\Debug\TimeConversion.pdb
 C:\Git\ProgrammingChallenges\TimeConversion\obj\Debug\TimeConversion.exe
 C:\Git\ProgrammingChallenges\TimeConversion\obj\Debug\TimeConversion.pdb
+D:\Development\Git\ProgrammingChallenges\TimeConversion\bin\Debug\TimeConversion.exe.config
+D:\Development\Git\ProgrammingChallenges\TimeConversion\bin\Debug\TimeConversion.exe
+D:\Development\Git\ProgrammingChallenges\TimeConversion\bin\Debug\TimeConversion.pdb
+D:\Development\Git\ProgrammingChallenges\TimeConversion\obj\Debug\TimeConversion.csproj.CoreCompileInputs.cache
+D:\Development\Git\ProgrammingChallenges\TimeConversion\obj\Debug\TimeConversion.exe
+D:\Development\Git\ProgrammingChallenges\TimeConversion\obj\Debug\TimeConversion.pdb

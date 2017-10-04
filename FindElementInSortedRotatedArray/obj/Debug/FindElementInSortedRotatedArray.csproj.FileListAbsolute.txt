@@ -8,3 +8,9 @@ C:\Git\ProgrammingChallenges\FindElementInSortedRotatedArray\bin\Debug\FindEleme
 C:\Git\ProgrammingChallenges\FindElementInSortedRotatedArray\bin\Debug\FindElementInSortedRotatedArray.pdb
 C:\Git\ProgrammingChallenges\FindElementInSortedRotatedArray\obj\Debug\FindElementInSortedRotatedArray.exe
 C:\Git\ProgrammingChallenges\FindElementInSortedRotatedArray\obj\Debug\FindElementInSortedRotatedArray.pdb
+D:\Development\Git\ProgrammingChallenges\FindElementInSortedRotatedArray\bin\Debug\FindElementInSortedRotatedArray.exe.config
+D:\Development\Git\ProgrammingChallenges\FindElementInSortedRotatedArray\bin\Debug\FindElementInSortedRotatedArray.exe
+D:\Development\Git\ProgrammingChallenges\FindElementInSortedRotatedArray\bin\Debug\FindElementInSortedRotatedArray.pdb
+D:\Development\Git\ProgrammingChallenges\FindElementInSortedRotatedArray\obj\Debug\FindElementInSortedRotatedArray.csproj.CoreCompileInputs.cache
+D:\Development\Git\ProgrammingChallenges\FindElementInSortedRotatedArray\obj\Debug\FindElementInSortedRotatedArray.exe
+D:\Development\Git\ProgrammingChallenges\FindElementInSortedRotatedArray\obj\Debug\FindElementInSortedRotatedArray.pdb

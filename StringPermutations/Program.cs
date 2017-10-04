@@ -10,11 +10,17 @@ namespace StringPermutations
     {
         /*
             Given a string, print all permutations.
-            NOTE: Never ever do something this inneficient in real life. Printing permuations is an O(n!) operation.
+            NOTE: Never ever do something this inneficient in real life.
+                Printing permuations is an O(n!) operation.
         */
+
+        private static int _count = 0;
         static void Main(string[] args)
         {
-            Permutation("caturday");
+            Permutation("dog");
+
+            //Permutation("caturday");
+            //Permutation("The quick brown fox jumps over the lazy dog");
             Console.Read();
         }
         static void Permutation(string str)
@@ -25,7 +31,7 @@ namespace StringPermutations
         {
             if(str.Length == 0)
             {
-                Console.WriteLine(currentString);
+                Console.WriteLine($"{_count++}: {currentString}");
             }
             else
             {

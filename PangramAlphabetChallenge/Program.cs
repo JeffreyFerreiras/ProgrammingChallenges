@@ -19,22 +19,61 @@ namespace PangramAlphabetChallenge
         {
             //TEST CODE
             string pangram = "The quick brown fox jumps over the lazy dog";
-            string pangram2 = "The quick brown fox jumps over the lazy";
+            string pangram2 = "The quick brown fox jumps over the lzy";
 
-            Console.WriteLine(FindMissingLetters(pangram));
-            Console.WriteLine(FindMissingLetters(pangram2));
+            var stopWatch = new System.Diagnostics.Stopwatch();
+            stopWatch.Start();
+            Console.WriteLine($"{nameof(FindMissingLetters)}: {FindMissingLetters(pangram)}");
+            Console.WriteLine($"{nameof(FindMissingLetters)}: {FindMissingLetters(pangram2)}");
+            stopWatch.Stop();
+            Console.WriteLine($"Ticks: {stopWatch.ElapsedTicks.ToString("N")}");
+            Console.WriteLine();
+            stopWatch.Reset();
+
+            stopWatch.Start();
+            Console.WriteLine($"{nameof(MissingLetters)}: {MissingLetters(pangram)}");
+            Console.WriteLine($"{nameof(MissingLetters)}: {MissingLetters(pangram2)}");
+            stopWatch.Stop();
+            Console.WriteLine($"Ticks: {stopWatch.ElapsedTicks.ToString("N")}");
+            Console.WriteLine();
+
             Console.ReadLine();
             //END TEST CODE
         }
-        static string FindMissingLetters(string line)
+
+        static string MissingLetters(string line) // SOLUTION - O(n)
         {
-            //SOLUTION - Brought out LINQ for an efficitent yet easy to understand solution.
-            if(string.IsNullOrEmpty(line))
+            if (line == null) return "NULL";
+
+            int[] table = new int[26]; //represents english alphabet.
+            for (int i = 0; i < line.Length; i++)
+            {
+                if (char.IsLetter(line[i]))
+                {
+                    int letterIndex = char.ToLower(line[i]) - 'a';
+                    table[letterIndex]++;
+                }
+            }
+
+            string missing = string.Empty;
+            for (int i = 0; i < table.Length; i++)
+            {
+                if (table[i] < 1)
+                    missing += Convert.ToChar(i + 'a');
+            }
+
+            return missing.Length == 0 ? "NULL" : missing;
+        }
+
+        static string FindMissingLetters(string line)
+        {   //(OLD answer from years ago... noob answer here... haha noob.) 
+            // SOLUTION - Brought out LINQ for an efficitent yet easy to understand solution.
+            if (string.IsNullOrEmpty(line))
                 throw new NotImplementedException("pangram input cannot be null");
 
             line = line.ToLower();
             var lettersInAphabet = alphabet.Where(c => line.Contains(c));
-            string missingletters =  new string (alphabet.Except(lettersInAphabet).ToArray());
+            string missingletters = new string(alphabet.Except(lettersInAphabet).ToArray());
             return lettersInAphabet.SequenceEqual(alphabet) ? "null" : missingletters;
         }
     }

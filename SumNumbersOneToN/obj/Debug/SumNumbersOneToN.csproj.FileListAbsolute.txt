@@ -9,3 +9,10 @@ C:\Git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.pdb
 C:\Git\ProgrammingChallenges\SumNumbersOneToN\bin\Debug\SumNumbersOneToN.exe
 C:\Git\ProgrammingChallenges\SumNumbersOneToN\bin\Debug\SumNumbersOneToN.pdb
 C:\Git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.csprojResolveAssemblyReference.cache
+D:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\bin\Debug\SumNumbersOneToN.exe.config
+D:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\bin\Debug\SumNumbersOneToN.exe
+D:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\bin\Debug\SumNumbersOneToN.pdb
+D:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.csprojResolveAssemblyReference.cache
+D:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.csproj.CoreCompileInputs.cache
+D:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.exe
+D:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.pdb

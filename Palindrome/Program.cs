@@ -32,6 +32,7 @@ namespace Palindrome
                 if(lowerCasePhrase[i] != lowerCasePhrase[j])
                     return false; 
             }
+
             return true;
         }
     }

@@ -75,3 +75,15 @@ C:\Git\ProgrammingChallenges\FizzBuzz\bin\Debug\normnfkd.nlp
 C:\Git\ProgrammingChallenges\FizzBuzz\obj\Debug\FizzBuzz.csprojResolveAssemblyReference.cache
 C:\Git\ProgrammingChallenges\FizzBuzz\obj\Debug\ConsoleApplication2.exe
 C:\Git\ProgrammingChallenges\FizzBuzz\obj\Debug\ConsoleApplication2.pdb
+D:\Development\Git\ProgrammingChallenges\FizzBuzz\bin\Debug\ConsoleApplication2.exe
+D:\Development\Git\ProgrammingChallenges\FizzBuzz\bin\Debug\ConsoleApplication2.pdb
+D:\Development\Git\ProgrammingChallenges\FizzBuzz\bin\Debug\mscorlib.dll
+D:\Development\Git\ProgrammingChallenges\FizzBuzz\bin\Debug\normidna.nlp
+D:\Development\Git\ProgrammingChallenges\FizzBuzz\bin\Debug\normnfc.nlp
+D:\Development\Git\ProgrammingChallenges\FizzBuzz\bin\Debug\normnfd.nlp
+D:\Development\Git\ProgrammingChallenges\FizzBuzz\bin\Debug\normnfkc.nlp
+D:\Development\Git\ProgrammingChallenges\FizzBuzz\bin\Debug\normnfkd.nlp
+D:\Development\Git\ProgrammingChallenges\FizzBuzz\obj\Debug\FizzBuzz.csprojResolveAssemblyReference.cache
+D:\Development\Git\ProgrammingChallenges\FizzBuzz\obj\Debug\FizzBuzz.csproj.CoreCompileInputs.cache
+D:\Development\Git\ProgrammingChallenges\FizzBuzz\obj\Debug\ConsoleApplication2.exe
+D:\Development\Git\ProgrammingChallenges\FizzBuzz\obj\Debug\ConsoleApplication2.pdb

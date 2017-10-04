@@ -9,3 +9,10 @@ C:\Git\ProgrammingChallenges\PangramAlphabetChallenge\bin\Debug\PangramAlphabetC
 C:\Git\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.exe
 C:\Git\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.pdb
 C:\Git\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.csprojResolveAssemblyReference.cache
+D:\Development\Git\ProgrammingChallenges\PangramAlphabetChallenge\bin\Debug\PangramAlphabetChallenge.exe.config
+D:\Development\Git\ProgrammingChallenges\PangramAlphabetChallenge\bin\Debug\PangramAlphabetChallenge.exe
+D:\Development\Git\ProgrammingChallenges\PangramAlphabetChallenge\bin\Debug\PangramAlphabetChallenge.pdb
+D:\Development\Git\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.csprojResolveAssemblyReference.cache
+D:\Development\Git\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.csproj.CoreCompileInputs.cache
+D:\Development\Git\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.exe
+D:\Development\Git\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.pdb

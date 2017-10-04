@@ -8,3 +8,10 @@ C:\Git\ProgrammingChallenges\StringPermutations\bin\Debug\StringPermutations.exe
 C:\Git\ProgrammingChallenges\StringPermutations\bin\Debug\StringPermutations.pdb
 C:\Git\ProgrammingChallenges\StringPermutations\obj\Debug\StringPermutations.exe
 C:\Git\ProgrammingChallenges\StringPermutations\obj\Debug\StringPermutations.pdb
+D:\Development\Git\ProgrammingChallenges\StringPermutations\bin\Debug\StringPermutations.exe.config
+D:\Development\Git\ProgrammingChallenges\StringPermutations\bin\Debug\StringPermutations.exe
+D:\Development\Git\ProgrammingChallenges\StringPermutations\bin\Debug\StringPermutations.pdb
+D:\Development\Git\ProgrammingChallenges\StringPermutations\obj\Debug\StringPermutations.csproj.CoreCompileInputs.cache
+D:\Development\Git\ProgrammingChallenges\StringPermutations\obj\Debug\StringPermutations.exe
+D:\Development\Git\ProgrammingChallenges\StringPermutations\obj\Debug\StringPermutations.pdb
+D:\Development\Git\ProgrammingChallenges\StringPermutations\obj\Debug\StringPermutations.csprojResolveAssemblyReference.cache

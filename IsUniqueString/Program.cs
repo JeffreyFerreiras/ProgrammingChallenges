@@ -30,9 +30,19 @@ namespace IsUniqueString
             //SOLUTION - one liner.
             return str.Length > 128 ? false : str.Length == str.Distinct().Count();
         }
+        static bool IsUniqueStringHash(string str)
+        {
+            //SOLUTION - HashSet
+            if (str.Length > 128) return false;
+
+            HashSet<char> set = new HashSet<char>(str);
+
+            return set.Count == str.Length;
+        }
         static bool IsUniqueStringWithoutIEnumerable(string str)
         {
-            //SOLUTION with better time and space complexity. 
+            //SOLUTION with better time and space complexity.
+
             if( !string.IsNullOrEmpty(str) && str.Length > 128)
                 return false;
 
@@ -43,6 +53,7 @@ namespace IsUniqueString
                 if(str.Contains(character))
                     return false;
             }
+
             return true;
         }
     }

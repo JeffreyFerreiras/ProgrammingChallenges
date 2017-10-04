@@ -22,11 +22,9 @@ namespace PolygonMaking
          */
         static void Main(string[] args)
         {
-            //Generated Code.
             int sides = Convert.ToInt32(Console.ReadLine());
             string[] a_temp = Console.ReadLine().Split(' ');
             int[] sideLengths = Array.ConvertAll(a_temp,Int32.Parse);
-            // End Generated Code.
 
             MinimumCuts(sideLengths);
         }

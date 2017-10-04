@@ -64,13 +64,15 @@ namespace CheckPermutations
                 if(originalSet.BinarySearch(c) == -1)
                     return false;
             }
+
             return true;
         }
+
         static bool IsPermutationQuickSort(string original, string permutation)
         {
             //SOLUTION: With custom QuickSort algorithm implementation.
             //This implementation is nearly 4X faster than using OrderBy
-            //Changed the QuickSorter to an extension method.
+            
             if(original == permutation)
                 return true;
 
@@ -86,12 +88,14 @@ namespace CheckPermutations
             else
                 return false;
         }
+
         static bool IsPermutationOrderBy(string s1, string s2)
         {
             //SOLUTION: in one line.
             return s1.Length == s2.Length ? s1.OrderBy(x => x).ToString() == s2.OrderBy(x => x).ToString() : false;
         }
 
+        //Best solution
         static bool IsAnagram(string original, string permutation)
         {
             var charTableOriginal = BuildCharTable(original);
@@ -101,18 +105,23 @@ namespace CheckPermutations
             {
                 if(charTableOriginal[i] != charTablePermutation[i]) return false;
             }
+
             return true;
         }
+
         static int[] BuildCharTable(string phrase)
         {
             int [] table = new int[25];
+
             foreach(char c in phrase.Replace(" ",""))
             {
                 int x = GetCharNumber(c);
                 table[x]++;
             }
+
             return table;
         }
+
         static int GetCharNumber(char c) //NOTE: in C#.NET characters have default integer values corresponding to ASCII numbers. 
         {
             if('a' <= c && c <= 'z')

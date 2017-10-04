@@ -30,11 +30,13 @@ For each line of input, print to standard output the sum of the numbers from 1 t
         private static int IterativeAdder(int num) //SOLUTION 2 - This is the ideal solution..Reason: It will be more widely understood and easy to read, and has the best performance.
         {
             int sum = 1;
-            for(int i = 2; i < num; ++i)
+
+            for (int i = 2; i < num; ++i)
             {
                 if(i % 5 == 0 || i % 7 == 0) continue;
                 sum += i;
             }
+
             return sum;
         }
         private static int RecursiveAdder(int num) //SOLUTION 3

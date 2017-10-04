@@ -8,3 +8,9 @@ C:\Git\ProgrammingChallenges\IsUniqueString\bin\Debug\IsUniqueString.exe
 C:\Git\ProgrammingChallenges\IsUniqueString\bin\Debug\IsUniqueString.pdb
 C:\Git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.exe
 C:\Git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.pdb
+D:\Development\Git\ProgrammingChallenges\IsUniqueString\bin\Debug\IsUniqueString.exe.config
+D:\Development\Git\ProgrammingChallenges\IsUniqueString\bin\Debug\IsUniqueString.exe
+D:\Development\Git\ProgrammingChallenges\IsUniqueString\bin\Debug\IsUniqueString.pdb
+D:\Development\Git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.csproj.CoreCompileInputs.cache
+D:\Development\Git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.exe
+D:\Development\Git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.pdb

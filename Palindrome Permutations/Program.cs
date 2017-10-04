@@ -22,6 +22,7 @@ namespace Palindrome_Permutations
         {
             bool x = PermutationOfPalindrome("Taco cat");
         }
+
         static bool PermutationOfPalindrome(string phrase)
         {
             if(string.IsNullOrEmpty(phrase))
@@ -30,20 +31,25 @@ namespace Palindrome_Permutations
             int [] table = BuildCharTable(phrase.Replace(" ",""));
             return CheckMaxOneOdd(table);
         }
+
         static bool CheckMaxOneOdd(int[] table)
         {
             bool hasOdd = false;
-            foreach(var i in table)
+
+            foreach (var i in table)
             {
                 if(i % 2 == 1)
                 {
                     if(hasOdd)
                         return false;
+
                     hasOdd = true;
                 }
             }
+
             return true;
         }
+
         static int[] BuildCharTable(string phrase)
         {
             int [] table = new int[25];
@@ -54,8 +60,11 @@ namespace Palindrome_Permutations
             }
             return table;          
         }
+
         static int GetCharNumber(char c) //NOTE: in C#.NET characters have default integer values corresponding to ASCII numbers. 
         {
+            //return char.ToLower(c) - 'a';
+
             if('a' <= c && c <= 'z')
                 return c - 'a';
             else if('A' <= c && c <= 'Z')

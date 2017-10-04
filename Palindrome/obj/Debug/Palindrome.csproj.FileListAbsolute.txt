@@ -8,3 +8,9 @@ C:\Git\ProgrammingChallenges\Palindrome\bin\Debug\Palindrome.exe
 C:\Git\ProgrammingChallenges\Palindrome\bin\Debug\Palindrome.pdb
 C:\Git\ProgrammingChallenges\Palindrome\obj\Debug\Palindrome.exe
 C:\Git\ProgrammingChallenges\Palindrome\obj\Debug\Palindrome.pdb
+D:\Development\Git\ProgrammingChallenges\Palindrome\bin\Debug\Palindrome.exe.config
+D:\Development\Git\ProgrammingChallenges\Palindrome\bin\Debug\Palindrome.exe
+D:\Development\Git\ProgrammingChallenges\Palindrome\bin\Debug\Palindrome.pdb
+D:\Development\Git\ProgrammingChallenges\Palindrome\obj\Debug\Palindrome.csproj.CoreCompileInputs.cache
+D:\Development\Git\ProgrammingChallenges\Palindrome\obj\Debug\Palindrome.exe
+D:\Development\Git\ProgrammingChallenges\Palindrome\obj\Debug\Palindrome.pdb

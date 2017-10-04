@@ -8,3 +8,9 @@ C:\Git\ProgrammingChallenges\Staircase\bin\Debug\Staircase.exe
 C:\Git\ProgrammingChallenges\Staircase\bin\Debug\Staircase.pdb
 C:\Git\ProgrammingChallenges\Staircase\obj\Debug\Staircase.exe
 C:\Git\ProgrammingChallenges\Staircase\obj\Debug\Staircase.pdb
+D:\Development\Git\ProgrammingChallenges\Staircase\bin\Debug\Staircase.exe.config
+D:\Development\Git\ProgrammingChallenges\Staircase\bin\Debug\Staircase.exe
+D:\Development\Git\ProgrammingChallenges\Staircase\bin\Debug\Staircase.pdb
+D:\Development\Git\ProgrammingChallenges\Staircase\obj\Debug\Staircase.csproj.CoreCompileInputs.cache
+D:\Development\Git\ProgrammingChallenges\Staircase\obj\Debug\Staircase.exe
+D:\Development\Git\ProgrammingChallenges\Staircase\obj\Debug\Staircase.pdb

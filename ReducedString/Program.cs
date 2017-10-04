@@ -12,7 +12,9 @@ namespace ReducedString
         {
             string input = "aaabccddd";
             string result = GetReducedString(input, string.Empty);
+
             Console.Write(result.Length > 0 ? result : "Empty String");
+            Console.ReadLine();
         }
         static string GetReducedString(string reduced, string original)
         {

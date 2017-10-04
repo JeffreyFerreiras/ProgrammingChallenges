@@ -8,3 +8,9 @@ C:\Git\ProgrammingChallenges\Palindrome Permutations\bin\Debug\Palindrome Permut
 C:\Git\ProgrammingChallenges\Palindrome Permutations\bin\Debug\Palindrome Permutations.pdb
 C:\Git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.exe
 C:\Git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.pdb
+D:\Development\Git\ProgrammingChallenges\Palindrome Permutations\bin\Debug\Palindrome Permutations.exe.config
+D:\Development\Git\ProgrammingChallenges\Palindrome Permutations\bin\Debug\Palindrome Permutations.exe
+D:\Development\Git\ProgrammingChallenges\Palindrome Permutations\bin\Debug\Palindrome Permutations.pdb
+D:\Development\Git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.csproj.CoreCompileInputs.cache
+D:\Development\Git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.exe
+D:\Development\Git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.pdb
