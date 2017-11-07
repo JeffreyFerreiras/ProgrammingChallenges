@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PangramAlphabetChallenge", "PangramAlphabetChallenge\PangramAlphabetChallenge.csproj", "{B6EDC1BA-C8B4-4F8F-80A1-6E3DF5107C80}"
 EndProject
@@ -36,6 +36,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReducedString", "ReducedString\ReducedString.csproj", "{DEA04DDF-0DD8-4002-B0F8-660753FE0DF4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolygonMaking", "PolygonMaking\PolygonMaking.csproj", "{22CD4B8B-962E-4250-8957-ABCAC5CD1C12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarbleTest", "MarbleTest\MarbleTest.csproj", "{91DD0E3A-A77C-42C7-8056-993116185C36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,8 +113,15 @@ Global
 		{22CD4B8B-962E-4250-8957-ABCAC5CD1C12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22CD4B8B-962E-4250-8957-ABCAC5CD1C12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22CD4B8B-962E-4250-8957-ABCAC5CD1C12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91DD0E3A-A77C-42C7-8056-993116185C36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91DD0E3A-A77C-42C7-8056-993116185C36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91DD0E3A-A77C-42C7-8056-993116185C36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91DD0E3A-A77C-42C7-8056-993116185C36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A69BF26C-62B2-4C49-9E86-9821D97BB8AA}
 	EndGlobalSection
 EndGlobal
