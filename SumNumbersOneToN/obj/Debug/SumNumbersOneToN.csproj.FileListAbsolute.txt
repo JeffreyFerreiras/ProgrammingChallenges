@@ -16,3 +16,10 @@ D:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOn
 D:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.csproj.CoreCompileInputs.cache
 D:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.exe
 D:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.pdb
+C:\Projects\git\ProgrammingChallenges\SumNumbersOneToN\bin\Debug\SumNumbersOneToN.exe.config
+C:\Projects\git\ProgrammingChallenges\SumNumbersOneToN\bin\Debug\SumNumbersOneToN.exe
+C:\Projects\git\ProgrammingChallenges\SumNumbersOneToN\bin\Debug\SumNumbersOneToN.pdb
+C:\Projects\git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.csprojResolveAssemblyReference.cache
+C:\Projects\git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.csproj.CoreCompileInputs.cache
+C:\Projects\git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.exe
+C:\Projects\git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.pdb

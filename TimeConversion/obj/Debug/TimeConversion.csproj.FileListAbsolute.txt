@@ -14,3 +14,9 @@ D:\Development\Git\ProgrammingChallenges\TimeConversion\bin\Debug\TimeConversion
 D:\Development\Git\ProgrammingChallenges\TimeConversion\obj\Debug\TimeConversion.csproj.CoreCompileInputs.cache
 D:\Development\Git\ProgrammingChallenges\TimeConversion\obj\Debug\TimeConversion.exe
 D:\Development\Git\ProgrammingChallenges\TimeConversion\obj\Debug\TimeConversion.pdb
+C:\Projects\git\ProgrammingChallenges\TimeConversion\bin\Debug\TimeConversion.exe.config
+C:\Projects\git\ProgrammingChallenges\TimeConversion\bin\Debug\TimeConversion.exe
+C:\Projects\git\ProgrammingChallenges\TimeConversion\bin\Debug\TimeConversion.pdb
+C:\Projects\git\ProgrammingChallenges\TimeConversion\obj\Debug\TimeConversion.csproj.CoreCompileInputs.cache
+C:\Projects\git\ProgrammingChallenges\TimeConversion\obj\Debug\TimeConversion.exe
+C:\Projects\git\ProgrammingChallenges\TimeConversion\obj\Debug\TimeConversion.pdb

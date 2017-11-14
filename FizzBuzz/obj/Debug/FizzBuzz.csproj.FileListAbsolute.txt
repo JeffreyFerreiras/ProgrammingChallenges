@@ -87,3 +87,9 @@ D:\Development\Git\ProgrammingChallenges\FizzBuzz\obj\Debug\FizzBuzz.csprojResol
 D:\Development\Git\ProgrammingChallenges\FizzBuzz\obj\Debug\FizzBuzz.csproj.CoreCompileInputs.cache
 D:\Development\Git\ProgrammingChallenges\FizzBuzz\obj\Debug\ConsoleApplication2.exe
 D:\Development\Git\ProgrammingChallenges\FizzBuzz\obj\Debug\ConsoleApplication2.pdb
+C:\Projects\git\ProgrammingChallenges\FizzBuzz\bin\Debug\ConsoleApplication2.exe
+C:\Projects\git\ProgrammingChallenges\FizzBuzz\bin\Debug\ConsoleApplication2.pdb
+C:\Projects\git\ProgrammingChallenges\FizzBuzz\obj\Debug\FizzBuzz.csprojResolveAssemblyReference.cache
+C:\Projects\git\ProgrammingChallenges\FizzBuzz\obj\Debug\FizzBuzz.csproj.CoreCompileInputs.cache
+C:\Projects\git\ProgrammingChallenges\FizzBuzz\obj\Debug\ConsoleApplication2.exe
+C:\Projects\git\ProgrammingChallenges\FizzBuzz\obj\Debug\ConsoleApplication2.pdb

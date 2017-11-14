@@ -62,16 +62,16 @@ namespace QuickTest
 
             for (int i = 0; i < count; i++)
             {
-                IEnumerable<int> bucket = BuildMarbleBucket(red, green, blue, orange);
+                var bucket = BuildMarbleBucket(red, green, blue, orange);
                 int index = _random.Next(0, bucket.Count());
 
-                result[i] = bucket.ElementAt(index);
+                result[i] = bucket[index];
             }
 
             return result;
         }
 
-        private static IEnumerable<int> BuildMarbleBucket(int red, int green, int blue, int orange)
+        private static List<int> BuildMarbleBucket(int red, int green, int blue, int orange)
         {
             Contract.Requires(IsValidMarbleAmount(red, green, blue, orange));
 
@@ -102,10 +102,12 @@ namespace QuickTest
         {
             //TODO: output the total number of red, green, blue and orange marbles based on the array of results passed to you.
             //This array is the same array you generated in the Solve function above.
+
             Console.WriteLine("\nStat Results:");
-            Console.WriteLine($"Red: {results.Count(x => x == RED_MARBLE)}");
-            Console.WriteLine($"Green: {results.Count(x => x == GREEN_MARBLE)}");
-            Console.WriteLine($"Blue: {results.Count(x => x == BLUE_MARBLE)}");
+
+            Console.WriteLine($"Red:    {results.Count(x => x == RED_MARBLE)}");
+            Console.WriteLine($"Green:  {results.Count(x => x == GREEN_MARBLE)}");
+            Console.WriteLine($"Blue:   {results.Count(x => x == BLUE_MARBLE)}");
             Console.WriteLine($"Orange: {results.Count(x => x == ORANGE_MARBLE)}");
 
             Console.ReadLine();

@@ -14,3 +14,9 @@ D:\Development\Git\ProgrammingChallenges\IsUniqueString\bin\Debug\IsUniqueString
 D:\Development\Git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.csproj.CoreCompileInputs.cache
 D:\Development\Git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.exe
 D:\Development\Git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.pdb
+C:\Projects\git\ProgrammingChallenges\IsUniqueString\bin\Debug\IsUniqueString.exe.config
+C:\Projects\git\ProgrammingChallenges\IsUniqueString\bin\Debug\IsUniqueString.exe
+C:\Projects\git\ProgrammingChallenges\IsUniqueString\bin\Debug\IsUniqueString.pdb
+C:\Projects\git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.csproj.CoreCompileInputs.cache
+C:\Projects\git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.exe
+C:\Projects\git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.pdb

@@ -9,3 +9,9 @@ D:\Development\Git\ProgrammingChallenges\ReverseLinkedList\bin\Debug\ReverseLink
 D:\Development\Git\ProgrammingChallenges\ReverseLinkedList\obj\Debug\ReverseLinkedList.csproj.CoreCompileInputs.cache
 D:\Development\Git\ProgrammingChallenges\ReverseLinkedList\obj\Debug\ReverseLinkedList.exe
 D:\Development\Git\ProgrammingChallenges\ReverseLinkedList\obj\Debug\ReverseLinkedList.pdb
+C:\Projects\git\ProgrammingChallenges\ReverseLinkedList\bin\Debug\ReverseLinkedList.exe.config
+C:\Projects\git\ProgrammingChallenges\ReverseLinkedList\bin\Debug\ReverseLinkedList.exe
+C:\Projects\git\ProgrammingChallenges\ReverseLinkedList\bin\Debug\ReverseLinkedList.pdb
+C:\Projects\git\ProgrammingChallenges\ReverseLinkedList\obj\Debug\ReverseLinkedList.csproj.CoreCompileInputs.cache
+C:\Projects\git\ProgrammingChallenges\ReverseLinkedList\obj\Debug\ReverseLinkedList.exe
+C:\Projects\git\ProgrammingChallenges\ReverseLinkedList\obj\Debug\ReverseLinkedList.pdb
