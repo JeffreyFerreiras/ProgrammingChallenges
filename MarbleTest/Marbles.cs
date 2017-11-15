@@ -56,22 +56,21 @@ namespace QuickTest
             //You should have approximately 10 red marbles for every 5 green and for every five blue marbles, and
             //there should be 10 red marbles for approximately every orange marble you get
 
-            Contract.Ensures(Contract.Result<int[]>().Length == count);
+            double totalInRatio = (red + green + blue + orange);
+            double redProbability = red / totalInRatio;
+            double greenProbability = green / totalInRatio;
+            double blueProbability = blue / totalInRatio;
+            double orangeProbability = orange / totalInRatio;
 
-            int[] result = new int[count];
+            double redMarbles = count * redProbability;
+            double greenMarbles = count * greenProbability;
+            double blueMarbles = count * blueProbability;
+            double orangeMarbles = count * orangeProbability;
 
-            for (int i = 0; i < count; i++)
-            {
-                var bucket = BuildMarbleBucket(red, green, blue, orange);
-                int index = _random.Next(0, bucket.Count());
-
-                result[i] = bucket[index];
-            }
-
-            return result;
+            return BuildMarbleBucket((int)redMarbles, (int)greenMarbles, (int)blueMarbles, (int)orangeMarbles);
         }
 
-        private static List<int> BuildMarbleBucket(int red, int green, int blue, int orange)
+        private static int[] BuildMarbleBucket(int red, int green, int blue, int orange)
         {
             Contract.Requires(IsValidMarbleAmount(red, green, blue, orange));
 
@@ -82,7 +81,7 @@ namespace QuickTest
             marbleBucket.AddRange(Enumerable.Repeat(BLUE_MARBLE, blue));
             marbleBucket.AddRange(Enumerable.Repeat(ORANGE_MARBLE, orange));
 
-            return marbleBucket;
+            return marbleBucket.ToArray();
         }
 
         private static bool IsValidMarbleAmount(params int[] amounts)
