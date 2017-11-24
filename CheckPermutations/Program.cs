@@ -77,16 +77,14 @@ namespace CheckPermutations
                 return true;
 
             bool notEmpty = (string.IsNullOrEmpty(original) || string.IsNullOrEmpty(permutation));
-            if( notEmpty && original.Length != permutation.Length)
+
+            if ( notEmpty && original.Length != permutation.Length)
                 return false;
 
             original    = original.QuickSorter();
             permutation = permutation.QuickSorter();
 
-            if(original == permutation)
-                return true;
-            else
-                return false;
+            return original == permutation;
         }
 
         static bool IsPermutationOrderBy(string s1, string s2)
