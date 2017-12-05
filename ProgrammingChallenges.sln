@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PangramAlphabetChallenge", "PangramAlphabetChallenge\PangramAlphabetChallenge.csproj", "{B6EDC1BA-C8B4-4F8F-80A1-6E3DF5107C80}"
 EndProject
@@ -46,6 +46,16 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fibonacci_Print", "Fibonacci_Print\Fibonacci_Print.csproj", "{94BF97DA-ECC9-4DB4-9010-86EDBA4B3E31}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortArrays", "SortArrays\SortArrays.csproj", "{AB362959-51A5-44C8-9447-32FFA9C1E2C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mini-Max Sum", "Mini-Max Sum\Mini-Max Sum.csproj", "{093529A7-0F03-4C34-83AE-868795EB3678}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Birthday Cake Candles", "Birthday Cake Candles\Birthday Cake Candles.csproj", "{D8A01DF5-7048-4751-9545-A8C7C9FC7B79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradingStudents", "GradingStudents\GradingStudents.csproj", "{0FD975F8-5302-48CC-8629-EE50476F7479}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pairs", "Pairs\Pairs.csproj", "{0A1B84B6-DEF9-49F7-815F-2E7227094B91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtraLongFactorial", "ExtraLongFactorial\ExtraLongFactorial.csproj", "{74FE5D41-53FB-4F27-B6C2-2595C5F1808C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -141,6 +151,26 @@ Global
 		{AB362959-51A5-44C8-9447-32FFA9C1E2C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB362959-51A5-44C8-9447-32FFA9C1E2C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB362959-51A5-44C8-9447-32FFA9C1E2C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{093529A7-0F03-4C34-83AE-868795EB3678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{093529A7-0F03-4C34-83AE-868795EB3678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{093529A7-0F03-4C34-83AE-868795EB3678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{093529A7-0F03-4C34-83AE-868795EB3678}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8A01DF5-7048-4751-9545-A8C7C9FC7B79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8A01DF5-7048-4751-9545-A8C7C9FC7B79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8A01DF5-7048-4751-9545-A8C7C9FC7B79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8A01DF5-7048-4751-9545-A8C7C9FC7B79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FD975F8-5302-48CC-8629-EE50476F7479}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FD975F8-5302-48CC-8629-EE50476F7479}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FD975F8-5302-48CC-8629-EE50476F7479}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FD975F8-5302-48CC-8629-EE50476F7479}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A1B84B6-DEF9-49F7-815F-2E7227094B91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A1B84B6-DEF9-49F7-815F-2E7227094B91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A1B84B6-DEF9-49F7-815F-2E7227094B91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A1B84B6-DEF9-49F7-815F-2E7227094B91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74FE5D41-53FB-4F27-B6C2-2595C5F1808C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74FE5D41-53FB-4F27-B6C2-2595C5F1808C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74FE5D41-53FB-4F27-B6C2-2595C5F1808C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74FE5D41-53FB-4F27-B6C2-2595C5F1808C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
