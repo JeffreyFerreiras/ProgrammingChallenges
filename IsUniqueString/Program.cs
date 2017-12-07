@@ -25,13 +25,11 @@ namespace IsUniqueString
             stopwatch2.Stop(); //539 ticks
             //END TEST CODE 
         }
-
         static bool IsUniqueString(string str)
         {
             //SOLUTION - one liner.
             return str.Length > 128 ? false : str.Length == str.Distinct().Count();
         }
-
         static bool IsUniqueStringHash(string str)
         {
             //SOLUTION - HashSet
@@ -41,7 +39,6 @@ namespace IsUniqueString
 
             return set.Count == str.Length;
         }
-
         static bool IsUniqueStringWithoutIEnumerable(string str)
         {
             //SOLUTION with better time and space complexity.
