@@ -37,30 +37,31 @@ Here's why 22 is NOT a happy number:
 
         public static void Main(string[] args)
         {
-            Console.WriteLine(IsHappyNumber(Convert.ToInt32("145")));
+            Console.WriteLine(IsHappyNumber(49));
             Console.ReadLine();
         }
+
         static int IsHappyNumber(int num)
         { //SOLUTION
              
-            int sumOfSquares = 0;
+            int sumOfRightDigit = 0;
 
             while(num != 0)
             {
                 int digit = num % 10;
                 num = num / 10;
-                sumOfSquares += (int) Math.Pow(digit, 2);                                   
+                sumOfRightDigit += (int) Math.Pow(digit, 2);                                   
             }
 
-            if(cache.Contains(sumOfSquares))
+            if(cache.Contains(sumOfRightDigit))
                 return 0;
 
-            cache.Add(sumOfSquares);
+            cache.Add(sumOfRightDigit);
 
-            if(sumOfSquares == 1)
+            if(sumOfRightDigit == 1)
                 return 1;
 
-            return IsHappyNumber(sumOfSquares);
+            return IsHappyNumber(sumOfRightDigit);
         }
     }
 }

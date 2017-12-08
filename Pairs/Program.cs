@@ -36,9 +36,7 @@ namespace Pairs
 
             for (int i = 0; i < ar.Length; i++)
             {
-                int current = ar[i];
-                
-                if (seen.Contains(current - k))
+                if (seen.Contains(ar[i] - k))
                 {
                     count++;
                 }

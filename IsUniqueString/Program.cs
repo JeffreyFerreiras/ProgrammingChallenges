@@ -30,6 +30,7 @@ namespace IsUniqueString
             //SOLUTION - one liner.
             return str.Length > 128 ? false : str.Length == str.Distinct().Count();
         }
+
         static bool IsUniqueStringHash(string str)
         {
             //SOLUTION - HashSet
@@ -39,6 +40,7 @@ namespace IsUniqueString
 
             return set.Count == str.Length;
         }
+
         static bool IsUniqueStringWithoutIEnumerable(string str)
         {
             //SOLUTION with better time and space complexity.
@@ -50,6 +52,7 @@ namespace IsUniqueString
             {
                 var character = str[0];
                 str = str.Substring(1);
+
                 if(str.Contains(character))
                     return false;
             }

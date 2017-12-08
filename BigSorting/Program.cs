@@ -7,13 +7,15 @@ namespace BigSorting
     {
         //NOTE: Did it manually for good training, but it could be easily done using Array.Sort with a customized comparer.
         /*
-         * Consider an array of numeric strings, , where each string is a positive number with anywhere from  to  digits. Sort the array's elements in non-decreasing (i.e., ascending) order of their real-world integer values and print each element of the sorted array on a new line.
-
-Input Format
-
-The first line contains an integer, , denoting the number of strings in . 
-Each of the  subsequent lines contains a string of integers describing an element of the array.
+         * Consider an array of numeric strings, 
+         * where each string is a positive number with anywhere from 0 - N digits.
+         * Sort the array's elements in non-decreasing (i.e., ascending) 
+         * order of their real-world integer values and print each element
+         * of the sorted array on a new line.
+         * 
          */
+
+
         static void Main(string[] args)
         {
             string[] input =
@@ -29,7 +31,7 @@ Each of the  subsequent lines contains a string of integers describing an elemen
 
             Sort(input);
 
-            foreach (string n in input)
+            foreach(string n in input)
             {
                 Console.WriteLine(n);
             }
@@ -38,12 +40,14 @@ Each of the  subsequent lines contains a string of integers describing an elemen
             string[] input2 =
             {
                 "200000",
-                "42969"
+                "42969",
+                null,
+                ""
             };
 
             Sort(input2);
 
-            foreach (string n in input2)
+            foreach(string n in input2)
             {
                 Console.WriteLine(n);
             }
@@ -56,7 +60,7 @@ Each of the  subsequent lines contains a string of integers describing an elemen
 
         static void Sort(string[] arr, int left, int right)
         {
-            if (left < right)
+            if(left < right)
             {
                 int index = Partition(arr, left, right);
 
@@ -71,10 +75,10 @@ Each of the  subsequent lines contains a string of integers describing an elemen
 
             while(left <= right)
             {
-                while (IsBigger(pivot, arr[left] ?? "0")) left++;
-                while (IsBigger(arr[right] ?? "0", pivot)) right--;
+                while(IsBigger(pivot, arr[left])) left++;
+                while(IsBigger(arr[right], pivot)) right--;
 
-                if (left <= right)
+                if(left <= right)
                 {
                     //swap
                     string temp = arr[left];
@@ -89,18 +93,18 @@ Each of the  subsequent lines contains a string of integers describing an elemen
             return left;
         }
 
-        private static bool IsBigger(string left, string right)
+        private static bool IsBigger(string value, string target)
         {
-            left = left.Trim();
-            right = right.Trim();
+            if(string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(target))
+                return false;
 
-            if (left.Length > right.Length) return true;
-            if (right.Length > left.Length) return false;
-            
-            for (int i = 0; i < left.Length; i++) //equal length
+            if(value.Length > target.Length) return true;
+            if(target.Length > value.Length) return false;
+
+            for(int i = 0; i < value.Length; i++) //equal length
             {
-                if (left[i] > right[i]) return true;
-                if (right[i] > left[i]) return false;
+                if(value[i] > target[i]) return true;
+                if(target[i] > value[i]) return false;
             }
 
             return false; //They're equal

@@ -16,21 +16,21 @@ namespace Palindrome
             bool result1 = IsPalindrome("Malayalam");
             bool result2 = IsPalindrome("Racecar");
             bool result3 = IsPalindrome("Not a palindrome");
+            bool result4 = IsPalindrome("");
+            bool result5 = IsPalindrome(null);
             //END TEST CODE
         }
-        static bool IsPalindrome(string phrase)
+
+        static bool IsPalindrome(string phrase) //SOLUTION - O(n)
         {
-            //SOLUTION - runtime is O(n/2), quick. 
-            if(string.IsNullOrEmpty(phrase))
-                return false;
+            if(string.IsNullOrWhiteSpace(phrase)) return false;
 
-            phrase = phrase.Replace(" ", "");
-            string lowerCasePhrase = phrase.ToLower();
-
-            for(int i = 0, j = lowerCasePhrase.Length - 1; i != j; i++, j--) 
+            for(int i = 0; i < phrase.Length / 2; i++)
             {
-                if(lowerCasePhrase[i] != lowerCasePhrase[j])
-                    return false; 
+                char left = (char)(phrase[i] | ' ');                        //OR | bitwise operator used to always compare lower case.
+                char right = (char)(phrase[phrase.Length - 1 - i] | ' ');
+
+                if(left != right) return false;
             }
 
             return true;

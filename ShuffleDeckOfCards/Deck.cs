@@ -39,7 +39,7 @@ namespace ShuffleDeckOfCards
 
         public void Display()
         {
-            foreach (Card card in this.Cards)
+            foreach (Card card in Cards)
             {
                 Console.WriteLine(string.Format("{0}: {1}", card.Face, card.Value));
             }
@@ -48,9 +48,9 @@ namespace ShuffleDeckOfCards
         private int GetRandomIndex()
         {
             int num;
-            lock (Deck._syncLock)
+            lock (_syncLock)
             {
-                int num1 = Deck._random.Next(0, this.Cards.Count);
+                int num1 = _random.Next(0, Cards.Count);
                 num = num1;
             }
             return num;
