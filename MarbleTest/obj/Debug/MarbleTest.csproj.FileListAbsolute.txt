@@ -8,7 +8,7 @@ C:\Projects\git\ProgrammingChallenges\MarbleTest\obj\Debug\MarbleTest.pdb
 D:\Development\Git\ProgrammingChallenges\MarbleTest\bin\Debug\MarbleTest.exe.config
 D:\Development\Git\ProgrammingChallenges\MarbleTest\bin\Debug\MarbleTest.exe
 D:\Development\Git\ProgrammingChallenges\MarbleTest\bin\Debug\MarbleTest.pdb
-D:\Development\Git\ProgrammingChallenges\MarbleTest\obj\Debug\MarbleTest.csprojResolveAssemblyReference.cache
 D:\Development\Git\ProgrammingChallenges\MarbleTest\obj\Debug\MarbleTest.csproj.CoreCompileInputs.cache
 D:\Development\Git\ProgrammingChallenges\MarbleTest\obj\Debug\MarbleTest.exe
 D:\Development\Git\ProgrammingChallenges\MarbleTest\obj\Debug\MarbleTest.pdb
+D:\Development\Git\ProgrammingChallenges\MarbleTest\obj\Debug\MarbleTest.csprojResolveAssemblyReference.cache

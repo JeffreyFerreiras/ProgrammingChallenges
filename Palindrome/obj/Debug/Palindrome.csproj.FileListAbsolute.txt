@@ -20,4 +20,3 @@ C:\Projects\git\ProgrammingChallenges\Palindrome\bin\Debug\Palindrome.pdb
 C:\Projects\git\ProgrammingChallenges\Palindrome\obj\Debug\Palindrome.csproj.CoreCompileInputs.cache
 C:\Projects\git\ProgrammingChallenges\Palindrome\obj\Debug\Palindrome.exe
 C:\Projects\git\ProgrammingChallenges\Palindrome\obj\Debug\Palindrome.pdb
-D:\Development\Git\ProgrammingChallenges\Palindrome\obj\Debug\Palindrome.csprojResolveAssemblyReference.cache

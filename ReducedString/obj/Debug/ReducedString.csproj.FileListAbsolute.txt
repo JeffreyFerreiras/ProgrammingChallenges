@@ -7,7 +7,6 @@ C:\Git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.pdb
 D:\Development\Git\ProgrammingChallenges\ReducedString\bin\Debug\ReducedString.exe.config
 D:\Development\Git\ProgrammingChallenges\ReducedString\bin\Debug\ReducedString.exe
 D:\Development\Git\ProgrammingChallenges\ReducedString\bin\Debug\ReducedString.pdb
-D:\Development\Git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.csprojResolveAssemblyReference.cache
 D:\Development\Git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.csproj.CoreCompileInputs.cache
 D:\Development\Git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.exe
 D:\Development\Git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.pdb

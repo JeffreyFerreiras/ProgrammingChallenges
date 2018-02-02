@@ -49,6 +49,7 @@ Difference: |4 - 19| = 15
             //Generated code
             int n = Convert.ToInt32(Console.ReadLine());
             int[][] numArray = new int[n][];
+
             for(int a_i = 0; a_i < n; a_i++)
             {
                 string[] a_temp = Console.ReadLine().Split(' ');

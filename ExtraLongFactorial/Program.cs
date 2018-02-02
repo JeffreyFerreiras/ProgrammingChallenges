@@ -22,7 +22,7 @@ namespace ExtraLongFactorial
             Console.ReadLine();
         }
 
-        static BigInteger Factorial(BigInteger n)
+        static System.Numerics.BigInteger Factorial(BigInteger n)
         {
             if (n == 1) return n;
             

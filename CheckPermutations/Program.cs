@@ -9,8 +9,8 @@ namespace CheckPermutations
     class Program
     {
         /*
-            Given two strings, write a method to decide if one is a permutation of the other.
-        */
+         * Given two strings, write a method to decide if one is a permutation of the other.
+         */
         static void Main(string[] args)
         {   
             var sw = new System.Diagnostics.Stopwatch();

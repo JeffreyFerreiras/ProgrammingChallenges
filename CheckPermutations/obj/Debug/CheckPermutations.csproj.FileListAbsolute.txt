@@ -12,7 +12,6 @@ C:\Git\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutations.cspro
 D:\Development\Git\ProgrammingChallenges\CheckPermutations\bin\Debug\CheckPermutations.exe.config
 D:\Development\Git\ProgrammingChallenges\CheckPermutations\bin\Debug\CheckPermutations.exe
 D:\Development\Git\ProgrammingChallenges\CheckPermutations\bin\Debug\CheckPermutations.pdb
-D:\Development\Git\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutations.csprojResolveAssemblyReference.cache
 D:\Development\Git\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutations.csproj.CoreCompileInputs.cache
 D:\Development\Git\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutations.exe
 D:\Development\Git\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutations.pdb
@@ -23,3 +22,4 @@ C:\Projects\git\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutati
 C:\Projects\git\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutations.csproj.CoreCompileInputs.cache
 C:\Projects\git\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutations.exe
 C:\Projects\git\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutations.pdb
+D:\Development\Git\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutations.csprojResolveAssemblyReference.cache

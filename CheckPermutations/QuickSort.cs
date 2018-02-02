@@ -14,7 +14,9 @@ namespace CheckPermutations
         public static string QuickSorter(this string str)
         {
             char[] sorterArry = str.ToArray();
+
             QuickSorter(sorterArry, 0, sorterArry.Length - 1);
+
             return new string(sorterArry);
         }
         private static void QuickSorter(char[] array, int left, int right)
@@ -50,6 +52,7 @@ namespace CheckPermutations
                     right--;
                 }
             }
+
             return left;
         }
     }

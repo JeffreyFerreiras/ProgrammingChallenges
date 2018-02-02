@@ -14,7 +14,6 @@ D:\Development\Git\ProgrammingChallenges\StringPermutations\bin\Debug\StringPerm
 D:\Development\Git\ProgrammingChallenges\StringPermutations\obj\Debug\StringPermutations.csproj.CoreCompileInputs.cache
 D:\Development\Git\ProgrammingChallenges\StringPermutations\obj\Debug\StringPermutations.exe
 D:\Development\Git\ProgrammingChallenges\StringPermutations\obj\Debug\StringPermutations.pdb
-D:\Development\Git\ProgrammingChallenges\StringPermutations\obj\Debug\StringPermutations.csprojResolveAssemblyReference.cache
 C:\Projects\git\ProgrammingChallenges\StringPermutations\bin\Debug\StringPermutations.exe.config
 C:\Projects\git\ProgrammingChallenges\StringPermutations\bin\Debug\StringPermutations.exe
 C:\Projects\git\ProgrammingChallenges\StringPermutations\bin\Debug\StringPermutations.pdb
