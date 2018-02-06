@@ -1,11 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-<<<<<<< HEAD
 VisualStudioVersion = 15.0.27130.2026
-=======
-VisualStudioVersion = 15.0.27130.2027
->>>>>>> eae93866d05fe44b8e4b35f5f13bd2936ff2d2d8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PangramAlphabetChallenge", "PangramAlphabetChallenge\PangramAlphabetChallenge.csproj", "{B6EDC1BA-C8B4-4F8F-80A1-6E3DF5107C80}"
 EndProject
@@ -65,7 +61,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigSorting", "BigSorting\Bi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShuffleDeckOfCards", "ShuffleDeckOfCards\ShuffleDeckOfCards.csproj", "{377128D0-E299-4626-974C-9253F571F904}"
 EndProject
-<<<<<<< HEAD
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakingAnagrams", "MakingAnagrams\MakingAnagrams.csproj", "{0377E9AE-C895-4AC1-AE8D-8063A56D0406}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeftRotation", "LeftRotation\LeftRotation.csproj", "{5D91EC1B-993A-4CA4-9875-6513033FD5B9}"
@@ -81,13 +76,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductOfHighest3Ints", "ProductOfHighest3Ints\ProductOfHighest3Ints.csproj", "{5752D7BB-9D7D-4537-B3F1-B6EBD5494930}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddOne", "AddOne\AddOne.csproj", "{83ADE8E5-5B60-465A-AD47-FAEF7770CCE5}"
-=======
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindSmallestRange", "FindSmallestRange\FindSmallestRange.csproj", "{EBC95E3A-72E4-4085-B735-DFF834FA8256}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnagramSubstring", "AnagramSubstring\AnagramSubstring.csproj", "{65CE4D2A-457C-4358-BA49-5CC51E015E05}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedList_RemoveDups", "LinkedList_RemoveDups\LinkedList_RemoveDups.csproj", "{19EC63EF-9B68-442D-9B9D-94E49FBA91AA}"
->>>>>>> eae93866d05fe44b8e4b35f5f13bd2936ff2d2d8
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalancedBrackets", "..\ProgrammingLessons\BalancedBrackets\BalancedBrackets.csproj", "{5CFF2382-7347-4E39-880F-52C67563DD74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedList_DeleteMiddleNode", "LinkedList_DeleteMiddleNode\LinkedList_DeleteMiddleNode.csproj", "{7A6B569C-634E-4A96-8497-39FA5E6BD151}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -211,7 +209,6 @@ Global
 		{377128D0-E299-4626-974C-9253F571F904}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{377128D0-E299-4626-974C-9253F571F904}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{377128D0-E299-4626-974C-9253F571F904}.Release|Any CPU.Build.0 = Release|Any CPU
-<<<<<<< HEAD
 		{0377E9AE-C895-4AC1-AE8D-8063A56D0406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0377E9AE-C895-4AC1-AE8D-8063A56D0406}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0377E9AE-C895-4AC1-AE8D-8063A56D0406}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -244,7 +241,6 @@ Global
 		{83ADE8E5-5B60-465A-AD47-FAEF7770CCE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83ADE8E5-5B60-465A-AD47-FAEF7770CCE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83ADE8E5-5B60-465A-AD47-FAEF7770CCE5}.Release|Any CPU.Build.0 = Release|Any CPU
-=======
 		{EBC95E3A-72E4-4085-B735-DFF834FA8256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EBC95E3A-72E4-4085-B735-DFF834FA8256}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBC95E3A-72E4-4085-B735-DFF834FA8256}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -257,7 +253,14 @@ Global
 		{19EC63EF-9B68-442D-9B9D-94E49FBA91AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19EC63EF-9B68-442D-9B9D-94E49FBA91AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19EC63EF-9B68-442D-9B9D-94E49FBA91AA}.Release|Any CPU.Build.0 = Release|Any CPU
->>>>>>> eae93866d05fe44b8e4b35f5f13bd2936ff2d2d8
+		{5CFF2382-7347-4E39-880F-52C67563DD74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CFF2382-7347-4E39-880F-52C67563DD74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CFF2382-7347-4E39-880F-52C67563DD74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CFF2382-7347-4E39-880F-52C67563DD74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A6B569C-634E-4A96-8497-39FA5E6BD151}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A6B569C-634E-4A96-8497-39FA5E6BD151}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A6B569C-634E-4A96-8497-39FA5E6BD151}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A6B569C-634E-4A96-8497-39FA5E6BD151}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

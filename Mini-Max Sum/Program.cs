@@ -31,10 +31,11 @@ namespace Mini_Max_Sum
 
         static long[] MiniMaxSum(int[] arr)
         {
-            Func<long, long, bool> maxFunc = (x, y) => x > y;
+            bool maxFunc(long x, long y) => x > y;
+
             long max = GetMinMax(arr, maxFunc);
 
-            Func<long, long, bool> minFunc = (x, y) => x < y;
+            bool minFunc(long x, long y) => x < y;
             long min = GetMinMax(arr, minFunc);
             
             return new long[] { min, max };

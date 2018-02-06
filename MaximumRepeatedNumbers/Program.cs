@@ -34,7 +34,7 @@ namespace MaximumRepeatedNumbers
         {
             int max = -1;
 
-            HashSet<int> seen = new HashSet<int>();
+            var seen = new HashSet<int>();
 
             foreach(var num in arr)
             {
@@ -62,9 +62,10 @@ namespace MaximumRepeatedNumbers
             return result;
         }
 
-        private static int FindMissing2(int[] arr) //O(n) time, O(n) space
+        private static int FindMissing2(int[] arr) //O(n log n) time, O(1) space
         {
             Array.Sort(arr);
+
             int last=arr[0];
 
             foreach(int num in arr)
