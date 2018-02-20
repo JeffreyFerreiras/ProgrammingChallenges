@@ -87,6 +87,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalancedBrackets", "..\Prog
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedList_DeleteMiddleNode", "LinkedList_DeleteMiddleNode\LinkedList_DeleteMiddleNode.csproj", "{7A6B569C-634E-4A96-8497-39FA5E6BD151}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalTree", "MinimalTree\MinimalTree.csproj", "{E0EC6F7E-88B5-4F76-8592-B6CD2FE442FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -261,6 +263,10 @@ Global
 		{7A6B569C-634E-4A96-8497-39FA5E6BD151}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A6B569C-634E-4A96-8497-39FA5E6BD151}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A6B569C-634E-4A96-8497-39FA5E6BD151}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0EC6F7E-88B5-4F76-8592-B6CD2FE442FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0EC6F7E-88B5-4F76-8592-B6CD2FE442FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0EC6F7E-88B5-4F76-8592-B6CD2FE442FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0EC6F7E-88B5-4F76-8592-B6CD2FE442FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
