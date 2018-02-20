@@ -16,7 +16,7 @@ namespace ReverseLinkedList
             {
                 LinkedListNode<string> next = current.Next;
 
-                linkedList.Remove(next);        //links current to the removed items .Next
+                linkedList.Remove(next);            //links current to the removed items .Next
                 linkedList.AddFirst(next.Value);
 
                 /*  Eventually current.Next ends up null and the list is reversed.  */
