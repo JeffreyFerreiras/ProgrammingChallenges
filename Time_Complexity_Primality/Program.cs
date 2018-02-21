@@ -22,16 +22,6 @@ namespace Time_Complexity_Primality
 
         private static void Main(string[] args)
         {
-            //Not prime
-            //Not prime
-            //Not prime
-            //Not prime
-            //Not prime
-            //Not prime
-            //Not prime
-            //Prime
-            //Not prime
-            //Prime
             int[] data = {
 30 ,
 1  ,
@@ -65,7 +55,6 @@ namespace Time_Complexity_Primality
 841,
 907,
             };
-            //{ 12, 5, 7, 15 , 661, 450};
 
             foreach(int n in data)
             {
