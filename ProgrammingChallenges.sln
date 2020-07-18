@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PangramAlphabetChallenge", "PangramAlphabetChallenge\PangramAlphabetChallenge.csproj", "{B6EDC1BA-C8B4-4F8F-80A1-6E3DF5107C80}"
 EndProject
@@ -93,7 +93,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Time_Complexity_Primality",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Google_Question_PreviousDigitCount", "Google_Question_PreviousDigitCount\Google_Question_PreviousDigitCount.csproj", "{E3B269BE-7DB9-4538-B041-AD987D643EB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMissingNumbers", "FindMissingNumbers\FindMissingNumbers.csproj", "{535AF2AD-D8D7-4C8A-B662-E1D291B120BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindMissingNumbers", "FindMissingNumbers\FindMissingNumbers.csproj", "{535AF2AD-D8D7-4C8A-B662-E1D291B120BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlmostPalindrome", "AlmostPalindrome\AlmostPalindrome.csproj", "{8E4D5C89-581D-46E8-96E1-A94FADBA2BEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShortestPathOfMaze", "ShortestPathOfMaze\ShortestPathOfMaze.csproj", "{61D77575-31D9-43F5-BAC4-993D2536A9F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -285,6 +289,14 @@ Global
 		{535AF2AD-D8D7-4C8A-B662-E1D291B120BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{535AF2AD-D8D7-4C8A-B662-E1D291B120BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{535AF2AD-D8D7-4C8A-B662-E1D291B120BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E4D5C89-581D-46E8-96E1-A94FADBA2BEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E4D5C89-581D-46E8-96E1-A94FADBA2BEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E4D5C89-581D-46E8-96E1-A94FADBA2BEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E4D5C89-581D-46E8-96E1-A94FADBA2BEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61D77575-31D9-43F5-BAC4-993D2536A9F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61D77575-31D9-43F5-BAC4-993D2536A9F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61D77575-31D9-43F5-BAC4-993D2536A9F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61D77575-31D9-43F5-BAC4-993D2536A9F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
