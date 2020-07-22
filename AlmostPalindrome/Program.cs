@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AlmostPalindrome
 {
@@ -22,20 +23,31 @@ Given a string S consisting of lowercase English characters determine if you can
         {
             Console.WriteLine("Hello World!");
 
-            PrintExpected()
-
-            void PrintExpected(bool actual, string expected)
+            var tests = new Dictionary<string, bool>
             {
-                Console.WriteLine($"actual: {actual}\tresult");
+                { "abca", true },
+                { "aabbcs", false }
+            };
+
+
+            foreach (var item in tests)
+            {
+                PrintExpected(IsAlmostPalindrom(item.Key), item.Value);
             }
+
+            static void PrintExpected(bool actual, bool expected)
+            {
+                Console.WriteLine($"actual: {actual}\tresult: {expected}");
+            }
+
+            Console.ReadLine();
+
         }
 
-
-
-        private bool IsAlmostPalindrom(string candidate)
+        private static bool IsAlmostPalindrom(string candidate)
         {
 
-            for (int i = 0, j = candidate.Length - 1; i != j; i++, j--)
+            for (int i = 0, j = candidate.Length - 1; i < j; i++, j--)
             {
 
                 bool isMatch = candidate[i] == candidate[j];
