@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,7 +30,7 @@ namespace ReverseLinkedList
 
             Print(testNode);
 
-            testNode = ReverseLinkedListRecursive(testNode);
+            testNode = ReverseLinkedList(testNode);
 
             Console.WriteLine("after\n");
 
@@ -65,32 +66,28 @@ namespace ReverseLinkedList
 
         // 1,2,3,4
 
-        private static Node ReverseLinkedListRecursive(Node root)
+        private static Node ReverseLinkedList(Node root)
         {
-            var reversed = Reversed(root);
-
-            root.Next = null;
-
-            return reversed;
-
-            Node Reversed(Node node)
+            Node current = root;
+            Node prev = null;
+            // 1 2 3
+            
+            // 2 1 3
+            while(current != null)
             {
-                if(node?.Next == null)
-                {
-                    return node;
-                }
+                //2
+                Node next = current.Next;
+                        //null
+                current.Next = prev;
 
-                var prev = node;
-
-                var stackNode = Reversed(node.Next);
-
-                if (stackNode != null)
-                {
-                    stackNode.Next = prev;
-                }
-
-                return stackNode;
+                //1
+                prev = current; 
+                
+                //2
+                current = next;
             }
+
+            return prev;
         }
 
         public class Node
