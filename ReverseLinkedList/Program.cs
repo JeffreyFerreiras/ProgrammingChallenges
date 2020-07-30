@@ -36,8 +36,15 @@ namespace ReverseLinkedList
 
             Print(testNode);
 
-            Console.ReadLine();
+            Console.WriteLine("recursive\n");
+            Console.WriteLine("before:\n");
+            
+            testNode = PopulateTestCase();
+            Print(testNode);
 
+            Console.WriteLine("after\n");
+            Print(ReverseLinkedListRecursive(testNode));
+            Console.ReadLine();
         }
 
         private static void Print(Node testNode)
@@ -64,26 +71,52 @@ namespace ReverseLinkedList
             return root;
         }
 
-        // 1,2,3,4
+        private static Node ReverseLinkedListRecursive(Node root)
+        {
+            Node next = root.Next;
+            root.Next = null;
 
+            return Recursive(root, next);
+
+            Node Recursive(Node node, Node nex)
+            {
+                if(nex is null)
+                {
+                    return node;
+                }
+
+                Node nextToNext = nex.Next;
+                nex.Next = node;
+
+                return Recursive(nex, nextToNext);
+            }
+        }
+
+        private static Node ReverseLinkedList2(Node root)
+        {
+            Node current = root;
+            Node prev = null;
+
+            while(current != null)
+            {
+                Node next = current.Next;
+                current.Next = prev;
+                prev = current;
+                current = next;
+            }
+
+            return prev;
+        }
         private static Node ReverseLinkedList(Node root)
         {
             Node current = root;
             Node prev = null;
-            // 1 2 3
-            
-            // 2 1 3
+
             while(current != null)
             {
-                //2
                 Node next = current.Next;
-                        //null
                 current.Next = prev;
-
-                //1
                 prev = current; 
-                
-                //2
                 current = next;
             }
 
