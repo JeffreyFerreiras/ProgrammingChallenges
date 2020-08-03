@@ -4,6 +4,8 @@ namespace SetMatrixZeroes
 {
     class Program
     {
+        //[[1,1,1],[1,0,1],[1,1,1]]
+        //[[0,1,2,0],[3,4,5,2],[1,3,1,5]]
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
@@ -11,37 +13,51 @@ namespace SetMatrixZeroes
 
         public void SetZeroes(int[][] matrix)
         {
-            int x = 0, y = 0;
             int len = matrix.Length;
-            var visited = new bool[len, len];
+            bool isColZero = false;
 
-            while (y < len)
+            for (int i = 1; i < len; i++)
             {
-                while (x < len)
+                if (matrix[i][0] == 0)
                 {
-                    if (matrix[y][x] == 0 && !visited[y, x])
-                    {
-                        for (int i = 0; i < len; i++)
-                        {
-                            if (matrix[i][x] != 0)
-                            {
-                                matrix[i][x] = 0; //verticle
-                                visited[i, x] = true;
-                            }
-
-                            if (matrix[y][i] != 0)
-                            {
-                                matrix[y][i] = 0; //horizontal
-                                visited[y, i] = true;
-                            }
-                        }
-                    }
-
-                    x++;
+                    isColZero = true;
                 }
 
-                y++;
-                x = 0;
+                for (int j = 1; j < len; j++)
+                {
+                    if(matrix[i][j] == 0)
+                    {
+                        matrix[0][j] = 0;
+                        matrix[i][0] = 0;
+                    }
+                }
+            }
+
+            for (int i = 0; i < len; i++)
+            {
+                for (int j = 0; j < len; j++)
+                {
+                    if (matrix[0][j] == 0 || matrix[i][j] == 0)
+                    {
+                        matrix[i][j] = 0;
+                    }
+                }
+            }
+
+            if(matrix[0][0] == 0)
+            {
+                for (int i = 0; i < len; i++)
+                {
+                    matrix[0][i] = 0;
+                }
+            }
+
+            if (isColZero)
+            {
+                for (int i = 0; i < len; i++)
+                {
+                    matrix[i][0] = 0;
+                }
             }
         }
     }

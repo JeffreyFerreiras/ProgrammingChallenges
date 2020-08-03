@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace LinkedList_DetectCycle
 {
+    public class Node
+    {
+        public int Value { get; set; }
+        public Node Next { get; set; }
+    }
+
     class Program
     {
         /*A linked list is said to contain a cycle if any node is visited more than once while traversing the list.
@@ -18,29 +24,80 @@ namespace LinkedList_DetectCycle
         {
             var linkedList = new LinkedList<int>(Enumerable.Range(0, 100));
 
-            bool hasCycle = HasCycle(linkedList.First);
+            bool hasCycle = HasCycle(CreateCycledLinkedList(6));
+            bool hasCycle2 = HasCycle2(CreateCycledLinkedList(6));
+        }
+        /**
+         * Turtois and the Hair algorithm
+         */
+        private static bool HasCycle2(Node node)
+        {
+            Node turtle = node, hair = node.Next;
+
+            do
+            {
+                if (hair == null || turtle == null)
+                {
+                    return false;
+                }
+
+                turtle = turtle.Next;
+                hair = hair.Next?.Next;
+            }
+            while (turtle != hair);
+            
+            return true;
         }
 
-        private static bool HasCycle(LinkedListNode<int> head)
+
+        private static bool HasCycle(Node head)
         {
             if(head == null) return false;
 
-            HashSet<int> hashes = new HashSet<int>();
-
+            var seen = new HashSet<int>();
             var node = head;
 
             while(node != null)
             {
-                if(hashes.Contains(node.GetHashCode()))
+                if(seen.Contains(node.GetHashCode()))
                 {
                     return true;
                 }
 
-                hashes.Add(node.GetHashCode());
+                seen.Add(node.GetHashCode());
                 node = node.Next;
             }
 
             return false;
+        }
+
+
+        private static Node CreateCycledLinkedList(int size)
+        {
+            var rand = new Random();
+            var randomValues = Enumerable.Range(0, size).Select(x => rand.Next(0, 100)).ToList();
+            var randIndex = rand.Next(0, size);
+            Node node = new Node() { Value = rand.Next(0, 100) }, prev = node;
+
+            randomValues.ForEach(val =>
+            {
+                prev.Next = new Node
+                {
+                    Value = val
+                };
+                prev = prev.Next;
+            });
+
+            Node current = node;
+
+            for (int i = 0; i < randIndex; i++)
+            {
+                current = current.Next;
+            }
+
+            prev.Next = current;
+
+            return node;
         }
     }
 }
