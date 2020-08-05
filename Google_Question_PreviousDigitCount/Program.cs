@@ -9,9 +9,45 @@ namespace Google_Question_PreviousDigitCount
 
         static void Main(string[] args)
         {
-            bool pass = GetSequence(1) == "11";
-            bool pass2 = GetSequence(21) == "1211";
-            bool pass3 = GetSequence(1211) == "111221";
+            //bool pass = GetSequence(1) == "11";
+            //bool pass2 = GetSequence(21) == "1211";
+            //bool pass3 = GetSequence(1211) == "111221";
+
+            bool pass1 = GetSequence_4_2020(1) == "11";
+            bool pass22 = GetSequence_4_2020(21) == "1211";
+            bool pass32 = GetSequence_4_2020(1211) == "111221";
+        }
+
+        static string GetSequence_4_2020(int n)
+        {
+            string sequence = n.ToString();
+
+            if (sequence.Length == 1)
+            {
+                return "1" + n;
+            }
+
+            string ans = string.Empty;
+            char c = sequence[0];
+            int count = 1;
+
+            for (int i = 1; i < sequence.Length; i++)
+            {
+                if(c == sequence[i])
+                {
+                    count++;
+                }
+                else
+                {
+                    ans += $"{count}{c}";
+                    count = 1;
+                    c = sequence[i];
+                }
+            }
+
+            ans += $"{count}{c}";
+
+            return ans;
         }
 
         static string GetSequence(int n)

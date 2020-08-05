@@ -27,6 +27,7 @@ namespace StringPermutations
         {   // SOLUTION
             Permutation(str, "");
         }
+
         static void Permutation(string str, string currentString)
         {
             if(str.Length == 0)

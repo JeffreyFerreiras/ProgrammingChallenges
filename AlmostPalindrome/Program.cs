@@ -29,7 +29,6 @@ Given a string S consisting of lowercase English characters determine if you can
                 { "aabbcs", false }
             };
 
-
             foreach (var item in tests)
             {
                 PrintExpected(IsAlmostPalindrom(item.Key), item.Value);
