@@ -107,7 +107,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GroupAnagrams", "GroupAnagr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Facebook_SetMatrixZeroes", "SetMatrixZeroes\Facebook_SetMatrixZeroes.csproj", "{D7CFE5D3-AD50-4FA3-95FB-091CED06DAAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinTreeAsArrayFindLargestBranch", "BinTreeAsArrayFindLargestBranch\BinTreeAsArrayFindLargestBranch.csproj", "{58725809-F3D5-407A-8DAF-8ED95D80899A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinTreeAsArrayFindLargestBranch", "BinTreeAsArrayFindLargestBranch\BinTreeAsArrayFindLargestBranch.csproj", "{58725809-F3D5-407A-8DAF-8ED95D80899A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedList_OddEvenList", "LinkedList_OddEvenList\LinkedList_OddEvenList.csproj", "{1C74EE01-8F4B-438E-88D2-541DB0B08CDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -327,6 +329,10 @@ Global
 		{58725809-F3D5-407A-8DAF-8ED95D80899A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58725809-F3D5-407A-8DAF-8ED95D80899A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58725809-F3D5-407A-8DAF-8ED95D80899A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C74EE01-8F4B-438E-88D2-541DB0B08CDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C74EE01-8F4B-438E-88D2-541DB0B08CDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C74EE01-8F4B-438E-88D2-541DB0B08CDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C74EE01-8F4B-438E-88D2-541DB0B08CDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
