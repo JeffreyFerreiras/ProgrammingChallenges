@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace _3Sum
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
         }
@@ -15,6 +15,47 @@ namespace _3Sum
 
 public class Solution
 {
+    //[-1, 0, 1, 2, -1, -4]
+    public IList<IList<int>> ThreeSum1(int[] nums)
+    {
+        Array.Sort(nums);
+        var resultSet = new List<IList<int>>();
+        for (int start = 0; start < nums.Length - 2; start++)
+        {
+            if (start > 0 && nums[start] == nums[start - 1]) continue;
+
+            int mid = start + 1, end = nums.Length - 1;
+
+            while (mid < nums.Length - 1)
+            {
+                if (nums[mid] + nums[end] > -nums[start])
+                {
+                    end--;
+                }
+                else if (nums[mid] + nums[end] < -nums[start])
+                {
+                    mid++;
+                }
+                else
+                {
+                    var set = new List<int>
+                    {
+                       nums[start],
+                       nums[mid],
+                       nums[end]
+                    };
+
+                    resultSet.Add(set);
+                }
+                while (++mid < nums.Length && nums[mid] == nums[mid - 1]) ;
+                while (--end > start && nums[end] == nums[end + 1]) ;
+            }
+        }
+
+        return resultSet;
+    }
+
+    //my approach, doesn't pass the speed test but does have correct answer
     public IList<IList<int>> ThreeSum(int[] nums)
     {
         var resultSet = new List<IList<int>>();
