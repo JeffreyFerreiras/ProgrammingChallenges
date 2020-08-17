@@ -107,14 +107,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GroupAnagrams", "GroupAnagr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SetMatrixZeroes", "SetMatrixZeroes\SetMatrixZeroes.csproj", "{D7CFE5D3-AD50-4FA3-95FB-091CED06DAAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LongestSubStringWithoutRepeatingChars", "LongestSubStringWithoutRepeatingChars\LongestSubStringWithoutRepeatingChars.csproj", "{C54790B4-E0F4-4EDD-8238-D4F019199BF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LongestSubStringWithoutRepeatingChars", "LongestSubStringWithoutRepeatingChars\LongestSubStringWithoutRepeatingChars.csproj", "{C54790B4-E0F4-4EDD-8238-D4F019199BF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JumpStairs", "JumpStairs\JumpStairs.csproj", "{47670C01-9A09-4F1B-A344-C337BD2E6842}"
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Facebook_SetMatrixZeroes", "SetMatrixZeroes\Facebook_SetMatrixZeroes.csproj", "{D7CFE5D3-AD50-4FA3-95FB-091CED06DAAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JumpStairs", "JumpStairs\JumpStairs.csproj", "{47670C01-9A09-4F1B-A344-C337BD2E6842}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Facebook_SetMatrixZeroes", "SetMatrixZeroes\Facebook_SetMatrixZeroes.csproj", "{66ED2BE6-40CF-4A43-8A65-4E6597325D5F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinTreeAsArrayFindLargestBranch", "BinTreeAsArrayFindLargestBranch\BinTreeAsArrayFindLargestBranch.csproj", "{58725809-F3D5-407A-8DAF-8ED95D80899A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedList_OddEvenList", "LinkedList_OddEvenList\LinkedList_OddEvenList.csproj", "{1C74EE01-8F4B-438E-88D2-541DB0B08CDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkedList_OddEvenList", "LinkedList_OddEvenList\LinkedList_OddEvenList.csproj", "{1C74EE01-8F4B-438E-88D2-541DB0B08CDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -330,6 +331,26 @@ Global
 		{D7CFE5D3-AD50-4FA3-95FB-091CED06DAAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7CFE5D3-AD50-4FA3-95FB-091CED06DAAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7CFE5D3-AD50-4FA3-95FB-091CED06DAAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C54790B4-E0F4-4EDD-8238-D4F019199BF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C54790B4-E0F4-4EDD-8238-D4F019199BF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C54790B4-E0F4-4EDD-8238-D4F019199BF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C54790B4-E0F4-4EDD-8238-D4F019199BF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47670C01-9A09-4F1B-A344-C337BD2E6842}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47670C01-9A09-4F1B-A344-C337BD2E6842}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47670C01-9A09-4F1B-A344-C337BD2E6842}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47670C01-9A09-4F1B-A344-C337BD2E6842}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66ED2BE6-40CF-4A43-8A65-4E6597325D5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66ED2BE6-40CF-4A43-8A65-4E6597325D5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66ED2BE6-40CF-4A43-8A65-4E6597325D5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66ED2BE6-40CF-4A43-8A65-4E6597325D5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58725809-F3D5-407A-8DAF-8ED95D80899A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58725809-F3D5-407A-8DAF-8ED95D80899A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58725809-F3D5-407A-8DAF-8ED95D80899A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58725809-F3D5-407A-8DAF-8ED95D80899A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C74EE01-8F4B-438E-88D2-541DB0B08CDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C74EE01-8F4B-438E-88D2-541DB0B08CDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C74EE01-8F4B-438E-88D2-541DB0B08CDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C74EE01-8F4B-438E-88D2-541DB0B08CDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
