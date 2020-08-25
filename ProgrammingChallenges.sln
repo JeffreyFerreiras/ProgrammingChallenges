@@ -119,7 +119,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SingleNumber", "SingleNumbe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RotateArrayKTimes", "RotateArrayKTimes\RotateArrayKTimes.csproj", "{CD12C1DA-0F31-4B34-98DB-4D98CC4570EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Permutations", "Permutations\Permutations.csproj", "{8EE065E1-DBAA-443F-8932-5F562EE3F64E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Permutations", "Permutations\Permutations.csproj", "{8EE065E1-DBAA-443F-8932-5F562EE3F64E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstUniqueCharacter", "FirstUniqueCharacter\FirstUniqueCharacter.csproj", "{693CB5BA-7154-4E9E-8570-DF8DF0B4BA48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsPalindrom2", "IsPalindrom2\IsPalindrom2.csproj", "{0C3AE502-33A2-4E21-97C0-8786AA4E7C42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -363,6 +367,14 @@ Global
 		{8EE065E1-DBAA-443F-8932-5F562EE3F64E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EE065E1-DBAA-443F-8932-5F562EE3F64E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EE065E1-DBAA-443F-8932-5F562EE3F64E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{693CB5BA-7154-4E9E-8570-DF8DF0B4BA48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{693CB5BA-7154-4E9E-8570-DF8DF0B4BA48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{693CB5BA-7154-4E9E-8570-DF8DF0B4BA48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{693CB5BA-7154-4E9E-8570-DF8DF0B4BA48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C3AE502-33A2-4E21-97C0-8786AA4E7C42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C3AE502-33A2-4E21-97C0-8786AA4E7C42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C3AE502-33A2-4E21-97C0-8786AA4E7C42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C3AE502-33A2-4E21-97C0-8786AA4E7C42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

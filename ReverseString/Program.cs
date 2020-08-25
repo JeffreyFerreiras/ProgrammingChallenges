@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ReverseString
@@ -37,12 +38,30 @@ namespace ReverseString
             string reversed4 = ReverseWithArry(toReverse);
             sw4.Stop(); //Fastest! 368 tics
             ;
+
+            var sw5 = new System.Diagnostics.Stopwatch();
+            sw4.Start();
+            string reversed5 = ClassicReverse(toReverse);
+            sw4.Stop(); //Fastest! 
+            ;
+        }
+
+        private static string ClassicReverse(string s)
+        {
+            var sb = new StringBuilder(s.Length);
+            
+            for (int i = s.Length-1; i >= 0; i--){
+                sb.Append(s[i]);
+            }
+            
+            return sb.ToString();
         }
 
         private static string Reverse(string toReverse)
         {
             return Reverse(toReverse, string.Empty);
         }
+
         private static string Reverse(string toReverse, string s)
         {
             if(toReverse.Length == 0) return s;
@@ -54,6 +73,7 @@ namespace ReverseString
             if(toReverse.Length == 0) return sb.ToString();
             return ReverseWithStringBuilder(toReverse.Substring(0, toReverse.Length - 1), sb.Append(toReverse.Substring(toReverse.Length - 1)));
         }
+
         private static string ReverseWithStack(string strtoReverse)
         {
             var stack = new Stack<char>();
@@ -63,9 +83,10 @@ namespace ReverseString
             }
             return new string(stack.ToArray());
         }
+
         private static string ReverseWithArry(string toReverse)
         {
-            char[] chararry = toReverse.ToCharArray();
+            char[] chararry = toReverse.ToArray();
             Array.Reverse(chararry);
             return new string(chararry);
         }
