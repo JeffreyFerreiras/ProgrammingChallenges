@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LeftRotation
 {
@@ -17,24 +13,24 @@ namespace LeftRotation
             Console.WriteLine(string.Join(" ", arr));
         }
 
-            private static void ShiftLeft(int[] arr, int shift, int len)
+        private static void ShiftLeft(int[] arr, int shift, int len)
+        {
+            var tail = new int[shift];
+
+            for (int i = 0; i < shift; i++) //copy tail
             {
-                var tail = new int[shift];
-
-                for(int i = 0; i < shift; i++) //copy tail
-                {
-                    tail[i] = arr[i]; 
-                }
-
-                for(int i = 0; i < len - shift; i++) //shift values in place
-                {
-                    arr[i] = arr[i + shift];
-                }
-
-                for(int i = 0; i < tail.Length; i++) // copy tail to end
-                {
-                    arr[i + (len - shift) % len] = tail[i];
-                }
+                tail[i] = arr[i];
             }
+
+            for (int i = 0; i < len - shift; i++) //shift values in place
+            {
+                arr[i] = arr[i + shift];
+            }
+
+            for (int i = 0; i < tail.Length; i++) // copy tail to end
+            {
+                arr[i + (len - shift) % len] = tail[i];
+            }
+        }
     }
 }

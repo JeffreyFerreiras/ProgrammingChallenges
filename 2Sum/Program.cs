@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 
 namespace _2Sum
 {
@@ -8,13 +9,14 @@ namespace _2Sum
     {
         private static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            int[] arr = ParseLeetCodeInput("[2,7,11,15]");
+            var input = "[2,7,11,15]";
+            int[] arr = ParseLeetCodeInput(input);
             int target = 9;
 
-            int[] result = TwoSum(arr, target);
+            Console.WriteLine(input);
+            Console.WriteLine($"{nameof(TwoSum)}{JsonSerializer.Serialize(TwoSum(arr, target))}");
+            Console.WriteLine($"{nameof(TwoSumMemoized)}{JsonSerializer.Serialize(TwoSumMemoized(arr, target))}");
         }
-
 
         static int[] ParseLeetCodeInput(string testData)
         {
@@ -26,7 +28,6 @@ namespace _2Sum
          * You may assume that each input would have exactly one solution, and you may not use the same element twice.
          * You can return the answer in any order.
          */
-
 
         // speed: O(n log n) space: O(log n) 
         private static int[] TwoSum(int[] arr, int target)
@@ -43,8 +44,7 @@ namespace _2Sum
                 if(leftValue + rightValue > target)
                 {
                     right--; 
-                }
-                
+                }               
                 else if(leftValue + rightValue < target)
                 {
                     left++;
