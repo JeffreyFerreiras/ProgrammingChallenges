@@ -47,6 +47,7 @@ public class Solution
 
                     resultSet.Add(set);
                 }
+
                 while (++mid < nums.Length && nums[mid] == nums[mid - 1]) ;
                 while (--end > start && nums[end] == nums[end + 1]) ;
             }
