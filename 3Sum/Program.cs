@@ -12,7 +12,6 @@ namespace _3Sum
         }
     }
 
-
     public class Solution
     {
         //[-1, 0, 1, 2, -1, -4]
@@ -50,12 +49,6 @@ namespace _3Sum
                     while (++mid < nums.Length && nums[mid] == nums[mid - 1]) ;
                     while (--end > start && nums[end] == nums[end + 1]) ;
                 }
-<<<<<<< HEAD
-=======
-
-                while (++mid < nums.Length && nums[mid] == nums[mid - 1]) ;
-                while (--end > start && nums[end] == nums[end + 1]) ;
->>>>>>> b28b0ab3d6844b12f31943ebb5d0f2bf6e1aa747
             }
 
             return resultSet;
@@ -86,11 +79,11 @@ namespace _3Sum
                         if (sum == 0 && !usedMap.Contains($"{nums[low]}{nums[mid]}{nums[high]}"))
                         {
                             var set = new List<int>
-                        {
-                           nums[low],
-                           nums[mid],
-                           nums[high]
-                        };
+                            {
+                               nums[low],
+                               nums[mid],
+                               nums[high]
+                            };
 
                             resultSet.Add(set);
                             usedMap.Add($"{nums[low]}{nums[mid]}{nums[high]}");
