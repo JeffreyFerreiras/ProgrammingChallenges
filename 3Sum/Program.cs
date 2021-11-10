@@ -50,6 +50,12 @@ namespace _3Sum
                     while (++mid < nums.Length && nums[mid] == nums[mid - 1]) ;
                     while (--end > start && nums[end] == nums[end + 1]) ;
                 }
+<<<<<<< HEAD
+=======
+
+                while (++mid < nums.Length && nums[mid] == nums[mid - 1]) ;
+                while (--end > start && nums[end] == nums[end + 1]) ;
+>>>>>>> b28b0ab3d6844b12f31943ebb5d0f2bf6e1aa747
             }
 
             return resultSet;
