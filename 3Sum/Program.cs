@@ -11,93 +11,94 @@ namespace _3Sum
             Console.WriteLine("Hello World!");
         }
     }
-}
 
-public class Solution
-{
-    //[-1, 0, 1, 2, -1, -4]
-    public IList<IList<int>> ThreeSum1(int[] nums)
+
+    public class Solution
     {
-        Array.Sort(nums);
-        var resultSet = new List<IList<int>>();
-        for (int start = 0; start < nums.Length - 2; start++)
+        //[-1, 0, 1, 2, -1, -4]
+        public IList<IList<int>> ThreeSum1(int[] nums)
         {
-            if (start > 0 && nums[start] == nums[start - 1]) continue;
-
-            int mid = start + 1, end = nums.Length - 1;
-
-            while (mid < nums.Length - 1)
+            Array.Sort(nums);
+            var resultSet = new List<IList<int>>();
+            for (int start = 0; start < nums.Length - 2; start++)
             {
-                if (nums[mid] + nums[end] > -nums[start])
+                if (start > 0 && nums[start] == nums[start - 1]) continue;
+
+                int mid = start + 1, end = nums.Length - 1;
+
+                while (mid < nums.Length - 1)
                 {
-                    end--;
-                }
-                else if (nums[mid] + nums[end] < -nums[start])
-                {
-                    mid++;
-                }
-                else
-                {
-                    var set = new List<int>
+                    if (nums[mid] + nums[end] > -nums[start])
+                    {
+                        end--;
+                    }
+                    else if (nums[mid] + nums[end] < -nums[start])
+                    {
+                        mid++;
+                    }
+                    else
+                    {
+                        var set = new List<int>
                     {
                        nums[start],
                        nums[mid],
                        nums[end]
                     };
 
-                    resultSet.Add(set);
+                        resultSet.Add(set);
+                    }
+                    while (++mid < nums.Length && nums[mid] == nums[mid - 1]) ;
+                    while (--end > start && nums[end] == nums[end + 1]) ;
                 }
-                while (++mid < nums.Length && nums[mid] == nums[mid - 1]) ;
-                while (--end > start && nums[end] == nums[end + 1]) ;
             }
+
+            return resultSet;
         }
 
-        return resultSet;
-    }
-
-    //my approach, doesn't pass the speed test but does have correct answer
-    public IList<IList<int>> ThreeSum(int[] nums)
-    {
-        var resultSet = new List<IList<int>>();
-        var usedMap = new HashSet<string>();
-
-        var nm = nums.ToList();
-        nm.Sort();
-        nums = nm.ToArray();
-
-        int low = 0;
-        while (low < nums.Length - 2 && nums[low] <= 0)
+        //my approach, doesn't pass the speed test but does have correct answer
+        public IList<IList<int>> ThreeSum(int[] nums)
         {
-            int high = nums.Length - 1;
+            var resultSet = new List<IList<int>>();
+            var usedMap = new HashSet<string>();
 
-            while (nums[high] >= 0 && high > 1)
+            var nm = nums.ToList();
+            nm.Sort();
+            nums = nm.ToArray();
+
+            int low = 0;
+            while (low < nums.Length - 2 && nums[low] <= 0)
             {
-                int mid = low + 1;
+                int high = nums.Length - 1;
 
-                while (mid < high)
+                while (nums[high] >= 0 && high > 1)
                 {
-                    int sum = nums[low] + nums[mid] + nums[high];
-                    if (sum == 0 && !usedMap.Contains($"{nums[low]}{nums[mid]}{nums[high]}"))
+                    int mid = low + 1;
+
+                    while (mid < high)
                     {
-                        var set = new List<int>
+                        int sum = nums[low] + nums[mid] + nums[high];
+                        if (sum == 0 && !usedMap.Contains($"{nums[low]}{nums[mid]}{nums[high]}"))
+                        {
+                            var set = new List<int>
                         {
                            nums[low],
                            nums[mid],
                            nums[high]
                         };
 
-                        resultSet.Add(set);
-                        usedMap.Add($"{nums[low]}{nums[mid]}{nums[high]}");
+                            resultSet.Add(set);
+                            usedMap.Add($"{nums[low]}{nums[mid]}{nums[high]}");
+                        }
+
+                        mid++;
                     }
 
-                    mid++;
+                    high--;
                 }
 
-                high--;
+                low++;
             }
-
-            low++;
+            return resultSet;
         }
-        return resultSet;
     }
 }

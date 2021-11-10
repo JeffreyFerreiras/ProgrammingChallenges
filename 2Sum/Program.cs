@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace _2Sum
 {
-    internal class Program
+    class Program
     {
         private static void Main(string[] args)
         {
@@ -14,13 +14,13 @@ namespace _2Sum
             int target = 9;
 
             Console.WriteLine(input);
-            Console.WriteLine($"{nameof(TwoSum)}{JsonSerializer.Serialize(TwoSum(arr, target))}");
-            Console.WriteLine($"{nameof(TwoSumMemoized)}{JsonSerializer.Serialize(TwoSumMemoized(arr, target))}");
+            Console.WriteLine($@"{nameof(TwoSum)}	{JsonSerializer.Serialize(TwoSum(arr, target))}");
+            Console.WriteLine($@"{nameof(TwoSumMemoized)}	{JsonSerializer.Serialize(TwoSumMemoized(arr, target))}");
         }
 
         static int[] ParseLeetCodeInput(string testData)
         {
-            return testData.Trim('[').Trim(']').Split(',').Select(x=>int.Parse(x)).ToArray();
+            return testData.Trim('[').Trim(']').Split(',').Select(x => int.Parse(x)).ToArray();
         }
 
         /**
@@ -41,11 +41,11 @@ namespace _2Sum
                 var leftValue = arr[left];
                 var rightValue = arr[right];
 
-                if(leftValue + rightValue > target)
+                if (leftValue + rightValue > target)
                 {
-                    right--; 
-                }               
-                else if(leftValue + rightValue < target)
+                    right--;
+                }
+                else if (leftValue + rightValue < target)
                 {
                     left++;
                 }
@@ -72,7 +72,7 @@ namespace _2Sum
             {
                 int requiredNum = target - arr[i];
 
-                if( lookUp.ContainsKey(requiredNum))
+                if (lookUp.ContainsKey(requiredNum))
                 {
                     return new int[] { lookUp[requiredNum], i };
                 }
