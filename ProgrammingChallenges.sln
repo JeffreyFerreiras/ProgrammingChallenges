@@ -63,7 +63,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShuffleDeckOfCards", "Shuff
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakingAnagrams", "MakingAnagrams\MakingAnagrams.csproj", "{0377E9AE-C895-4AC1-AE8D-8063A56D0406}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeftRotation", "LeftRotation\LeftRotation.csproj", "{5D91EC1B-993A-4CA4-9875-6513033FD5B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeftRotation", "LeftRotation\LeftRotation.csproj", "{5D91EC1B-993A-4CA4-9875-6513033FD5B9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RansomNote", "RansomNote\RansomNote.csproj", "{23FE8D6C-166D-41D0-9058-BFAE848919AD}"
 EndProject
@@ -130,6 +130,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2Sum", "2Sum\2Sum.csproj", "{D8711A0E-93B2-4FD3-AD42-CFA327D1443B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValidAnagram", "ValidAnagram\ValidAnagram.csproj", "{0B695AA2-18C6-4994-8EEA-4E26B4C91716}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddTwoNumbers", "AddTwoNumbers\AddTwoNumbers.csproj", "{9436C001-0404-435D-85C3-9C38F4106974}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -393,6 +395,10 @@ Global
 		{0B695AA2-18C6-4994-8EEA-4E26B4C91716}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B695AA2-18C6-4994-8EEA-4E26B4C91716}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B695AA2-18C6-4994-8EEA-4E26B4C91716}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9436C001-0404-435D-85C3-9C38F4106974}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9436C001-0404-435D-85C3-9C38F4106974}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9436C001-0404-435D-85C3-9C38F4106974}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9436C001-0404-435D-85C3-9C38F4106974}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
