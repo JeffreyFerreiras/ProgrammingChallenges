@@ -5,11 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "BinarySearch",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/BinarySearch/bin/Debug/net6.0/BinarySearch.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
             "name": ".NET Core Launch (console)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/3Sum/bin/Debug/net6.0/3Sum.dll",
+            "program": "${workspaceFolder}/3Sum/bin/Debug/net6.0/${project}.dll",
             "args": [],
             "cwd": "${workspaceFolder}/3Sum",
             "console": "internalConsole",

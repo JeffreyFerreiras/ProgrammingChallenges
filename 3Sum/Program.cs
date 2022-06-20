@@ -115,7 +115,7 @@ namespace _3Sum
 
     public class Solution
     {
-        public static IList<IList<int>> ThreeSum(int[] nums)
+        public static IList<IList<int>> ThreeSumSpace(int[] nums)
         {
             IList<IList<int>> output = new List<IList<int>>();
             if (nums.Length < 3)
@@ -149,6 +149,39 @@ namespace _3Sum
                     }
                 }
             }
+            return output;
+        }
+
+        public static IList<IList<int>> ThreeSum(int[] nums){
+            IList<IList<int>> output = new List<IList<int>>();
+            if (nums.Length < 3)
+            {
+                return output;
+            }
+
+            Array.Sort(nums);
+            var seen = new HashSet<string>();
+
+            for(int i = 0; i < nums.Count()-2; i++)
+            {
+                for(int j = i + 1; j < nums.Count() - 1;j++){
+                    int difference = (nums[i] + nums[j]) * -1;
+                    int diffIndex = Array.BinarySearch(nums, j + 1, nums.Count() - j - 1, difference);
+                    if(diffIndex >= 2 && diffIndex != i && diffIndex != j)
+                    {
+                        var answer = new List<int> { nums[i], nums[j], difference };
+                        answer.Sort();
+                        var ansKey = string.Join(',', answer);
+                        if(seen.Contains(ansKey)){
+                            continue;
+                        }
+
+                        output.Add(answer);
+                        seen.Add(ansKey);
+                    }
+                }
+            }
+
             return output;
         }
 
