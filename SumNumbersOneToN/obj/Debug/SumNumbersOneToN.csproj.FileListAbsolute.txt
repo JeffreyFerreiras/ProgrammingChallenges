@@ -23,3 +23,11 @@ C:\Projects\git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneTo
 C:\Projects\git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.exe
 C:\Projects\git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.pdb
 D:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.csprojResolveAssemblyReference.cache
+C:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\bin\Debug\SumNumbersOneToN.exe.config
+C:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\bin\Debug\SumNumbersOneToN.exe
+C:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\bin\Debug\SumNumbersOneToN.pdb
+C:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.csproj.AssemblyReference.cache
+C:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.csproj.SuggestedBindingRedirects.cache
+C:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.csproj.CoreCompileInputs.cache
+C:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.exe
+C:\Development\Git\ProgrammingChallenges\SumNumbersOneToN\obj\Debug\SumNumbersOneToN.pdb

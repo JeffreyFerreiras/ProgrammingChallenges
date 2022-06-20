@@ -12,3 +12,11 @@ D:\Development\Git\ProgrammingChallenges\MarbleTest\obj\Debug\MarbleTest.csproj.
 D:\Development\Git\ProgrammingChallenges\MarbleTest\obj\Debug\MarbleTest.exe
 D:\Development\Git\ProgrammingChallenges\MarbleTest\obj\Debug\MarbleTest.pdb
 D:\Development\Git\ProgrammingChallenges\MarbleTest\obj\Debug\MarbleTest.csprojResolveAssemblyReference.cache
+C:\Development\Git\ProgrammingChallenges\MarbleTest\bin\Debug\MarbleTest.exe.config
+C:\Development\Git\ProgrammingChallenges\MarbleTest\bin\Debug\MarbleTest.exe
+C:\Development\Git\ProgrammingChallenges\MarbleTest\bin\Debug\MarbleTest.pdb
+C:\Development\Git\ProgrammingChallenges\MarbleTest\obj\Debug\MarbleTest.csproj.AssemblyReference.cache
+C:\Development\Git\ProgrammingChallenges\MarbleTest\obj\Debug\MarbleTest.csproj.SuggestedBindingRedirects.cache
+C:\Development\Git\ProgrammingChallenges\MarbleTest\obj\Debug\MarbleTest.csproj.CoreCompileInputs.cache
+C:\Development\Git\ProgrammingChallenges\MarbleTest\obj\Debug\MarbleTest.exe
+C:\Development\Git\ProgrammingChallenges\MarbleTest\obj\Debug\MarbleTest.pdb

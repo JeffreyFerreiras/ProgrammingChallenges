@@ -21,3 +21,11 @@ C:\Projects\git\ProgrammingChallenges\StringPermutations\obj\Debug\StringPermuta
 C:\Projects\git\ProgrammingChallenges\StringPermutations\obj\Debug\StringPermutations.csproj.CoreCompileInputs.cache
 C:\Projects\git\ProgrammingChallenges\StringPermutations\obj\Debug\StringPermutations.exe
 C:\Projects\git\ProgrammingChallenges\StringPermutations\obj\Debug\StringPermutations.pdb
+C:\Development\Git\ProgrammingChallenges\StringPermutations\bin\Debug\StringPermutations.exe.config
+C:\Development\Git\ProgrammingChallenges\StringPermutations\bin\Debug\StringPermutations.exe
+C:\Development\Git\ProgrammingChallenges\StringPermutations\bin\Debug\StringPermutations.pdb
+C:\Development\Git\ProgrammingChallenges\StringPermutations\obj\Debug\StringPermutations.csproj.AssemblyReference.cache
+C:\Development\Git\ProgrammingChallenges\StringPermutations\obj\Debug\StringPermutations.csproj.SuggestedBindingRedirects.cache
+C:\Development\Git\ProgrammingChallenges\StringPermutations\obj\Debug\StringPermutations.csproj.CoreCompileInputs.cache
+C:\Development\Git\ProgrammingChallenges\StringPermutations\obj\Debug\StringPermutations.exe
+C:\Development\Git\ProgrammingChallenges\StringPermutations\obj\Debug\StringPermutations.pdb

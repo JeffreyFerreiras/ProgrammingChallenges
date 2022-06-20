@@ -17,3 +17,11 @@ C:\Projects\git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.cspr
 C:\Projects\git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.csproj.CoreCompileInputs.cache
 C:\Projects\git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.exe
 C:\Projects\git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.pdb
+C:\Development\Git\ProgrammingChallenges\ReducedString\bin\Debug\ReducedString.exe.config
+C:\Development\Git\ProgrammingChallenges\ReducedString\bin\Debug\ReducedString.exe
+C:\Development\Git\ProgrammingChallenges\ReducedString\bin\Debug\ReducedString.pdb
+C:\Development\Git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.csproj.AssemblyReference.cache
+C:\Development\Git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.csproj.SuggestedBindingRedirects.cache
+C:\Development\Git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.csproj.CoreCompileInputs.cache
+C:\Development\Git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.exe
+C:\Development\Git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.pdb

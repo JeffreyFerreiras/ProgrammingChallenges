@@ -20,3 +20,11 @@ C:\Projects\git\ProgrammingChallenges\IsUniqueString\bin\Debug\IsUniqueString.pd
 C:\Projects\git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.csproj.CoreCompileInputs.cache
 C:\Projects\git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.exe
 C:\Projects\git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.pdb
+C:\Development\Git\ProgrammingChallenges\IsUniqueString\bin\Debug\IsUniqueString.exe.config
+C:\Development\Git\ProgrammingChallenges\IsUniqueString\bin\Debug\IsUniqueString.exe
+C:\Development\Git\ProgrammingChallenges\IsUniqueString\bin\Debug\IsUniqueString.pdb
+C:\Development\Git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.csproj.AssemblyReference.cache
+C:\Development\Git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.csproj.SuggestedBindingRedirects.cache
+C:\Development\Git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.csproj.CoreCompileInputs.cache
+C:\Development\Git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.exe
+C:\Development\Git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.pdb

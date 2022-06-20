@@ -23,3 +23,11 @@ C:\Projects\git\ProgrammingChallenges\HappyNumbers\obj\Debug\HappyNumbers.csproj
 C:\Projects\git\ProgrammingChallenges\HappyNumbers\obj\Debug\HappyNumbers.exe
 C:\Projects\git\ProgrammingChallenges\HappyNumbers\obj\Debug\HappyNumbers.pdb
 D:\Development\Git\ProgrammingChallenges\HappyNumbers\obj\Debug\HappyNumbers.csprojResolveAssemblyReference.cache
+C:\Development\Git\ProgrammingChallenges\HappyNumbers\bin\Debug\HappyNumbers.exe.config
+C:\Development\Git\ProgrammingChallenges\HappyNumbers\bin\Debug\HappyNumbers.exe
+C:\Development\Git\ProgrammingChallenges\HappyNumbers\bin\Debug\HappyNumbers.pdb
+C:\Development\Git\ProgrammingChallenges\HappyNumbers\obj\Debug\HappyNumbers.csproj.AssemblyReference.cache
+C:\Development\Git\ProgrammingChallenges\HappyNumbers\obj\Debug\HappyNumbers.csproj.SuggestedBindingRedirects.cache
+C:\Development\Git\ProgrammingChallenges\HappyNumbers\obj\Debug\HappyNumbers.csproj.CoreCompileInputs.cache
+C:\Development\Git\ProgrammingChallenges\HappyNumbers\obj\Debug\HappyNumbers.exe
+C:\Development\Git\ProgrammingChallenges\HappyNumbers\obj\Debug\HappyNumbers.pdb

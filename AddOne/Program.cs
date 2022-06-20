@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace AddOne
 {
+    // Add one number to the array as if doing addition on paper
+    
     class Program
     {
         static void Main(string[] args)

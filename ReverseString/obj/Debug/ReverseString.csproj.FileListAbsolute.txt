@@ -15,3 +15,11 @@ C:\Projects\git\ProgrammingChallenges\ReverseString\bin\Debug\ReverseString.pdb
 C:\Projects\git\ProgrammingChallenges\ReverseString\obj\Debug\ReverseString.csproj.CoreCompileInputs.cache
 C:\Projects\git\ProgrammingChallenges\ReverseString\obj\Debug\ReverseString.exe
 C:\Projects\git\ProgrammingChallenges\ReverseString\obj\Debug\ReverseString.pdb
+C:\Development\Git\ProgrammingChallenges\ReverseString\bin\Debug\ReverseString.exe.config
+C:\Development\Git\ProgrammingChallenges\ReverseString\bin\Debug\ReverseString.exe
+C:\Development\Git\ProgrammingChallenges\ReverseString\bin\Debug\ReverseString.pdb
+C:\Development\Git\ProgrammingChallenges\ReverseString\obj\Debug\ReverseString.csproj.AssemblyReference.cache
+C:\Development\Git\ProgrammingChallenges\ReverseString\obj\Debug\ReverseString.csproj.SuggestedBindingRedirects.cache
+C:\Development\Git\ProgrammingChallenges\ReverseString\obj\Debug\ReverseString.csproj.CoreCompileInputs.cache
+C:\Development\Git\ProgrammingChallenges\ReverseString\obj\Debug\ReverseString.exe
+C:\Development\Git\ProgrammingChallenges\ReverseString\obj\Debug\ReverseString.pdb

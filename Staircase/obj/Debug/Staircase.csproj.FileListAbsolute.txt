@@ -20,3 +20,11 @@ C:\Projects\git\ProgrammingChallenges\Staircase\bin\Debug\Staircase.pdb
 C:\Projects\git\ProgrammingChallenges\Staircase\obj\Debug\Staircase.csproj.CoreCompileInputs.cache
 C:\Projects\git\ProgrammingChallenges\Staircase\obj\Debug\Staircase.exe
 C:\Projects\git\ProgrammingChallenges\Staircase\obj\Debug\Staircase.pdb
+C:\Development\Git\ProgrammingChallenges\Staircase\bin\Debug\Staircase.exe.config
+C:\Development\Git\ProgrammingChallenges\Staircase\bin\Debug\Staircase.exe
+C:\Development\Git\ProgrammingChallenges\Staircase\bin\Debug\Staircase.pdb
+C:\Development\Git\ProgrammingChallenges\Staircase\obj\Debug\Staircase.csproj.AssemblyReference.cache
+C:\Development\Git\ProgrammingChallenges\Staircase\obj\Debug\Staircase.csproj.SuggestedBindingRedirects.cache
+C:\Development\Git\ProgrammingChallenges\Staircase\obj\Debug\Staircase.csproj.CoreCompileInputs.cache
+C:\Development\Git\ProgrammingChallenges\Staircase\obj\Debug\Staircase.exe
+C:\Development\Git\ProgrammingChallenges\Staircase\obj\Debug\Staircase.pdb

@@ -20,3 +20,11 @@ C:\Projects\git\ProgrammingChallenges\Palindrome\bin\Debug\Palindrome.pdb
 C:\Projects\git\ProgrammingChallenges\Palindrome\obj\Debug\Palindrome.csproj.CoreCompileInputs.cache
 C:\Projects\git\ProgrammingChallenges\Palindrome\obj\Debug\Palindrome.exe
 C:\Projects\git\ProgrammingChallenges\Palindrome\obj\Debug\Palindrome.pdb
+C:\Development\Git\ProgrammingChallenges\Palindrome\bin\Debug\Palindrome.exe.config
+C:\Development\Git\ProgrammingChallenges\Palindrome\bin\Debug\Palindrome.exe
+C:\Development\Git\ProgrammingChallenges\Palindrome\bin\Debug\Palindrome.pdb
+C:\Development\Git\ProgrammingChallenges\Palindrome\obj\Debug\Palindrome.csproj.AssemblyReference.cache
+C:\Development\Git\ProgrammingChallenges\Palindrome\obj\Debug\Palindrome.csproj.SuggestedBindingRedirects.cache
+C:\Development\Git\ProgrammingChallenges\Palindrome\obj\Debug\Palindrome.csproj.CoreCompileInputs.cache
+C:\Development\Git\ProgrammingChallenges\Palindrome\obj\Debug\Palindrome.exe
+C:\Development\Git\ProgrammingChallenges\Palindrome\obj\Debug\Palindrome.pdb

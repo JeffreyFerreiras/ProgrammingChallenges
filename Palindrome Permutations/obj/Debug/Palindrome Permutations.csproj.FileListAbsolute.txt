@@ -20,3 +20,11 @@ C:\Projects\git\ProgrammingChallenges\Palindrome Permutations\bin\Debug\Palindro
 C:\Projects\git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.csproj.CoreCompileInputs.cache
 C:\Projects\git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.exe
 C:\Projects\git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.pdb
+C:\Development\Git\ProgrammingChallenges\Palindrome Permutations\bin\Debug\Palindrome Permutations.exe.config
+C:\Development\Git\ProgrammingChallenges\Palindrome Permutations\bin\Debug\Palindrome Permutations.exe
+C:\Development\Git\ProgrammingChallenges\Palindrome Permutations\bin\Debug\Palindrome Permutations.pdb
+C:\Development\Git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.csproj.AssemblyReference.cache
+C:\Development\Git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.csproj.SuggestedBindingRedirects.cache
+C:\Development\Git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.csproj.CoreCompileInputs.cache
+C:\Development\Git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.exe
+C:\Development\Git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.pdb

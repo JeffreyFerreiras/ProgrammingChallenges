@@ -16,6 +16,7 @@ namespace _2Sum
             Console.WriteLine(input);
             Console.WriteLine($@"{nameof(TwoSum)}	{JsonSerializer.Serialize(TwoSum(arr, target))}");
             Console.WriteLine($@"{nameof(TwoSumMemoized)}	{JsonSerializer.Serialize(TwoSumMemoized(arr, target))}");
+            Console.WriteLine($@"{nameof(TwoSumPractice)}	{JsonSerializer.Serialize(TwoSumPractice(arr, target))}");
         }
 
         static int[] ParseLeetCodeInput(string testData)
@@ -79,6 +80,23 @@ namespace _2Sum
             }
 
             throw new ArgumentOutOfRangeException("Input must have exactly one solution");
+        }
+
+        // speed: O(n^2) space: O(1)
+        private static int[] TwoSumPractice(int[] arr, int target)
+        {
+            var dict = new Dictionary<int, int>();
+            for(int i=0; i<arr.Length;i++){
+                int diff = target - arr[i];
+                
+                if(dict.ContainsKey(diff)){
+                    return new int[]{i,dict[diff]};
+                }
+                
+                dict[arr[i]] = i;
+            }
+
+            return new int[]{-1,-1};
         }
     }
 }

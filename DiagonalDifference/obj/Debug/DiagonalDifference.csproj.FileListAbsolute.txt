@@ -23,3 +23,11 @@ C:\Projects\git\ProgrammingChallenges\DiagonalDifference\obj\Debug\DiagonalDiffe
 C:\Projects\git\ProgrammingChallenges\DiagonalDifference\obj\Debug\DiagonalDifference.csproj.CoreCompileInputs.cache
 C:\Projects\git\ProgrammingChallenges\DiagonalDifference\obj\Debug\DiagonalDifference.exe
 C:\Projects\git\ProgrammingChallenges\DiagonalDifference\obj\Debug\DiagonalDifference.pdb
+C:\Development\Git\ProgrammingChallenges\DiagonalDifference\bin\Debug\DiagonalDifference.exe.config
+C:\Development\Git\ProgrammingChallenges\DiagonalDifference\bin\Debug\DiagonalDifference.exe
+C:\Development\Git\ProgrammingChallenges\DiagonalDifference\bin\Debug\DiagonalDifference.pdb
+C:\Development\Git\ProgrammingChallenges\DiagonalDifference\obj\Debug\DiagonalDifference.csproj.AssemblyReference.cache
+C:\Development\Git\ProgrammingChallenges\DiagonalDifference\obj\Debug\DiagonalDifference.csproj.SuggestedBindingRedirects.cache
+C:\Development\Git\ProgrammingChallenges\DiagonalDifference\obj\Debug\DiagonalDifference.csproj.CoreCompileInputs.cache
+C:\Development\Git\ProgrammingChallenges\DiagonalDifference\obj\Debug\DiagonalDifference.exe
+C:\Development\Git\ProgrammingChallenges\DiagonalDifference\obj\Debug\DiagonalDifference.pdb
