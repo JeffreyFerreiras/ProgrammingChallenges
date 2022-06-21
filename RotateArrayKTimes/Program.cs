@@ -16,6 +16,11 @@ Could you do it in-place with O(1) extra space?
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            var nums = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+            
+            Rotate2(nums, 3);
+
+            Console.WriteLine(string.Join(',', nums));
         }
         public void Rotate(int[] nums, int k)
         {
@@ -24,6 +29,32 @@ Could you do it in-place with O(1) extra space?
             Array.Reverse(nums, 0, nums.Length);
             Array.Reverse(nums, r, (nums.Length - r));
             Array.Reverse(nums, 0, r);
+        }
+
+        public static void Rotate2(int [] nums, int k)
+        {
+            //12345 
+            //3
+            int shift = k % nums.Length; 
+            int[] temp = new int [shift];
+
+    
+            for(int i = 0; i < shift; i++)
+            {
+                temp[i] = nums[i];
+            }
+
+            // copy from shift position to the start of array
+            for(int i = 0; i < nums.Length - temp.Length; i++)
+            {
+                nums[i] = nums[i + (nums.Length - temp.Length) -1];
+            }
+
+            // populate the array from the shift position with the temp array
+            for(int i = 0; i < temp.Length; i++)
+            {
+                nums[nums.Length - temp.Length + i] = temp[i];
+            }
         }
     }
 }
