@@ -33,24 +33,20 @@ Could you do it in-place with O(1) extra space?
 
         public static void Rotate2(int [] nums, int k)
         {
-            //12345 
-            //3
             int shift = k % nums.Length; 
-            int[] temp = new int [shift];
+            int[] temp = new int [nums.Length - shift];
 
     
-            for(int i = 0; i < shift; i++)
+            for(int i = 0; i < temp.Length; i++)
             {
                 temp[i] = nums[i];
             }
 
-            // copy from shift position to the start of array
-            for(int i = 0; i < nums.Length - temp.Length; i++)
+            for(int i = 0; i < shift; i++)
             {
-                nums[i] = nums[i + (nums.Length - temp.Length) -1];
+                nums[i] = nums[i + (nums.Length - shift)];
             }
 
-            // populate the array from the shift position with the temp array
             for(int i = 0; i < temp.Length; i++)
             {
                 nums[nums.Length - temp.Length + i] = temp[i];
