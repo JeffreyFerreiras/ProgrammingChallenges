@@ -84,7 +84,8 @@ namespace Fibonacci_Print
         }
 
         /*
-         * A Fibbonacci sequence is one that sums the result of a number when added to the previous result starting with 1.
+         * A Fibbonacci sequence is one that sums the result of a number when added 
+         to the previous result starting with 1.
          *
          * so.. 1 + 1 = 2
          *      2 + 3 = 5
@@ -113,6 +114,24 @@ namespace Fibonacci_Print
             return fib;
         }
 
+        private static int BottomUpFib2(int n)
+        {
+            if(n <= 2) return n; 
+
+            int current = 5;
+            int prev = 0;
+            int fibCount = 3;
+
+            while(fibCount++ < n){
+                int temp = current;
+                current += prev;
+                prev = temp;
+            }
+
+            return current;
+        }
+
+        
         private static int PracticeFib(int n)
         {
             if(n < 2)
