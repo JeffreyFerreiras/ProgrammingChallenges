@@ -41,6 +41,7 @@ namespace Fibonacci_Print
             FibMethodRunStats(BasicFib, num);
             FibMethodRunStats(MemoizedFib, num);
             FibMethodRunStats(BottomUpFib, num);
+            FibMethodRunStats(BottomUpFib2, num);
 
             Console.Read();
         }
@@ -119,7 +120,7 @@ namespace Fibonacci_Print
             if(n <= 2) return n; 
 
             int current = 5;
-            int prev = 0;
+            int prev = 2;
             int fibCount = 3;
 
             while(fibCount++ < n){
