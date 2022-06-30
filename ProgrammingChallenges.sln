@@ -131,7 +131,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2Sum", "2Sum\2Sum.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValidAnagram", "ValidAnagram\ValidAnagram.csproj", "{0B695AA2-18C6-4994-8EEA-4E26B4C91716}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddTwoNumbers", "AddTwoNumbers\AddTwoNumbers.csproj", "{9436C001-0404-435D-85C3-9C38F4106974}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddTwoNumbers", "AddTwoNumbers\AddTwoNumbers.csproj", "{9436C001-0404-435D-85C3-9C38F4106974}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirstBadVersion", "FirstBadVersion\FirstBadVersion.csproj", "{E8BED9AD-EA86-4657-8662-3D0C4034A247}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -399,6 +401,10 @@ Global
 		{9436C001-0404-435D-85C3-9C38F4106974}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9436C001-0404-435D-85C3-9C38F4106974}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9436C001-0404-435D-85C3-9C38F4106974}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8BED9AD-EA86-4657-8662-3D0C4034A247}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8BED9AD-EA86-4657-8662-3D0C4034A247}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8BED9AD-EA86-4657-8662-3D0C4034A247}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8BED9AD-EA86-4657-8662-3D0C4034A247}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
