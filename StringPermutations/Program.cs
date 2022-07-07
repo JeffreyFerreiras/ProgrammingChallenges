@@ -17,9 +17,8 @@ namespace StringPermutations
         private static int _count = 0;
         static void Main(string[] args)
         {
-            Permutation("dog");
-
             //Permutation("caturday");
+            Permute("caturday");
             //Permutation("The quick brown fox jumps over the lazy dog");
             Console.Read();
         }
@@ -40,6 +39,22 @@ namespace StringPermutations
                 {
                     string remainingChars = str.Substring(0 , i) + str.Substring(i + 1);
                     Permutation(remainingChars, currentString + str[i]);
+                }
+            }
+        }
+
+        
+        static void Permute(string input, string permutation = "")
+        {
+            if(input.Length == 0)
+            {
+                System.Console.WriteLine(permutation);
+            }
+            else
+            {
+                for(int i = 0; i < input.Length; i++ )
+                {
+                    Permute(input[0..i] + input[(i + 1)..], permutation + input[i]);
                 }
             }
         }

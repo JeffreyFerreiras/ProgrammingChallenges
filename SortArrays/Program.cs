@@ -85,7 +85,7 @@ namespace SortArrays
             {
                 lock (_lock)
                 {
-                    arr[i] = _rand.Next(0, 101);
+                    arr[i] = _rand.Next(0, 1500);
                 }
             }
 

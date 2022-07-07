@@ -24,9 +24,13 @@ namespace StockPrices
             int[] stockPricesYesterday = { 10, 7, 5, 8, 11, 9 };
             double profit = GetMaxProfit(stockPricesYesterday);
 
-
             int[] stockPricesYesterday2 = { 10, 7, 5, 4, 3, 2 };
             double profit2 = GetMaxProfit(stockPricesYesterday2);
+
+            //display profit
+            Random rand = new Random();
+            Console.WriteLine(GetMaxProfit2(Enumerable.Range(0, 1500).Select(i=> rand.Next()).ToArray()));
+            Console.WriteLine(GetMaxProfit(stockPricesYesterday));
         }
 
         //Brute Force
@@ -80,6 +84,25 @@ namespace StockPrices
             }
 
             return maxProfit * -1;
+        }
+
+        private static double GetMaxProfit2(int[] nums)
+        {
+            double maxProfit = 0.00;
+            for(int i = 0; i < nums.Length; i++)
+            {
+                for(int j = i + 1; j < nums.Length; j++)
+                {
+                    double profit = nums[j] - nums[i];
+
+                    if(profit > maxProfit)
+                    {
+                        maxProfit = profit;
+                    }
+                }
+            }
+
+            return maxProfit;
         }
     }
 }
