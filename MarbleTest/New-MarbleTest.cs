@@ -2,7 +2,7 @@
 
 namespace QuickTest
 {
-    class Marbles
+    class Marbles2
     {
         private static readonly Random mRandom = new Random();
         private static readonly object mLock = new object();
