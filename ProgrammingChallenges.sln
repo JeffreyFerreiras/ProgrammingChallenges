@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeConversion", "TimeConve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Palindrome Permutations", "Palindrome Permutations\Palindrome Permutations.csproj", "{DADC34FA-87B1-4763-BAC2-FCF9C9E9E2E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringPermutations", "StringPermutations\StringPermutations.csproj", "{9057C839-01C7-4B87-9784-5F59C8E87024}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StringPermutations", "StringPermutations\StringPermutations.csproj", "{9057C839-01C7-4B87-9784-5F59C8E87024}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Palindrome", "Palindrome\Palindrome.csproj", "{29AA3DB5-CFE4-453A-AFAD-AF6D06BBA5D4}"
 EndProject
@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckPermutations", "CheckP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FizzBuzz", "FizzBuzz\FizzBuzz.csproj", "{A2D91FE0-01B4-4AAA-BF25-59316073226C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedList_Reverse", "ReverseLinkedList\LinkedList_Reverse.csproj", "{162A878E-9AD6-4C6F-ABF1-B2E9D880519F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkedList_Reverse", "ReverseLinkedList\LinkedList_Reverse.csproj", "{162A878E-9AD6-4C6F-ABF1-B2E9D880519F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReverseString", "ReverseString\ReverseString.csproj", "{C4C6841B-A462-4DF8-95B9-3B9F04046B7D}"
 EndProject
@@ -37,7 +37,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReducedString", "ReducedStr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolygonMaking", "PolygonMaking\PolygonMaking.csproj", "{22CD4B8B-962E-4250-8957-ABCAC5CD1C12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarbleTest", "MarbleTest\MarbleTest.csproj", "{91DD0E3A-A77C-42C7-8056-993116185C36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarbleTest", "MarbleTest\MarbleTest.csproj", "{91DD0E3A-A77C-42C7-8056-993116185C36}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaximumRepeatedNumbers", "MaximumRepeatedNumbers\MaximumRepeatedNumbers.csproj", "{06AE322A-B6CC-4794-AAC8-889E655D3088}"
 EndProject
@@ -61,7 +61,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigSorting", "BigSorting\Bi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShuffleDeckOfCards", "ShuffleDeckOfCards\ShuffleDeckOfCards.csproj", "{377128D0-E299-4626-974C-9253F571F904}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakingAnagrams", "MakingAnagrams\MakingAnagrams.csproj", "{0377E9AE-C895-4AC1-AE8D-8063A56D0406}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakingAnagrams", "MakingAnagrams\MakingAnagrams.csproj", "{0377E9AE-C895-4AC1-AE8D-8063A56D0406}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeftRotation", "LeftRotation\LeftRotation.csproj", "{5D91EC1B-993A-4CA4-9875-6513033FD5B9}"
 EndProject
@@ -134,6 +134,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddTwoNumbers", "AddTwoNumbers\AddTwoNumbers.csproj", "{9436C001-0404-435D-85C3-9C38F4106974}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirstBadVersion", "FirstBadVersion\FirstBadVersion.csproj", "{E8BED9AD-EA86-4657-8662-3D0C4034A247}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedList_Palindrome", "LinkedList_Palindrome\LinkedList_Palindrome.csproj", "{46FA4515-22A9-411C-A688-1B5481C49511}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -405,6 +407,10 @@ Global
 		{E8BED9AD-EA86-4657-8662-3D0C4034A247}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8BED9AD-EA86-4657-8662-3D0C4034A247}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8BED9AD-EA86-4657-8662-3D0C4034A247}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46FA4515-22A9-411C-A688-1B5481C49511}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FA4515-22A9-411C-A688-1B5481C49511}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46FA4515-22A9-411C-A688-1B5481C49511}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46FA4515-22A9-411C-A688-1B5481C49511}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
