@@ -8,7 +8,6 @@ Console.WriteLine(index);
 
 int Search(int[] nums, int target)
 {
-    //[1, 4, 8, 16]
     int low = 0;
     int high = nums.Length - 1;
 

@@ -13,6 +13,16 @@ namespace LeftRotation
             Console.WriteLine(string.Join(" ", arr));
         }
 
+		private static int[] RotateLeft(int[] arr, int shift)
+		{
+			shift = shift % arr.Length;
+
+			Array.Reverse(arr, 0, arr.Length);
+			Array.Reverse(arr, 0, arr.Length - shift);
+
+			return arr;
+		}
+
         private static void ShiftLeft(int[] arr, int shift, int len)
         {
             var tail = new int[shift];
