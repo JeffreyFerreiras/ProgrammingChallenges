@@ -6,11 +6,14 @@ namespace LeftRotation
     {
         static void Main(string[] args)
         {
-            int[] arr = { 1, 2, 3, 4, 5 };
+            int [] arr = { 1, 2, 3, 4, 5 };
+            int [] expected = { 2, 3, 4, 5, 1 };
 
-            ShiftLeft(arr, 2, arr.Length);
+            //ShiftLeft(arr, 2, arr.Length);
+            RotateLeft(arr, 1);
 
-            Console.WriteLine(string.Join(" ", arr));
+            Console.WriteLine($"result: {string.Join(" ", arr)}");
+            Console.WriteLine($"expected: {string.Join(" ", expected)}");
         }
 
 		private static int[] RotateLeft(int[] arr, int shift)
