@@ -73,7 +73,7 @@ namespace _2Sum
             {
                 int requiredNum = target - arr[i];
 
-                if (lookUp.ContainsKey(requiredNum))
+                if (lookUp.ContainsKey(requiredNum) && i != lookUp[requiredNum])
                 {
                     return new int[] { lookUp[requiredNum], i };
                 }

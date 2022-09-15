@@ -91,36 +91,21 @@ namespace ReverseLinkedList
                 return Recursive(nex, nextToNext);
             }
         }
-
-        private static Node ReverseLinkedList2(Node root)
-        {
-            Node current = root;
-            Node prev = null;
-
-            while(current != null)
-            {
-                Node next = current.Next;
-                current.Next = prev;
-                prev = current;
-                current = next;
-            }
-
-            return prev;
-        }
+		
         private static Node ReverseLinkedList(Node root)
         {
             Node current = root;
-            Node prev = null;
+            Node previous = null;
 
             while(current != null)
             {
-                Node next = current.Next;
-                current.Next = prev;
-                prev = current; 
-                current = next;
-            }
+				Node next = current.Next;		//define a container for the next node
+				current.Next = previous;		// assign the previous node to next
+				previous = current;				// assign the current node to previous
+				current = next;					// assign the next node to current
+			}
 
-            return prev;
+            return previous;
         }
 
         public class Node
