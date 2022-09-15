@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31815.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PangramAlphabetChallenge", "PangramAlphabetChallenge\PangramAlphabetChallenge.csproj", "{B6EDC1BA-C8B4-4F8F-80A1-6E3DF5107C80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyNumbers", "HappyNumbers\HappyNumbers.csproj", "{8BCA9852-719F-42EC-9D55-867D8994A226}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HappyNumbers", "HappyNumbers\HappyNumbers.csproj", "{8BCA9852-719F-42EC-9D55-867D8994A226}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SumNumbersOneToN", "SumNumbersOneToN\SumNumbersOneToN.csproj", "{4202C4E4-B52E-40D1-8D8A-F607558CEC9C}"
 EndProject
@@ -135,7 +135,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddTwoNumbers", "AddTwoNumb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirstBadVersion", "FirstBadVersion\FirstBadVersion.csproj", "{E8BED9AD-EA86-4657-8662-3D0C4034A247}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedList_Palindrome", "LinkedList_Palindrome\LinkedList_Palindrome.csproj", "{46FA4515-22A9-411C-A688-1B5481C49511}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkedList_Palindrome", "LinkedList_Palindrome\LinkedList_Palindrome.csproj", "{46FA4515-22A9-411C-A688-1B5481C49511}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContainsDuplicate", "ContainsDuplicate\ContainsDuplicate.csproj", "{C4F50906-C74B-4CAF-8548-4913B888E149}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -411,6 +413,10 @@ Global
 		{46FA4515-22A9-411C-A688-1B5481C49511}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46FA4515-22A9-411C-A688-1B5481C49511}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46FA4515-22A9-411C-A688-1B5481C49511}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4F50906-C74B-4CAF-8548-4913B888E149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4F50906-C74B-4CAF-8548-4913B888E149}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4F50906-C74B-4CAF-8548-4913B888E149}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4F50906-C74B-4CAF-8548-4913B888E149}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
