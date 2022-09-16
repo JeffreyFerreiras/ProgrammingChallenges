@@ -95,7 +95,6 @@ namespace ContainsDuplicate
         public void HashSet2(int[] nums) => solution.ContainsDuplicate_HashSet2(nums);
     }
 
-    [MemoryDiagnoser]
     public class Solution
     {
         public bool ContainsDuplicate_NetSort(int[] nums)
