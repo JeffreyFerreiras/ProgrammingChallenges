@@ -10,6 +10,46 @@ namespace ProductOfArrayExceptSelf
     {
         public static int[] ProductExceptSelf(int[] nums)
         {
+            var result = new int[nums.Length];
+            var product = nums.Aggregate(1, (acc, next) => acc * next);
+            
+            for (int i = 0; i < nums.Length; i++)
+            {
+                result[i] = product / nums[i];
+            }
+            return result;
+        }
+        public static int[] ProductExceptSelf_Arrays(int[] nums)
+        {
+            int[] result = new int[nums.Length];
+            int[] left = new int[nums.Length];
+            int[] right = new int[nums.Length];
+
+            left[0] = 1;
+            for (int i = 1; i < nums.Length; i++)
+            {
+                left[i] = left[i - 1] * nums[i - 1];
+            }
+
+            right[nums.Length - 1] = 1;
+            for (int i = nums.Length - 2; i >= 0; i--)
+            {
+                right[i] = right[i + 1] * nums[i + 1];
+            }
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                result[i] = left[i] * right[i];
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Official LeetCode solution
+        /// </summary>
+        public static int[] ProductExceptSelf_Official(int[] nums)
+        {
 
             var answer = Enumerable
                 .Repeat(1, nums.Length)
