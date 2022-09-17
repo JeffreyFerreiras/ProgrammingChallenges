@@ -139,7 +139,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkedList_Palindrome", "Li
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContainsDuplicate", "ContainsDuplicate\ContainsDuplicate.csproj", "{C4F50906-C74B-4CAF-8548-4913B888E149}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductOfArrayExceptSelf", "ProductOfArrayExceptSelf\ProductOfArrayExceptSelf.csproj", "{3DFB6466-6F0C-4FE4-A47C-BD4B271185FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductOfArrayExceptSelf", "ProductOfArrayExceptSelf\ProductOfArrayExceptSelf.csproj", "{3DFB6466-6F0C-4FE4-A47C-BD4B271185FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaximumSubarray", "MaximumSubarray\MaximumSubarray.csproj", "{BF235F48-A093-4B89-AFDA-B3128E40C332}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -423,6 +425,10 @@ Global
 		{3DFB6466-6F0C-4FE4-A47C-BD4B271185FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DFB6466-6F0C-4FE4-A47C-BD4B271185FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DFB6466-6F0C-4FE4-A47C-BD4B271185FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF235F48-A093-4B89-AFDA-B3128E40C332}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF235F48-A093-4B89-AFDA-B3128E40C332}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF235F48-A093-4B89-AFDA-B3128E40C332}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF235F48-A093-4B89-AFDA-B3128E40C332}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
