@@ -170,6 +170,7 @@ namespace ContainsDuplicate
             QuickSort(nums, 0, nums.Length - 1);
             
             return hasDuplicate;
+			
             void QuickSort(int[] arr, int low, int high)
             {
                 if (low < high)
