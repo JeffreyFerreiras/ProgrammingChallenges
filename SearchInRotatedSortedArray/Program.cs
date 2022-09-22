@@ -42,11 +42,61 @@ int expected;
 int result;
 
 // [4, 5, 6, 7, 0, 1, 2]
-nums = new int[]{4,5,6,7,0,1,2};
+nums = new int[] { 4, 5, 6, 7, 0, 1, 2 };
 target = 0;
 expected = 4;
-result = Search(nums, 0);
+result = Search(nums, target);
 
+Console.WriteLine($"RESULT: {result} EXPECTED: {expected}");
+
+//[4, 5, 6, 7, 0, 1, 2]
+target = 3;
+expected = -1;
+result = Search(nums, target);
+Console.WriteLine($"RESULT: {result} EXPECTED: {expected}");
+
+//[1]
+nums = new int[] { 1 };
+target = 0;
+expected = -1;
+result = Search(nums, target);
+Console.WriteLine($"RESULT: {result} EXPECTED: {expected}");
+
+//[-1, -1, -1, -1, 0, 1, 2]
+nums = new int[] { -1, -1, -1, -1, 0, 1, 2 };
+target = 0;
+expected = 4;
+result = Search(nums, target);
+Console.WriteLine($"RESULT: {result} EXPECTED: {expected}");
+
+//all 0
+nums = new int[] { 0, 0, 0, 0, 0, 0, 0 };
+target = 0;
+expected = nums.Length / 2;
+result = Search(nums, target);
+Console.WriteLine($"RESULT: {result} EXPECTED: {expected}");
+
+// [7, 0, 1, 2, 4, 5, 6,]
+nums = new int[] { 7, 0, 1, 2, 4, 5, 6 };
+target = 0;
+expected = 1;
+result = Search(nums, target);
+Console.WriteLine($"RESULT: {result} EXPECTED: {expected}");
+
+// [ 0, 1, 2, 4, 5, 6, 7]
+nums = new int[] { 0, 1, 2, 4, 5, 6, 7 };
+target = 0;
+expected = 0;
+result = Search(nums, target);
+Console.WriteLine($"RESULT: {result} EXPECTED: {expected}");
+
+//Input: nums = [4,5,6,7,0,1,2], target = 0
+//Output: 4
+nums = new int[] { 4, 5, 6, 7, 0, 1, 2 };
+target = 0;
+expected = 4;
+result = Search(nums, target);
+Console.WriteLine($"RESULT: {result} EXPECTED: {expected}");
 
 int Search(int[] nums, int target)
 {
@@ -54,17 +104,44 @@ int Search(int[] nums, int target)
     int right = nums.Length - 1;
     int mid;
 
-    while(left <= right){
+    while (left <= right)
+    {
         mid = (left + right) / 2;
 
-        if(nums[mid] == target){
+        if (nums[mid] == target)
+        {
             return mid;
         }
 
-        if(nums[left] < nums[right]){
-            
-        }else if(nums[left] > nums[right]){
-            if(nums[mid] > )
+        if (nums[left] < nums[right])
+        {
+            if (nums[mid] > target)
+            {
+                right = mid - 1;
+            }
+            else
+            {
+                left = mid + 1;
+            }
+        }
+        else
+        { // array is rotated
+            if (nums[left] > nums[mid] && target >= nums[left])
+            {
+                right = mid - 1;
+            }
+            else if (nums[right] < nums[mid] && target <= nums[right])
+            {
+                left = mid + 1;
+            }
+            else if (nums[mid] > target)
+            {
+                right = mid - 1;
+            }
+            else
+            {
+                left = mid + 1;
+            }
         }
     }
 
