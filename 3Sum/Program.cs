@@ -60,15 +60,17 @@ namespace _3Sum
 
             var output = Solution.ThreeSum(nums);
             Console.WriteLine(CheckOutput(output, expected));
+            output = Solution.ThreeSumX(nums);
+            Console.WriteLine(nameof(Solution.ThreeSumX) + " " + CheckOutput(output, expected));
 
             /*
-                Scenario 2:
+    Scenario 2:
 
-                Input:
-                [0,0,0]
-                Expected:
-                [[0,0,0]]
-            */
+    Input:
+    [0,0,0]
+    Expected:
+    [[0,0,0]]
+*/
 
             nums = new int[] { 0, 0, 0 };
             expected = new List<IList<int>>();
@@ -93,6 +95,7 @@ namespace _3Sum
             output = Solution.ThreeSum(nums);
             Console.WriteLine(CheckOutput(output, expected));
 
+
         }
         // check if the output is correct
         public static bool CheckOutput(IList<IList<int>> output, IList<IList<int>> expectedOutput)
@@ -115,44 +118,9 @@ namespace _3Sum
 
     public class Solution
     {
-        public static IList<IList<int>> ThreeSumSpace(int[] nums)
+        // correct 3Sum solution
+        public static IList<IList<int>> ThreeSum(int[] nums)
         {
-            IList<IList<int>> output = new List<IList<int>>();
-            if (nums.Length < 3)
-            {
-                return output;
-            }
-
-            var lookUp = new Dictionary<int, int>();
-            for (int i = 0; i < nums.Count(); i++)
-            {
-                lookUp[nums[i]] = i;
-            }
-            var seen = new HashSet<string>();
-
-            for (int i = 0; i < nums.Count() - 2; i++)
-            {
-                for (int j = i + 1; j < nums.Count() - 1; j++)
-                {
-                    int missing = (nums[i] + nums[j]) * -1;
-
-                    if (lookUp.ContainsKey(missing) && lookUp[missing] != i && lookUp[missing] != j)
-                    {
-                        var list = new List<int>() { nums[i], nums[j], missing };
-                        list.Sort();
-                        var key = string.Join(",", list);
-                        if (!seen.Contains(key))
-                        {
-                            output.Add(list);
-                            seen.Add(key);
-                        }
-                    }
-                }
-            }
-            return output;
-        }
-
-        public static IList<IList<int>> ThreeSum(int[] nums){
             IList<IList<int>> output = new List<IList<int>>();
             if (nums.Length < 3)
             {
@@ -162,17 +130,19 @@ namespace _3Sum
             Array.Sort(nums);
             var seen = new HashSet<string>();
 
-            for(int i = 0; i < nums.Count()-2; i++)
+            for (int i = 0; i < nums.Count() - 2; i++)
             {
-                for(int j = i + 1; j < nums.Count() - 1;j++){
+                for (int j = i + 1; j < nums.Count() - 1; j++)
+                {
                     int difference = (nums[i] + nums[j]) * -1;
                     int diffIndex = Array.BinarySearch(nums, j + 1, nums.Count() - j - 1, difference);
-                    if(diffIndex >= 2 && diffIndex != i && diffIndex != j)
+                    if (diffIndex >= 2 && diffIndex != i && diffIndex != j)
                     {
                         var answer = new List<int> { nums[i], nums[j], difference };
                         answer.Sort();
                         var ansKey = string.Join(',', answer);
-                        if(seen.Contains(ansKey)){
+                        if (seen.Contains(ansKey))
+                        {
                             continue;
                         }
 
@@ -184,7 +154,54 @@ namespace _3Sum
 
             return output;
         }
+        public static IList<IList<int>> ThreeSumX(int[] nums)
+        {
+            var result = new List<IList<int>>();
+            var lookUp = new Dictionary<int, List<int>>();
+            var usedIndex = new HashSet<string>();
+            
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (!lookUp.ContainsKey(nums[i]))
+                {
+                    lookUp.Add(nums[i], new List<int>{i});
+                }
+                else
+                {
+                    lookUp[nums[i]].Add(i);
+                }
+            }
 
+            for (int i = 0; i < nums.Length - 2; i++)
+            {
+                for (int j = i + 1; j < nums.Length - 1; j++)
+                {
+                    var missing = (nums[i] + nums[j]) * -1;
+                    if (lookUp.ContainsKey(missing))
+                    {
+                        var missingIndex = lookUp[missing];
+                        foreach (var index in missingIndex)
+                        {
+                            if (index > j)
+                            {
+                                var answer = new List<int> { nums[i], nums[j], missing };
+                                answer.Sort();
+                                var ansKey = string.Join(',', answer);
+                                if (usedIndex.Contains(ansKey))
+                                {
+                                    continue;
+                                }
+
+                                result.Add(answer);
+                                usedIndex.Add(ansKey);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
         public static IList<IList<int>> ThreeSumBrute(int[] nums)
         {
             IList<IList<int>> output = new List<IList<int>>();
@@ -203,7 +220,7 @@ namespace _3Sum
                         if (nums[i] + nums[j] + nums[k] == 0)
                         {
                             var ans = new List<int> { nums[i], nums[j], nums[k] };
-                            
+
                             output.Add(ans);
                         }
                     }
