@@ -81,6 +81,7 @@ namespace _2Sum
             throw new ArgumentOutOfRangeException("Input must have exactly one solution");
         }
 
+        // speed: O(n log n) space: O(log n))        
         private static int[] TwoSumBinarySearch(int[] nums, int target)
         {
             Array.Sort(nums);

@@ -12,8 +12,13 @@ namespace AddOne
     {
         static void Main(string[] args)
         {
+            int[] expected;
+
             int[] sample = { 1, 3, 2, 4 };
+            expected = new int[] { 1, 3, 2, 5 };
             int[] result = AddOne(sample);
+            Console.WriteLine("Expected: {0}, Result: {1}", string.Join(",", expected), string.Join(",", result));
+
 
             int[] sample2 = { 5, 4, 8, 9 };
             int[] result2 = AddOne(sample2);
@@ -28,7 +33,33 @@ namespace AddOne
             int[] result5 = AddOne(sample5);
         }
 
-        static int[] AddOne(int[] sample)
+        // 
+        static int[] AddOne(int[] nums)
+        {
+            int carry = 1;
+            var result = new Stack<int>();
+
+            for(int i = nums.Length - 1; i > 0; i--)
+            {
+                int current = nums[i] + carry;
+                if(current > 10)
+                {
+                    carry = current % 10;
+                    result.Push(9);
+                }else{
+                    result.Push(current);
+                }                
+            }
+
+            if(carry > 0)
+            {
+                result.Push(carry);
+            }
+
+            return result.ToArray();
+        }
+
+        static int[] AddOneX(int[] sample)
         {
             return AddOne(sample, sample.Length - 1);
         }

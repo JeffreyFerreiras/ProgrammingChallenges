@@ -202,6 +202,8 @@ namespace _3Sum
 
             return result;
         }
+        
+        // n ^ 3 solution
         public static IList<IList<int>> ThreeSumBrute(int[] nums)
         {
             IList<IList<int>> output = new List<IList<int>>();
