@@ -83,8 +83,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnagramSubstring", "Anagram
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedList_RemoveDups", "LinkedList_RemoveDups\LinkedList_RemoveDups.csproj", "{19EC63EF-9B68-442D-9B9D-94E49FBA91AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalancedBrackets", "..\ProgrammingLessons\BalancedBrackets\BalancedBrackets.csproj", "{5CFF2382-7347-4E39-880F-52C67563DD74}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedList_DeleteMiddleNode", "LinkedList_DeleteMiddleNode\LinkedList_DeleteMiddleNode.csproj", "{7A6B569C-634E-4A96-8497-39FA5E6BD151}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalTree", "MinimalTree\MinimalTree.csproj", "{E0EC6F7E-88B5-4F76-8592-B6CD2FE442FC}"

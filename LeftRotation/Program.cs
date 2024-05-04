@@ -18,7 +18,7 @@ namespace LeftRotation
 
 		private static int[] RotateLeft(int[] arr, int shift)
 		{
-			shift = shift % arr.Length;
+			shift %= arr.Length;
 
 			Array.Reverse(arr, 0, arr.Length);
 			Array.Reverse(arr, 0, arr.Length - shift);
