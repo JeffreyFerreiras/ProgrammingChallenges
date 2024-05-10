@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace QuickTest
+﻿namespace QuickTest
 {
     class Marbles
     {

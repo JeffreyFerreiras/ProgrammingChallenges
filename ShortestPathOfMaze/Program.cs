@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace ShortestPathOfMaze
+﻿namespace ShortestPathOfMaze
 {
     //LEVEL medium/hard
     /*

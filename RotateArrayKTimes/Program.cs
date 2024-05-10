@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RotateArrayKTimes
+﻿namespace RotateArrayKTimes
 {
     class Program
     {

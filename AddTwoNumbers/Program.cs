@@ -1,7 +1,4 @@
-﻿
-// See https://aka.ms/new-console-template for more information
-using System.Linq;
-
+﻿// See https://aka.ms/new-console-template for more information
 ;
 var l1 = GenerateInputNode("[2,4,3]");
 var l2 = GenerateInputNode("[5,6,4]");

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Google_Question_PreviousDigitCount
+﻿namespace Google_Question_PreviousDigitCount
 {
     class Program
     {
