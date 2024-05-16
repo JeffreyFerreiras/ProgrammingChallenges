@@ -60,5 +60,36 @@ namespace SetMatrixZeroes
                 }
             }
         }
+        public void SetZeroes_5_16_2024(int[][] matrix)
+        {
+            bool[][] tozero = new bool[matrix.Length][];
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                tozero[i] = new bool[matrix[i].Length];
+            }
+
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                for (int j = 0; j < matrix[i].Length; j++)
+                {
+                    var value = tozero[i][j];
+
+                    if (value)
+                    {
+                        matrix[i][j] = 0;
+
+                        for (int k = 0; k < matrix.Length; k++)
+                        {
+                            matrix[k][j] = 0;
+                        }
+
+                        for (int r = 0; r < matrix[i].Length; r++)
+                        {
+                            matrix[i][r] = 0;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
