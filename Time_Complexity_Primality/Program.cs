@@ -22,37 +22,37 @@ namespace Time_Complexity_Primality
         private static void Main(string[] args)
         {
             int[] data = {
-30 ,
-1  ,
-4  ,
-9  ,
-16 ,
-25 ,
-36 ,
-49 ,
-64 ,
-81 ,
-100,
-121,
-144,
-169,
-196,
-225,
-256,
-289,
-324,
-361,
-400,
-441,
-484,
-529,
-576,
-625,
-676,
-729,
-784,
-841,
-907,
+                30 ,
+                1  ,
+                4  ,
+                9  ,
+                16 ,
+                25 ,
+                36 ,
+                49 ,
+                64 ,
+                81 ,
+                100,
+                121,
+                144,
+                169,
+                196,
+                225,
+                256,
+                289,
+                324,
+                361,
+                400,
+                441,
+                484,
+                529,
+                576,
+                625,
+                676,
+                729,
+                784,
+                841,
+                907,
             };
 
             foreach(int n in data)
@@ -68,26 +68,27 @@ namespace Time_Complexity_Primality
             }
         }
 
-        private static HashSet<int> primes = new HashSet<int>();
+        private static readonly HashSet<int> knownPrimes = []; //stores all the known prime numbers to avoid recalculating them.
 
-        private static bool IsPrime(int value)
+        private static bool IsPrime(int number)
         {
-            if(value <= 1) return false;
-            if(value == 2) return true;
-            if(value % 2 == 0 || value % 3 == 0) return false; //eliminates all even numbers.
-            if(primes.Contains(value)) return true;
+            if(number <= 1) return false; //1 is not a prime number and anything less than 1 is not a natural number.
+            if(number == 2) return true; //2 is the only even prime number.
+            if(number % 2 == 0 || number % 3 == 0) return false; //eliminates all even numbers, because even numbers cannot be a prime number.
+            if(knownPrimes.Contains(number)) return true; //checks if the number is already in the list of known prime numbers.
 
-            int sqrt = (int)Math.Ceiling(Math.Sqrt(value));
+            /// Calculates the square root of the given number and rounds it up to the nearest integer.
+            int sqrt = (int)Math.Ceiling(Math.Sqrt(number));
 
-            for(int i = 5; i <= sqrt; i+=2)
+            for(int i = 5; i <= sqrt; i += 2) // iterates through all odd numbers starting from 5 to the square root of the given number.
             {
-                if(value % i == 0)
+                if(number % i == 0) //checks if the number is divisible by the current number.
                 {
                     return false;
                 }
             }
             
-            primes.Add(value);
+            knownPrimes.Add(number);
 
             return true;
         }
