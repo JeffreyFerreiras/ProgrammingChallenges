@@ -32,7 +32,7 @@ For each line of input, print to standard output the sum of the numbers from 1 t
 
             for (int i = 2; i < num; ++i)
             {
-                if(i % 5 == 0 || i % 7 == 0) continue;
+                if (i % 5 == 0 || i % 7 == 0) continue;
                 sum += i;
             }
 
@@ -40,8 +40,8 @@ For each line of input, print to standard output the sum of the numbers from 1 t
         }
         private static int RecursiveAdder(int num) //SOLUTION 3
         {
-            if(num == 0) return 0;
-            if(num % 5 == 0 || num % 7 == 0) return RecursiveAdder(num - 1);           
+            if (num == 0) return 0;
+            if (num % 5 == 0 || num % 7 == 0) return RecursiveAdder(num - 1);
             return num + RecursiveAdder(num - 1);
         }
     }

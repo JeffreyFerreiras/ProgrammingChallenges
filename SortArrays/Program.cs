@@ -8,21 +8,21 @@ namespace SortArrays
          * Write a function to sort 2 arrays of numbers (without using existing libraries).
          * Assume arrays are sorted.
          */
-        static readonly Random _rand = new Random();
-        static readonly object _lock = new object();
+        static readonly Random _rand = new();
+        static readonly object _lock = new();
 
         static void Main(string[] args)
         {
-            var arr1 = GetRandomArray();
-            var arr2 = GetRandomArray();
+            var generatedArray = GetRandomArray();
+            var generatedArray2 = GetRandomArray();
 
-            Array.Sort(arr1);
-            Array.Sort(arr2);
+            Array.Sort(generatedArray);
+            Array.Sort(generatedArray2);
 
-            var m = Merge(arr1, arr2);
+            var m = Merge(generatedArray, generatedArray2);
 
-            Print(arr1);
-            Print(arr2);
+            Print(generatedArray);
+            Print(generatedArray2);
             Print(m);
 
             Console.Read();
@@ -38,41 +38,6 @@ namespace SortArrays
             Console.WriteLine();
         }
 
-        private static int[] Merge(int[] arrFirst, int[] arrSecond)
-        {
-            var merged = new int[arrFirst.Length + arrSecond.Length];
-            int iMerged = 0, iFirst = 0, iSecond = 0;
-            
-            while (iMerged < merged.Length && iFirst < arrFirst.Length && iSecond < arrSecond.Length)
-            {
-                if(arrFirst[iFirst] < arrSecond[iSecond])
-                {
-                    merged[iMerged] = arrFirst[iFirst++];
-                }
-                else
-                {
-                    merged[iMerged] = arrSecond[iSecond++];
-                }
-
-                iMerged++;
-            }
-
-            //tail
-            
-            CopyTail(merged, iFirst > iSecond ? arrSecond : arrFirst, iMerged, iFirst > iSecond ? iSecond : iFirst);
-
-            return merged;
-        }
-
-        static void CopyTail(int[]combined, int[]arr, int current, int bigArrIndex)
-        {
-            for (int i = current; i < combined.Length && bigArrIndex < arr.Length; i++, bigArrIndex++)
-            {
-                combined[i] = arr[bigArrIndex];
-            }
-        }
-        
-
         static int[] GetRandomArray(int count = 10)
         {
             var arr = new int[count];
@@ -87,7 +52,36 @@ namespace SortArrays
 
             return arr;
         }
-    }
 
-    
+        //Merge two sorted arrays
+        private static int[] Merge(int[] firstArray, int[] secondArray)
+        {
+            var mergedArray = new int[firstArray.Length + secondArray.Length];
+            int mergedIndex = 0, firstIndex = 0, secondIndex = 0;
+
+            while (mergedIndex < mergedArray.Length && firstIndex < firstArray.Length && secondIndex < secondArray.Length)
+            {
+                if (firstArray[firstIndex] < secondArray[secondIndex])
+                {
+                    mergedArray[mergedIndex] = firstArray[firstIndex++];
+                }
+                else
+                {
+                    mergedArray[mergedIndex] = secondArray[secondIndex++];
+                }
+
+                mergedIndex++;
+            }
+
+            int bigArrayIndex = Math.Min(firstIndex, secondIndex);
+            int[] remainingArray = firstIndex > secondIndex ? secondArray : firstArray;
+            
+            for (int i = mergedIndex; i < mergedArray.Length && bigArrayIndex < remainingArray.Length; i++, bigArrayIndex++)
+            {
+                mergedArray[i] = remainingArray[bigArrayIndex];
+            }
+
+            return mergedArray;
+        }
+    }
 }

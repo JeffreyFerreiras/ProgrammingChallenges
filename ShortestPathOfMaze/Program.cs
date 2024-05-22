@@ -32,11 +32,11 @@ This is shortest! return 13
         {
             var matrix = new int[5][];
             //17
-            matrix[0] = new int[] { 0, 0, 0, 0, 0, 0, 0 };
-            matrix[1] = new int[] { 0, 0, 1, 1, 1, 1, 0 };
-            matrix[2] = new int[] { 0, 0, 1, 0, 0, 0, 0 };
-            matrix[3] = new int[] { 0, 0, 1, 0, 1, 0, 1 };
-            matrix[4] = new int[] { 1, 1, 1, 0, 0, 0, 0 };
+            matrix[0] = [0, 0, 0, 0, 0, 0, 0];
+            matrix[1] = [0, 0, 1, 1, 1, 1, 0];
+            matrix[2] = [0, 0, 1, 0, 0, 0, 0];
+            matrix[3] = [0, 0, 1, 0, 1, 0, 1];
+            matrix[4] = [1, 1, 1, 0, 0, 0, 0];
             var seen = new int[5][];
             for (int i = 0; i < seen.Length; i++)
             {
@@ -50,6 +50,7 @@ This is shortest! return 13
             //Console.WriteLine(result);
             Console.ReadLine();
         }
+        
         private static int GetShortestPathSteps_2022(int[][] matrix)
         {
             var seen = new int[matrix.Length, matrix[0].Length];

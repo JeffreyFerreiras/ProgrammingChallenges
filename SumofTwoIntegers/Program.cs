@@ -1,4 +1,6 @@
-﻿// Given two integers a and b, return the sum of the two integers without using the operators +and -.
+﻿using System;
+
+// Given two integers a and b, return the sum of the two integers without using the operators +and -.
 // Example 1:
 
 // Input: a = 1, b = 2
@@ -23,8 +25,8 @@ Console.WriteLine($"2 + 3 :" + result2);
 static int GetSum(int a, int b)
 {
     int result = 0,
-    // carry now contains common set bits of "a" and "b"
-    carry = a & b;
+    
+    carry = a & b; // carry now contains common set bits of "a" and "b"
 
     if (Convert.ToBoolean(carry))
     {
@@ -40,7 +42,7 @@ static int GetSum(int a, int b)
     }
     else
     {
-        result = a ^ b;
+        result = a ^ b; // XOR is the sum of two bits
     }
 
     return result;
