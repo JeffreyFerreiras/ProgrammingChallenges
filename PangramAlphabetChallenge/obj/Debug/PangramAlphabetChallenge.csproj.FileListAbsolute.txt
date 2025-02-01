@@ -31,3 +31,10 @@ C:\Development\Git\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\Pang
 C:\Development\Git\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.csproj.CoreCompileInputs.cache
 C:\Development\Git\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.exe
 C:\Development\Git\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.pdb
+C:\dev\GitHub\ProgrammingChallenges\PangramAlphabetChallenge\bin\Debug\PangramAlphabetChallenge.exe.config
+C:\dev\GitHub\ProgrammingChallenges\PangramAlphabetChallenge\bin\Debug\PangramAlphabetChallenge.exe
+C:\dev\GitHub\ProgrammingChallenges\PangramAlphabetChallenge\bin\Debug\PangramAlphabetChallenge.pdb
+C:\dev\GitHub\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.csproj.AssemblyReference.cache
+C:\dev\GitHub\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.csproj.CoreCompileInputs.cache
+C:\dev\GitHub\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.exe
+C:\dev\GitHub\ProgrammingChallenges\PangramAlphabetChallenge\obj\Debug\PangramAlphabetChallenge.pdb

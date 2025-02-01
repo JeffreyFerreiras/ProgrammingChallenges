@@ -23,3 +23,10 @@ C:\Development\Git\ProgrammingChallenges\ReverseString\obj\Debug\ReverseString.c
 C:\Development\Git\ProgrammingChallenges\ReverseString\obj\Debug\ReverseString.csproj.CoreCompileInputs.cache
 C:\Development\Git\ProgrammingChallenges\ReverseString\obj\Debug\ReverseString.exe
 C:\Development\Git\ProgrammingChallenges\ReverseString\obj\Debug\ReverseString.pdb
+C:\dev\GitHub\ProgrammingChallenges\ReverseString\bin\Debug\ReverseString.exe.config
+C:\dev\GitHub\ProgrammingChallenges\ReverseString\bin\Debug\ReverseString.exe
+C:\dev\GitHub\ProgrammingChallenges\ReverseString\bin\Debug\ReverseString.pdb
+C:\dev\GitHub\ProgrammingChallenges\ReverseString\obj\Debug\ReverseString.csproj.AssemblyReference.cache
+C:\dev\GitHub\ProgrammingChallenges\ReverseString\obj\Debug\ReverseString.csproj.CoreCompileInputs.cache
+C:\dev\GitHub\ProgrammingChallenges\ReverseString\obj\Debug\ReverseString.exe
+C:\dev\GitHub\ProgrammingChallenges\ReverseString\obj\Debug\ReverseString.pdb

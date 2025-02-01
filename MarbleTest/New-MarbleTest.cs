@@ -11,7 +11,7 @@
         public const int GREEN_MARBLE = 3;
         public const int ORANGE_MARBLE = 4;
 
-        static void Main(string[] args)
+        static void Main2(string[] args)
         {
             int red, green, blue, orange;
 

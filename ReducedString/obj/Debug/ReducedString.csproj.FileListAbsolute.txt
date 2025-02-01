@@ -25,3 +25,10 @@ C:\Development\Git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.c
 C:\Development\Git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.csproj.CoreCompileInputs.cache
 C:\Development\Git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.exe
 C:\Development\Git\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.pdb
+C:\dev\GitHub\ProgrammingChallenges\ReducedString\bin\Debug\ReducedString.exe.config
+C:\dev\GitHub\ProgrammingChallenges\ReducedString\bin\Debug\ReducedString.exe
+C:\dev\GitHub\ProgrammingChallenges\ReducedString\bin\Debug\ReducedString.pdb
+C:\dev\GitHub\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.csproj.AssemblyReference.cache
+C:\dev\GitHub\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.csproj.CoreCompileInputs.cache
+C:\dev\GitHub\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.exe
+C:\dev\GitHub\ProgrammingChallenges\ReducedString\obj\Debug\ReducedString.pdb

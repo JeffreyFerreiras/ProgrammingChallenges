@@ -28,3 +28,10 @@ C:\Development\Git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString
 C:\Development\Git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.csproj.CoreCompileInputs.cache
 C:\Development\Git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.exe
 C:\Development\Git\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.pdb
+C:\dev\GitHub\ProgrammingChallenges\IsUniqueString\bin\Debug\IsUniqueString.exe.config
+C:\dev\GitHub\ProgrammingChallenges\IsUniqueString\bin\Debug\IsUniqueString.exe
+C:\dev\GitHub\ProgrammingChallenges\IsUniqueString\bin\Debug\IsUniqueString.pdb
+C:\dev\GitHub\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.csproj.AssemblyReference.cache
+C:\dev\GitHub\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.csproj.CoreCompileInputs.cache
+C:\dev\GitHub\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.exe
+C:\dev\GitHub\ProgrammingChallenges\IsUniqueString\obj\Debug\IsUniqueString.pdb

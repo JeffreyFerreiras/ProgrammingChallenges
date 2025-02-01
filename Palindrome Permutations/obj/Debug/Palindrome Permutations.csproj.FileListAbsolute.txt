@@ -28,3 +28,10 @@ C:\Development\Git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palin
 C:\Development\Git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.csproj.CoreCompileInputs.cache
 C:\Development\Git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.exe
 C:\Development\Git\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.pdb
+C:\dev\GitHub\ProgrammingChallenges\Palindrome Permutations\bin\Debug\Palindrome Permutations.exe.config
+C:\dev\GitHub\ProgrammingChallenges\Palindrome Permutations\bin\Debug\Palindrome Permutations.exe
+C:\dev\GitHub\ProgrammingChallenges\Palindrome Permutations\bin\Debug\Palindrome Permutations.pdb
+C:\dev\GitHub\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.csproj.AssemblyReference.cache
+C:\dev\GitHub\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.csproj.CoreCompileInputs.cache
+C:\dev\GitHub\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.exe
+C:\dev\GitHub\ProgrammingChallenges\Palindrome Permutations\obj\Debug\Palindrome Permutations.pdb

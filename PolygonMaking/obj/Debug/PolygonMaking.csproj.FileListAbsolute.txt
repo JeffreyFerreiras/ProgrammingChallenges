@@ -25,3 +25,10 @@ C:\Development\Git\ProgrammingChallenges\PolygonMaking\obj\Debug\PolygonMaking.c
 C:\Development\Git\ProgrammingChallenges\PolygonMaking\obj\Debug\PolygonMaking.csproj.CoreCompileInputs.cache
 C:\Development\Git\ProgrammingChallenges\PolygonMaking\obj\Debug\PolygonMaking.exe
 C:\Development\Git\ProgrammingChallenges\PolygonMaking\obj\Debug\PolygonMaking.pdb
+C:\dev\GitHub\ProgrammingChallenges\PolygonMaking\bin\Debug\PolygonMaking.exe.config
+C:\dev\GitHub\ProgrammingChallenges\PolygonMaking\bin\Debug\PolygonMaking.exe
+C:\dev\GitHub\ProgrammingChallenges\PolygonMaking\bin\Debug\PolygonMaking.pdb
+C:\dev\GitHub\ProgrammingChallenges\PolygonMaking\obj\Debug\PolygonMaking.csproj.AssemblyReference.cache
+C:\dev\GitHub\ProgrammingChallenges\PolygonMaking\obj\Debug\PolygonMaking.csproj.CoreCompileInputs.cache
+C:\dev\GitHub\ProgrammingChallenges\PolygonMaking\obj\Debug\PolygonMaking.exe
+C:\dev\GitHub\ProgrammingChallenges\PolygonMaking\obj\Debug\PolygonMaking.pdb

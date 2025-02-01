@@ -28,3 +28,10 @@ C:\Development\Git\ProgrammingChallenges\FindElementInSortedRotatedArray\obj\Deb
 C:\Development\Git\ProgrammingChallenges\FindElementInSortedRotatedArray\obj\Debug\FindElementInSortedRotatedArray.csproj.CoreCompileInputs.cache
 C:\Development\Git\ProgrammingChallenges\FindElementInSortedRotatedArray\obj\Debug\FindElementInSortedRotatedArray.exe
 C:\Development\Git\ProgrammingChallenges\FindElementInSortedRotatedArray\obj\Debug\FindElementInSortedRotatedArray.pdb
+C:\dev\GitHub\ProgrammingChallenges\FindElementInSortedRotatedArray\bin\Debug\FindElementInSortedRotatedArray.exe.config
+C:\dev\GitHub\ProgrammingChallenges\FindElementInSortedRotatedArray\bin\Debug\FindElementInSortedRotatedArray.exe
+C:\dev\GitHub\ProgrammingChallenges\FindElementInSortedRotatedArray\bin\Debug\FindElementInSortedRotatedArray.pdb
+C:\dev\GitHub\ProgrammingChallenges\FindElementInSortedRotatedArray\obj\Debug\FindElementInSortedRotatedArray.csproj.AssemblyReference.cache
+C:\dev\GitHub\ProgrammingChallenges\FindElementInSortedRotatedArray\obj\Debug\FindElementInSortedRotatedArray.csproj.CoreCompileInputs.cache
+C:\dev\GitHub\ProgrammingChallenges\FindElementInSortedRotatedArray\obj\Debug\FindElementInSortedRotatedArray.exe
+C:\dev\GitHub\ProgrammingChallenges\FindElementInSortedRotatedArray\obj\Debug\FindElementInSortedRotatedArray.pdb

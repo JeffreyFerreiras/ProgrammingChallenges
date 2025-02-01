@@ -31,3 +31,10 @@ C:\Development\Git\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermut
 C:\Development\Git\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutations.csproj.CoreCompileInputs.cache
 C:\Development\Git\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutations.exe
 C:\Development\Git\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutations.pdb
+C:\dev\GitHub\ProgrammingChallenges\CheckPermutations\bin\Debug\CheckPermutations.exe.config
+C:\dev\GitHub\ProgrammingChallenges\CheckPermutations\bin\Debug\CheckPermutations.exe
+C:\dev\GitHub\ProgrammingChallenges\CheckPermutations\bin\Debug\CheckPermutations.pdb
+C:\dev\GitHub\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutations.csproj.AssemblyReference.cache
+C:\dev\GitHub\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutations.csproj.CoreCompileInputs.cache
+C:\dev\GitHub\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutations.exe
+C:\dev\GitHub\ProgrammingChallenges\CheckPermutations\obj\Debug\CheckPermutations.pdb
