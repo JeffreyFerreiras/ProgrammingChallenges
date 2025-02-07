@@ -4,16 +4,16 @@
     {
         public static void ReverseLinkedList(this LinkedList<string> linkedList)
         {
-            LinkedListNode<string> current  = linkedList.First;
+            if (linkedList == null || linkedList.First == null)
+                return;
 
-            while(current.Next != null)
+            LinkedListNode<string> current = linkedList.First;
+
+            while (current.Next != null)
             {
                 LinkedListNode<string> next = current.Next;
-
-                linkedList.Remove(next);            //links current to the removed items .Next
-                linkedList.AddFirst(next.Value);
-
-                /*  Eventually current.Next ends up null and the list is reversed.  */
+                linkedList.Remove(next);  // Remove the node after current.
+                linkedList.AddFirst(next.Value);  // Prepend it to reverse the list.
             }
         }
     }

@@ -10,9 +10,9 @@ l1 = GenerateInputNode("[9,9,9,9,9,9,9]");
 l2 = GenerateInputNode("[9,9,9,9]");
 result = AddTwoNumbers(l1, l2);
 
-static ListNode GenerateInputNode(string source)
+static ListNode? GenerateInputNode(string source)
 {
-    ListNode root = null;
+    ListNode? root = null;
     source = source.Trim('[').Trim(']');
     var col = source.Split(',').Select(x => int.Parse(x)).ToArray();
     foreach (var item in col)
@@ -22,14 +22,14 @@ static ListNode GenerateInputNode(string source)
     return root;
 }
 
-static ListNode AddTwoNumbers(ListNode l1, ListNode l2)
+static ListNode? AddTwoNumbers(ListNode? l1, ListNode? l2)
 {
     // loop through each node from the ending num
     // exit loop when one of the nodes runs out of itmes.
     // append the remaining nums to the front
 
-    ListNode iter = null;
-    ListNode root = iter;
+    ListNode? iter = null;
+    ListNode? root = iter;
     
     var remainder = 0;
 
