@@ -72,7 +72,7 @@ namespace _3Sum
     [[0,0,0]]
 */
 
-            nums = new int[] { 0, 0, 0 };
+            nums = [0, 0, 0];
             expected = new List<IList<int>>();
             expected.Add(new List<int> { 0, 0, 0 });
             output = Solution.ThreeSum(nums);

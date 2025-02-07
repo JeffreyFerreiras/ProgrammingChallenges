@@ -4,7 +4,7 @@
     {
         private static readonly Random mRandom = new Random();
         private static readonly object mLock = new object();
-        private static int[] marbleValues = { RED_MARBLE, GREEN_MARBLE, BLUE_MARBLE, ORANGE_MARBLE };
+        private static int[] marbleValues = [RED_MARBLE, GREEN_MARBLE, BLUE_MARBLE, ORANGE_MARBLE];
 
         public const int RED_MARBLE = 1;
         public const int BLUE_MARBLE = 2;
@@ -72,7 +72,7 @@
             float blueProbability = blue / totalRatio;
             float orangeProbability = orange / totalRatio;
 
-            return new float[] { redProbability, greenProbability, blueProbability, orangeProbability };
+            return [redProbability, greenProbability, blueProbability, orangeProbability];
         }
 
         static int GetRandom(int min, int max)

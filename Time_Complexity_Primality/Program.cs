@@ -21,7 +21,7 @@ namespace Time_Complexity_Primality
 
         private static void Main(string[] args)
         {
-            int[] data = {
+            int[] data = [
                 30 ,
                 1  ,
                 4  ,
@@ -53,7 +53,7 @@ namespace Time_Complexity_Primality
                 784,
                 841,
                 907,
-            };
+            ];
 
             foreach(int n in data)
             {

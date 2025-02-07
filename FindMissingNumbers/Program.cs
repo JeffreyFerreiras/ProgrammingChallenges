@@ -21,12 +21,12 @@ namespace FindMissingNumbers
 
         private static void Case2()
         {
-            int[] numbers = { 1, 2, 4, 5 };
+            int[] numbers = [1, 2, 4, 5];
             int len = 5;
             int result = FindMissingNumber(numbers, len);
             bool passed = result == 3;
 
-            int[] numbers2 = { 1, 2, 4};
+            int[] numbers2 = [1, 2, 4];
             int[] result2 = FindTwoMissingNumbers(numbers2, len);
         }
 
@@ -78,12 +78,12 @@ namespace FindMissingNumbers
 
         private static void Case1()
         {
-            int[] numbers = { 1, 2, 0, 4, 5 };
+            int[] numbers = [1, 2, 0, 4, 5];
             int result = FindMissingNumber(numbers);
             bool passed = result == 3;
 
 
-            int[] numbers2 = { 1, 2, 0, 4, 0 };
+            int[] numbers2 = [1, 2, 0, 4, 0];
             int[] result2 = FindTwoMissingNumbers(numbers2);
         }
 

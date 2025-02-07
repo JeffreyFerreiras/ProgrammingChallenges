@@ -15,10 +15,10 @@
             //find maximum diff
         static void Main(string[] args)
         {
-            int[] stockPricesYesterday = { 10, 7, 5, 8, 11, 9 };
+            int[] stockPricesYesterday = [10, 7, 5, 8, 11, 9];
             double profit = GetMaxProfit(stockPricesYesterday);
 
-            int[] stockPricesYesterday2 = { 10, 7, 5, 4, 3, 2 };
+            int[] stockPricesYesterday2 = [10, 7, 5, 4, 3, 2];
             double profit2 = GetMaxProfit(stockPricesYesterday2);
 
             //display profit

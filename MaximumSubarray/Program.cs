@@ -47,7 +47,7 @@ Follow up: If you have figured out the O(n) solution, try coding another solutio
             Console.WriteLine($"result: {result} expected: {expected}");
 
             //[1]
-            nums = new int[] { 1 };
+            nums = [1];
             expected = 1;
             result = Solution.MaxSubArray(nums);
             Console.WriteLine($"result: {result} expected: {expected}");

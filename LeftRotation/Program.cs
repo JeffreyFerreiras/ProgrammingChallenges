@@ -6,8 +6,8 @@ namespace LeftRotation
     {
         static void Main(string[] args)
         {
-            int [] arr = { 1, 2, 3, 4, 5 };
-            int [] expected = { 2, 3, 4, 5, 1 };
+            int [] arr = [1, 2, 3, 4, 5];
+            int [] expected = [2, 3, 4, 5, 1];
 
             //ShiftLeft(arr, 2, arr.Length);
             RotateLeft(arr, 1);

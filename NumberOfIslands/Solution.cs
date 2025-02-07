@@ -1,13 +1,5 @@
 public class Solution
 {
-    private int[][] directions = new int[][]
-    {
-        new int[] { 0, 1 },
-        new int[] { 0, -1 },
-        new int[] { 1, 0 },
-        new int[] { -1, 0 }
-    };
-
     public int NumIslands(char[][] grid)
     {
         if (grid == null || grid.Length == 0) return 0;
@@ -23,7 +15,7 @@ public class Solution
                 if (grid[i][j] == '1')
                 {
                     islandCount++;
-                    ExploreIsland(grid, i, j);
+                    ExploreIslandDFS(grid, i, j);
                 }
             }
         }
@@ -31,12 +23,20 @@ public class Solution
         return islandCount;
     }
 
-    private void ExploreIsland(char[][] grid, int row, int col)
+    private void ExploreIslandBFS(char[][] grid, int row, int col)
     {
+        int[][] directions =
+        [
+            [0, 1],
+            [0, -1],
+            [1, 0],
+            [-1, 0]
+        ];
+
         var queue = new Queue<(int, int)>();
         queue.Enqueue((row, col));
 
-        while(queue.Count > 0)
+        while (queue.Count > 0)
         {
             var (direction_row, direction_col) = queue.Dequeue();
 
@@ -52,5 +52,20 @@ public class Solution
                 }
             }
         }
+    }
+
+    private void ExploreIslandDFS(char[][] grid, int row, int col)
+    {
+        if (row < 0 || row >= grid.Length || col < 0 || col >= grid[0].Length || grid[row][col] == '0')
+        {
+            return;
+        }
+
+        grid[row][col] = '0'; //mark 0 so its not visited again
+
+        ExploreIslandDFS(grid, row - 1, col);
+        ExploreIslandDFS(grid, row + 1, col);
+        ExploreIslandDFS(grid, row, col - 1);
+        ExploreIslandDFS(grid, row, col + 1);
     }
 }

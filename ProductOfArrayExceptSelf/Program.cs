@@ -12,8 +12,8 @@ Console.WriteLine($"result: {string.Join(",", result)} expected: {string.Join(",
 
 
 //[1,-1]
-input = new int[] { 1, -1 };
-expected = new int[] { -1, 1 };
+input = [1, -1];
+expected = [-1, 1];
 result = Solution.ProductExceptSelf(input);
 //print result
 Console.WriteLine($"result: {string.Join(",", result)} expected: {string.Join(",", expected)}");
@@ -21,8 +21,8 @@ Console.WriteLine($"result: {string.Join(",", result)} expected: {string.Join(",
 
 
 //[-1,1,0,-3,3]
-input = new int[] { -1, 1, 0, -3, 3 };
-expected = new int[] { 0, 0, 9, 0, 0 };
+input = [-1, 1, 0, -3, 3];
+expected = [0, 0, 9, 0, 0];
 result = Solution.ProductExceptSelf(input);
 //print result
 Console.WriteLine($"result: {string.Join(",", result)} expected: {string.Join(",", expected)}");

@@ -8,22 +8,22 @@
         {
             int[] expected;
 
-            int[] sample = { 1, 3, 2, 4 };
-            expected = new int[] { 1, 3, 2, 5 };
+            int[] sample = [1, 3, 2, 4];
+            expected = [1, 3, 2, 5];
             int[] result = AddOne(sample);
             Console.WriteLine("Expected: {0}, Result: {1}", string.Join(",", expected), string.Join(",", result));
 
 
-            int[] sample2 = { 5, 4, 8, 9 };
+            int[] sample2 = [5, 4, 8, 9];
             int[] result2 = AddOne(sample2);
 
-            int[] sample3 = { 9, 8, 9, 9 };
+            int[] sample3 = [9, 8, 9, 9];
             int[] result3 = AddOne(sample3);
 
-            int[] sample4 = { };
+            int[] sample4 = [];
             int[] result4 = AddOne(sample4);
 
-            int[] sample5 = { 9, 9, 9, 9 };
+            int[] sample5 = [9, 9, 9, 9];
             int[] result5 = AddOne(sample5);
         }
 

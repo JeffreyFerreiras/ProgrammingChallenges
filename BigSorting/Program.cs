@@ -19,7 +19,7 @@ namespace BigSorting
         static void Main(string[] args)
         {
             string[] input =
-            {
+            [
                 "6",
                 "31415926535897932384626433832795",
                 "1",
@@ -27,7 +27,7 @@ namespace BigSorting
                 "10",
                 "3",
                 "5"
-            };
+            ];
 
             Sort(input);
 
@@ -38,12 +38,12 @@ namespace BigSorting
 
 
             string[] input2 =
-            {
+            [
                 "200000",
                 "42969",
                 null,
                 ""
-            };
+            ];
 
             Sort(input2);
 
