@@ -3,85 +3,153 @@ using System;
 namespace KthLargestElement
 {
     /*
-     * Find the kth largest element in an unsorted array. 
-     * Note that it is the kth largest element in the sorted order, 
-     * not the kth distinct element.
-     * 
-     * Example 1:
-     * Input: [3,2,1,5,6,4] and k = 2
-     * Output: 5
-     * 
-     * Example 2:
-     * Input: [3,2,3,1,2,4,5,5,6] and k = 4
-     * Output: 4
-     * 
-     * Constraints:
-     * 1 <= k <= array length
-     * -104 <= array[i] <= 104
+     * This class finds the kth largest element in an unsorted array.
+     * It demonstrates two approaches:
+     * 1. Using QuickSelect for O(n) average time complexity.
+     * 2. A simple sort-based approach with O(n log n) time complexity.
      */
     class Program
     {
         static void Main(string[] args)
         {
-            var test1 = new int[] { 3, 2, 1, 5, 6, 4 };
-            var k1 = 2;
-            Console.WriteLine($"Test 1: {FindKthLargest(test1, k1)} (expected: 5)");
+            // Test case 1: Should output 5
+            var testArray1 = new int[] { 3, 2, 1, 5, 6, 4 };
+            int k1 = 2;
+            Console.WriteLine($"Test 1: {FindKthLargest(testArray1, k1)} (expected: 5)");
 
-            var test2 = new int[] { 3, 2, 3, 1, 2, 4, 5, 5, 6 };
-            var k2 = 4;
-            Console.WriteLine($"Test 2: {FindKthLargest(test2, k2)} (expected: 4)");
+            // Test case 2: Should output 4
+            var testArray2 = new int[] { 3, 2, 3, 1, 2, 4, 5, 5, 6 };
+            int k2 = 4;
+            Console.WriteLine($"Test 2: {FindKthLargest(testArray2, k2)} (expected: 4)");
         }
-
         public static int FindKthLargest(int[] nums, int k)
         {
-            // Using QuickSelect algorithm for O(n) average time complexity
-            return QuickSelect(nums, 0, nums.Length - 1, nums.Length - k);
-        }
+            var priorityQueue = new PriorityQueue<int, int>();
 
-        private static int QuickSelect(int[] nums, int left, int right, int k)
-        {
-            if (left == right) return nums[left];
-
-            int pivotIndex = Partition(nums, left, right);
-
-            if (k == pivotIndex)
-                return nums[k];
-            else if (k < pivotIndex)
-                return QuickSelect(nums, left, pivotIndex - 1, k);
-            else
-                return QuickSelect(nums, pivotIndex + 1, right, k);
-        }
-
-        private static int Partition(int[] nums, int left, int right)
-        {
-            int pivot = nums[right];
-            int i = left;
-
-            for (int j = left; j < right; j++)
+            for (var i = 0; i < nums.Length; i++)
             {
-                if (nums[j] <= pivot)
+                priorityQueue.Enqueue(nums[i], nums[i]);
+
+                if (priorityQueue.Count > k)
                 {
-                    Swap(nums, i, j);
-                    i++;
+                    priorityQueue.Dequeue();
                 }
             }
 
-            Swap(nums, i, right);
-            return i;
+            return priorityQueue.Peek();
+        }
+        // Finds the kth largest element using the QuickSelect algorithm.
+        // Converts kth largest to finding the (n-k)th smallest element.
+        public static int FindKthLargestQuickSelect(int[] numbers, int k)
+        {
+            // Convert kth largest to target index for kth smallest.
+            int targetIndex = numbers.Length - k;
+            // Use QuickSelect to find the kth smallest element.
+            return QuickSelect(numbers, 0, numbers.Length - 1, targetIndex);
         }
 
-        private static void Swap(int[] nums, int i, int j)
+        // QuickSelect recursively selects a pivot and partitions the array.
+        // It continues the search on one side of the pivot until the target element is found.
+        private static int QuickSelect(int[] numbers, int startIndex, int endIndex, int targetIndex)
         {
-            int temp = nums[i];
-            nums[i] = nums[j];
-            nums[j] = temp;
+            // If the list contains only one element, return it.
+            if (startIndex == endIndex) return numbers[startIndex];
+
+            // Partition returns the final index of the pivot.
+            int pivotFinalIndex = Partition(numbers, startIndex, endIndex);
+
+            // If the pivot is at the target index, we found our kth smallest (or kth largest) element.
+            if (targetIndex == pivotFinalIndex)
+                return numbers[targetIndex];
+            // If the target is in the left sub-array, search there.
+            else if (targetIndex < pivotFinalIndex)
+                return QuickSelect(numbers, startIndex, pivotFinalIndex - 1, targetIndex);
+            // Otherwise, search in the right sub-array.
+            else
+                return QuickSelect(numbers, pivotFinalIndex + 1, endIndex, targetIndex);
         }
 
-        // Simple solution using sorting - O(n log n)
-        public static int FindKthLargestSimple(int[] nums, int k)
+        // Partition reorders the array by placing values less than or equal to the pivot to its left,
+        // and values greater than the pivot to its right.
+        private static int Partition(int[] numbers, int start, int end)
         {
-            Array.Sort(nums);
-            return nums[nums.Length - k];
+            // Choose the rightmost element as the pivot.
+            int pivotValue = numbers[end];
+            // Index at which to store the next element that is less than or equal to pivot.
+            int storeIndex = start;
+
+            // Compare each element with the pivot.
+            for (int j = start; j < end; j++)
+            {
+                // If the current element is less than or equal to the pivot, swap it.
+                if (numbers[j] <= pivotValue)
+                {
+                    SwapElements(numbers, storeIndex, j);
+                    storeIndex++;
+                }
+            }
+
+            // Place the pivot element in its correct sorted position.
+            SwapElements(numbers, storeIndex, end);
+            return storeIndex;
+        }
+
+        // SwapElements exchanges the values of two elements in the array.
+        private static void SwapElements(int[] numbers, int index1, int index2)
+        {
+            int temp = numbers[index1];
+            numbers[index1] = numbers[index2];
+            numbers[index2] = temp;
+        }
+
+        // A simple solution using sorting.
+        // It sorts the array and then returns the kth largest element.
+        public static int FindKthLargestBySort(int[] numbers, int k)
+        {
+            Array.Sort(numbers);
+            return numbers[numbers.Length - k];
+        }
+
+        // A solution using a stack to keep track of the k largest elements.
+        // It iterates through the array and maintains a stack of the k largest elements.
+        public int FindKthLargestStack(int[] nums, int k)
+        {
+            //declare ranks
+            var ranks = new Stack<int>();
+
+            // loop through nums
+            for (int i = 0; i < nums.Length; i++)
+            {
+                int current = nums[i];
+
+                //for each num, find rank
+                if (ranks.Count > 0)
+                {
+                    var temp = new Stack<int>();
+
+                    while (ranks.Count > 0 && current > ranks.Peek())
+                    {
+                        temp.Push(ranks.Pop());
+                    }
+
+                    if (ranks.Count < k)
+                    {
+                        ranks.Push(current);
+                    }
+
+                    while (temp.Count > 0 && ranks.Count < k)
+                    {
+                        ranks.Push(temp.Pop());
+                    }
+                }
+                else
+                {
+                    ranks.Push(current);
+                }
+            }
+
+            //return kth item which is the lowest rank.
+            return ranks.Peek();
         }
     }
 }
