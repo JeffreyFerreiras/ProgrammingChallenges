@@ -4,32 +4,37 @@ namespace LongestPalindromicSubstring
 {
     public class Solution
     {
-        public string LongestPalindrome(string s)
+        public string LongestPalindrome(string inputString)
         {
-            if (string.IsNullOrEmpty(s)) return "";
-            int start = 0, end = 0;
-            for (int i = 0; i < s.Length; i++)
+            if (string.IsNullOrEmpty(inputString)) return ""; 
+            int startIndex = 0, endIndex = 0;
+
+            for (int i = 0; i < inputString.Length; i++)
             {
-                int len1 = ExpandAroundCenter(s, i, i);
-                int len2 = ExpandAroundCenter(s, i, i + 1);
-                int len = Math.Max(len1, len2);
-                if (len > end - start)
+                int oddLength = ExpandAroundCenter(inputString, i, i);
+                int evenLength = ExpandAroundCenter(inputString, i, i + 1);
+                int currentPalindromeLength = Math.Max(oddLength, evenLength);
+                if (currentPalindromeLength > endIndex - startIndex)
                 {
-                    start = i - (len - 1) / 2;
-                    end = i + len / 2;
+                    startIndex = i - (currentPalindromeLength - 1) / 2; // calculate start index
+                    endIndex = i + currentPalindromeLength / 2; // calculate end index
                 }
             }
-            return s.Substring(start, end - start + 1);
+            return inputString.Substring(startIndex, endIndex - startIndex + 1);
         }
 
-        private int ExpandAroundCenter(string s, int left, int right)
+        private int ExpandAroundCenter(string inputString, int leftIndex, int rightIndex)
         {
-            while (left >= 0 && right < s.Length && s[left] == s[right])
+            while (leftIndex >= 0 // leftIndex is within bounds
+            && rightIndex < inputString.Length // rightIndex is within bounds
+            && inputString[leftIndex] == inputString[rightIndex] // characters match
+            )
             {
-                left--;
-                right++;
+                leftIndex--;
+                rightIndex++;
             }
-            return right - left - 1;
+
+            return rightIndex - leftIndex - 1; // return the length of the palindrome
         }
     }
 }
