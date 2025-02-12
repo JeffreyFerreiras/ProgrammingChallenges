@@ -21,13 +21,34 @@ namespace AmazonEmployeeShift
         public int Skill { get; set; }
     }
 
-    public static class Solution
+    public class Solution
     {
         public Employee[] Employees { get; set; }
 
-        public static IEnumerable<Employee> GreedyAssignment(Task[] tasks)
+        public IEnumerable<Employee> GreedyAssignment(Task[] tasks)
         {
+            const int maxHours = 8;
+
+            var result = new List<Employee>();
             
+            //take only 8 hours worth of tasks
+            if(tasks.Sum(t => t.Hours) > maxHours)
+            {
+                throw new InvalidOperationException($"Tasks exceed {maxHours} hours");
+            }
+
+            //sort employees by skill
+            Employees = Employees.OrderBy(e => e.Skill).ToArray();
+
+            foreach (var task in tasks)
+            {
+                var employee = Employees.FirstOrDefault(e => e.Skill >= task.Skill)
+                    ?? throw new InvalidOperationException("No employee available for the task");
+
+                result.Add(employee);
+            }
+
+            return result;
         }
     }
 }
