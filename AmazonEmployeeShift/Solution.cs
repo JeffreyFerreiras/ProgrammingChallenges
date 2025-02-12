@@ -50,5 +50,53 @@ namespace AmazonEmployeeShift
 
             return result;
         }
+
+        // New method: OptimalAssignment assigns each task to a unique employee
+        public IEnumerable<Employee> OptimalAssignment(Task[] tasks)
+        {
+            const int maxHours = 8;
+            if (tasks.Sum(t => t.Hours) > maxHours)
+            {
+                throw new InvalidOperationException($"Tasks exceed {maxHours} hours");
+            }
+            
+            // Sort employees to try lower-skilled ones first
+            var sortedEmployees = Employees.OrderBy(e => e.Skill).ToArray();
+            int n = tasks.Length;
+            List<Employee> bestAssignment = null;
+            int bestCost = int.MaxValue;
+            
+            // Recursive DFS to try unique assignments
+            void DFS(int idx, List<Employee> currentAssignment, bool[] used, int currentCost)
+            {
+                if (idx == n)
+                {
+                    if (currentCost < bestCost)
+                    {
+                        bestCost = currentCost;
+                        bestAssignment = new List<Employee>(currentAssignment);
+                    }
+                    return;
+                }
+                foreach (var (employee, i) in sortedEmployees.Select((emp, i) => (emp, i)))
+                {
+                    if (!used[i] && employee.Skill >= tasks[idx].Skill)
+                    {
+                        used[i] = true;
+                        currentAssignment.Add(employee);
+                        DFS(idx + 1, currentAssignment, used, currentCost + (employee.Skill - tasks[idx].Skill));
+                        currentAssignment.RemoveAt(currentAssignment.Count - 1);
+                        used[i] = false;
+                    }
+                }
+            }
+            
+            DFS(0, new List<Employee>(), new bool[sortedEmployees.Length], 0);
+            if (bestAssignment == null)
+            {
+                throw new InvalidOperationException("No valid optimal assignment found");
+            }
+            return bestAssignment;
+        }
     }
 }
