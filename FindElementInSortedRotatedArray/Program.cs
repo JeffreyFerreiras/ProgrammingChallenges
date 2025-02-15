@@ -31,22 +31,29 @@ namespace FindElementInSortedRotatedArray
         
         static void Main(string[] args)
         {
-            //Test code.
-            int[] rotatedArry = { 3,4,5,1,2 };
-            int x = 4, left = 0, right = rotatedArry.Length -1;
-            int expectedIndex = 1; // Expected index for x = 4
+            RunStandardTests();
+            RunComparisonTests();
+        }
+        
+        // Extracted standard tests for BinarySearchRecursive
+        private static void RunStandardTests()
+        {
             Stopwatch sw = Stopwatch.StartNew();
-            int indexofX = BinarySearch(rotatedArry, left, right, x);
+            
+            // Test case 1
+            int[] rotatedArry = { 3, 4, 5, 1, 2 };
+            int x = 4, left = 0, right = rotatedArry.Length - 1;
+            int expectedIndex = 1;
+            int indexofX = BinarySearchRecursive(rotatedArry, left, right, x);
             sw.Stop();
-            bool isCorrect = indexofX == expectedIndex;
-            Console.WriteLine($"Array: [{string.Join(", ", rotatedArry)}], Target: {x}, Index: {indexofX}, Expected: {expectedIndex}, Time: {sw.Elapsed.TotalMilliseconds}ms, Correct: {isCorrect}");
-
+            Console.WriteLine($"Array: [{string.Join(", ", rotatedArry)}], Target: {x}, Index: {indexofX}, Expected: {expectedIndex}, Time: {sw.Elapsed.TotalMilliseconds}ms");
+            
             // Additional test cases
             int[] rotatedArry2 = { 4, 5, 6, 7, 0, 1, 2 };
             int x2 = 0;
             int expectedIndex2 = 4; // Expected index for x2 = 0
             sw.Restart();
-            int indexofX2 = BinarySearch(rotatedArry2, 0, rotatedArry2.Length - 1, x2);
+            int indexofX2 = BinarySearchRecursive(rotatedArry2, 0, rotatedArry2.Length - 1, x2);
             sw.Stop();
             bool isCorrect2 = indexofX2 == expectedIndex2;
             Console.WriteLine($"Array: [{string.Join(", ", rotatedArry2)}], Target: {x2}, Index: {indexofX2}, Expected: {expectedIndex2}, Time: {sw.Elapsed.TotalMilliseconds}ms, Correct: {isCorrect2}");
@@ -55,7 +62,7 @@ namespace FindElementInSortedRotatedArray
             int x3 = 1;
             int expectedIndex3 = 0; // Expected index for x3 = 1
             sw.Restart();
-            int indexofX3 = BinarySearch(rotatedArry3, 0, rotatedArry3.Length - 1, x3);
+            int indexofX3 = BinarySearchRecursive(rotatedArry3, 0, rotatedArry3.Length - 1, x3);
             sw.Stop();
             bool isCorrect3 = indexofX3 == expectedIndex3;
             Console.WriteLine($"Array: [{string.Join(", ", rotatedArry3)}], Target: {x3}, Index: {indexofX3}, Expected: {expectedIndex3}, Time: {sw.Elapsed.TotalMilliseconds}ms, Correct: {isCorrect3}");
@@ -64,7 +71,7 @@ namespace FindElementInSortedRotatedArray
             int x4 = 3;
             int expectedIndex4 = 1; // Expected index for x4 = 3
             sw.Restart();
-            int indexofX4 = BinarySearch(rotatedArry4, 0, rotatedArry4.Length - 1, x4);
+            int indexofX4 = BinarySearchRecursive(rotatedArry4, 0, rotatedArry4.Length - 1, x4);
             sw.Stop();
             bool isCorrect4 = indexofX4 == expectedIndex4;
             Console.WriteLine($"Array: [{string.Join(", ", rotatedArry4)}], Target: {x4}, Index: {indexofX4}, Expected: {expectedIndex4}, Time: {sw.Elapsed.TotalMilliseconds}ms, Correct: {isCorrect4}");
@@ -73,18 +80,22 @@ namespace FindElementInSortedRotatedArray
             int x5 = 5;
             int expectedIndex5 = 0; // Expected index for x5 = 5
             sw.Restart();
-            int indexofX5 = BinarySearch(rotatedArry5, 0, rotatedArry5.Length - 1, x5);
+            int indexofX5 = BinarySearchRecursive(rotatedArry5, 0, rotatedArry5.Length - 1, x5);
             sw.Stop();
             bool isCorrect5 = indexofX5 == expectedIndex5;
             Console.WriteLine($"Array: [{string.Join(", ", rotatedArry5)}], Target: {x5}, Index: {indexofX5}, Expected: {expectedIndex5}, Time: {sw.Elapsed.TotalMilliseconds}ms, Correct: {isCorrect5}");
-
-            // Compare BinarySearch vs ShiftedBinarySearch
+        }
+        
+        // Extracted comparison tests for all search methods
+        private static void RunComparisonTests()
+        {
+            Stopwatch sw = Stopwatch.StartNew();
             int[] comparisonArray = { 4, 5, 6, 7, 0, 1, 2 };
             int target = 0;
-
-            // Test BinarySearch
+            
+            // Test BinarySearchRecursive
             sw.Restart();
-            int binarySearchResult = BinarySearch(comparisonArray, 0, comparisonArray.Length - 1, target);
+            int binarySearchResult = BinarySearchRecursive(comparisonArray, 0, comparisonArray.Length - 1, target);
             sw.Stop();
             double binarySearchTime = sw.Elapsed.TotalMilliseconds;
             
@@ -93,15 +104,68 @@ namespace FindElementInSortedRotatedArray
             int shiftedSearchResult = ShiftedBinarySearch(comparisonArray, target);
             sw.Stop();
             double shiftedSearchTime = sw.Elapsed.TotalMilliseconds;
-
+            
+            // Test BinarySearchFindsSortedHalf
+            sw.Restart();
+            int findsSortedHalfResult = BinarySearchFindsSortedHalf(comparisonArray, target);
+            sw.Stop();
+            double findsSortedHalfTime = sw.Elapsed.TotalMilliseconds;
+            
             Console.WriteLine("\nComparison Test:");
             Console.WriteLine($"Array: [{string.Join(", ", comparisonArray)}], Target: {target}");
             Console.WriteLine($"BinarySearch - Index: {binarySearchResult}, Time: {binarySearchTime}ms");
             Console.WriteLine($"ShiftedBinarySearch - Index: {shiftedSearchResult}, Time: {shiftedSearchTime}ms");
-            Console.WriteLine($"Both correct: {binarySearchResult == expectedIndex2 && shiftedSearchResult == expectedIndex2}");
+            Console.WriteLine($"BinarySearchFindsSortedHalf - Index: {findsSortedHalfResult}, Time: {findsSortedHalfTime}ms");
+            Console.WriteLine($"Both BinarySearch and ShiftedBinarySearch correct: {binarySearchResult == shiftedSearchResult}");
         }
         
-        static int BinarySearch(int[] arry, int leftIndex, int rightIndex, int target)
+        static int BinarySearchFindsSortedHalf(int [] nums, int target)
+        {
+            if(nums == null || nums.Length == 0) return -1;
+
+            int left = 0, right = nums.Length - 1;
+
+            //find the index of the smallest element
+            while(left < right)
+            {
+                int mid = left + (right - left) / 2;
+                if(nums[mid] > nums[right])
+                {
+                    left = mid + 1;
+                }
+                else
+                {
+                    right = mid;
+                }
+            }
+
+            int start = left;
+            left = 0;
+            right = nums.Length - 1;
+
+            // if the target is in the right sorted half look there
+            if(target >= nums[start] && target <= nums[right])
+            {
+                left = start;
+            }
+            else // if the target is in the left sorted half look there
+            {
+                right = start;
+            }
+
+            // regular binary search
+            while(left <= right)
+            {
+                int mid = left + (right - left) / 2;
+                if(nums[mid] == target) return mid;
+                if(nums[mid] < target) left = mid + 1;
+                else right = mid - 1;
+            }
+
+            return -1;
+        }
+
+        static int BinarySearchRecursive(int[] arry, int leftIndex, int rightIndex, int target)
         {
             //SOLUTION - Lengthy solution, but the requirement stated "lowest possible complexity(both time and space)"
             //This solution is O(log N)
@@ -114,26 +178,26 @@ namespace FindElementInSortedRotatedArray
             if(arry[leftIndex] < arry[mid])
             {
                 if(target >= arry[leftIndex] && target < arry[mid]) 
-                    return BinarySearch(arry, leftIndex, mid - 1, target);
+                    return BinarySearchRecursive(arry, leftIndex, mid - 1, target);
                 else
-                    return BinarySearch(arry, mid + 1, rightIndex, target);
+                    return BinarySearchRecursive(arry, mid + 1, rightIndex, target);
             }
             else if(arry[leftIndex] > arry[mid])
             {
                 if(target > arry[mid] && target < arry[rightIndex])
-                    return BinarySearch(arry, mid + 1, rightIndex, target);
+                    return BinarySearchRecursive(arry, mid + 1, rightIndex, target);
                 else
-                    return BinarySearch(arry, leftIndex, mid - 1, target);
+                    return BinarySearchRecursive(arry, leftIndex, mid - 1, target);
             }
             else if (arry[leftIndex] == arry[mid])
             {
                 if(arry[mid] != arry[rightIndex])
-                    return BinarySearch(arry, mid + 1, rightIndex, target);
+                    return BinarySearchRecursive(arry, mid + 1, rightIndex, target);
                 else
                 {
-                    int result = BinarySearch(arry, leftIndex, mid -1, target);
+                    int result = BinarySearchRecursive(arry, leftIndex, mid -1, target);
                     if(result == -1)
-                        return BinarySearch(arry, mid + 1, rightIndex, target); 
+                        return BinarySearchRecursive(arry, mid + 1, rightIndex, target); 
                     else
                         return result;
                 }
@@ -141,7 +205,7 @@ namespace FindElementInSortedRotatedArray
             return -1;
         }
         
-        public static int ShiftedBinarySearch(int[] nums, int target)
+        static int ShiftedBinarySearch(int[] nums, int target)
         {
             int n = nums.Length, left = 0, right = n - 1;
 
