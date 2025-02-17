@@ -161,6 +161,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmazonEmployeeShift", "Amaz
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecodeWays", "DecodeWays\DecodeWays.csproj", "{B2DA2FA3-8A00-487E-9A33-89DF77B43019}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LongestValidParentheses", "LongestValidParentheses\LongestValidParentheses.csproj", "{E5D8432F-01B5-4D2C-A3B0-A6142F85AE77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -483,6 +485,10 @@ Global
 		{B2DA2FA3-8A00-487E-9A33-89DF77B43019}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2DA2FA3-8A00-487E-9A33-89DF77B43019}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2DA2FA3-8A00-487E-9A33-89DF77B43019}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5D8432F-01B5-4D2C-A3B0-A6142F85AE77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5D8432F-01B5-4D2C-A3B0-A6142F85AE77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5D8432F-01B5-4D2C-A3B0-A6142F85AE77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5D8432F-01B5-4D2C-A3B0-A6142F85AE77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
