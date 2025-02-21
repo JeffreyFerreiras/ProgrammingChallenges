@@ -2,7 +2,7 @@
 public class NumMatrix2
 {
     private readonly int[][] _matrix;
-    private readonly Dictionary<string, int> _memo = new();
+    private readonly Dictionary<string, int> _memo = [];
 
     public NumMatrix2 (int[][] matrix)
     {

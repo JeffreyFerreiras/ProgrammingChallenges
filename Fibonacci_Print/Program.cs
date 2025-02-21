@@ -36,7 +36,7 @@ namespace Fibonacci_Print
 
             num = 30;
             cache = null;
-            cache = new Dictionary<int, int>();
+            cache = [];
             Console.WriteLine($"\n----  Test with {num} input  ----\n");
             FibMethodRunStats(BasicFib, num);
             FibMethodRunStats(MemoizedFib, num);
@@ -66,7 +66,7 @@ namespace Fibonacci_Print
             return BasicFib(current - 1) + BasicFib(current - 2);
         }
 
-        private static Dictionary<int, int> cache = new Dictionary<int, int>();
+        private static Dictionary<int, int> cache = [];
 
         private static int MemoizedFib(int current)
         {

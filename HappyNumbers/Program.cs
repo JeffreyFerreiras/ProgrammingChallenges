@@ -30,7 +30,7 @@ Here's why 22 is NOT a happy number:
          */
     class Program
     {
-        static List<int> s_cache = new List<int>();
+        static List<int> s_cache = [];
 
         public static void Main(string[] args)
         {

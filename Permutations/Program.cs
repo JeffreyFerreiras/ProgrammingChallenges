@@ -35,7 +35,7 @@ namespace Permutations
         {
             var collector = new List<IList<int>>();
 
-            Permute(new List<int>(), nums.ToList(), collector);
+            Permute([], nums.ToList(), collector);
 
             return collector;
         }

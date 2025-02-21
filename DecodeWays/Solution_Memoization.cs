@@ -1,7 +1,7 @@
 public class Solution_Memoization
 {
     // Dictionary to store computed results for subproblems (memoization)
-    private Dictionary<int, int> memo = new();
+    private Dictionary<int, int> memo = [];
 
     public int NumDecodings(string s)
     {

@@ -81,8 +81,10 @@ public class Solution
 
     public bool CheckSubarraySum2(int[] nums, int k)
     {
-        Dictionary<int, int> remainderDict = new Dictionary<int, int>();
-        remainderDict[0] = -1;
+        Dictionary<int, int> remainderDict = new Dictionary<int, int>
+        {
+            [0] = -1
+        };
         int runningSum = 0;
 
         for (int i = 0; i < nums.Length; i++)

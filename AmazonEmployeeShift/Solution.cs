@@ -74,7 +74,7 @@ namespace AmazonEmployeeShift
                     if (currentCost < bestCost)
                     {
                         bestCost = currentCost;
-                        bestAssignment = new List<Employee>(currentAssignment);
+                        bestAssignment = [.. currentAssignment];
                     }
                     return;
                 }
@@ -91,7 +91,7 @@ namespace AmazonEmployeeShift
                 }
             }
             
-            DFS(0, new List<Employee>(), new bool[sortedEmployees.Length], 0);
+            DFS(0, [], new bool[sortedEmployees.Length], 0);
             if (bestAssignment == null)
             {
                 throw new InvalidOperationException("No valid optimal assignment found");

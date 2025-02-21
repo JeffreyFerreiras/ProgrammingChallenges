@@ -53,7 +53,7 @@ public class Solution
             result.Add([]);
         }
 
-        result[level] ??= new List<int>(); //create a list for each level
+        result[level] ??= []; //create a list for each level
         result[level].Add(node.val);
         Console.WriteLine(node.val);
         Traverse(node.left, result, level + 1);

@@ -16,7 +16,7 @@ namespace ShuffleDeckOfCards
 
         public Deck()
         {
-            Cards = new List<Card>();
+            Cards = [];
 
             foreach(CardFace enumValue in typeof(CardFace).GetEnumValues())
             {

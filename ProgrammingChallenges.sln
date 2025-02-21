@@ -169,6 +169,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MergeKSortedLists", "MergeK
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckSubarraySum", "CheckSubarraySum\CheckSubarraySum.csproj", "{F495F630-E3B8-4F8E-8C71-7754D71D6A84}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Permutations_II", "Permutations_II\Permutations_II.csproj", "{662C38EA-5E22-4AAD-A7D9-B7DDB5EEAAF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -507,6 +509,10 @@ Global
 		{F495F630-E3B8-4F8E-8C71-7754D71D6A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F495F630-E3B8-4F8E-8C71-7754D71D6A84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F495F630-E3B8-4F8E-8C71-7754D71D6A84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{662C38EA-5E22-4AAD-A7D9-B7DDB5EEAAF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{662C38EA-5E22-4AAD-A7D9-B7DDB5EEAAF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{662C38EA-5E22-4AAD-A7D9-B7DDB5EEAAF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{662C38EA-5E22-4AAD-A7D9-B7DDB5EEAAF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
