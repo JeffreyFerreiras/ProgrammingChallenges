@@ -1,6 +1,6 @@
 ﻿namespace Permutations_II;
 
-public class Solution
+public class Solution2
 {
     // _result stores all unique permutations found.
     private IList<IList<int>> _result = [];
@@ -52,5 +52,48 @@ public class Solution
                 }
             }
         }        
+    }
+}
+public class Solution
+{
+    public IList<IList<int>> PermuteUnique(int[] nums)
+    {
+        List<IList<int>> asccumulator = new();
+        Dictionary<int, int> counter = new();
+        List<int> perm = new();
+
+        foreach (var num in nums)
+        {
+            if (!counter.TryAdd(num, 1))
+                counter[num] += 1;
+        }
+
+        Permute();
+
+        return asccumulator;
+
+        void Permute()
+        {
+            if (nums.Length == perm.Count)
+            {
+                asccumulator.Add(perm.ToArray());
+            }
+            else
+            {
+                foreach(var num in counter.Keys)
+                {
+                    if (counter[num] == 0)
+                        continue;
+
+                    perm.Add(num); 
+                    counter[num]--;
+
+                    Permute();
+
+                    perm.RemoveAt(perm.Count - 1);
+                    counter[num]++;
+                }
+            }
+        }
     }
 }
