@@ -20,12 +20,12 @@ public class Solution
 
     public IList<string> LetterCombinations(string digits)
     {
-        if (string.IsNullOrEmpty(digits)) return new List<string>();
-        List<string> result = new();
+        if (string.IsNullOrEmpty(digits)) return [];
+        List<string> result = [];
 
         Backtrack(new StringBuilder(digits.Length), 0);
 
-        return result.ToList();
+        return [.. result];
 
         void Backtrack(StringBuilder prefix, int index)
         {
