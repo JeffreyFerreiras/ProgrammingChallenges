@@ -38,7 +38,7 @@ namespace AmazonEmployeeShift
             }
 
             //sort employees by skill
-            Employees = Employees.OrderBy(e => e.Skill).ToArray();
+            Employees = [.. Employees.OrderBy(e => e.Skill)];
 
             foreach (var task in tasks)
             {

@@ -52,7 +52,7 @@ namespace ContainsDuplicate
     {
         private readonly Solution solution = new();
         private static readonly Random rand = new(420);
-        int[] ints = Enumerable.Range(0, 100).Select(x => rand.Next(0, 100)).ToArray();
+        int[] ints = [.. Enumerable.Range(0, 100).Select(x => rand.Next(0, 100))];
 		//int[] ints1 = Enumerable.Range(0, 10).Select(x => rand.Next(0, 10000)).ToArray();
 		//int[] ints2 = Enumerable.Range(0, 15).Select(x => rand.Next(0, 50)).ToArray();
 		public IEnumerable<int[]> Data()

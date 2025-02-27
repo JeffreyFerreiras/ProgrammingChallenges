@@ -15,14 +15,14 @@ string? leetcodeInput = @"
 [1, 2, 3, 4, 5, 6]
 ";
 
-int[][]? tests = leetcodeInput
+int[][]? tests = [.. leetcodeInput
         .Trim()
         .Split(Environment.NewLine)
         .Select(sample =>
         {
             string[]? arrStr = sample.TrimStart('[').TrimEnd(']').Split(',');
             return arrStr.Select(num => int.Parse(num.Trim())).ToArray();
-        }).ToArray();
+        })];
 
 foreach (int[]? test in tests)
 {

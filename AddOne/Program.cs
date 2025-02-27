@@ -50,7 +50,7 @@
                 result.Push(carry);
             }
 
-            return result.ToArray();
+            return [.. result];
         }
 
         static int[] AddOneX(int[] sample)

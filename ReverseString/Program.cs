@@ -81,12 +81,12 @@ namespace ReverseString
             {
                 stack.Push(c);
             }
-            return new string(stack.ToArray());
+            return new string([.. stack]);
         }
 
         private static string ReverseWithArry(string toReverse)
         {
-            char[] chararry = toReverse.ToArray();
+            char[] chararry = [.. toReverse];
             Array.Reverse(chararry);
             return new string(chararry);
         }

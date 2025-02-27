@@ -23,7 +23,7 @@ public class Solution2
         if (perm.Count == nums.Length)
         {
             // Add a copy of the complete permutation to _result.
-            _result.Add(perm.ToList());
+            _result.Add([.. perm]);
         }
         else
         {

@@ -78,7 +78,7 @@ class Program
         return head;
     }
     
-    static string LinkedListToString(ListNode node)
+    static string LinkedListToString(ListNode? node)
     {
         if (node == null)
             return "null";
@@ -89,7 +89,7 @@ class Program
             sb.Append(node.val);
             if (node.next != null)
                 sb.Append("->");
-            node = node.next;
+            node = node?.next;
         }
         return sb.ToString();
     }

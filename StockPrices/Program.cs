@@ -23,7 +23,7 @@
 
             //display profit
             Random rand = new Random();
-            Console.WriteLine(GetMaxProfit2(Enumerable.Range(0, 1500).Select(i=> rand.Next()).ToArray()));
+            Console.WriteLine(GetMaxProfit2([.. Enumerable.Range(0, 1500).Select(i=> rand.Next())]));
             Console.WriteLine(GetMaxProfit(stockPricesYesterday));
         }
 
