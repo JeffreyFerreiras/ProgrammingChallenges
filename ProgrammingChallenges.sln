@@ -49,7 +49,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortArrays", "SortArrays\So
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mini-Max Sum", "Mini-Max Sum\Mini-Max Sum.csproj", "{093529A7-0F03-4C34-83AE-868795EB3678}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Birthday Cake Candles", "Birthday Cake Candles\Birthday Cake Candles.csproj", "{D8A01DF5-7048-4751-9545-A8C7C9FC7B79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirthdayCakeCandles", "Birthday Cake Candles\BirthdayCakeCandles.csproj", "{D8A01DF5-7048-4751-9545-A8C7C9FC7B79}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradingStudents", "GradingStudents\GradingStudents.csproj", "{0FD975F8-5302-48CC-8629-EE50476F7479}"
 EndProject
@@ -180,6 +180,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NQueens", "NQueens\NQueens.csproj", "{8DE7FE48-9E23-4BDD-B26D-15F1AE37CC50}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PalindromePartitioning", "PalindromePartitioning\PalindromePartitioning.csproj", "{9C44E54C-AE25-45B8-9880-B1E7CA83CEF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryTree_InvertBinaryTree", "BinaryTree_InvertBinaryTree\BinaryTree_InvertBinaryTree.csproj", "{E89E7AF5-5CC5-49CB-98A2-892FB82452CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryTree_MaximumDepthofBinaryTree", "BinaryTree_MaximumDepthofBinaryTree\BinaryTree_MaximumDepthofBinaryTree.csproj", "{6C7D7734-9AF1-4663-A079-D06D57BA93B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1259,6 +1263,30 @@ Global
 		{9C44E54C-AE25-45B8-9880-B1E7CA83CEF0}.Release|x64.Build.0 = Release|Any CPU
 		{9C44E54C-AE25-45B8-9880-B1E7CA83CEF0}.Release|x86.ActiveCfg = Release|Any CPU
 		{9C44E54C-AE25-45B8-9880-B1E7CA83CEF0}.Release|x86.Build.0 = Release|Any CPU
+		{E89E7AF5-5CC5-49CB-98A2-892FB82452CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E89E7AF5-5CC5-49CB-98A2-892FB82452CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E89E7AF5-5CC5-49CB-98A2-892FB82452CB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E89E7AF5-5CC5-49CB-98A2-892FB82452CB}.Debug|x64.Build.0 = Debug|Any CPU
+		{E89E7AF5-5CC5-49CB-98A2-892FB82452CB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E89E7AF5-5CC5-49CB-98A2-892FB82452CB}.Debug|x86.Build.0 = Debug|Any CPU
+		{E89E7AF5-5CC5-49CB-98A2-892FB82452CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E89E7AF5-5CC5-49CB-98A2-892FB82452CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E89E7AF5-5CC5-49CB-98A2-892FB82452CB}.Release|x64.ActiveCfg = Release|Any CPU
+		{E89E7AF5-5CC5-49CB-98A2-892FB82452CB}.Release|x64.Build.0 = Release|Any CPU
+		{E89E7AF5-5CC5-49CB-98A2-892FB82452CB}.Release|x86.ActiveCfg = Release|Any CPU
+		{E89E7AF5-5CC5-49CB-98A2-892FB82452CB}.Release|x86.Build.0 = Release|Any CPU
+		{6C7D7734-9AF1-4663-A079-D06D57BA93B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C7D7734-9AF1-4663-A079-D06D57BA93B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C7D7734-9AF1-4663-A079-D06D57BA93B8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6C7D7734-9AF1-4663-A079-D06D57BA93B8}.Debug|x64.Build.0 = Debug|Any CPU
+		{6C7D7734-9AF1-4663-A079-D06D57BA93B8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6C7D7734-9AF1-4663-A079-D06D57BA93B8}.Debug|x86.Build.0 = Debug|Any CPU
+		{6C7D7734-9AF1-4663-A079-D06D57BA93B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C7D7734-9AF1-4663-A079-D06D57BA93B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C7D7734-9AF1-4663-A079-D06D57BA93B8}.Release|x64.ActiveCfg = Release|Any CPU
+		{6C7D7734-9AF1-4663-A079-D06D57BA93B8}.Release|x64.Build.0 = Release|Any CPU
+		{6C7D7734-9AF1-4663-A079-D06D57BA93B8}.Release|x86.ActiveCfg = Release|Any CPU
+		{6C7D7734-9AF1-4663-A079-D06D57BA93B8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
