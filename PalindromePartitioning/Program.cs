@@ -29,7 +29,9 @@ class Program
         {
             { "aab", new List<IList<string>> { new List<string> { "a", "a", "b" }, new List<string> { "aa", "b" } } },
             { "a", new List<IList<string>> { new List<string> { "a" } } },
-            { "bb", new List<IList<string>> { new List<string> { "b", "b" }, new List<string> { "bb" } } }
+            { "bb", new List<IList<string>> { new List<string> { "b", "b" }, new List<string> { "bb" } } },
+            // Adding a longer test case to better demonstrate the performance difference
+            { "aabbbaccccdd", null } // We're only interested in performance for this one
         };
         
         foreach (var testCase in testCases)
@@ -37,18 +39,37 @@ class Program
             var input = testCase.Key;
             var expected = testCase.Value;
             
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            
-            var result = solution.Partition(input);
-            
-            stopwatch.Stop();
-            
-            Console.WriteLine($"Method: Partition");
             Console.WriteLine($"Input: \"{input}\"");
-            Console.WriteLine($"Time: {stopwatch.ElapsedTicks} ticks");
-            Console.WriteLine($"Result: {FormatResult(result)}");
-            Console.WriteLine($"Expected: {FormatResult(expected)}");
+            
+            // Test original method
+            Stopwatch stopwatch1 = new Stopwatch();
+            stopwatch1.Start();
+            var result1 = solution.Partition(input);
+            stopwatch1.Stop();
+            
+            Console.WriteLine($"Original Method:");
+            Console.WriteLine($"Time: {stopwatch1.ElapsedTicks} ticks");
+            
+            // Test optimized method
+            Stopwatch stopwatch2 = new Stopwatch();
+            stopwatch2.Start();
+            var result2 = solution.PartitionOptimized(input);
+            stopwatch2.Stop();
+            
+            Console.WriteLine($"Optimized Method:");
+            Console.WriteLine($"Time: {stopwatch2.ElapsedTicks} ticks");
+            Console.WriteLine($"Performance improvement: {(stopwatch1.ElapsedTicks / (double)stopwatch2.ElapsedTicks):F2}x");
+            
+            // For shorter strings, validate the results match
+            if (expected != null)
+            {
+                Console.WriteLine($"Result: {FormatResult(result2)}");
+                Console.WriteLine($"Expected: {FormatResult(expected)}");
+            }
+            else
+            {
+                Console.WriteLine($"Partitions found: {result2.Count}");
+            }
             Console.WriteLine();
         }
     }
