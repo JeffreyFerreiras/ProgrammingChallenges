@@ -76,7 +76,7 @@ public class Solution
         {
             if (nums.Length == perm.Count)
             {
-                asccumulator.Add(perm.ToArray());
+                asccumulator.Add([.. perm]);
             }
             else
             {

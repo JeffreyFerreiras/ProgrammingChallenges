@@ -9,7 +9,7 @@ namespace CheckPermutations
     {
         public static string QuickSorter(this string str)
         {
-            char[] sorterArry = str.ToArray();
+            char[] sorterArry = [.. str];
 
             QuickSorter(sorterArry, 0, sorterArry.Length - 1);
 

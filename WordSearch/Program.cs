@@ -120,7 +120,7 @@ class Program
         stopwatch1.Stop();
         
         // Create a deep copy of the board for the second solution
-        char[][] boardCopy = test.Board.Select(row => row.ToArray()).ToArray();
+        char[][] boardCopy = [.. test.Board.Select(row => row.ToArray())];
         
         // Test second solution
         Stopwatch stopwatch2 = new Stopwatch();

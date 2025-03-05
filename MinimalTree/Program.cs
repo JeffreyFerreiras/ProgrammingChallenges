@@ -27,7 +27,7 @@ namespace MinimalTree
                 data[i] = s_random.Next(0, 101);
             }
 
-            data = data.Distinct().ToArray();
+            data = [.. data.Distinct()];
             Array.Sort(data);
 
             var stopWatch = Stopwatch.StartNew();

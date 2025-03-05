@@ -44,7 +44,7 @@ namespace Permutations
         {
             if (!remaining.Any())
             {
-                collector.Add(prefix.ToArray());
+                collector.Add([.. prefix]);
             }
             else
             {

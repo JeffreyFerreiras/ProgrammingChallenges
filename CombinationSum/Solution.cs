@@ -15,7 +15,7 @@ public class Solution
             // base case
             if (comb.Count > 0 && currentTarget == 0)
             { // if 0 is reached then its a valid combination
-                result.Add(comb.ToArray());
+                result.Add([.. comb]);
             }
             else if (currentTarget > 0)
             {
