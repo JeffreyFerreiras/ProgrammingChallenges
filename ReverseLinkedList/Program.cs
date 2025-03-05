@@ -1,4 +1,8 @@
-﻿namespace ReverseLinkedList
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+
+namespace ReverseLinkedList
 {
     class Program
     {
@@ -8,36 +12,43 @@
 
         static void Main(string[] args)
         {
-            LinkedList<string> linked = new LinkedList<string>();
+            // .NET LinkedList reversal scenario
+            var list = new LinkedList<string>();
+            list.AddLast("one");
+            list.AddLast("two");
+            list.AddLast("three");
+            var expectedLinked = new List<string> { "three", "two", "one" };
+            var sw = Stopwatch.StartNew();
+            list.ReverseLinkedList(); // assumed extension method
+            sw.Stop();
+            Console.WriteLine($"Method: LinkedList.ReverseLinkedList, Time: {sw.ElapsedTicks} ticks, Result: {string.Join(',', list)}, Expected: {string.Join(',', expectedLinked)}");
 
-            linked.AddLast("one");
-            linked.AddLast("two");
-            linked.AddLast("three");
-
-            linked.ReverseLinkedList();
-
-
+            // Node iterative reversal scenario
             var testNode = PopulateTestCase();
-            
-            Console.WriteLine("before:\n");
+            sw.Restart();
+            var reversedIterative = ReverseLinkedList(testNode);
+            sw.Stop();
+            Console.WriteLine($"Method: ReverseLinkedList (iterative), Time: {sw.ElapsedTicks} ticks, Result: {GetValues(reversedIterative)}, Expected: 3,2,1");
 
-            Print(testNode);
-
-            testNode = ReverseLinkedList(testNode);
-
-            Console.WriteLine("after\n");
-
-            Print(testNode);
-
-            Console.WriteLine("recursive\n");
-            Console.WriteLine("before:\n");
-            
+            // Node recursive reversal scenario
             testNode = PopulateTestCase();
-            Print(testNode);
+            sw.Restart();
+            var reversedRecursive = ReverseLinkedListRecursive(testNode);
+            sw.Stop();
+            Console.WriteLine($"Method: ReverseLinkedListRecursive (recursive), Time: {sw.ElapsedTicks} ticks, Result: {GetValues(reversedRecursive)}, Expected: 3,2,1");
 
-            Console.WriteLine("after\n");
-            Print(ReverseLinkedListRecursive(testNode));
             Console.ReadLine();
+        }
+
+        private static string GetValues(Node node)
+        {
+            var values = new List<string>();
+            while (node != null)
+            {
+                values.Add(node.Value.ToString());
+                node = node.Next;
+            }
+            return string.Join(",", values);
         }
 
         private static void Print(Node testNode)
@@ -51,17 +62,11 @@
 
         private static Node PopulateTestCase()
         {
-            var random = new Random();
-            var node = new Node(5);
-            var root = node;
-
-            for (int i = 0; i < 2; i++)
-            {
-                node.Next = new Node(random.Next(100));
-                node = node.Next;
-            }
-
-            return root;
+            // Changed: using fixed test case values for consistency.
+            var node = new Node(1);
+            node.Next = new Node(2);
+            node.Next.Next = new Node(3);
+            return node;
         }
 
         private static Node ReverseLinkedListRecursive(Node root)
