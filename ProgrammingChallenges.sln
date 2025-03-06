@@ -185,6 +185,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryTree_InvertBinaryTree
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryTree_MaximumDepthofBinaryTree", "BinaryTree_MaximumDepthofBinaryTree\BinaryTree_MaximumDepthofBinaryTree.csproj", "{6C7D7734-9AF1-4663-A079-D06D57BA93B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloneGraph", "CloneGraph\CloneGraph.csproj", "{DF073207-7785-4C05-8A7E-22E08C6073F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1287,6 +1289,18 @@ Global
 		{6C7D7734-9AF1-4663-A079-D06D57BA93B8}.Release|x64.Build.0 = Release|Any CPU
 		{6C7D7734-9AF1-4663-A079-D06D57BA93B8}.Release|x86.ActiveCfg = Release|Any CPU
 		{6C7D7734-9AF1-4663-A079-D06D57BA93B8}.Release|x86.Build.0 = Release|Any CPU
+		{DF073207-7785-4C05-8A7E-22E08C6073F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF073207-7785-4C05-8A7E-22E08C6073F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF073207-7785-4C05-8A7E-22E08C6073F9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DF073207-7785-4C05-8A7E-22E08C6073F9}.Debug|x64.Build.0 = Debug|Any CPU
+		{DF073207-7785-4C05-8A7E-22E08C6073F9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DF073207-7785-4C05-8A7E-22E08C6073F9}.Debug|x86.Build.0 = Debug|Any CPU
+		{DF073207-7785-4C05-8A7E-22E08C6073F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF073207-7785-4C05-8A7E-22E08C6073F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF073207-7785-4C05-8A7E-22E08C6073F9}.Release|x64.ActiveCfg = Release|Any CPU
+		{DF073207-7785-4C05-8A7E-22E08C6073F9}.Release|x64.Build.0 = Release|Any CPU
+		{DF073207-7785-4C05-8A7E-22E08C6073F9}.Release|x86.ActiveCfg = Release|Any CPU
+		{DF073207-7785-4C05-8A7E-22E08C6073F9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
