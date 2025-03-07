@@ -34,9 +34,9 @@ namespace BinaryTreeLevelOrderTraversal
                 new TreeNode(2, new TreeNode(4), new TreeNode(5)),
                 new TreeNode(3, new TreeNode(6), new TreeNode(7)));
             IList<IList<int>> expectedBalanced = [
-                    new List<int> { 1 },
-                    new List<int> { 2, 3 },
-                    new List<int> { 4, 5, 6, 7 }
+                    [1],
+                    [2, 3],
+                    [4, 5, 6, 7]
                 ];
             ExecuteTestCase(solution, balancedRoot, "Balanced Tree with 7 nodes", expectedBalanced);
 
@@ -49,10 +49,10 @@ namespace BinaryTreeLevelOrderTraversal
                     null),
                 null);
             IList<IList<int>> expectedUnbalanced = [
-                    new List<int> { 1 },
-                    new List<int> { 2 },
-                    new List<int> { 4 },
-                    new List<int> { 5 }
+                    [1],
+                    [2],
+                    [4],
+                    [5]
                 ];
             ExecuteTestCase(solution, unbalancedRoot, "Unbalanced Tree with 5 nodes", expectedUnbalanced);
 

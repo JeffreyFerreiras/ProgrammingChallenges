@@ -70,7 +70,7 @@ namespace ProgrammingChallenges
         static string SerializeTree(TreeNode root)
         {
             if (root == null) return "[]";
-            List<string> result = new List<string>();
+            List<string> result = [];
             Queue<TreeNode> queue = new Queue<TreeNode>();
             queue.Enqueue(root);
             while(queue.Count > 0)

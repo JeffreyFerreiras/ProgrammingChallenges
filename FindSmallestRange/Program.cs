@@ -21,9 +21,9 @@ namespace FindSmallestRange
     {
         private static void Main(string[] args)
         {
-            List<int> sample = new List<int> { 4, 10, 15, 24, 26 };
-            List<int> sample2 = new List<int> { 0, 9, 12, 20 };
-            List<int> sample3 = new List<int> { 5, 18, 22, 30 };
+            List<int> sample = [4, 10, 15, 24, 26];
+            List<int> sample2 = [0, 9, 12, 20];
+            List<int> sample3 = [5, 18, 22, 30];
 
             int[] range = SmallestRange(sample, sample2, sample3);
         }

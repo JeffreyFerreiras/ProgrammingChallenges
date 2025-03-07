@@ -58,9 +58,9 @@ public class Solution
 {
     public IList<IList<int>> PermuteUnique(int[] nums)
     {
-        List<IList<int>> asccumulator = new();
-        Dictionary<int, int> counter = new();
-        List<int> perm = new();
+        List<IList<int>> asccumulator = [];
+        Dictionary<int, int> counter = [];
+        List<int> perm = [];
 
         foreach (var num in nums)
         {

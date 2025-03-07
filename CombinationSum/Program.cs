@@ -30,20 +30,20 @@ namespace CombinationSum
             Console.WriteLine("Leetcode 39. Combination Sum");
             Console.WriteLine("----------------------------");
 
-            RunTestCase(new int[] { 2, 3, 6, 7 }, 7, new List<IList<int>> 
-            { 
+            RunTestCase(new int[] { 2, 3, 6, 7 }, 7,
+            [
                 new List<int> { 2, 2, 3 }, 
                 new List<int> { 7 } 
-            });
+            ]);
 
-            RunTestCase(new int[] { 2, 3, 5 }, 8, new List<IList<int>> 
-            { 
+            RunTestCase(new int[] { 2, 3, 5 }, 8,
+            [
                 new List<int> { 2, 2, 2, 2 }, 
                 new List<int> { 2, 3, 3 }, 
                 new List<int> { 3, 5 } 
-            });
+            ]);
 
-            RunTestCase(new int[] { 2 }, 1, new List<IList<int>> { });
+            RunTestCase(new int[] { 2 }, 1, []);
         }
 
         private static void RunTestCase(int[] candidates, int target, IList<IList<int>> expected)

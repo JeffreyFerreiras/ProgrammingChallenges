@@ -7,7 +7,7 @@ public class Solution
     {
         //[2,3,6,7]
         List<IList<int>> result = new(target);
-        Combinations(new List<int>(), target, 0);
+        Combinations([], target, 0);
         return result;
 
         void Combinations(List<int> comb, int currentTarget, int index)

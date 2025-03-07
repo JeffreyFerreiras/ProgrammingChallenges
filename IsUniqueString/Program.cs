@@ -33,7 +33,7 @@ namespace IsUniqueString
             //SOLUTION - HashSet
             if (str.Length > 128) return false;
 
-            HashSet<char> set = new HashSet<char>(str);
+            HashSet<char> set = [.. str];
 
             return set.Count == str.Length;
         }
