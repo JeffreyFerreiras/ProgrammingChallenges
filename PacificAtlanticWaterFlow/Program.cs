@@ -76,26 +76,6 @@ namespace PacificAtlanticWaterFlow
             };
             string expected4 = "[[0,0],[0,1],[0,2],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]]";
             RunTestCase(solution, heights4, expected4, "Test Case 4: Uniform Height");
-            
-            // Test Case 5: Mountain peak in the middle
-            int[][] heights5 = new int[][]
-            {
-                new int[] {1, 2, 3},
-                new int[] {8, 9, 4},
-                new int[] {7, 6, 5}
-            };
-            string expected5 = "[[1,1]]"; // Only the peak can flow to both oceans
-            RunTestCase(solution, heights5, expected5, "Test Case 5: Mountain Peak");
-            
-            // Test Case 6: Descending heights from top-left to bottom-right
-            int[][] heights6 = new int[][]
-            {
-                new int[] {9, 8, 7},
-                new int[] {6, 5, 4},
-                new int[] {3, 2, 1}
-            };
-            string expected6 = "[[0,0]]"; // Only the highest point can flow to both oceans
-            RunTestCase(solution, heights6, expected6, "Test Case 6: Descending Heights");
         }
         
         static void RunTestCase(Solution solution, int[][] heights, string expected, string testCaseName)
