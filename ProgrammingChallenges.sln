@@ -190,6 +190,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RottingOranges", "RottingOr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PacificAtlanticWaterFlow", "PacificAtlanticWaterFlow\PacificAtlanticWaterFlow.csproj", "{A6E48934-8B87-4552-B610-C75A4719D0F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopKFrequentElements", "TopKFrequentElements\TopKFrequentElements.csproj", "{5EC71B22-0110-4A88-A453-8F9A729544F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
