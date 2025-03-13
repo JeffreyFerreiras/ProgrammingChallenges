@@ -119,6 +119,7 @@ namespace _3Sum
     public class Solution
     {
         // correct 3Sum solution
+        // n ^ 2 solution
         public static IList<IList<int>> ThreeSum(int[] nums)
         {
             IList<IList<int>> output = [];
@@ -154,6 +155,8 @@ namespace _3Sum
 
             return output;
         }
+
+        // n ^ 2 solution
         public static IList<IList<int>> ThreeSumX(int[] nums)
         {
             var result = new List<IList<int>>();

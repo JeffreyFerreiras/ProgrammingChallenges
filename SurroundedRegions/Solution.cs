@@ -30,53 +30,43 @@ namespace SurroundedRegions
     {
         public void Solve(char[][] board)
         {
-            int rowLower = 0, colLower = 0;
-            int rowUpper = board.Length - 1, colUpper = board[0].Length - 1;
-            for (int i = 1; i <= rowUpper; i++)
+            if (board == null || board.Length == 0) return;
+
+            int rows = board.Length;
+            int cols = board[0].Length;
+
+            // Mark 'O's connected to border with temporary marker
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 1; j <= colUpper; j++)
+                if (board[i][0] == 'O') DfsMarkSafe(board, i, 0);
+                if (board[i][cols - 1] == 'O') DfsMarkSafe(board, i, cols - 1);
+            }
+
+            for (int j = 0; j < cols; j++)
+            {
+                if (board[0][j] == 'O') DfsMarkSafe(board, 0, j);
+                if (board[rows - 1][j] == 'O') DfsMarkSafe(board, rows - 1, j);
+            }
+
+            // Convert remaining 'O's to 'X' and restore temporary markers
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
                 {
-                    if (board[i][j] == 'O')
-                        Dfs(i, j);
+                    if (board[i][j] == 'O') board[i][j] = 'X';
+                    else if (board[i][j] == 'T') board[i][j] = 'O';
                 }
             }
 
-            for (int i = 1; i <= rowUpper; i++)
+            void DfsMarkSafe(char[][] board, int i, int j)
             {
-                for (int j = 1; j <= colUpper; j++)
-                {
-                    if (board[i][j] == 'J')
-                        board[i][j] = 'O';
-                }
-            }
+                if (i < 0 || i >= rows || j < 0 || j >= cols || board[i][j] != 'O') return;
 
-            bool Dfs(int row, int col)
-            {
-                if (row <= rowLower || col <= colLower
-                || row >= rowUpper || col >= colUpper
-                || board[row][col] == 'X')
-                {
-                    return false;
-                }
-
-                if (row - 1 == rowLower && board[rowLower][col] == 'O'
-                || row + 1 == rowUpper && board[rowUpper][col] == 'O'
-                || col - 1 == colLower && board[row][colLower] == 'O'
-                || col + 1 == colLower && board[row][colUpper] == 'O')
-                {
-                    return true;
-                }
-
-                board[row][col] = 'X';
-
-                bool escaped = Dfs(row + 1, col)
-                || Dfs(row - 1, col)
-                || Dfs(row, col + 1)
-                || Dfs(row, col - 1);
-
-                if (escaped)
-                    board[row][col] = 'J';
-                return escaped;
+                board[i][j] = 'T'; // Temporary marker
+                DfsMarkSafe(board, i + 1, j);
+                DfsMarkSafe(board, i - 1, j);
+                DfsMarkSafe(board, i, j + 1);
+                DfsMarkSafe(board, i, j - 1);
             }
         }
     }
