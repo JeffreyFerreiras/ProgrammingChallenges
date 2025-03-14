@@ -194,6 +194,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopKFrequentElements", "Top
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurroundedRegions", "SurroundedRegions\SurroundedRegions.csproj", "{B510AFD4-7F0C-4C97-B243-1C899B8CDF55}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseSchedule", "CourseSchedule\CourseSchedule.csproj", "{A6217516-FA9F-43D0-A7F1-6985D0C31BC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
