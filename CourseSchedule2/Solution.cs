@@ -11,12 +11,14 @@ public class Solution
         HashSet<int> cycle = [];
 
         //build adjacency list
+        for (int i = 0; i < numCourses; i++)
+        {
+            adj[i] = [];
+        }
+
         foreach (var pair in prerequisites)
         {
-            if (!adj.TryAdd(pair[0], [pair[1]]))
-            {
-                adj[pair[0]] = [pair[1]];
-            }
+            adj[pair[0]].Add(pair[1]);
         }
 
         //DFS each course
@@ -37,14 +39,11 @@ public class Solution
 
             cycle.Add(course);
 
-            if (adj.ContainsKey(course))
+            foreach (int pre in adj[course])
             {
-                foreach (int pre in adj[course])
+                if (!Dfs(pre))
                 {
-                    if (!Dfs(pre))
-                    {
-                        return false;
-                    }
+                    return false;
                 }
             }
 
