@@ -113,6 +113,25 @@ class RefinedSolution
             }
         }
         return priorityQueue.Count > 0 ? priorityQueue.Peek() : -1; // O(1)
+
+
+        // foreach (var elem in arr)
+        // {
+        //     if (priorityQueue.Count >= k)
+        //     {
+        //         var high = priorityQueue.Peek();
+        //         if (elem > high)
+        //         {
+        //             priorityQueue.Enqueue(elem, elem);
+        //             priorityQueue.Dequeue();
+        //         }
+        //     }
+        //     else
+        //     {
+        //         priorityQueue.Enqueue(elem, elem); // nlogn
+        //     }
+        // }
+        // return priorityQueue.Peek();
     }
 
     public Dictionary<int, int[]> Clone(Dictionary<int, int[]> input)
