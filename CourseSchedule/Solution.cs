@@ -37,7 +37,7 @@ public class Solution
         HashSet<int> visited = new(prerequisites.Length);
 
         for (int i = 0; i < numCourses; i++)
-            adj.Add(i, new List<int>());
+            adj.Add(i, []);
 
         foreach (int[] courses in prerequisites)
             adj[courses[0]].Add(courses[1]);
@@ -54,6 +54,7 @@ public class Solution
         {
             if (visited.Contains(course)) return false;
             if (adj[course].Count == 0) return true;
+            
             visited.Add(course);
 
             foreach (int n in adj[course])
