@@ -103,35 +103,35 @@ class RefinedSolution
         // n * log (size of queue) = n * log (k)
         var priorityQueue = new PriorityQueue<int, int>(); // O(1)
 
-        foreach (var elem in arr) // O(n)
-        {
-            priorityQueue.Enqueue(elem, elem); // nlogk
-
-            if(priorityQueue.Count > Math.Max(k,1)) // O(1)
-            {
-                priorityQueue.Dequeue(); // O(logk)
-            }
-        }
-        return priorityQueue.Count > 0 ? priorityQueue.Peek() : -1; // O(1)
-
-
-        // foreach (var elem in arr)
+        // foreach (var elem in arr) // O(n)
         // {
-        //     if (priorityQueue.Count >= k)
+        //     priorityQueue.Enqueue(elem, elem); // nlogk
+
+        //     if(priorityQueue.Count > Math.Max(k,1)) // O(1)
         //     {
-        //         var high = priorityQueue.Peek();
-        //         if (elem > high)
-        //         {
-        //             priorityQueue.Enqueue(elem, elem);
-        //             priorityQueue.Dequeue();
-        //         }
-        //     }
-        //     else
-        //     {
-        //         priorityQueue.Enqueue(elem, elem); // nlogn
+        //         priorityQueue.Dequeue(); // O(logk)
         //     }
         // }
-        // return priorityQueue.Peek();
+        // return priorityQueue.Count > 0 ? priorityQueue.Peek() : -1; // O(1)
+
+
+        foreach (var elem in arr)
+        {
+            if (priorityQueue.Count >= k)
+            {
+                var high = priorityQueue.Peek();
+                if (elem > high)
+                {
+                    priorityQueue.Enqueue(elem, elem);
+                    priorityQueue.Dequeue();
+                }
+            }
+            else
+            {
+                priorityQueue.Enqueue(elem, elem); // nlogn
+            }
+        }
+        return priorityQueue.Peek();
     }
 
     public Dictionary<int, int[]> Clone(Dictionary<int, int[]> input)
