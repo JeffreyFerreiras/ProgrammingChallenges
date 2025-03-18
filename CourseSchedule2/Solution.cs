@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 public class Solution
 {
-    public int[] FindOrder(int numCourses, int[][] prerequisites)
+    public int[] FindOrderAdjDfs(int numCourses, int[][] prerequisites)
     {
         List<int> result = [];
         Dictionary<int, List<int>> adj = [];
@@ -30,7 +31,7 @@ public class Solution
             }
         }
 
-        return result.ToArray();
+        return [.. result];
 
         bool Dfs(int course)
         {
@@ -56,112 +57,95 @@ public class Solution
     }
 
     // DFS-based topological sort approach
-    public int[] FindOrderDFS(int numCourses, int[][] prerequisites)
+    public int[] FindOrderTopologicalDFS(int numCourses, int[][] prerequisites)
     {
-        // Build adjacency list
-        List<int>[] adj = new List<int>[numCourses];
+        List<int> output = []; // List to store the topological order
+        List<List<int>> adj = []; // Adjacency list to represent the graph
         for (int i = 0; i < numCourses; i++)
         {
-            adj[i] = new List<int>();
+            adj.Add([]); // Initialize the adjacency list for each course
         }
-        
-        foreach (var prereq in prerequisites)
+        var indegree = new int[numCourses]; // Array to store the in-degree of each course
+        foreach (var pre in prerequisites)
         {
-            adj[prereq[1]].Add(prereq[0]); // prereq[1] -> prereq[0]
+            indegree[pre[0]]++; // Increment the in-degree of the course that has a prerequisite
+            adj[pre[1]].Add(pre[0]); // Add the prerequisite to the adjacency list of the course
         }
-        
-        // 0 = not visited, 1 = visiting (in current path), 2 = visited
-        int[] visited = new int[numCourses];
-        List<int> result = new List<int>();
-        
-        for (int i = 0; i < numCourses; i++)
-        {
-            if (visited[i] == 0)
-            {
-                if (HasCycleDFS(i, adj, visited, result))
-                {
-                    return new int[0]; // Cycle found, impossible to finish
-                }
-            }
-        }
-        
-        result.Reverse(); // Reverse to get correct order
-        return result.ToArray();
-    }
-    
-    private bool HasCycleDFS(int node, List<int>[] adj, int[] visited, List<int> result)
-    {
-        visited[node] = 1; // Mark as visiting
-        
-        foreach (var neighbor in adj[node])
-        {
-            if (visited[neighbor] == 1) return true; // Cycle detected
-            
-            if (visited[neighbor] == 0)
-            {
-                if (HasCycleDFS(neighbor, adj, visited, result))
-                {
-                    return true;
-                }
-            }
-        }
-        
-        visited[node] = 2; // Mark as visited
-        result.Add(node);
-        return false;
-    }
-    
-    // BFS-based topological sort approach (Kahn's algorithm)
-    public int[] FindOrderBFS(int numCourses, int[][] prerequisites)
-    {
-        // Build adjacency list and indegree array
-        List<int>[] adj = new List<int>[numCourses];
-        int[] indegree = new int[numCourses];
-        
-        for (int i = 0; i < numCourses; i++)
-        {
-            adj[i] = new List<int>();
-        }
-        
-        foreach (var prereq in prerequisites)
-        {
-            adj[prereq[1]].Add(prereq[0]);
-            indegree[prereq[0]]++;
-        }
-        
-        // Add all nodes with indegree 0 to queue
-        Queue<int> queue = new Queue<int>();
+
         for (int i = 0; i < numCourses; i++)
         {
             if (indegree[i] == 0)
             {
-                queue.Enqueue(i);
+                Dfs(i); // Start DFS from courses with in-degree 0
             }
         }
-        
-        int[] result = new int[numCourses];
-        int index = 0;
-        
-        // Process queue
-        while (queue.Count > 0)
+
+        if (output.Count != numCourses) return []; // If not all courses are visited, there is a cycle
+        return [.. output]; // Return the topological order
+
+        // DFS function to traverse the graph
+        void Dfs(int node)
         {
-            int current = queue.Dequeue();
-            result[index++] = current;
-            
-            foreach (var neighbor in adj[current])
+            output.Add(node); // Add the current node to the topological order
+            indegree[node]--; // Decrement the in-degree of the current node
+            foreach (var nei in adj[node])
             {
-                indegree[neighbor]--;
-                if (indegree[neighbor] == 0)
+                indegree[nei]--; // Decrement the in-degree of the neighbor
+                if (indegree[nei] == 0)
                 {
-                    queue.Enqueue(neighbor);
+                    Dfs(nei); // Recursively call DFS on the neighbor if its in-degree becomes 0
                 }
             }
         }
-        
-        // If we couldn't include all courses, there must be a cycle
-        if (index == numCourses)
-            return result;
-        
-        return new int[0];
+    }
+
+    // BFS-based topological sort approach (Kahn's algorithm)
+    public int[] FindOrderTopologicalBFS(int numCourses, int[][] prerequisites)
+    {
+        // Create an adjacency list to represent the graph
+        List<List<int>> adj = [];
+        for(int i = 0; i < numCourses; i++){
+            adj.Add([]); // Initialize each course with an empty list of prerequisites
+        }
+
+        // Create an array to store the in-degrees of each course
+        int[] indegrees = new int[numCourses];
+
+        // Populate the adjacency list and in-degree array based on the prerequisites
+        foreach (var pre in prerequisites) {
+            indegrees[pre[1]]++; // Increment the in-degree of the course that has a prerequisite
+            adj[pre[0]].Add(pre[1]); // Add the prerequisite to the adjacency list of the course
+        }
+
+        // Create a queue to store courses with in-degree of 0
+        Queue<int> queue = [];
+        for (int i = 0; i < numCourses; i++) {
+            if(indegrees[i] == 0) {
+                queue.Enqueue(i); // Add courses with no prerequisites to the queue
+            }
+        }
+
+        // Initialize variables for tracking the number of finished courses and the result array
+        int finish = 0;
+        int [] result = new int[numCourses];
+        // Process courses in the queue until it's empty
+        while(queue.Count > 0) {
+            var node = queue.Dequeue(); // Dequeue a course from the queue
+            result[numCourses - finish - 1] = node; // Add the course to the result array
+            finish++; // Increment the number of finished courses
+            // Iterate through the neighbors (prerequisites) of the current course
+            foreach(var neighbor in adj[node]){
+                indegrees[neighbor]--; // Decrement the in-degree of the neighbor
+                if(indegrees[neighbor] == 0) {
+                    queue.Enqueue(neighbor); // If the in-degree becomes 0, add it to the queue
+                }
+            }
+        }
+        // If not all courses have been finished, there is a cycle, so return an empty array
+        if(finish != numCourses) {
+            return [];
+        }
+        // Return the topological order of the courses
+        return result;
     }
 }

@@ -38,36 +38,52 @@ Explanation: It is impossible to finish all courses.
         Solution solution = new Solution();
 
         // Test cases
-        RunTestCase(solution, 2, new int[][] { new int[] { 1, 0 } }, new int[] { 0, 1 });
-        RunTestCase(solution, 4, new int[][] { new int[] { 1, 0 }, new int[] { 2, 0 }, new int[] { 3, 1 }, new int[] { 3, 2 } }, new int[] { 0, 2, 1, 3 });
-        RunTestCase(solution, 1, new int[][] { }, new int[] { 0 });
-        RunTestCase(solution, 2, new int[][] { new int[] { 1, 0 }, new int[] { 0, 1 } }, new int[] { });
-        RunTestCase(solution, 3, new int[][] { new int[] { 1, 0 }, new int[] { 2, 1 } }, new int[] { 0, 1, 2 });
+        RunTestCase(solution, 2, [[1, 0]], [0, 1]);
+        RunTestCase(solution, 4, [[1, 0], [2, 0], [3, 1], [3, 2]], [0, 2, 1, 3]);
+        RunTestCase(solution, 1, [], [0]);
+        RunTestCase(solution, 2, [[1, 0], [0, 1]], []);
+        RunTestCase(solution, 3, [[1, 0], [2, 1]], [0, 1, 2]);
     }
 
     static void RunTestCase(Solution solution, int numCourses, int[][] prerequisites, int[] expected)
     {
-        Console.WriteLine($"Test Case: numCourses = {numCourses}, prerequisites = {GetPrerequisitesString(prerequisites)}");
+        Console.WriteLine($"Test Case: numCourses = {numCourses}, prerequisites = {GetPrerequisitesString(prerequisites)} => Expected: {GetArrayString(expected)}");
         
+        // Run DFS algorithm and report results
+        RunAlgorithm(
+            "DFS", 
+            () => solution.FindOrderTopologicalDFS(numCourses, prerequisites), 
+            expected
+        );
+        
+        // Run BFS algorithm and report results
+        RunAlgorithm(
+            "BFS (Kahn's algorithm)", 
+            () => solution.FindOrderTopologicalBFS(numCourses, prerequisites), 
+            expected
+        );
+
+        // Run Adj algorithm and report results
+        RunAlgorithm(
+            "Adj List",
+            () => solution.FindOrderAdjDfs(numCourses, prerequisites),
+            expected
+        );
+        
+        Console.WriteLine(new string('-', 50));
+    }
+    
+    static void RunAlgorithm(string algorithmName, Func<int[]> algorithmFunction, int[] expected)
+    {
         Stopwatch sw = new Stopwatch();
-        
-        // Run solution using DFS approach
         sw.Start();
-        int[] resultDFS = solution.FindOrderDFS(numCourses, prerequisites);
+        int[] result = algorithmFunction();
         sw.Stop();
-        Console.WriteLine($"FindOrderDFS: {sw.ElapsedTicks} ticks");
-        Console.WriteLine($"Result: `{GetArrayString(resultDFS)}`");
+        
+        Console.WriteLine($"Find Order {algorithmName}: {sw.ElapsedTicks} ticks");
+        Console.WriteLine($"Result: `{GetArrayString(result)}`");
         Console.WriteLine($"Expected: `{GetArrayString(expected)}`");
         Console.WriteLine();
-        
-        // Run solution using BFS approach (Kahn's algorithm)
-        sw.Restart();
-        int[] resultBFS = solution.FindOrderBFS(numCourses, prerequisites);
-        sw.Stop();
-        Console.WriteLine($"FindOrderBFS: {sw.ElapsedTicks} ticks");
-        Console.WriteLine($"Result: `{GetArrayString(resultBFS)}`");
-        Console.WriteLine($"Expected: `{GetArrayString(expected)}`");
-        Console.WriteLine(new string('-', 50));
     }
 
     static string GetArrayString(int[] array)
