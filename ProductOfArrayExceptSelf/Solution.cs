@@ -13,6 +13,49 @@
             }
             return result;
         }
+        public static int[] ProductExceptSelf_2025(int[] nums)
+        {
+
+            int[] products = new int[nums.Length];
+            int[] result = new int[nums.Length];
+            int zeros = 0;
+            products[0] = nums[0];
+
+            for (int i = 1; i < nums.Length; i++)
+            {
+                if (nums[i] == 0)
+                {
+                    zeros++;
+                }
+
+                if (zeros > 1)
+                {
+                    return new int[nums.Length];
+                }
+
+                products[i] = products[i - 1] * nums[i];
+            }
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+
+                if (nums[i] == 0)
+                {
+                    result[i] = i > 0 ? products[i - 1] : 1;
+                    int j = i + 1;
+                    while (j < nums.Length)
+                    {
+                        result[i] *= nums[j++];
+                    }
+
+                    continue;
+                }
+
+                result[i] = products[nums.Length - 1] / nums[i];
+            }
+
+            return result;
+        }
         public static int[] ProductExceptSelf_Arrays(int[] nums)
         {
             int[] result = new int[nums.Length];
@@ -41,6 +84,7 @@
 
         /// <summary>
         /// Official LeetCode solution
+        /// JF 3/2025 - forgot about this! nice solution.
         /// </summary>
         public static int[] ProductExceptSelf_Official(int[] nums)
         {
