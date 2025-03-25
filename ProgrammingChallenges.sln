@@ -201,6 +201,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meta_March_2025", "Meta_Mar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseSchedule2", "CourseSchedule2\CourseSchedule2.csproj", "{403A7330-37D9-4864-A094-B2DC48404D92}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IslandTreasure", "IslandTreasure\IslandTreasure.csproj", "{50ED3B2E-9E13-4B1E-BDB7-A892DB5E5FDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1363,6 +1365,18 @@ Global
 		{403A7330-37D9-4864-A094-B2DC48404D92}.Release|x64.Build.0 = Release|Any CPU
 		{403A7330-37D9-4864-A094-B2DC48404D92}.Release|x86.ActiveCfg = Release|Any CPU
 		{403A7330-37D9-4864-A094-B2DC48404D92}.Release|x86.Build.0 = Release|Any CPU
+		{50ED3B2E-9E13-4B1E-BDB7-A892DB5E5FDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50ED3B2E-9E13-4B1E-BDB7-A892DB5E5FDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50ED3B2E-9E13-4B1E-BDB7-A892DB5E5FDA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{50ED3B2E-9E13-4B1E-BDB7-A892DB5E5FDA}.Debug|x64.Build.0 = Debug|Any CPU
+		{50ED3B2E-9E13-4B1E-BDB7-A892DB5E5FDA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{50ED3B2E-9E13-4B1E-BDB7-A892DB5E5FDA}.Debug|x86.Build.0 = Debug|Any CPU
+		{50ED3B2E-9E13-4B1E-BDB7-A892DB5E5FDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50ED3B2E-9E13-4B1E-BDB7-A892DB5E5FDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50ED3B2E-9E13-4B1E-BDB7-A892DB5E5FDA}.Release|x64.ActiveCfg = Release|Any CPU
+		{50ED3B2E-9E13-4B1E-BDB7-A892DB5E5FDA}.Release|x64.Build.0 = Release|Any CPU
+		{50ED3B2E-9E13-4B1E-BDB7-A892DB5E5FDA}.Release|x86.ActiveCfg = Release|Any CPU
+		{50ED3B2E-9E13-4B1E-BDB7-A892DB5E5FDA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
