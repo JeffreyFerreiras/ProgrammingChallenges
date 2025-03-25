@@ -15,11 +15,9 @@
         }
         public static int[] ProductExceptSelf_2025(int[] nums)
         {
-
-            int[] products = new int[nums.Length];
             int[] result = new int[nums.Length];
             int zeros = 0;
-            products[0] = nums[0];
+            result[0] = nums[0];
 
             for (int i = 1; i < nums.Length; i++)
             {
@@ -33,15 +31,14 @@
                     return new int[nums.Length];
                 }
 
-                products[i] = products[i - 1] * nums[i];
+                result[i] = result[i - 1] * nums[i];
             }
-
+            int prev = 0;
             for (int i = 0; i < nums.Length; i++)
             {
-
-                if (nums[i] == 0)
-                {
-                    result[i] = i > 0 ? products[i - 1] : 1;
+                if (nums[i] == 0) // there will only be 1 0
+                { 
+                    result[i] = i > 0 ? prev : 1;
                     int j = i + 1;
                     while (j < nums.Length)
                     {
@@ -51,11 +48,53 @@
                     continue;
                 }
 
-                result[i] = products[nums.Length - 1] / nums[i];
+                prev = result[i];
+                result[i] = result[nums.Length - 1] / nums[i];
             }
 
             return result;
         }
+
+        public static int[] ProductExceptSelf_2025_Clean(int[] nums)
+        {
+            int length = nums.Length;
+            int[] result = new int[length];
+
+            // Count zeros and calculate product of all non-zero elements
+            int zeroCount = 0;
+            int productNonZero = 1;
+
+            foreach (int num in nums)
+            {
+                if (num == 0)
+                    zeroCount++;
+                else
+                    productNonZero *= num;
+            }
+
+            // If more than one zero, all products will be zero
+            if (zeroCount > 1)
+                return new int[length]; // Returns array filled with zeros
+
+            // If exactly one zero, only the element at the zero position will have a non-zero value
+            if (zeroCount == 1)
+            {
+                for (int i = 0; i < length; i++)
+                {
+                    result[i] = nums[i] == 0 ? productNonZero : 0;
+                }
+                return result;
+            }
+
+            // No zeros - each result is product of all divided by current element
+            for (int i = 0; i < length; i++)
+            {
+                result[i] = productNonZero / nums[i];
+            }
+
+            return result;
+        }
+        
         public static int[] ProductExceptSelf_Arrays(int[] nums)
         {
             int[] result = new int[nums.Length];
