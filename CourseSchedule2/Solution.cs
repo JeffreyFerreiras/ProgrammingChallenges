@@ -5,7 +5,7 @@ public class Solution
     public int[] FindOrderAdjDfs(int numCourses, int[][] prerequisites)
     {
         List<int> result = [];
-        Dictionary<int, List<int>> adj = [];
+        Dictionary<int, List<int>> adj = new (numCourses);
         HashSet<int> visited = [];
         HashSet<int> cycle = [];
 
