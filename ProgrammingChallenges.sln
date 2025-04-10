@@ -211,6 +211,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LongestConsecutiveSequence"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncodeDecodeString", "EncodeDecodeString\EncodeDecodeString.csproj", "{BC3DB8B8-F8FE-4169-A76D-65050A0CFC84}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedundantConnection", "RedundantConnection\RedundantConnection.csproj", "{2D8547A9-9AD3-45D9-BAD8-10538BA4373E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1433,6 +1435,18 @@ Global
 		{BC3DB8B8-F8FE-4169-A76D-65050A0CFC84}.Release|x64.Build.0 = Release|Any CPU
 		{BC3DB8B8-F8FE-4169-A76D-65050A0CFC84}.Release|x86.ActiveCfg = Release|Any CPU
 		{BC3DB8B8-F8FE-4169-A76D-65050A0CFC84}.Release|x86.Build.0 = Release|Any CPU
+		{2D8547A9-9AD3-45D9-BAD8-10538BA4373E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D8547A9-9AD3-45D9-BAD8-10538BA4373E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D8547A9-9AD3-45D9-BAD8-10538BA4373E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2D8547A9-9AD3-45D9-BAD8-10538BA4373E}.Debug|x64.Build.0 = Debug|Any CPU
+		{2D8547A9-9AD3-45D9-BAD8-10538BA4373E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2D8547A9-9AD3-45D9-BAD8-10538BA4373E}.Debug|x86.Build.0 = Debug|Any CPU
+		{2D8547A9-9AD3-45D9-BAD8-10538BA4373E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D8547A9-9AD3-45D9-BAD8-10538BA4373E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D8547A9-9AD3-45D9-BAD8-10538BA4373E}.Release|x64.ActiveCfg = Release|Any CPU
+		{2D8547A9-9AD3-45D9-BAD8-10538BA4373E}.Release|x64.Build.0 = Release|Any CPU
+		{2D8547A9-9AD3-45D9-BAD8-10538BA4373E}.Release|x86.ActiveCfg = Release|Any CPU
+		{2D8547A9-9AD3-45D9-BAD8-10538BA4373E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
