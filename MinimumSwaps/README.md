@@ -1,44 +1,53 @@
-# Minimum Swaps to Group All 1's Together
+# Minimum Swaps
 
 ## Problem Description
-The task is to find the minimum number of swaps required to group all 1's together in a binary array. Given an array consisting of only 0's and 1's, the goal is to rearrange the elements such that all 1's are contiguous, using the least number of swaps.
+Calculate the minimum number of swaps required to group all 1's together in a binary array (an array containing only 0s and 1s).
 
-### Example
-For the input array:
+## Examples:
 ```
-[0, 1, 0, 1, 0, 1]
-```
-The output should be `1`, as we can swap the first `0` with the last `1` to group all `1's` together.
+Example 1 (Simple case):
+Input: [1, 0, 1, 0, 1]
+Output: 1
+Explanation: We can move one of the 1s to create [1, 1, 1, 0, 0]
 
-## Optimal Solution Overview
-The optimal solution involves counting the total number of `1's` in the array and then using a sliding window approach to determine the minimum number of `0's` in any window of size equal to the count of `1's`. The number of swaps required will be equal to the number of `0's` in that window.
+Example 2 (Already grouped):
+Input: [1, 1, 1, 0, 0]
+Output: 0
+Explanation: All 1s are already grouped together, so no swaps are needed.
 
-### Steps
-1. Count the total number of `1's` in the array.
-2. Use a sliding window of size equal to the count of `1's` to find the minimum number of `0's` in that window.
-3. The result will be the minimum number of `0's` found, which corresponds to the minimum swaps needed.
+Example 3 (Worst case):
+Input: [1, 0, 1, 0, 1, 0]
+Output: 2
+Explanation: We need 2 swaps to get all 1s together.
 
-## Usage Instructions
-1. Clone the repository.
-2. Navigate to the project directory.
-3. Build the project using the command:
-   ```
-   dotnet build
-   ```
-4. Run the application using the command:
-   ```
-   dotnet run
-   ```
-5. Input the binary array when prompted.
+Example 4 (All zeros or ones):
+Input: [0, 0, 0, 0]
+Output: 0
+Explanation: No 1s to group, so no swaps needed.
 
-## Example Usage
-Input:
-```
-[0, 1, 0, 1, 0, 1]
-```
-Output:
-```
-Minimum swaps required: 1
+Input: [1, 1, 1, 1]
+Output: 0
+Explanation: All 1s are already grouped together.
 ```
 
-This project provides a clear and efficient solution to the problem of grouping all `1's` together in a binary array with minimal swaps.
+## Solution Approach
+The solution uses a sliding window technique to find the minimum number of swaps:
+
+1. Count the total number of 1s in the array
+2. Use a sliding window of size equal to the count of 1s
+3. For each possible position of the window:
+   - Count how many 0s are inside the window
+   - These 0s need to be swapped with 1s outside the window
+   - Track the minimum count of swaps needed across all window positions
+4. Return the minimum number of swaps found
+
+This approach:
+- Time Complexity: O(n) where n is the length of the array
+- Space Complexity: O(1) as it only needs a few variables
+
+The implementation includes:
+- Comprehensive test cases covering different scenarios
+- Performance measurement using a Stopwatch
+- An interactive mode allowing users to enter their own binary arrays for testing
+
+This problem is a good example of using the sliding window technique to optimize an otherwise O(n²) solution to O(n).

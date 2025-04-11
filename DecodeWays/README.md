@@ -1,39 +1,53 @@
-# Decode Ways Coding Challenge
+# 91. Decode Ways
 
-This challenge is focused on decoding a numeric message into possible letter combinations.
-
-## Overview
-- Given an encoded message containing digits, determine the total number of ways to decode it.
-- The decoding follows a mapping where 'A' -> 1, 'B' -> 2, ..., 'Z' -> 26.
-- Handle cases with leading zeros appropriately.
-
-## Challenge Description
-You have intercepted a secret message encoded as a string of numbers. The message is decoded via the following mapping:
-
-- "1" -> 'A'
-- "2" -> 'B'
+## Problem Description
+A message containing letters from A-Z can be encoded into numbers using the following mapping:
+- 'A' -> "1"
+- 'B' -> "2"
 - ...
-- "26" -> 'Z'
+- 'Z' -> "26"
 
-However, while decoding the message, note that there are several ways to decode it because some codes are contained in other codes (e.g., "2" and "5" vs "25"). For example, "11106" can be decoded into:
-- "AAJF" with the grouping (1, 1, 10, 6)
-- "KJF" with the grouping (11, 10, 6)
+To decode an encoded message, all the digits must be grouped then mapped back into letters using the reverse of the mapping above. Note that the grouping of digits is not unique.
 
-Note: Groupings that produce codes with leading zero(s) (e.g., "06") are invalid. If the entire string cannot be decoded in any valid way, return 0. The answer fits in a 32-bit integer.
+Given a string `s` containing only digits, return the number of ways to decode it.
 
-### Examples:
-- Input: s = "12"  
-  Output: 2  
-  Explanation: "12" can be decoded as "AB" (1 2) or "L" (12).
+## Examples:
+```
+Example 1:
+Input: s = "12"
+Output: 2
+Explanation: "12" could be decoded as "AB" (1 2) or "L" (12).
 
-- Input: s = "226"  
-  Output: 3  
-  Explanation: "226" can be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
+Example 2:
+Input: s = "226"
+Output: 3
+Explanation: "226" could be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
 
-- Input: s = "06"  
-  Output: 0  
-  Explanation: "06" cannot be mapped due to the leading zero.
+Example 3:
+Input: s = "06"
+Output: 0
+Explanation: "06" cannot be mapped to "F" because the leading zero makes it ambiguous. A valid encoding starts with a non-zero digit.
+```
 
-## Instructions
-- Implement your solution in `Program.cs` using a dynamic programming approach.
-- Test your solution with various cases.
+## Constraints:
+- 1 <= s.length <= 100
+- s contains only digits and may contain leading zeros
+
+## Solution Approaches
+The solution implements two different approaches:
+
+1. **Memoization Approach** (`Solution_Memoization`):
+   - Uses recursion with memoization to avoid redundant calculations
+   - Breaks the problem into subproblems and caches results
+   - Handles edge cases like strings starting with '0'
+   - Time Complexity: O(n) where n is the length of the string
+   - Space Complexity: O(n) for the memoization cache
+
+2. **Iterative Approach** (`Solution_Iterative`):
+   - Uses dynamic programming with a bottom-up approach
+   - Maintains a DP array where dp[i] = number of ways to decode the substring s[0...i]
+   - Handles edge cases efficiently
+   - Time Complexity: O(n) where n is the length of the string
+   - Space Complexity: O(n) for the DP array
+
+The implementation includes benchmarking to compare the performance of both approaches across different test cases.
