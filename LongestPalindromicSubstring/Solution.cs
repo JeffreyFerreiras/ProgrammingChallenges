@@ -1,5 +1,3 @@
-using System;
-
 namespace LongestPalindromicSubstring
 {
     public class Solution

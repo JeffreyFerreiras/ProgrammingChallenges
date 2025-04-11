@@ -1,7 +1,4 @@
-﻿
-using System;
-
-namespace CheckSubarraySum
+﻿namespace CheckSubarraySum
 {
     /// <summary>
     /// LeetCode Problem: Check Subarray Sum

@@ -1,5 +1,3 @@
-using System;
-
 namespace IslandTreasure;
 
 public class Solution

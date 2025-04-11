@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SortArrays
+﻿namespace SortArrays
 {
     class Program
     {

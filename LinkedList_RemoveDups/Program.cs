@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace LinkedList_RemoveDups
+﻿namespace LinkedList_RemoveDups
 {
     /*
      * Write code to remove duplicates from an unsorted linked list.

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Mini_Max_Sum
+﻿namespace Mini_Max_Sum
 {
     class Program
     {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Collections.Generic;
+﻿using System.Diagnostics;
 
 // See https://aka.ms/new-console-template for more information
 

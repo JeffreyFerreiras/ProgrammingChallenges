@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Birthday_Cake_Candles
+﻿namespace Birthday_Cake_Candles
 {
     class Program
     {

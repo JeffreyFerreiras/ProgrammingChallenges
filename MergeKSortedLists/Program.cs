@@ -19,7 +19,6 @@
  * The Solution.MergeKLists method is only a scaffold. Please implement the merging logic as required.
  */
 
-using System;
 using System.Diagnostics;
 using System.Text;
 

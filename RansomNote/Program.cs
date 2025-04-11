@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace RansomNote
+﻿namespace RansomNote
 {
     class Program
     {

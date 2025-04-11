@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace CheckPermutations
+﻿namespace CheckPermutations
 {
     /*
     QuickSort algorithm implementation for sorting characters.

@@ -1,5 +1,3 @@
-using System;
-
 namespace CombinationSum;
 public class Solution
 {

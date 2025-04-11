@@ -1,5 +1,3 @@
-using System;
-
 namespace EncodeDecodeString;
 
 public class Solution

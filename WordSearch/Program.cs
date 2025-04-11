@@ -26,9 +26,7 @@
  * - board and word consists of only lowercase and uppercase English letters.
  */
 
-using System;
 using System.Diagnostics;
-using System.Linq;
 
 class Program
 {

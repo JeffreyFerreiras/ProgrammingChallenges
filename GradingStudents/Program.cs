@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GradingStudents
+﻿namespace GradingStudents
 {
     class Program
     {

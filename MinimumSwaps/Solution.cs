@@ -1,5 +1,4 @@
 using System;
-using System.Configuration.Assemblies;
 using System.Linq;
 
 namespace MinimumSwaps

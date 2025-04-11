@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FindDuplicate_SpaceEdition
+﻿namespace FindDuplicate_SpaceEdition
 {
     class Program
     {

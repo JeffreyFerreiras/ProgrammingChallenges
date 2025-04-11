@@ -1,5 +1,3 @@
-using System;
-
 namespace BinaryTree_MaximumDepthofBinaryTree {
 	public class Solution {
 		public int MaxDepth(TreeNode root) {

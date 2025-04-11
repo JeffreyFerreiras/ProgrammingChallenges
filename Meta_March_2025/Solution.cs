@@ -1,7 +1,4 @@
-using System;
 using System.Diagnostics;
-using System.Collections.Generic;
-using System.Linq;
 
 // To execute C#, please define "static void Main" on a class
 // named Solution.
