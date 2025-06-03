@@ -3,15 +3,10 @@
     /*
      * Definition for singly-linked list.
      */
-    public class ListNode
+    public class ListNode(int val = 0, ListNode next = null)
     {
-        public int val;
-        public ListNode next;
-        public ListNode(int val = 0, ListNode next = null)
-        {
-            this.val = val;
-            this.next = next;
-        }
+        public int val = val;
+        public ListNode next = next;
     }
 
     public class Solution
@@ -19,7 +14,7 @@
         public static bool IsPalindrome(ListNode head)
         {
             ListNode headptr = head;
-            ListNode currentptr = new ListNode(headptr.val, headptr.next);
+            ListNode currentptr = new(headptr.val, headptr.next);
             ListNode current = currentptr;
 
             while(headptr != null)

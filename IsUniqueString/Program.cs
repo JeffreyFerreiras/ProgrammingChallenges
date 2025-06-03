@@ -11,12 +11,12 @@ namespace IsUniqueString
         static void Main(string[] args)
         {
             //TEST CODE
-            System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
+            System.Diagnostics.Stopwatch stopwatch = new();
             stopwatch.Start();
             bool first = IsUniqueString("xyzabc");
             stopwatch.Stop(); //6276 ticks - This shows the shorter answer isn't always best for performance.
 
-            System.Diagnostics.Stopwatch stopwatch2 = new System.Diagnostics.Stopwatch();
+            System.Diagnostics.Stopwatch stopwatch2 = new();
             stopwatch2.Start();
             bool second = IsUniqueStringWithoutIEnumerable("xyzabc");
             stopwatch2.Stop(); //539 ticks

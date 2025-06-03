@@ -27,10 +27,10 @@ namespace BinaryTreeLevelOrderTraversal
     {
         static void Main()
         {
-            Solution solution = new Solution();
+            Solution solution = new();
 
             // Test Case 1: Balanced Tree with 7 nodes
-            TreeNode balancedRoot = new TreeNode(1,
+            TreeNode balancedRoot = new(1,
                 new TreeNode(2, new TreeNode(4), new TreeNode(5)),
                 new TreeNode(3, new TreeNode(6), new TreeNode(7)));
             IList<IList<int>> expectedBalanced = [
@@ -41,7 +41,7 @@ namespace BinaryTreeLevelOrderTraversal
             ExecuteTestCase(solution, balancedRoot, "Balanced Tree with 7 nodes", expectedBalanced);
 
             // Test Case 2: Unbalanced Tree with 5 nodes
-            TreeNode? unbalancedRoot = new TreeNode(1,
+            TreeNode? unbalancedRoot = new(1,
                 new TreeNode(2,
                     new TreeNode(4,
                         new TreeNode(5),

@@ -16,7 +16,7 @@ Console.WriteLine(result);
 
 ListNode CreateTestCase(string data)
 {
-    ListNode root = new ListNode();
+    ListNode root = new();
     ListNode head = root;
     
     for (int i = 0; i < data.Length; i++)

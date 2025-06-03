@@ -104,16 +104,11 @@ namespace ReverseLinkedList
             return previous;
         }
 
-        public class Node
+        public class Node(int value)
         {
-            public int Value { get; set; }
-            
-            public Node Next { get; set; }
+            public int Value { get; set; } = value;
 
-            public Node(int value)
-            {
-                this.Value = value;
-            }
+            public Node Next { get; set; }
         }
     }
 }

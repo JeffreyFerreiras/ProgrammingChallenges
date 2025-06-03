@@ -8,10 +8,10 @@
     {
         static void Main(string[] args)
         {
-            int[] arr = {1, 7, 3, 4};
+            int[] arr = [1, 7, 3, 4];
             int[] profucts = GetProductsOfAllIntsExceptAtIndex(arr);
             //[84, 12, 28, 21]
-            int[] arr2 = { 3, 1, 2, 5, 6, 4 };
+            int[] arr2 = [3, 1, 2, 5, 6, 4];
             int[]products2=GetProductsOfAllIntsExceptAtIndex(arr2);
             //[1, 3, 3, 6, 30, 180]
         }

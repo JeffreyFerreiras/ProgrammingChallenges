@@ -8,11 +8,11 @@
 
         private static void Main(string[] args)
         {
-            int missing = FindMissing(new int[] { 5, 4, 3, 1, 0 });
-            int missing2 = FindMissing(new int[] { 5, 4, 2, 1, 0 });
+            int missing = FindMissing([5, 4, 3, 1, 0]);
+            int missing2 = FindMissing([5, 4, 2, 1, 0]);
 
-            int missing3 = FindMissing2(new int[] { 5, 4, 3, 1, 0 });
-            int missing4 = FindMissing2(new int[] { 5, 4, 2, 1, 0 });
+            int missing3 = FindMissing2([5, 4, 3, 1, 0]);
+            int missing4 = FindMissing2([5, 4, 2, 1, 0]);
 
             Console.WriteLine();
 

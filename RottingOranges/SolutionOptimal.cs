@@ -14,7 +14,7 @@ public class SolutionOptimal
             return 0;
 
         int fresh = 0, m = grid.Length, n = grid[0].Length;
-        Queue<(int, int)> queue = new Queue<(int, int)>();
+        Queue<(int, int)> queue = new();
 
         // Count fresh and enqueue rotten oranges.
         for (int i = 0; i < m; i++)

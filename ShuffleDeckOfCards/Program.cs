@@ -6,7 +6,7 @@ namespace ShuffleDeckOfCards
     {
         static void Main(string[] args)
         {
-            Deck deck = new Deck();
+            Deck deck = new();
             deck.Display();
             Console.WriteLine();
             deck.Shuffle();

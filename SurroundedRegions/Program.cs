@@ -25,21 +25,21 @@ namespace SurroundedRegions
         static void RunTestCase1()
         {
             // Test case 1 from LeetCode example 1
-            char[][] board = new char[][]
-            {
-                new char[] { 'X', 'X', 'X', 'X' },
-                new char[] { 'X', 'O', 'O', 'X' },
-                new char[] { 'X', 'X', 'O', 'X' },
-                new char[] { 'X', 'O', 'X', 'X' }
-            };
+            char[][] board =
+            [
+                ['X', 'X', 'X', 'X'],
+                ['X', 'O', 'O', 'X'],
+                ['X', 'X', 'O', 'X'],
+                ['X', 'O', 'X', 'X']
+            ];
 
-            char[][] expected = new char[][]
-            {
-                new char[] { 'X', 'X', 'X', 'X' },
-                new char[] { 'X', 'X', 'X', 'X' },
-                new char[] { 'X', 'X', 'X', 'X' },
-                new char[] { 'X', 'O', 'X', 'X' }
-            };
+            char[][] expected =
+            [
+                ['X', 'X', 'X', 'X'],
+                ['X', 'X', 'X', 'X'],
+                ['X', 'X', 'X', 'X'],
+                ['X', 'O', 'X', 'X']
+            ];
 
             RunTest("Test Case 1", board, expected);
         }
@@ -47,15 +47,15 @@ namespace SurroundedRegions
         static void RunTestCase2()
         {
             // Test case 2 from LeetCode example 2
-            char[][] board = new char[][]
-            {
-                new char[] { 'X' }
-            };
+            char[][] board =
+            [
+                ['X']
+            ];
 
-            char[][] expected = new char[][]
-            {
-                new char[] { 'X' }
-            };
+            char[][] expected =
+            [
+                ['X']
+            ];
 
             RunTest("Test Case 2", board, expected);
         }
@@ -63,25 +63,25 @@ namespace SurroundedRegions
         static void RunTestCase3()
         {
             // Test case 3 - Larger board with multiple regions
-            char[][] board = new char[][]
-            {
-                new char[] { 'X', 'X', 'X', 'X', 'X', 'X' },
-                new char[] { 'X', 'O', 'O', 'O', 'X', 'X' },
-                new char[] { 'X', 'X', 'O', 'O', 'O', 'X' },
-                new char[] { 'X', 'O', 'X', 'O', 'X', 'X' },
-                new char[] { 'X', 'O', 'O', 'X', 'O', 'X' },
-                new char[] { 'X', 'X', 'X', 'X', 'X', 'X' }
-            };
+            char[][] board =
+            [
+                ['X', 'X', 'X', 'X', 'X', 'X'],
+                ['X', 'O', 'O', 'O', 'X', 'X'],
+                ['X', 'X', 'O', 'O', 'O', 'X'],
+                ['X', 'O', 'X', 'O', 'X', 'X'],
+                ['X', 'O', 'O', 'X', 'O', 'X'],
+                ['X', 'X', 'X', 'X', 'X', 'X']
+            ];
 
-            char[][] expected = new char[][]
-            {
-                new char[] { 'X', 'X', 'X', 'X', 'X', 'X' },
-                new char[] { 'X', 'X', 'X', 'X', 'X', 'X' },
-                new char[] { 'X', 'X', 'X', 'X', 'X', 'X' },
-                new char[] { 'X', 'O', 'X', 'X', 'X', 'X' },
-                new char[] { 'X', 'O', 'O', 'X', 'O', 'X' },
-                new char[] { 'X', 'X', 'X', 'X', 'X', 'X' }
-            };
+            char[][] expected =
+            [
+                ['X', 'X', 'X', 'X', 'X', 'X'],
+                ['X', 'X', 'X', 'X', 'X', 'X'],
+                ['X', 'X', 'X', 'X', 'X', 'X'],
+                ['X', 'O', 'X', 'X', 'X', 'X'],
+                ['X', 'O', 'O', 'X', 'O', 'X'],
+                ['X', 'X', 'X', 'X', 'X', 'X']
+            ];
 
             RunTest("Test Case 3", board, expected);
         }
@@ -89,8 +89,8 @@ namespace SurroundedRegions
         static void RunTestCase4()
         {
             // Test case 4 - Empty board
-            char[][] board = new char[][] { };
-            char[][] expected = new char[][] { };
+            char[][] board = [];
+            char[][] expected = [];
 
             RunTest("Test Case 4", board, expected);
         }
@@ -98,19 +98,19 @@ namespace SurroundedRegions
         static void RunTestCase5()
         {
             // Test case 5 - Board with no 'O's
-            char[][] board = new char[][]
-            {
-                new char[] { 'X', 'X', 'X' },
-                new char[] { 'X', 'X', 'X' },
-                new char[] { 'X', 'X', 'X' }
-            };
+            char[][] board =
+            [
+                ['X', 'X', 'X'],
+                ['X', 'X', 'X'],
+                ['X', 'X', 'X']
+            ];
 
-            char[][] expected = new char[][]
-            {
-                new char[] { 'X', 'X', 'X' },
-                new char[] { 'X', 'X', 'X' },
-                new char[] { 'X', 'X', 'X' }
-            };
+            char[][] expected =
+            [
+                ['X', 'X', 'X'],
+                ['X', 'X', 'X'],
+                ['X', 'X', 'X']
+            ];
 
             RunTest("Test Case 5", board, expected);
         }
@@ -149,7 +149,7 @@ namespace SurroundedRegions
         static char[][] DeepCopyBoard(char[][] board)
         {
             if (board == null || board.Length == 0)
-                return new char[][] { };
+                return [];
 
             char[][] copy = new char[board.Length][];
             for (int i = 0; i < board.Length; i++)
@@ -187,7 +187,7 @@ namespace SurroundedRegions
                 return;
             }
 
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             sb.Append("[\n");
             
             foreach (var row in board)

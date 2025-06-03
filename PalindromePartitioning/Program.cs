@@ -40,7 +40,7 @@ class Program
             Console.WriteLine($"Input: \"{input}\"");
             
             // Test original method
-            Stopwatch stopwatch1 = new Stopwatch();
+            Stopwatch stopwatch1 = new();
             stopwatch1.Start();
             var result1 = solution.Partition(input);
             stopwatch1.Stop();
@@ -49,7 +49,7 @@ class Program
             Console.WriteLine($"Time: {stopwatch1.ElapsedTicks} ticks");
             
             // Test optimized method
-            Stopwatch stopwatch2 = new Stopwatch();
+            Stopwatch stopwatch2 = new();
             stopwatch2.Start();
             var result2 = solution.PartitionOptimized(input);
             stopwatch2.Stop();

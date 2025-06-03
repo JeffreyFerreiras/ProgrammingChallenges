@@ -4,7 +4,7 @@ namespace LetterCombinationsofAPhoneNumber;
 
 public class Solution
 {
-    private Dictionary<char, string> phone = new Dictionary<char, string>
+    private Dictionary<char, string> phone = new()
     {
         {'2', "abc"},
         {'3', "def"},

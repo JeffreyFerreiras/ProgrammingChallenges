@@ -29,23 +29,23 @@
         {
             Console.WriteLine("Check Subarray Sum Problem");
 
-            Solution solution = new Solution();
+            Solution solution = new();
 
-            int[] nums1 = { 23, 2, 4, 6, 7 };
+            int[] nums1 = [23, 2, 4, 6, 7];
             int k1 = 6;
             var watch1 = System.Diagnostics.Stopwatch.StartNew();
             bool result1 = solution.CheckSubarraySum(nums1, k1);
             watch1.Stop();
             Console.WriteLine($"Example 1: {result1} (Expected: true) - Time: {watch1.ElapsedTicks} ticks");
 
-            int[] nums2 = { 23, 2, 6, 4, 7 };
+            int[] nums2 = [23, 2, 6, 4, 7];
             int k2 = 6;
             var watch2 = System.Diagnostics.Stopwatch.StartNew();
             bool result2 = solution.CheckSubarraySum(nums2, k2);
             watch2.Stop();
             Console.WriteLine($"Example 2: {result2} (Expected: true) - Time: {watch2.ElapsedTicks} ticks");
 
-            int[] nums3 = { 23, 2, 6, 4, 7 };
+            int[] nums3 = [23, 2, 6, 4, 7];
             int k3 = 13;
             var watch3 = System.Diagnostics.Stopwatch.StartNew();
             bool result3 = solution.CheckSubarraySum(nums3, k3);
@@ -78,7 +78,7 @@ public class Solution
 
     public bool CheckSubarraySum2(int[] nums, int k)
     {
-        Dictionary<int, int> remainderDict = new Dictionary<int, int>
+        Dictionary<int, int> remainderDict = new()
         {
             [0] = -1
         };

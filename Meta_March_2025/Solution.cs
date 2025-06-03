@@ -13,10 +13,10 @@ class RefinedSolution
         var testCases = new[]
         {
             (new[] { -1, 1, 3, 4, -2 }, 1, 4),    // 1st largest is 4
-            (new[] { -1, 1, 3, 4, -2 }, 2, 3),      // 2nd largest is 3
-            (new[] { -1, 1, 3, 4, -2 }, 4, -1),     // 4th largest is -1
-            (new[] { 5, 10, 15, 20, 25 }, 2, 20),    // 2nd largest is 20
-            (new[] { 100, 50, 25, 75 }, 2, 75)       // 2nd largest is 75
+            ([-1, 1, 3, 4, -2], 2, 3),      // 2nd largest is 3
+            ([-1, 1, 3, 4, -2], 4, -1),     // 4th largest is -1
+            ([5, 10, 15, 20, 25], 2, 20),    // 2nd largest is 20
+            ([100, 50, 25, 75], 2, 75)       // 2nd largest is 75
         };
         
         var stopwatch = new Stopwatch();

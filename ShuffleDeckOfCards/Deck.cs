@@ -5,8 +5,8 @@ namespace ShuffleDeckOfCards
 {
     public class Deck
     {
-        private readonly static object s_syncLock = new object();
-        private readonly static Random s_random = new Random();
+        private readonly static object s_syncLock = new();
+        private readonly static Random s_random = new();
 
         public List<Card> Cards
         {

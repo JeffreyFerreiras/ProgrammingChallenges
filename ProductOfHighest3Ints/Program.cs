@@ -8,7 +8,7 @@
     {
         private static void Main(string[] args)
         {
-            int[] arrayOfInts = { 1, 10, -5, 1, -100 };
+            int[] arrayOfInts = [1, 10, -5, 1, -100];
 
             int product = ProductOf3(arrayOfInts);
         }

@@ -33,9 +33,9 @@ namespace TopKFrequentElements
             Console.WriteLine("============================");
 
             // Test cases
-            RunTest(new int[] { 1, 1, 1, 2, 2, 3 }, 2, new int[] { 1, 2 });
-            RunTest(new int[] { 1 }, 1, new int[] { 1 });
-            RunTest(new int[] { 4, 1, 1, 1, 2, 2, 3, 4, 4, 4, 4 }, 2, new int[] { 4, 1 });
+            RunTest([1, 1, 1, 2, 2, 3], 2, [1, 2]);
+            RunTest([1], 1, [1]);
+            RunTest([4, 1, 1, 1, 2, 2, 3, 4, 4, 4, 4], 2, [4, 1]);
 
             Console.ReadLine();
         }
@@ -45,9 +45,9 @@ namespace TopKFrequentElements
             Console.WriteLine($"Input: nums = [{string.Join(",", nums)}], k = {k}");
             Console.WriteLine($"Expected: [{string.Join(",", expected)}]");
 
-            Solution solution = new Solution();
+            Solution solution = new();
             
-            Stopwatch stopwatch = new Stopwatch();
+            Stopwatch stopwatch = new();
             stopwatch.Start();
             int[] result = solution.TopKFrequent(nums, k);
             stopwatch.Stop();

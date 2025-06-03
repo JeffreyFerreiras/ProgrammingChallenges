@@ -75,7 +75,7 @@ namespace LinkedList_DetectCycle
             var rand = new Random();
             var randomValues = Enumerable.Range(0, size).Select(x => rand.Next(0, 100)).ToList();
             var randIndex = rand.Next(0, size);
-            Node node = new Node() { Value = rand.Next(0, 100) }, prev = node;
+            Node node = new() { Value = rand.Next(0, 100) }, prev = node;
 
             randomValues.ForEach(val =>
             {

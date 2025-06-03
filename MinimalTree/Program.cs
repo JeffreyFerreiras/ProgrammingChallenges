@@ -9,7 +9,7 @@ namespace MinimalTree
          * write an algorithm to create a binary search tree with minimal height.
          */
 
-        private static Random s_random = new Random();
+        private static Random s_random = new();
 
         private static void Main(string[] args)
         {
@@ -30,7 +30,7 @@ namespace MinimalTree
 
             var stopWatch = Stopwatch.StartNew();
 
-            BinTree tree = new BinTree();
+            BinTree tree = new();
             tree.Insert(data);
             tree.TraverseInOrder((x) => Console.WriteLine(x));
         }
@@ -92,7 +92,7 @@ namespace MinimalTree
             {
                 int mid = (low + high) / 2;
 
-                Node node = new Node(data[mid]);
+                Node node = new(data[mid]);
 
                 node.Left = node.AddSorted(data, low, mid - 1);
                 node.Right = node.AddSorted(data, mid + 1, high);

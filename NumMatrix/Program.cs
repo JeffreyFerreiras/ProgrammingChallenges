@@ -4,13 +4,13 @@ class Program
 {
     static void Main(string[] args)
     {
-        int[][] matrix = new int[][] {
-            new int[]{3, 0, 1, 4, 2},
-            new int[]{5, 6, 3, 2, 1},
-            new int[]{1, 2, 0, 1, 5},
-            new int[]{4, 1, 0, 1, 7},
-            new int[]{1, 0, 3, 0, 5}
-        };
+        int[][] matrix = [
+            [3, 0, 1, 4, 2],
+            [5, 6, 3, 2, 1],
+            [1, 2, 0, 1, 5],
+            [4, 1, 0, 1, 7],
+            [1, 0, 3, 0, 5]
+        ];
         var numMatrix = new NumMatrix(matrix);
 
         TestSumRegion(numMatrix, 2, 1, 4, 3, 8);

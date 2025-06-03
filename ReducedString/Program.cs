@@ -19,7 +19,7 @@ namespace ReducedString
                 return original;
 
             string input = String.Copy(reduced);
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
 
             while(input.Length >= 1)
             {

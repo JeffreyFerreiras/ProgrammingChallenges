@@ -27,23 +27,23 @@ class Program
     static void Main(string[] args)
     {
         // Test Scenario 1: Empty list array
-        RunMergeKListsTest("TestScenario1", new ListNode[] { }, null);
+        RunMergeKListsTest("TestScenario1", [], null);
         
         // Test Scenario 2: Array with one empty list
-        RunMergeKListsTest("TestScenario2", new ListNode[] { null }, null);
+        RunMergeKListsTest("TestScenario2", [null], null);
         
         // Test Scenario 3: Single non-empty list
-        var list1 = CreateLinkedList(new int[] { 1, 3, 5 });
-        RunMergeKListsTest("TestScenario3", new ListNode[] { list1 }, list1);
+        var list1 = CreateLinkedList([1, 3, 5]);
+        RunMergeKListsTest("TestScenario3", [list1], list1);
         
         // Test Scenario 4: Multiple non-empty lists
-        var list2 = CreateLinkedList(new int[] { 2, 4, 6 });
-        var mergedExpected = CreateLinkedList(new int[] { 1, 2, 3, 4, 5, 6 }); // expected result from merging list1 and list2
-        RunMergeKListsTest("TestScenario4", new ListNode[] { list1, list2 }, mergedExpected);
+        var list2 = CreateLinkedList([2, 4, 6]);
+        var mergedExpected = CreateLinkedList([1, 2, 3, 4, 5, 6]); // expected result from merging list1 and list2
+        RunMergeKListsTest("TestScenario4", [list1, list2], mergedExpected);
 
         // Test Scenario 5: Use case [[]] - an array with an empty list created as a linked list with no elements
-        var emptyListWrapper = CreateLinkedList(new int[] { }); // returns null
-        RunMergeKListsTest("TestScenario5", new ListNode[] { emptyListWrapper }, null);
+        var emptyListWrapper = CreateLinkedList([]); // returns null
+        RunMergeKListsTest("TestScenario5", [emptyListWrapper], null);
     }
     
     static void RunMergeKListsTest(string testName, ListNode[] lists, ListNode expected)
@@ -67,7 +67,7 @@ class Program
         if (values == null || values.Length == 0)
             return null;
         
-        ListNode head = new ListNode(values[0]);
+        ListNode head = new(values[0]);
         ListNode current = head;
         for (int i = 1; i < values.Length; i++)
         {
@@ -82,7 +82,7 @@ class Program
         if (node == null)
             return "null";
         
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new();
         while (node != null)
         {
             sb.Append(node.val);
@@ -97,15 +97,10 @@ class Program
 /**
  * Definition for singly-linked list.
  */
-public class ListNode
+public class ListNode(int val = 0, ListNode? next = null)
 {
-    public int val;
-    public ListNode next;
-    public ListNode(int val = 0, ListNode? next = null)
-    {
-        this.val = val;
-        this.next = next;
-    }
+    public int val = val;
+    public ListNode next = next;
 }
 
 /**

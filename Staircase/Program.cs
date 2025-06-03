@@ -31,7 +31,7 @@ namespace Staircase
                 //SOLUTION.
                 int number = Convert.ToInt32(Console.ReadLine());
 
-                StringBuilder floor = new StringBuilder(number*number);
+                StringBuilder floor = new(number*number);
                 for(int i = 1; i < number + 1; i++)
                 {
                     floor.Append(' ', number - i);

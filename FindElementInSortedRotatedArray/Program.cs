@@ -41,7 +41,7 @@ namespace FindElementInSortedRotatedArray
             Stopwatch sw = Stopwatch.StartNew();
             
             // Test case 1
-            int[] rotatedArry = { 3, 4, 5, 1, 2 };
+            int[] rotatedArry = [3, 4, 5, 1, 2];
             int x = 4, left = 0, right = rotatedArry.Length - 1;
             int expectedIndex = 1;
             int indexofX = BinarySearchRecursive(rotatedArry, left, right, x);
@@ -49,7 +49,7 @@ namespace FindElementInSortedRotatedArray
             Console.WriteLine($"Array: [{string.Join(", ", rotatedArry)}], Target: {x}, Index: {indexofX}, Expected: {expectedIndex}, Time: {sw.Elapsed.TotalMilliseconds}ms");
             
             // Additional test cases
-            int[] rotatedArry2 = { 4, 5, 6, 7, 0, 1, 2 };
+            int[] rotatedArry2 = [4, 5, 6, 7, 0, 1, 2];
             int x2 = 0;
             int expectedIndex2 = 4; // Expected index for x2 = 0
             sw.Restart();
@@ -58,7 +58,7 @@ namespace FindElementInSortedRotatedArray
             bool isCorrect2 = indexofX2 == expectedIndex2;
             Console.WriteLine($"Array: [{string.Join(", ", rotatedArry2)}], Target: {x2}, Index: {indexofX2}, Expected: {expectedIndex2}, Time: {sw.Elapsed.TotalMilliseconds}ms, Correct: {isCorrect2}");
 
-            int[] rotatedArry3 = { 1 };
+            int[] rotatedArry3 = [1];
             int x3 = 1;
             int expectedIndex3 = 0; // Expected index for x3 = 1
             sw.Restart();
@@ -67,7 +67,7 @@ namespace FindElementInSortedRotatedArray
             bool isCorrect3 = indexofX3 == expectedIndex3;
             Console.WriteLine($"Array: [{string.Join(", ", rotatedArry3)}], Target: {x3}, Index: {indexofX3}, Expected: {expectedIndex3}, Time: {sw.Elapsed.TotalMilliseconds}ms, Correct: {isCorrect3}");
 
-            int[] rotatedArry4 = { 1, 3 };
+            int[] rotatedArry4 = [1, 3];
             int x4 = 3;
             int expectedIndex4 = 1; // Expected index for x4 = 3
             sw.Restart();
@@ -76,7 +76,7 @@ namespace FindElementInSortedRotatedArray
             bool isCorrect4 = indexofX4 == expectedIndex4;
             Console.WriteLine($"Array: [{string.Join(", ", rotatedArry4)}], Target: {x4}, Index: {indexofX4}, Expected: {expectedIndex4}, Time: {sw.Elapsed.TotalMilliseconds}ms, Correct: {isCorrect4}");
 
-            int[] rotatedArry5 = { 5, 1, 3 };
+            int[] rotatedArry5 = [5, 1, 3];
             int x5 = 5;
             int expectedIndex5 = 0; // Expected index for x5 = 5
             sw.Restart();
@@ -90,7 +90,7 @@ namespace FindElementInSortedRotatedArray
         private static void RunComparisonTests()
         {
             Stopwatch sw = Stopwatch.StartNew();
-            int[] comparisonArray = { 4, 5, 6, 7, 0, 1, 2 };
+            int[] comparisonArray = [4, 5, 6, 7, 0, 1, 2];
             int target = 0;
             
             // Test BinarySearchRecursive

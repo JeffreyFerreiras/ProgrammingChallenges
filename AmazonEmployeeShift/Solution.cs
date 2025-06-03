@@ -4,15 +4,10 @@ using System.Linq;
 
 namespace AmazonEmployeeShift
 {
-    public class Task
+    public class Task(int minSkill, int hours)
     {
-        public int Skill { get; set; }
-        public int Hours { get; set; }
-        public Task(int minSkill, int hours)
-        {
-            Skill = minSkill;
-            Hours = hours;
-        }
+        public int Skill { get; set; } = minSkill;
+        public int Hours { get; set; } = hours;
     }
 
     public class Employee

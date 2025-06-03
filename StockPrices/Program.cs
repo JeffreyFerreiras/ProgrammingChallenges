@@ -22,7 +22,7 @@
             double profit2 = GetMaxProfit(stockPricesYesterday2);
 
             //display profit
-            Random rand = new Random();
+            Random rand = new();
             Console.WriteLine(GetMaxProfit2([.. Enumerable.Range(0, 1500).Select(i=> rand.Next())]));
             Console.WriteLine(GetMaxProfit(stockPricesYesterday));
         }

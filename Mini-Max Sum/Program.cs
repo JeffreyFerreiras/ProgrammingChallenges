@@ -14,10 +14,10 @@
 
         static void Main(string[] args)
         {
-            var minMax = MiniMaxSum(new int[] { 1, 2, 3, 4, 5 });
+            var minMax = MiniMaxSum([1, 2, 3, 4, 5]);
 
             Console.WriteLine($"{minMax[0]} {minMax[1]}");
-            minMax = MiniMaxSum(new int[] { 4, 4, 3, 8, 5 });
+            minMax = MiniMaxSum([4, 4, 3, 8, 5]);
 
             Console.WriteLine($"{minMax[0]} {minMax[1]}");
             Console.Read();
@@ -32,7 +32,7 @@
             bool minFunc(long x, long y) => x < y;
             long min = GetMinMax(arr, minFunc);
             
-            return new long[] { min, max };
+            return [min, max];
         }
 
         private static long GetMinMax(int[] arr, Func<long, long, bool> comparer)

@@ -2,8 +2,8 @@
 {
     class Marbles
     {
-        private static readonly Random mRandom = new Random();
-        private static readonly object mLock = new object();
+        private static readonly Random mRandom = new();
+        private static readonly object mLock = new();
         private static int[] marbleValues = [RED_MARBLE, GREEN_MARBLE, BLUE_MARBLE, ORANGE_MARBLE];
 
         public const int RED_MARBLE = 1;

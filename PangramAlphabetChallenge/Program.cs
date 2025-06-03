@@ -71,7 +71,7 @@ namespace PangramAlphabetChallenge
 
             line = line.ToLower();
             var lettersInAphabet = alphabet.Where(c => line.Contains(c));
-            string missingletters = new string([.. alphabet.Except(lettersInAphabet)]);
+            string missingletters = new([.. alphabet.Except(lettersInAphabet)]);
             return lettersInAphabet.SequenceEqual(alphabet) ? "null" : missingletters;
         }
     }

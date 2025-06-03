@@ -10,7 +10,7 @@ namespace GraphValidTree
             Console.WriteLine("Graph Valid Tree Challenge");
             Console.WriteLine("=========================");
             
-            Solution solution = new Solution();
+            Solution solution = new();
             
             // Test cases
             RunTest(solution, "Example 1", 5, [ 
@@ -36,7 +36,7 @@ namespace GraphValidTree
         {
             Console.WriteLine($"\nRunning test: {testName}");
             
-            Stopwatch stopwatch = new Stopwatch();
+            Stopwatch stopwatch = new();
             stopwatch.Start();
             
             bool result = solution.ValidTree(n, edges);

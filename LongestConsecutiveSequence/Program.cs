@@ -6,23 +6,23 @@ Console.WriteLine("Hello, World!");
 Console.WriteLine("Longest Consecutive Sequence Problem");
 
 // Test Scenarios
-int[] nums1 = { 100, 4, 200, 1, 3, 2 };
+int[] nums1 = [100, 4, 200, 1, 3, 2];
 int expected1 = 4;
 
-int[] nums2 = { 0, 3, 7, 2, 5, 8, 4, 6, 0, 1 };
+int[] nums2 = [0, 3, 7, 2, 5, 8, 4, 6, 0, 1];
 int expected2 = 9;
 
-int[] nums3 = { 1, 0, 1, 2 };
+int[] nums3 = [1, 0, 1, 2];
 int expected3 = 3;
 
-int[] nums4 = { 1,2,3,4,5,6,7,8,9,10};
+int[] nums4 = [1,2,3,4,5,6,7,8,9,10];
 int expected4 = 10;
 
-int[] nums5 = { };
+int[] nums5 = [];
 int expected5 = 0;
 
 // Solution Instance
-Solution solution = new Solution();
+Solution solution = new();
 
 // Method to Run and Measure
 void RunAndMeasure(string scenarioName, Func<int[], int> method, int[] input, int expected)

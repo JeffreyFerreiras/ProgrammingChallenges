@@ -34,7 +34,7 @@ Output: []
 Explanation: It is impossible to finish all courses.
 ");
 
-        Solution solution = new Solution();
+        Solution solution = new();
 
         // Test cases
         RunTestCase(solution, 2, [[1, 0]], [0, 1]);
@@ -74,7 +74,7 @@ Explanation: It is impossible to finish all courses.
     
     static void RunAlgorithm(string algorithmName, Func<int[]> algorithmFunction, int[] expected)
     {
-        Stopwatch sw = new Stopwatch();
+        Stopwatch sw = new();
         sw.Start();
         int[] result = algorithmFunction();
         sw.Stop();
@@ -95,7 +95,7 @@ Explanation: It is impossible to finish all courses.
         if (prerequisites.Length == 0)
             return "[]";
             
-        List<string> pairs = new List<string>();
+        List<string> pairs = new();
         foreach (var pair in prerequisites)
         {
             pairs.Add($"[{pair[0]},{pair[1]}]");

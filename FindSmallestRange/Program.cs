@@ -28,8 +28,8 @@
         {
             int first = sample.Count - 1, second = sample2.Count - 1, third = sample3.Count - 1;
 
-            int[] rangeSet = { sample[first], sample2[second], sample3[third] };
-            int[] result = { rangeSet.Min(), rangeSet.Max() };
+            int[] rangeSet = [sample[first], sample2[second], sample3[third]];
+            int[] result = [rangeSet.Min(), rangeSet.Max()];
             int minRange = result[1] - sample2[0];
 
             while(first >= 0 && second >= 0 && third >= 0)

@@ -40,8 +40,8 @@ namespace ProgrammingChallenges
         static TreeNode BuildTree(int?[] arr)
         {
             if (arr == null || arr.Length == 0 || arr[0] == null) return null;
-            TreeNode root = new TreeNode(arr[0].Value);
-            Queue<TreeNode> queue = new Queue<TreeNode>();
+            TreeNode root = new(arr[0].Value);
+            Queue<TreeNode> queue = new();
             queue.Enqueue(root);
             int i = 1;
             while (i < arr.Length)
@@ -68,7 +68,7 @@ namespace ProgrammingChallenges
         {
             if (root == null) return "[]";
             List<string> result = [];
-            Queue<TreeNode> queue = new Queue<TreeNode>();
+            Queue<TreeNode> queue = new();
             queue.Enqueue(root);
             while(queue.Count > 0)
             {

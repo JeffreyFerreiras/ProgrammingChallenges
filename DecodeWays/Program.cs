@@ -27,7 +27,7 @@ class Program
 
             // Measure Solution_Iterative
             var swIter = Stopwatch.StartNew();
-            Solution_Iterative solution = new Solution_Iterative();
+            Solution_Iterative solution = new();
             int resultIter = solution.NumDecodings(test.input);
             swIter.Stop();
             Console.WriteLine($"Solution_Iterative: {swIter.ElapsedTicks} ticks, Result: {resultIter}, Expected: {test.expected}");

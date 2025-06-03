@@ -25,18 +25,18 @@
         static void Main(string[] args)
         {
             int[] grades =
-            {
+            [
                 73,
                 67,
                 38,
                 33
-            };
+            ];
             
             int[] result = solve(grades);
             Console.WriteLine(String.Join("\n", result));
 
 
-            result = solve(new int[]{59, 80, 98, 76 });
+            result = solve([59, 80, 98, 76]);
             Console.WriteLine(String.Join("\n", result));
         }
     }

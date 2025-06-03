@@ -22,12 +22,12 @@ namespace LongestPalindromicSubstring
     {
         static void Main(string[] args)
         {
-            string[] testCases = new string[] {
+            string[] testCases = [
                 "babad",
                 "cbbd",
                 "a",
                 "ac"
-            };
+            ];
             
             var solution = new Solution();
             foreach(var test in testCases)

@@ -10,7 +10,7 @@ namespace BinaryTree_MaximumDepthofBinaryTree {
 			RunTest("MaxDepth", () => solution.MaxDepth(test1), 0);
 
 			// Scenario 2: Single node tree
-			TreeNode test2 = new TreeNode(1);
+			TreeNode test2 = new(1);
 			RunTest("MaxDepth", () => solution.MaxDepth(test2), 1);
 
 			// Scenario 3: Tree with depth 3
@@ -19,7 +19,7 @@ namespace BinaryTree_MaximumDepthofBinaryTree {
 			//     2   3
 			//          \
 			//           4
-			TreeNode test3 = new TreeNode(1, new TreeNode(2), new TreeNode(3, null, new TreeNode(4)));
+			TreeNode test3 = new(1, new TreeNode(2), new TreeNode(3, null, new TreeNode(4)));
 			RunTest("MaxDepth", () => solution.MaxDepth(test3), 3);
 
 			// Scenario 4: Left skewed tree
@@ -30,7 +30,7 @@ namespace BinaryTree_MaximumDepthofBinaryTree {
 			//   3
 			//  /
 			// 4
-			TreeNode test4 = new TreeNode(1, new TreeNode(2, new TreeNode(3, new TreeNode(4))));
+			TreeNode test4 = new(1, new TreeNode(2, new TreeNode(3, new TreeNode(4))));
 			RunTest("MaxDepth", () => solution.MaxDepth(test4), 4);
 
 			// Scenario 5: Right skewed tree
@@ -39,7 +39,7 @@ namespace BinaryTree_MaximumDepthofBinaryTree {
 			//   2
 			//    \
 			//     3
-			TreeNode test5 = new TreeNode(1, null, new TreeNode(2, null, new TreeNode(3)));
+			TreeNode test5 = new(1, null, new TreeNode(2, null, new TreeNode(3)));
 			RunTest("MaxDepth", () => solution.MaxDepth(test5), 3);
 		}
 

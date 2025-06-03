@@ -47,8 +47,8 @@ namespace GroupAnagrams
 
         static void RunTest(string[] input, string expectedOutput)
         {
-            Solution solution = new Solution();
-            Stopwatch stopwatch = new Stopwatch();
+            Solution solution = new();
+            Stopwatch stopwatch = new();
             
             Console.WriteLine($"Testing input: [{string.Join(", ", input.Select(s => $"\"{s}\""))}]");
             

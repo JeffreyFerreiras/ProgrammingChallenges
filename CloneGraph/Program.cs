@@ -55,10 +55,10 @@ class Program {
 
         // Test scenario 6: Adjacency List Matching
         // adjList = [[2,4],[1,3],[2,4],[1,3]]
-        Node node1 = new Node(1);
-        Node node2 = new Node(2);
-        Node node3 = new Node(3);
-        Node node4 = new Node(4);
+        Node node1 = new(1);
+        Node node2 = new(2);
+        Node node3 = new(3);
+        Node node4 = new(4);
         node1.neighbors.Add(node2);
         node1.neighbors.Add(node4);
         node2.neighbors.Add(node1);

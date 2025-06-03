@@ -16,10 +16,10 @@
 
         static void Main(string[] args)
         {
-            int[] a = { 1, 5, 3, 4, 2 };
+            int[] a = [1, 5, 3, 4, 2];
             Console.WriteLine(Pairs(a, 2));
 
-            int[] b = { 1, 5, 3, 4, 2 };
+            int[] b = [1, 5, 3, 4, 2];
             Console.WriteLine(Pairs(b, 3));
         }
 

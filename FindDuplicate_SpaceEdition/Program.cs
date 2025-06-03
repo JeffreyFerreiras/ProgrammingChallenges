@@ -21,7 +21,7 @@
 
         static void Main(string[] args)
         {
-            int[] arr = { 9, 8, 7, 1, 6, 15, 8};
+            int[] arr = [9, 8, 7, 1, 6, 15, 8];
             int result = IndexOfRepeat(arr);
 
             Console.WriteLine(arr[result]);

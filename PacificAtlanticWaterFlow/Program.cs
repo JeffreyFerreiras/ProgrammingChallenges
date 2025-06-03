@@ -35,52 +35,52 @@ namespace PacificAtlanticWaterFlow
         {
             Console.WriteLine("417. Pacific Atlantic Water Flow");
             
-            Solution solution = new Solution();
+            Solution solution = new();
             
             // Test Case 1
-            int[][] heights1 = new int[][]
-            {
-                new int[] {1, 2, 2, 3, 5},
-                new int[] {3, 2, 3, 4, 4},
-                new int[] {2, 4, 5, 3, 1},
-                new int[] {6, 7, 1, 4, 5},
-                new int[] {5, 1, 1, 2, 4}
-            };
+            int[][] heights1 =
+            [
+                [1, 2, 2, 3, 5],
+                [3, 2, 3, 4, 4],
+                [2, 4, 5, 3, 1],
+                [6, 7, 1, 4, 5],
+                [5, 1, 1, 2, 4]
+            ];
             
             string expected1 = "[[0,4],[1,3],[1,4],[2,2],[3,0],[3,1],[4,0]]";
             
             RunTestCase(solution, heights1, expected1, "Test Case 1: 5x5 Matrix");
             
             // Test Case 2
-            int[][] heights2 = new int[][]
-            {
-                new int[] {2, 1},
-                new int[] {1, 2}
-            };
+            int[][] heights2 =
+            [
+                [2, 1],
+                [1, 2]
+            ];
             
             string expected2 = "[[0,0],[0,1],[1,0],[1,1]]";
             
             RunTestCase(solution, heights2, expected2, "Test Case 2: 2x2 Matrix");
             
             // Test Case 3: Single cell island
-            int[][] heights3 = new int[][] { new int[] { 3 } };
+            int[][] heights3 = [[3]];
             string expected3 = "[[0,0]]";
             RunTestCase(solution, heights3, expected3, "Test Case 3: Single Cell Island");
             
             // Test Case 4: Uniform height matrix (all cells have same height)
-            int[][] heights4 = new int[][]
-            {
-                new int[] {5, 5, 5},
-                new int[] {5, 5, 5},
-                new int[] {5, 5, 5}
-            };
+            int[][] heights4 =
+            [
+                [5, 5, 5],
+                [5, 5, 5],
+                [5, 5, 5]
+            ];
             string expected4 = "[[0,0],[0,1],[0,2],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]]";
             RunTestCase(solution, heights4, expected4, "Test Case 4: Uniform Height");
         }
         
         static void RunTestCase(Solution solution, int[][] heights, string expected, string testCaseName)
         {
-            Stopwatch sw = new Stopwatch();
+            Stopwatch sw = new();
             sw.Start();
             
             var result = solution.PacificAtlantic(heights);

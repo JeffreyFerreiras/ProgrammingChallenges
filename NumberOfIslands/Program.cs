@@ -39,12 +39,12 @@ class Program
 
         // Scenario 1
         Console.WriteLine("---------- Scenario 1 ----------");
-        char[][] grid1 = new char[][] {
+        char[][] grid1 = [
             "11110".ToCharArray(),
             "11010".ToCharArray(),
             "11000".ToCharArray(),
             "00000".ToCharArray()
-        };
+        ];
         Console.WriteLine("Input: grid1");
         Console.WriteLine("Expected Output: 1");
         sw.Restart();
@@ -55,12 +55,12 @@ class Program
 
         // Scenario 2
         Console.WriteLine("---------- Scenario 2 ----------");
-        char[][] grid2 = new char[][] {
+        char[][] grid2 = [
             "11000".ToCharArray(),
             "11000".ToCharArray(),
             "00100".ToCharArray(),
             "00011".ToCharArray()
-        };
+        ];
         Console.WriteLine("Input: grid2");
         Console.WriteLine("Expected Output: 3");
         sw.Restart();
@@ -73,7 +73,7 @@ class Program
         // The grid is divided by water-only rows (rows 4, 8, 12, and 16),
         // resulting in 4 separate connected blocks (islands)
         Console.WriteLine("---------- Scenario 3 ----------");
-        char[][] grid3 = new char[][] {
+        char[][] grid3 = [
             "11110111101111011110".ToCharArray(),
             "11010110101101011010".ToCharArray(),
             "11000110001100011000".ToCharArray(),
@@ -90,7 +90,7 @@ class Program
             "11010110101101011010".ToCharArray(),
             "11000110001100011000".ToCharArray(),
             "00000000000000000000".ToCharArray()  // separator (optional last water row)
-        };
+        ];
         Console.WriteLine("Input: grid3");
         Console.WriteLine("Expected Output: 16");
         sw.Restart();

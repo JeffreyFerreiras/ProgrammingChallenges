@@ -8,15 +8,10 @@ namespace LinkedList_DeleteMiddleNode
          * Delete the middle node from a singly linked list, given only access to that node.
          */
 
-        class Node
+        class Node(int data)
         {
             public Node Next;
-            public int Value;
-
-            public Node(int data)
-            {
-                Value = data;
-            }
+            public int Value = data;
 
             public void Add(int data)
             {
