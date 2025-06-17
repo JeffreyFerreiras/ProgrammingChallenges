@@ -10,8 +10,8 @@ pub fn reverse_char_vec(s: &mut Vec<char>) {
         return;
     }
 
-    let mut left = 0;
-    let mut right = s.len() - 1;
+    let mut left: usize = 0;
+    let mut right: usize = s.len() - 1;
 
     while left < right {
         s.swap(left, right);
