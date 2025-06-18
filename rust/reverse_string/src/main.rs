@@ -3,9 +3,12 @@ use solution::reverse_char_vec;
 
 fn main() {
     const TARGET: &str = "hello";
-    let mut reversed = TARGET.chars().collect::<Vec<char>>();
+    
+    println!("Original value: {TARGET}");
+
+    let mut reversed: Vec<char> = TARGET.chars().collect::<Vec<char>>();
     
     reverse_char_vec(&mut reversed);
 
-    println!("{:?}", reversed);
+    println!("reversed: {:?}", reversed);
 }

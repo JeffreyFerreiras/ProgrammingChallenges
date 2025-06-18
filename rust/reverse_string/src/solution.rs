@@ -1,16 +1,3 @@
-
-pub fn reverse_string(target: &mut String) -> Option<&String> {
-    target.reserve(0);
-    
-    Some(target)
-}
-
-pub fn reverse_string_str(target: &str) -> String {
-    let mut char_vec: Vec<char> = target.chars().into_iter().collect();
-    reverse_char_vec(&mut char_vec);
-    return char_vec.into_iter().collect();
-}
-
 pub fn reverse_char_vec(s: &mut Vec<char>) {
     if s.is_empty() {
         return;
