@@ -12,9 +12,9 @@ fn main() {
         .parse()
         .expect("Something went wrong while parsing the number");
 
-    let fib = fibonacci(num);
+    let result = fibonacci(num);
 
-    println!("Your fibonacci number is: {fib}");
+    println!("Your fibonacci number is: {result}");
 }
 
 fn fibonacci(num: u64) -> u64 {
@@ -65,7 +65,7 @@ mod tests {
     fn test_fibonacci_sequence() {
         let expected = vec![0, 1, 1, 2, 3, 5, 8, 13, 21, 34];
         for (i, &expected_value) in expected.iter().enumerate() {
-            assert_eq!(fibonacci(i as u32), expected_value);
+            assert_eq!(fibonacci(i as u64), expected_value);
         }
     }
 }
