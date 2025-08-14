@@ -355,3 +355,5 @@ benches/target/
 # Flamegraph profiling files
 flamegraph.svg
 perf.data*
+**/target/
+*.rustc_info.json
