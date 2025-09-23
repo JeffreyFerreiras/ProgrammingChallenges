@@ -215,6 +215,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedundantConnection", "Redu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluateReversePolishNotation", "EvaluateReversePolishNotation\EvaluateReversePolishNotation.csproj", "{E6B59622-8ED4-4C4E-B53A-8DAC57A138E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateParentheses", "GenerateParentheses\GenerateParentheses.csproj", "{FE5107D0-F11B-4C82-99E7-0DCB06443F22}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1461,6 +1463,18 @@ Global
 		{E6B59622-8ED4-4C4E-B53A-8DAC57A138E1}.Release|x64.Build.0 = Release|Any CPU
 		{E6B59622-8ED4-4C4E-B53A-8DAC57A138E1}.Release|x86.ActiveCfg = Release|Any CPU
 		{E6B59622-8ED4-4C4E-B53A-8DAC57A138E1}.Release|x86.Build.0 = Release|Any CPU
+		{FE5107D0-F11B-4C82-99E7-0DCB06443F22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE5107D0-F11B-4C82-99E7-0DCB06443F22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE5107D0-F11B-4C82-99E7-0DCB06443F22}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FE5107D0-F11B-4C82-99E7-0DCB06443F22}.Debug|x64.Build.0 = Debug|Any CPU
+		{FE5107D0-F11B-4C82-99E7-0DCB06443F22}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FE5107D0-F11B-4C82-99E7-0DCB06443F22}.Debug|x86.Build.0 = Debug|Any CPU
+		{FE5107D0-F11B-4C82-99E7-0DCB06443F22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE5107D0-F11B-4C82-99E7-0DCB06443F22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE5107D0-F11B-4C82-99E7-0DCB06443F22}.Release|x64.ActiveCfg = Release|Any CPU
+		{FE5107D0-F11B-4C82-99E7-0DCB06443F22}.Release|x64.Build.0 = Release|Any CPU
+		{FE5107D0-F11B-4C82-99E7-0DCB06443F22}.Release|x86.ActiveCfg = Release|Any CPU
+		{FE5107D0-F11B-4C82-99E7-0DCB06443F22}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
