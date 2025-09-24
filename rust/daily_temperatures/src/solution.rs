@@ -1,22 +1,17 @@
 /// 739. Daily Temperatures
-/// 
-/// Given an array of integers temperatures represents the daily temperatures, 
-/// return an array answer such that answer[i] is the number of days you have 
-/// to wait after the ith day to get a warmer temperature. If there is no future 
+///
+/// Given an array of integers temperatures represents the daily temperatures,
+/// return an array answer such that answer[i] is the number of days you have
+/// to wait after the ith day to get a warmer temperature. If there is no future
 /// day for which this is possible, keep answer[i] == 0 instead.
-/// 
+///
 /// Constraints:
 /// - 1 <= temperatures.length <= 10^5
 /// - 30 <= temperatures[i] <= 100
-/// 
+///
 /// Time Complexity: O(n) - Each element is pushed and popped from stack at most once
 /// Space Complexity: O(n) - Stack can contain at most n elements in worst case
 pub fn daily_temperatures(temperatures: Vec<i32>) -> Vec<i32> {
-    // TODO: Implement the daily temperatures solution
-    // Hint: Use a monotonic decreasing stack to efficiently find the next warmer day
-    // The stack should store indices of temperatures for which we haven't found 
-    // a warmer day yet
-
     // result array to store the number of days to wait for a warmer temperature
     let mut result = vec![0; temperatures.len()];
     let mut stack = Vec::new();
@@ -35,6 +30,25 @@ pub fn daily_temperatures(temperatures: Vec<i32>) -> Vec<i32> {
 
     result
 }
+
+pub fn daily_temperatures_fast(temperatures: Vec<i32>) -> Vec<i32> {
+        let n = temperatures.len();
+        let mut ans = vec![0; n];
+        let mut stack = vec![];
+
+        for (index, temp) in temperatures.into_iter().enumerate() {
+
+            while let Some((_, top_temperature)) = stack.last() {
+                if *top_temperature >= temp {
+                    break;
+                }
+                let (j, _) = stack.pop().unwrap();
+                ans[j] = (index - j) as i32;
+            }
+            stack.push((index, temp))
+        }
+        ans
+    }
 
 #[cfg(test)]
 mod tests {
