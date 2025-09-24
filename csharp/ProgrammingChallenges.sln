@@ -217,6 +217,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluateReversePolishNotati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateParentheses", "GenerateParentheses\GenerateParentheses.csproj", "{FE5107D0-F11B-4C82-99E7-0DCB06443F22}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyTemperatures", "DailyTemperatures\DailyTemperatures.csproj", "{93080695-05AB-47C1-BD6C-19DCCD9D426B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1475,6 +1477,18 @@ Global
 		{FE5107D0-F11B-4C82-99E7-0DCB06443F22}.Release|x64.Build.0 = Release|Any CPU
 		{FE5107D0-F11B-4C82-99E7-0DCB06443F22}.Release|x86.ActiveCfg = Release|Any CPU
 		{FE5107D0-F11B-4C82-99E7-0DCB06443F22}.Release|x86.Build.0 = Release|Any CPU
+		{93080695-05AB-47C1-BD6C-19DCCD9D426B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93080695-05AB-47C1-BD6C-19DCCD9D426B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93080695-05AB-47C1-BD6C-19DCCD9D426B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{93080695-05AB-47C1-BD6C-19DCCD9D426B}.Debug|x64.Build.0 = Debug|Any CPU
+		{93080695-05AB-47C1-BD6C-19DCCD9D426B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{93080695-05AB-47C1-BD6C-19DCCD9D426B}.Debug|x86.Build.0 = Debug|Any CPU
+		{93080695-05AB-47C1-BD6C-19DCCD9D426B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93080695-05AB-47C1-BD6C-19DCCD9D426B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93080695-05AB-47C1-BD6C-19DCCD9D426B}.Release|x64.ActiveCfg = Release|Any CPU
+		{93080695-05AB-47C1-BD6C-19DCCD9D426B}.Release|x64.Build.0 = Release|Any CPU
+		{93080695-05AB-47C1-BD6C-19DCCD9D426B}.Release|x86.ActiveCfg = Release|Any CPU
+		{93080695-05AB-47C1-BD6C-19DCCD9D426B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

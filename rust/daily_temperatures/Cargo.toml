@@ -1,0 +1,14 @@
+[package]
+name = "daily_temperatures"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "daily_temperatures"
+path = "src/main.rs"
+
+[lib]
+name = "daily_temperatures"
+path = "src/solution.rs"
+
+[dependencies]
