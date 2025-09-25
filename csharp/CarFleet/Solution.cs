@@ -72,6 +72,10 @@ public static class Solution
         return fleetCount;
     }
 
+    /// <summary>
+    /// Optimal approach: Use position as index to store time to target
+    /// Time: O(n + m), Space: O(m) where m is target
+    /// </summary>
     public static int CarFleet_UseAllRestrictions(int target, int[] position, int[] speed)
     {
         // this for when the cars meet in the target or before the target

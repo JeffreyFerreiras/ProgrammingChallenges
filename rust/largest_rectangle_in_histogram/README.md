@@ -7,6 +7,7 @@ Given an array of integers `heights` representing the histogram's bar height whe
 ## Examples
 
 **Example 1:**
+
 ```text
 Input: heights = [2,1,5,6,2,3]
 Output: 10
@@ -15,6 +16,7 @@ The largest rectangle is shown in the red area, which has an area = 10 units.
 ```
 
 **Example 2:**
+
 ```text
 Input: heights = [2,4]
 Output: 4

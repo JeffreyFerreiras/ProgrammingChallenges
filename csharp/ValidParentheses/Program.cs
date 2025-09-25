@@ -1,6 +1,6 @@
 ﻿/*
  * Valid Parentheses
- * 
+ *
  * Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
 
 An input string is valid if:
@@ -51,10 +51,36 @@ internal class Program
     {
         var testCases = new Dictionary<string, bool>
         {
+            // Basic examples
             { "()", true },
             { "()[]{}", true },
             { "(]", false },
-            { "([])", true }
+            { "([])", true },
+            // Edge cases
+            { "", true }, // Empty string
+            { "(", false }, // Single opening bracket
+            { ")", false }, // Single closing bracket
+            { "((", false }, // Only opening brackets
+            { "))", false }, // Only closing brackets
+            // Complex nesting
+            { "{[()]}", true }, // Proper nested brackets
+            { "([)]", false }, // Improper nesting
+            { "{[({})]}", true }, // Deep nesting
+            { "[({})]", true }, // Mixed proper nesting
+            // Mismatch cases
+            { "(}", false }, // Wrong closing bracket
+            { "[)", false }, // Wrong closing bracket
+            { "{]", false }, // Wrong closing bracket
+            // Longer sequences
+            { "()[]{}()", true }, // Multiple pairs
+            { "((()))", true }, // Nested same type
+            { "[[[]]]]", false }, // Extra closing bracket
+            { "((([))))", false }, // Wrong order closing
+            // Complex valid cases
+            { "{[()]}[{}](([])){()}", true }, // Mixed complex nesting
+            { "(){}[]", true }, // Simple sequence
+            { "(((())))[[[[]]]]{{{{}}}})", false }, // Missing opening
+            { "(((())))[[[[]]]][{{{}}}]", true }, // Complex balanced
         };
 
         foreach (var testCase in testCases)
@@ -63,50 +89,9 @@ internal class Program
             var result = Solution.IsValid(testCase.Key);
             stopwatch.Stop();
 
-            Console.WriteLine($"Method: IsValid, Input: {testCase.Key}, Result: {result}, Expected: {testCase.Value}, Time: {stopwatch.ElapsedTicks} ticks");
+            Console.WriteLine(
+                $"Method: IsValid, Input: {testCase.Key}, Result: {result}, Expected: {testCase.Value}, Time: {stopwatch.ElapsedTicks} ticks"
+            );
         }
-    }
-}
-
-public class Solution
-{
-    public static bool IsValid(string s)
-    {
-        var pairs = new Dictionary<char, char>()
-        {
-            {'{', '}'},
-            {'(', ')'},
-            {'[', ']'}
-        };
-
-        var opens = new Stack<char>(); //use a stack to add opens
-
-        foreach (char c in s)
-        {
-            if (pairs.ContainsKey(c))
-            {
-                opens.Push(c);
-            }
-            else
-            {
-                if (!opens.Any())
-                {
-                    return false;
-                }
-
-                var openBracket = opens.Peek();
-
-                if (pairs[openBracket] == c)
-                {
-                    opens.Pop();
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-
-        return opens.Count() == 0;
     }
 }
