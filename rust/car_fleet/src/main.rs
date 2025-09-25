@@ -4,8 +4,6 @@ mod solution;
 use solution::Solution;
 
 fn main() {
-    let solution = Solution;
-    
     // Test Case 1: Example 1 from LeetCode
     println!("=== Car Fleet Challenge Test Cases ===\n");
     
@@ -16,7 +14,7 @@ fn main() {
     let expected1 = 3;
     
     let start = Instant::now();
-    let result1 = solution.car_fleet(target1, position1.clone(), speed1.clone());
+    let result1 = Solution::car_fleet(target1, position1.clone(), speed1.clone());
     let duration1 = start.elapsed();
     
     println!("Test Case 1:");
@@ -34,7 +32,7 @@ fn main() {
     let expected2 = 1;
     
     let start = Instant::now();
-    let result2 = solution.car_fleet(target2, position2.clone(), speed2.clone());
+    let result2 = Solution::car_fleet(target2, position2.clone(), speed2.clone());
     let duration2 = start.elapsed();
     
     println!("Test Case 2:");
@@ -52,7 +50,7 @@ fn main() {
     let expected3 = 1;
     
     let start = Instant::now();
-    let result3 = solution.car_fleet(target3, position3.clone(), speed3.clone());
+    let result3 = Solution::car_fleet(target3, position3.clone(), speed3.clone());
     let duration3 = start.elapsed();
     
     println!("Test Case 3:");
@@ -70,7 +68,7 @@ fn main() {
     let expected4 = 1;
     
     let start = Instant::now();
-    let result4 = solution.car_fleet(target4, position4.clone(), speed4.clone());
+    let result4 = Solution::car_fleet(target4, position4.clone(), speed4.clone());
     let duration4 = start.elapsed();
     
     println!("Test Case 4 (Edge Case - Single Car):");
@@ -88,7 +86,7 @@ fn main() {
     let expected5 = 1;
     
     let start = Instant::now();
-    let result5 = solution.car_fleet(target5, position5.clone(), speed5.clone());
+    let result5 = Solution::car_fleet(target5, position5.clone(), speed5.clone());
     let duration5 = start.elapsed();
     
     println!("Test Case 5 (All Cars at Same Position):");

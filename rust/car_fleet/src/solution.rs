@@ -22,9 +22,29 @@ impl Solution {
     /// it will still be considered as one car fleet.
     /// 
     /// Return the number of car fleets that will arrive at the destination.
-    pub fn car_fleet(&self, _target: i32, _position: Vec<i32>, _speed: Vec<i32>) -> i32 {
-        // TODO: Implement the solution
-        // This is a placeholder - the actual solution needs to be implemented
-        0
+    pub fn car_fleet(target: i32, position: Vec<i32>, speed: Vec<i32>) -> i32 {
+        let len = position.len();
+        let mut cars: Vec<(i32, i32)> = Vec::new();
+        
+        // Create (position, time_to_reach_target) pairs
+        for i in 0..len {
+            let time = (target - position[i]) / speed[i];
+            cars.push((position[i], time));
+        }
+        
+        // Sort by position in descending order (closest to target first)
+        cars.sort_by(|a, b| b.0.cmp(&a.0));
+        
+        let mut fleets = 0;
+        let mut slowest_time = 0;
+        
+        for (_, time) in cars {
+            if time > slowest_time {
+                fleets += 1;
+                slowest_time = time;
+            }
+        }
+        
+        fleets
     }
 }
