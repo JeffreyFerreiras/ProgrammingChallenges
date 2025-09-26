@@ -76,6 +76,6 @@ class Program
         Run("Flat", [3, 3, 3], 0);
         Run("Edge case", [1], 0);
         Run("Two bars", [4, 2], 0);
-        Run("Simple basin", [3, 0, 2, 0, 4], 10);
+        Run("Simple basin", [3, 0, 2, 0, 4], 7);
     }
 }
