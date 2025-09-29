@@ -124,7 +124,7 @@ fn run_scenario(method_name: &str, scenario: &Scenario) {
     println!("  Matrix: {}", matrix_preview);
 
     let start = Instant::now();
-    let result = panic::catch_unwind(|| Solution::search_matrix(&scenario.matrix, scenario.target));
+    let result = panic::catch_unwind(|| Solution::search_matrix(scenario.matrix.clone(), scenario.target));
     let elapsed = start.elapsed();
 
     println!("  Method: {}", method_name);
