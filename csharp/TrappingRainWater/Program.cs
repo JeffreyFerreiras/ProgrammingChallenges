@@ -70,6 +70,7 @@ class Program
         }
 
         // Test cases
+        Run("Example 0", [0, 1, 0, 1], 1);
         Run("Example 1", [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1], 6);
         Run("Example 2", [4, 2, 0, 3, 2, 5], 9);
         Run("No water", [1, 2, 3], 0);

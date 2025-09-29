@@ -5,28 +5,25 @@ public static class Solution
     public static int Trap(int[] height)
     {
         int n = height.Length;
-        if (n == 0)
-            return 0;
-
-        Stack<int> stack = new();
+        Stack<int> stack = new(height.Length);
         int totalWater = 0;
 
         for (int i = 0; i < n; i++)
         {
             while (stack.Count > 0 && height[i] > height[stack.Peek()])
             {
-                int bottomIndex = stack.Pop();
+                var bottomIndex = stack.Pop();
                 if (stack.Count == 0)
                     break;
 
                 int leftIndex = stack.Peek();
                 int width = i - leftIndex - 1;
-                int boundedHeight = Math.Min(height[leftIndex], height[i]) - height[bottomIndex];
-                totalWater += width * boundedHeight;
+                int boundedHeight = Math.Min(height[i], height[leftIndex]) - height[bottomIndex];
+                totalWater += boundedHeight * width;
             }
+
             stack.Push(i);
         }
-
         return totalWater;
     }
 

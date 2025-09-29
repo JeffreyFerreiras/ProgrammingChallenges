@@ -31,4 +31,3 @@ int Search(int[] nums, int target)
 
     return -1;
 }
-
