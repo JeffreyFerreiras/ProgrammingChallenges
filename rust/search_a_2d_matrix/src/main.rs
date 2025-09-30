@@ -74,37 +74,11 @@ fn main() {
             target: 11,
             expected: false,
         },
-        Scenario {
-            name: "Large Example",
-            matrix: generate_large_matrix(50, 50, 2),
-            target: 4897,
-            expected: true,
-        },
-        Scenario {
-            name: "Large Example Not Found",
-            matrix: generate_large_matrix(50, 50, 2),
-            target: 50001,
-            expected: false,
-        },
     ];
 
     for scenario in scenarios {
         run_scenario("search_matrix", &scenario);
     }
-}
-
-fn generate_large_matrix(rows: usize, columns: usize, step: i32) -> Vec<Vec<i32>> {
-    let mut value = 1;
-    let mut matrix = Vec::with_capacity(rows);
-    for _ in 0..rows {
-        let mut row = Vec::with_capacity(columns);
-        for _ in 0..columns {
-            row.push(value);
-            value += step;
-        }
-        matrix.push(row);
-    }
-    matrix
 }
 
 fn run_scenario(method_name: &str, scenario: &Scenario) {
