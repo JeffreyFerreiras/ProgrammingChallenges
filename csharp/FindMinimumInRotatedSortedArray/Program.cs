@@ -1,124 +1,152 @@
-﻿/*
-Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example, the array nums = [0,1,2,4,5,6,7] might become:
+using System.Diagnostics;
 
-[4,5,6,7,0,1,2] if it was rotated 4 times.
-[0,1,2,4,5,6,7] if it was rotated 7 times.
-Notice that rotating an array [a[0], a[1], a[2], ..., a[n-1]] 1 time results in the array [a[n-1], a[0], a[1], a[2], ..., a[n-2]].
+namespace FindMinimumInRotatedSortedArray;
 
-Given the sorted rotated array nums of unique elements, return the minimum element of this array.
+internal record TestScenario(string Name, int[] Numbers, int ExpectedMinimum);
 
-You must write an algorithm that runs in O(log n) time.
-
-Example 1:
-
-Input: nums = [3,4,5,1,2]
-Output: 1
-Explanation: The original array was [1,2,3,4,5] rotated 3 times.
-Example 2:
-
-Input: nums = [4,5,6,7,0,1,2]
-Output: 0
-Explanation: The original array was [0,1,2,4,5,6,7] and it was rotated 4 times.
-Example 3:
-
-Input: nums = [11,13,15,17]
-Output: 11
-Explanation: The original array was [11,13,15,17] and it was rotated 4 times. 
-
-Constraints:
-
-n == nums.length
-1 <= n <= 5000
--5000 <= nums[i] <= 5000
-All the integers of nums are unique.
-nums is sorted and rotated between 1 and n times.
-*/
-int [] nums;
-int expected;
-int result;
-
-// [3,4,5,1,2]
-nums = new int[] {3, 4, 5, 1, 2};
-expected = 1;
-result = FindMin(nums);
-Console.WriteLine($"result: {result} expected: {expected}");
-
-
-//[4,5,6,7,0,1,2]
-nums = new int[] {4, 5, 6, 7, 0, 1, 2};
-expected = 0;
-result = FindMin(nums);
-Console.WriteLine($"result: {result} expected: {expected}");
-
-//[11,13,15,17]
-nums = new int[] {11, 13, 15, 17};
-expected = 11;
-result = FindMin(nums);
-Console.WriteLine($"result: {result} expected: {expected}");
-
-// [1]
-nums = new int[] {1};
-expected = 1;
-result = FindMin(nums);
-Console.WriteLine($"result: {result} expected: {expected}");
-
-// [2,1]
-nums = new int[] {2, 1};
-expected = 1;
-result = FindMin(nums);
-Console.WriteLine($"result: {result} expected: {expected}");
-
-// [1,2, -500]
-nums = new int[] {1, 2, -500};
-expected = -500;
-result = FindMin(nums);
-Console.WriteLine($"result: {result} expected: {expected}");
-
-// [1,2,3,4,5,6,7,0]
-nums = new int[] {1, 2, 3, 4, 5, 6, 7, 0};
-expected = 0;
-result = FindMin(nums);
-Console.WriteLine($"result: {result} expected: {expected}");
-
-// all 1s
-nums = new int[] {1, 1, 1, 1, 1, 1, 1, 1};
-expected = 1;
-result = FindMin(nums);
-Console.WriteLine($"result: {result} expected: {expected}");
-
-
-Console.ReadLine();
-/**
- * 1. Start by looking at the middle of the array
- * 2. Check the first and last element.
- * 3. 
- */
-
-
-static int FindMin(int[] nums) 
+internal static class Program
 {
-    int left = 0;
-    int right = nums.Length - 1;
-    int mid = nums.Length / 2;
-
-    while(left <= right)
+    public static void Main()
     {
-        mid = (left + right) / 2;
-        if (nums[left] > nums[right])
+        var solution = new Solution();
+        var methodName = nameof(Solution.FindMin);
+
+        int[] largeRotation = GenerateRotatedArray(100_000, 42_500);
+
+        TestScenario[] scenarios =
+        [
+            new(
+                "Example 1",
+                new[] { 3, 4, 5, 1, 2 },
+                1
+            ),
+            new(
+                "Example 2",
+                new[] { 4, 5, 6, 7, 0, 1, 2 },
+                0
+            ),
+            new(
+                "Example 3",
+                new[] { 11, 13, 15, 17 },
+                11
+            ),
+            new(
+                "Single Element",
+                new[] { 1 },
+                1
+            ),
+            new(
+                "Two Elements Rotated",
+                new[] { 2, 1 },
+                1
+            ),
+            new(
+                "Already Sorted",
+                new[] { -9, -3, 0, 4, 7, 12 },
+                -9
+            ),
+            new(
+                "Large Rotation",
+                largeRotation,
+                GetMinimumValue(largeRotation)
+            ),
+        ];
+
+        foreach (TestScenario scenario in scenarios)
         {
-            if (nums[mid] > nums[right]){
-                left = mid + 1;
-            }
-            else if (nums[mid] < nums[right]){
-                right = mid;
-            }
-        }
-        else
-        {
-            return nums[left];
+            RunScenario(solution, methodName, scenario);
         }
     }
 
-    return nums[left];
+    private static int[] GenerateRotatedArray(int length, int pivot)
+    {
+        int[] numbers = new int[length];
+        for (int i = 0; i < length; i++)
+        {
+            numbers[i] = i - (length / 2);
+        }
 
+        pivot %= length;
+        if (pivot < 0)
+        {
+            pivot += length;
+        }
+
+        int[] rotated = new int[length];
+        int index = 0;
+        for (int i = pivot; i < length; i++, index++)
+        {
+            rotated[index] = numbers[i];
+        }
+        for (int i = 0; i < pivot; i++, index++)
+        {
+            rotated[index] = numbers[i];
+        }
+
+        return rotated;
+    }
+
+    private static int GetMinimumValue(int[] numbers)
+    {
+        int min = numbers[0];
+        for (int i = 1; i < numbers.Length; i++)
+        {
+            if (numbers[i] < min)
+            {
+                min = numbers[i];
+            }
+        }
+        return min;
+    }
+
+    private static void RunScenario(Solution solution, string methodName, TestScenario scenario)
+    {
+        Console.WriteLine($"Scenario: {scenario.Name}");
+        Console.WriteLine($"Method: {methodName}");
+        Console.WriteLine($"Expected: {scenario.ExpectedMinimum}");
+        Console.WriteLine($"Array Length: {scenario.Numbers.Length}");
+        Console.WriteLine($"Array Preview: {FormatArrayPreview(scenario.Numbers)}");
+
+        Stopwatch stopwatch = Stopwatch.StartNew();
+        string resultDisplay;
+
+        try
+        {
+            int result = solution.FindMin(scenario.Numbers);
+            resultDisplay = result.ToString();
+        }
+        catch (NotImplementedException ex)
+        {
+            resultDisplay = $"Not Implemented ({ex.Message})";
+        }
+        catch (Exception ex)
+        {
+            resultDisplay = $"Error ({ex.GetType().Name}: {ex.Message})";
+        }
+        finally
+        {
+            stopwatch.Stop();
+        }
+
+        Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
+        Console.WriteLine($"Result: {resultDisplay}");
+        Console.WriteLine();
+    }
+
+    private static string FormatArrayPreview(int[] numbers)
+    {
+        const int previewCount = 12;
+        if (numbers.Length <= previewCount)
+        {
+            return $"[{string.Join(",", numbers)}]";
+        }
+
+        string[] preview = new string[previewCount + 1];
+        for (int i = 0; i < previewCount; i++)
+        {
+            preview[i] = numbers[i].ToString();
+        }
+        preview[previewCount] = $"..., {numbers[^1]}";
+        return $"[{string.Join(",", preview)}]";
+    }
 }

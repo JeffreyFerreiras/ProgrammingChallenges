@@ -1,31 +1,31 @@
-# Binary Search
+# 704. Binary Search
 
-## Problem Description
-Given a sorted array of integers `nums` and an integer `target`, find the index of `target` in the array. If `target` is not present in the array, return -1.
+## Problem
+You receive a sorted integer array `nums` and an integer `target`. The array is strictly increasing and may contain negative values. Your task is to return the index of `target` if it appears in the array; otherwise return `-1`. The search must execute in `O(log n)` time, which rules out linear scanning and directs you toward a divide-and-conquer approach.
 
-## Example:
-```
-Input: nums = [-1,0,3,5,9,12], target = 9
-Output: 4
-Explanation: 9 exists in nums and its index is 4
-```
+## Examples
+- **Example 1**
+  - Input: `nums = [-1,0,3,5,9,12]`, `target = 9`
+  - Output: `4`
+  - Explanation: `9` is located at index `4` when zero-indexed.
+- **Example 2**
+  - Input: `nums = [-1,0,3,5,9,12]`, `target = 2`
+  - Output: `-1`
+  - Explanation: There is no element equal to `2`, so the method returns `-1`.
 
-## Constraints:
-- The array is sorted in ascending order
-- All elements in the array are unique
-- The array may contain negative numbers
+## Edge Cases and Long Examples
+- Single element list where the target exists, e.g. `nums = [5]`, `target = 5` ? `0`.
+- Single element list where the target does not exist, e.g. `nums = [5]`, `target = -5` ? `-1`.
+- Arrays dominated by negative numbers, e.g. `nums = [-15,-9,-4,0,12,18,27]`, `target = -4` ? `2`.
+- Large monotonic range to exercise logarithmic performance, e.g. `nums` contains `200,001` values from `-100,000` to `100,000`, `target = 54,321` ? `154,321`.
 
-## Solution Approach
-The solution implements the classic binary search algorithm:
+## Constraints
+- `1 <= nums.length <= 10^4`
+- `-10^4 <= nums[i] <= 10^4`
+- `nums` is sorted in strictly ascending order.
+- All values in `nums` are unique.
+- `-10^4 <= target <= 10^4`
 
-1. Initialize two pointers, `low` at the beginning of the array and `high` at the end
-2. While `low` is less than or equal to `high`:
-   - Calculate the middle index `mid` as the average of `low` and `high`
-   - If the value at `mid` is equal to the target, return `mid`
-   - If the value at `mid` is greater than the target, search the left half by setting `high = mid - 1`
-   - If the value at `mid` is less than the target, search the right half by setting `low = mid + 1`
-3. If the target is not found after the loop, return -1
-
-This binary search implementation has:
-- Time Complexity: O(log n) where n is the length of the array
-- Space Complexity: O(1) as it uses a constant amount of extra space
+## Implementation Notes
+- The `Solution.Search(int[] nums, int target)` method is intentionally left unimplemented. Add the binary search logic before running the scenarios in `Program.cs`.
+- `Program.cs` defines several scenarios, invokes the solution method, and prints timing information in milliseconds with four decimal places for easy comparison.

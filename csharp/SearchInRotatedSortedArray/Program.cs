@@ -1,149 +1,161 @@
-﻿/**
-There is an integer array nums sorted in ascending order (with distinct values).
+using System.Diagnostics;
 
-Prior to being passed to your function, nums is possibly rotated at an unknown pivot index k (1 <= k < nums.length) such that the resulting array is [nums[k], nums[k + 1], ..., nums[n - 1], nums[0], nums[1], ..., nums[k - 1]] (0 - indexed).For example, [0,1,2,4,5,6,7] might be rotated at pivot index 3 and become [4,5,6,7,0,1,2].
+namespace SearchInRotatedSortedArray;
 
-Given the array nums after the possible rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums.
+internal record TestScenario(string Name, int[] Numbers, int Target, int ExpectedIndex);
 
-You must write an algorithm with O(log n) runtime complexity.
-
-
-
-
-Example 1:
-
-Input: nums = [4, 5, 6, 7, 0, 1, 2], target = 0
-Output: 4
-
-Example 2:
-
-Input: nums = [4, 5, 6, 7, 0, 1, 2], target = 3
-Output: -1
-
-Example 3:
-
-Input: nums = [1], target = 0
-Output: -1
-
-
-
-Constraints:
-
-1 <= nums.length <= 5000
--104 <= nums[i] <= 104
-All values of nums are unique.
-nums is an ascending array that is possibly rotated.
--104 <= target <= 104
-*/
-
-int[] nums;
-int target;
-int expected;
-int result;
-
-// [4, 5, 6, 7, 0, 1, 2]
-nums = new int[] { 4, 5, 6, 7, 0, 1, 2 };
-target = 0;
-expected = 4;
-result = Search(nums, target);
-
-Console.WriteLine($"RESULT: {result} EXPECTED: {expected}");
-
-//[4, 5, 6, 7, 0, 1, 2]
-target = 3;
-expected = -1;
-result = Search(nums, target);
-Console.WriteLine($"RESULT: {result} EXPECTED: {expected}");
-
-//[1]
-nums = new int[] { 1 };
-target = 0;
-expected = -1;
-result = Search(nums, target);
-Console.WriteLine($"RESULT: {result} EXPECTED: {expected}");
-
-//[-1, -1, -1, -1, 0, 1, 2]
-nums = new int[] { -1, -1, -1, -1, 0, 1, 2 };
-target = 0;
-expected = 4;
-result = Search(nums, target);
-Console.WriteLine($"RESULT: {result} EXPECTED: {expected}");
-
-//all 0
-nums = new int[] { 0, 0, 0, 0, 0, 0, 0 };
-target = 0;
-expected = nums.Length / 2;
-result = Search(nums, target);
-Console.WriteLine($"RESULT: {result} EXPECTED: {expected}");
-
-// [7, 0, 1, 2, 4, 5, 6,]
-nums = new int[] { 7, 0, 1, 2, 4, 5, 6 };
-target = 0;
-expected = 1;
-result = Search(nums, target);
-Console.WriteLine($"RESULT: {result} EXPECTED: {expected}");
-
-// [ 0, 1, 2, 4, 5, 6, 7]
-nums = new int[] { 0, 1, 2, 4, 5, 6, 7 };
-target = 0;
-expected = 0;
-result = Search(nums, target);
-Console.WriteLine($"RESULT: {result} EXPECTED: {expected}");
-
-//Input: nums = [4,5,6,7,0,1,2], target = 0
-//Output: 4
-nums = new int[] { 4, 5, 6, 7, 0, 1, 2 };
-target = 0;
-expected = 4;
-result = Search(nums, target);
-Console.WriteLine($"RESULT: {result} EXPECTED: {expected}");
-
-int Search(int[] nums, int target)
+internal static class Program
 {
-    int left = 0;
-    int right = nums.Length - 1;
-    int mid;
-
-    while (left <= right)
+    public static void Main()
     {
-        mid = (left + right) / 2;
+        var solution = new Solution();
+        var methodName = nameof(Solution.Search);
 
-        if (nums[mid] == target)
-        {
-            return mid;
-        }
+        int[] largeRotation = GenerateRotatedArray(120_000, 75_000);
+        int targetInLarge = 12_345;
+        int expectedIndexLarge = FindIndex(largeRotation, targetInLarge);
 
-        if (nums[left] < nums[right])
+        TestScenario[] scenarios =
+        [
+            new(
+                "Example 1",
+                new[] { 4, 5, 6, 7, 0, 1, 2 },
+                0,
+                4
+            ),
+            new(
+                "Example 2",
+                new[] { 4, 5, 6, 7, 0, 1, 2 },
+                3,
+                -1
+            ),
+            new(
+                "Single Element Present",
+                new[] { 1 },
+                1,
+                0
+            ),
+            new(
+                "Single Element Missing",
+                new[] { 1 },
+                0,
+                -1
+            ),
+            new(
+                "All Positive Rotation",
+                new[] { 30, 34, 40, 2, 5, 8, 11 },
+                5,
+                4
+            ),
+            new(
+                "Negative and Positive",
+                new[] { 9, 12, 17, -4, -1, 0, 3 },
+                -1,
+                4
+            ),
+            new(
+                "Large Rotation",
+                largeRotation,
+                targetInLarge,
+                expectedIndexLarge
+            ),
+        ];
+
+        foreach (TestScenario scenario in scenarios)
         {
-            if (nums[mid] > target)
-            {
-                right = mid - 1;
-            }
-            else
-            {
-                left = mid + 1;
-            }
-        }
-        else
-        { // array is rotated
-            if (nums[left] > nums[mid] && target >= nums[left])
-            {
-                right = mid - 1;
-            }
-            else if (nums[right] < nums[mid] && target <= nums[right])
-            {
-                left = mid + 1;
-            }
-            else if (nums[mid] > target)
-            {
-                right = mid - 1;
-            }
-            else
-            {
-                left = mid + 1;
-            }
+            RunScenario(solution, methodName, scenario);
         }
     }
 
-    return -1;
+    private static int[] GenerateRotatedArray(int length, int pivot)
+    {
+        int[] numbers = new int[length];
+        for (int i = 0; i < length; i++)
+        {
+            numbers[i] = i - (length / 2);
+        }
+
+        pivot %= length;
+        if (pivot < 0)
+        {
+            pivot += length;
+        }
+
+        int[] rotated = new int[length];
+        int index = 0;
+        for (int i = pivot; i < length; i++, index++)
+        {
+            rotated[index] = numbers[i];
+        }
+        for (int i = 0; i < pivot; i++, index++)
+        {
+            rotated[index] = numbers[i];
+        }
+
+        return rotated;
+    }
+
+    private static int FindIndex(int[] numbers, int target)
+    {
+        for (int i = 0; i < numbers.Length; i++)
+        {
+            if (numbers[i] == target)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private static void RunScenario(Solution solution, string methodName, TestScenario scenario)
+    {
+        Console.WriteLine($"Scenario: {scenario.Name}");
+        Console.WriteLine($"Method: {methodName}");
+        Console.WriteLine($"Target: {scenario.Target}");
+        Console.WriteLine($"Expected: {scenario.ExpectedIndex}");
+        Console.WriteLine($"Array Length: {scenario.Numbers.Length}");
+        Console.WriteLine($"Array Preview: {FormatArrayPreview(scenario.Numbers)}");
+
+        Stopwatch stopwatch = Stopwatch.StartNew();
+        string resultDisplay;
+
+        try
+        {
+            int result = solution.Search(scenario.Numbers, scenario.Target);
+            resultDisplay = result.ToString();
+        }
+        catch (NotImplementedException ex)
+        {
+            resultDisplay = $"Not Implemented ({ex.Message})";
+        }
+        catch (Exception ex)
+        {
+            resultDisplay = $"Error ({ex.GetType().Name}: {ex.Message})";
+        }
+        finally
+        {
+            stopwatch.Stop();
+        }
+
+        Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
+        Console.WriteLine($"Result: {resultDisplay}");
+        Console.WriteLine();
+    }
+
+    private static string FormatArrayPreview(int[] numbers)
+    {
+        const int previewCount = 12;
+        if (numbers.Length <= previewCount)
+        {
+            return $"[{string.Join(",", numbers)}]";
+        }
+
+        string[] preview = new string[previewCount + 1];
+        for (int i = 0; i < previewCount; i++)
+        {
+            preview[i] = numbers[i].ToString();
+        }
+        preview[previewCount] = $"..., {numbers[^1]}";
+        return $"[{string.Join(",", preview)}]";
+    }
 }
