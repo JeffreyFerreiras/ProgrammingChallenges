@@ -17,7 +17,7 @@ namespace FindElementInSortedRotatedArray
         3) Error Check: that left is not bigger than right...We're doing recursion here! mmmkay.
         4) Check if the left side is ordered
             a) if target is between left and mid, recur left to mid-1.
-            b) else recur mid+1 to right	
+            b) else recur mid+1 to right
         5) Check if the right side is ordered, if it is
             a) if target is between mid+1 to right, recur mid +1 to right.
             b) else recur left to mid-1;
@@ -42,11 +42,15 @@ namespace FindElementInSortedRotatedArray
 
             // Test case 1
             int[] rotatedArry = [3, 4, 5, 1, 2];
-            int x = 4, left = 0, right = rotatedArry.Length - 1;
+            int x = 4,
+                left = 0,
+                right = rotatedArry.Length - 1;
             int expectedIndex = 1;
             int indexofX = BinarySearchRecursive(rotatedArry, left, right, x);
             sw.Stop();
-            Console.WriteLine($"Array: [{string.Join(", ", rotatedArry)}], Target: {x}, Index: {indexofX}, Expected: {expectedIndex}, Time: {sw.Elapsed.TotalMilliseconds}ms");
+            Console.WriteLine(
+                $"Array: [{string.Join(", ", rotatedArry)}], Target: {x}, Index: {indexofX}, Expected: {expectedIndex}, Time: {sw.Elapsed.TotalMilliseconds}ms"
+            );
 
             // Additional test cases
             int[] rotatedArry2 = [4, 5, 6, 7, 0, 1, 2];
@@ -56,7 +60,9 @@ namespace FindElementInSortedRotatedArray
             int indexofX2 = BinarySearchRecursive(rotatedArry2, 0, rotatedArry2.Length - 1, x2);
             sw.Stop();
             bool isCorrect2 = indexofX2 == expectedIndex2;
-            Console.WriteLine($"Array: [{string.Join(", ", rotatedArry2)}], Target: {x2}, Index: {indexofX2}, Expected: {expectedIndex2}, Time: {sw.Elapsed.TotalMilliseconds}ms, Correct: {isCorrect2}");
+            Console.WriteLine(
+                $"Array: [{string.Join(", ", rotatedArry2)}], Target: {x2}, Index: {indexofX2}, Expected: {expectedIndex2}, Time: {sw.Elapsed.TotalMilliseconds}ms, Correct: {isCorrect2}"
+            );
 
             int[] rotatedArry3 = [1];
             int x3 = 1;
@@ -65,7 +71,9 @@ namespace FindElementInSortedRotatedArray
             int indexofX3 = BinarySearchRecursive(rotatedArry3, 0, rotatedArry3.Length - 1, x3);
             sw.Stop();
             bool isCorrect3 = indexofX3 == expectedIndex3;
-            Console.WriteLine($"Array: [{string.Join(", ", rotatedArry3)}], Target: {x3}, Index: {indexofX3}, Expected: {expectedIndex3}, Time: {sw.Elapsed.TotalMilliseconds}ms, Correct: {isCorrect3}");
+            Console.WriteLine(
+                $"Array: [{string.Join(", ", rotatedArry3)}], Target: {x3}, Index: {indexofX3}, Expected: {expectedIndex3}, Time: {sw.Elapsed.TotalMilliseconds}ms, Correct: {isCorrect3}"
+            );
 
             int[] rotatedArry4 = [1, 3];
             int x4 = 3;
@@ -74,7 +82,9 @@ namespace FindElementInSortedRotatedArray
             int indexofX4 = BinarySearchRecursive(rotatedArry4, 0, rotatedArry4.Length - 1, x4);
             sw.Stop();
             bool isCorrect4 = indexofX4 == expectedIndex4;
-            Console.WriteLine($"Array: [{string.Join(", ", rotatedArry4)}], Target: {x4}, Index: {indexofX4}, Expected: {expectedIndex4}, Time: {sw.Elapsed.TotalMilliseconds}ms, Correct: {isCorrect4}");
+            Console.WriteLine(
+                $"Array: [{string.Join(", ", rotatedArry4)}], Target: {x4}, Index: {indexofX4}, Expected: {expectedIndex4}, Time: {sw.Elapsed.TotalMilliseconds}ms, Correct: {isCorrect4}"
+            );
 
             int[] rotatedArry5 = [5, 1, 3];
             int x5 = 5;
@@ -83,7 +93,9 @@ namespace FindElementInSortedRotatedArray
             int indexofX5 = BinarySearchRecursive(rotatedArry5, 0, rotatedArry5.Length - 1, x5);
             sw.Stop();
             bool isCorrect5 = indexofX5 == expectedIndex5;
-            Console.WriteLine($"Array: [{string.Join(", ", rotatedArry5)}], Target: {x5}, Index: {indexofX5}, Expected: {expectedIndex5}, Time: {sw.Elapsed.TotalMilliseconds}ms, Correct: {isCorrect5}");
+            Console.WriteLine(
+                $"Array: [{string.Join(", ", rotatedArry5)}], Target: {x5}, Index: {indexofX5}, Expected: {expectedIndex5}, Time: {sw.Elapsed.TotalMilliseconds}ms, Correct: {isCorrect5}"
+            );
         }
 
         // Extracted comparison tests for all search methods
@@ -95,7 +107,12 @@ namespace FindElementInSortedRotatedArray
 
             // Test BinarySearchRecursive
             sw.Restart();
-            int binarySearchResult = BinarySearchRecursive(comparisonArray, 0, comparisonArray.Length - 1, target);
+            int binarySearchResult = BinarySearchRecursive(
+                comparisonArray,
+                0,
+                comparisonArray.Length - 1,
+                target
+            );
             sw.Stop();
             double binarySearchTime = sw.Elapsed.TotalMilliseconds;
 
@@ -113,17 +130,27 @@ namespace FindElementInSortedRotatedArray
 
             Console.WriteLine("\nComparison Test:");
             Console.WriteLine($"Array: [{string.Join(", ", comparisonArray)}], Target: {target}");
-            Console.WriteLine($"BinarySearch - Index: {binarySearchResult}, Time: {binarySearchTime}ms");
-            Console.WriteLine($"ShiftedBinarySearch - Index: {shiftedSearchResult}, Time: {shiftedSearchTime}ms");
-            Console.WriteLine($"BinarySearchFindsSortedHalf - Index: {findsSortedHalfResult}, Time: {findsSortedHalfTime}ms");
-            Console.WriteLine($"Both BinarySearch and ShiftedBinarySearch correct: {binarySearchResult == shiftedSearchResult}");
+            Console.WriteLine(
+                $"BinarySearch - Index: {binarySearchResult}, Time: {binarySearchTime}ms"
+            );
+            Console.WriteLine(
+                $"ShiftedBinarySearch - Index: {shiftedSearchResult}, Time: {shiftedSearchTime}ms"
+            );
+            Console.WriteLine(
+                $"BinarySearchFindsSortedHalf - Index: {findsSortedHalfResult}, Time: {findsSortedHalfTime}ms"
+            );
+            Console.WriteLine(
+                $"Both BinarySearch and ShiftedBinarySearch correct: {binarySearchResult == shiftedSearchResult}"
+            );
         }
 
         static int BinarySearchFindsSortedHalf(int[] nums, int target)
         {
-            if (nums == null || nums.Length == 0) return -1;
+            if (nums == null || nums.Length == 0)
+                return -1;
 
-            int left = 0, right = nums.Length - 1;
+            int left = 0,
+                right = nums.Length - 1;
 
             //find the index of the smallest element
             while (left < right)
@@ -157,9 +184,12 @@ namespace FindElementInSortedRotatedArray
             while (left <= right)
             {
                 int mid = left + (right - left) / 2;
-                if (nums[mid] == target) return mid;
-                if (nums[mid] < target) left = mid + 1;
-                else right = mid - 1;
+                if (nums[mid] == target)
+                    return mid;
+                if (nums[mid] < target)
+                    left = mid + 1;
+                else
+                    right = mid - 1;
             }
 
             return -1;
@@ -172,8 +202,10 @@ namespace FindElementInSortedRotatedArray
 
             int mid = (leftIndex + rightIndex) / 2;
 
-            if (target == arry[mid]) return mid;
-            if (rightIndex < leftIndex) return -1;
+            if (target == arry[mid])
+                return mid;
+            if (rightIndex < leftIndex)
+                return -1;
 
             if (arry[leftIndex] < arry[mid])
             {
@@ -207,7 +239,9 @@ namespace FindElementInSortedRotatedArray
 
         static int ShiftedBinarySearch(int[] nums, int target)
         {
-            int n = nums.Length, left = 0, right = n - 1;
+            int n = nums.Length,
+                left = 0,
+                right = n - 1;
 
             while (left <= right) // find the index of the smallest element. It is the pivot and assigned to the left.
             {
