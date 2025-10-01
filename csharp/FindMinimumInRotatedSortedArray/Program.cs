@@ -15,41 +15,13 @@ internal static class Program
 
         TestScenario[] scenarios =
         [
-            new(
-                "Example 1",
-                new[] { 3, 4, 5, 1, 2 },
-                1
-            ),
-            new(
-                "Example 2",
-                new[] { 4, 5, 6, 7, 0, 1, 2 },
-                0
-            ),
-            new(
-                "Example 3",
-                new[] { 11, 13, 15, 17 },
-                11
-            ),
-            new(
-                "Single Element",
-                new[] { 1 },
-                1
-            ),
-            new(
-                "Two Elements Rotated",
-                new[] { 2, 1 },
-                1
-            ),
-            new(
-                "Already Sorted",
-                new[] { -9, -3, 0, 4, 7, 12 },
-                -9
-            ),
-            new(
-                "Large Rotation",
-                largeRotation,
-                GetMinimumValue(largeRotation)
-            ),
+            new("Example 1", [3, 4, 5, 1, 2], 1),
+            new("Example 2", [4, 5, 6, 7, 0, 1, 2], 0),
+            new("Example 3", [11, 13, 15, 17], 11),
+            new("Single Element", [1], 1),
+            new("Two Elements Rotated", [2, 1], 1),
+            new("Already Sorted", new[] { -9, -3, 0, 4, 7, 12 }, -9),
+            new("Large Rotation", largeRotation, GetMinimumValue(largeRotation)),
         ];
 
         foreach (TestScenario scenario in scenarios)
