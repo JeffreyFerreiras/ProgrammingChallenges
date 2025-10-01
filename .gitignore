@@ -357,3 +357,4 @@ flamegraph.svg
 perf.data*
 **/target/
 *.rustc_info.json
+*.rustc_info.json
