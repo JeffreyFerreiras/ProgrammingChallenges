@@ -29,7 +29,7 @@ class Program
         void RunTestCase(int testNumber, string testName, int[] input, int[] expected)
         {
             Console.WriteLine($"Test {testNumber} - {testName}:");
-            
+
             foreach (var (method, index) in methods.Select((m, i) => (m, i)))
             {
                 Stopwatch methodStopwatch = Stopwatch.StartNew();
@@ -37,11 +37,11 @@ class Program
                 {
                     var result = method(input);
                     methodStopwatch.Stop();
-                    bool isCorrect = result != null && result.Length == expected.Length && 
+                    bool isCorrect = result != null && result.Length == expected.Length &&
                                      result.Zip(expected, (r, e) => r == e).All(x => x);
-                    
-                    Console.WriteLine($"  {methodNames[index]}: " + 
-                                     (isCorrect ? "PASSED" : "FAILED") + 
+
+                    Console.WriteLine($"  {methodNames[index]}: " +
+                                     (isCorrect ? "PASSED" : "FAILED") +
                                      $" [{methodStopwatch.ElapsedMilliseconds} ms]");
                     Console.WriteLine($"    Result: {string.Join(",", result.Take(Math.Min(5, result.Length)))}{(result.Length > 5 ? "..." : "")}");
                 }
@@ -86,7 +86,8 @@ class Program
         var expected6 = new int[input6.Length];
         long product = 1;
         foreach (var num in input6) product *= num;
-        for (int i = 0; i < input6.Length; i++) {
+        for (int i = 0; i < input6.Length; i++)
+        {
             expected6[i] = (int)(product / input6[i]);
         }
         RunTestCase(6, "Large array (1-20)", input6, expected6);

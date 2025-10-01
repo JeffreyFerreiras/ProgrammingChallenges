@@ -25,7 +25,7 @@ namespace ContainsDuplicate
             //timer.Restart();
             //result = Solution.ContainsDuplicate_QuickSort(arr);
             //Console.WriteLine($"{nameof(Solution.ContainsDuplicate_QuickSort)} \t\t\tresult: {result} expected: {expected} time: {timer.Elapsed} ms");
-            
+
             //timer.Restart();
             //result = Solution.ContainsDuplicate_HashSet(arr);
             //Console.WriteLine($"{nameof(Solution.ContainsDuplicate_HashSet)} \t\t\tresult: {result} expected: {expected} time: {timer.Elapsed} ms");
@@ -40,7 +40,7 @@ namespace ContainsDuplicate
 
 
             BenchmarkRunner.Run<SolutionBenchmark>();
-            
+
             Console.ReadKey();
         }
     }
@@ -53,22 +53,22 @@ namespace ContainsDuplicate
         private readonly Solution solution = new();
         private static readonly Random rand = new(420);
         int[] ints = [.. Enumerable.Range(0, 100).Select(x => rand.Next(0, 100))];
-		//int[] ints1 = Enumerable.Range(0, 10).Select(x => rand.Next(0, 10000)).ToArray();
-		//int[] ints2 = Enumerable.Range(0, 15).Select(x => rand.Next(0, 50)).ToArray();
-		public IEnumerable<int[]> Data()
-		{
+        //int[] ints1 = Enumerable.Range(0, 10).Select(x => rand.Next(0, 10000)).ToArray();
+        //int[] ints2 = Enumerable.Range(0, 15).Select(x => rand.Next(0, 50)).ToArray();
+        public IEnumerable<int[]> Data()
+        {
 
-			yield return ints;
-			//yield return ints1;
-			//yield return ints2;
-		}
+            yield return ints;
+            //yield return ints1;
+            //yield return ints2;
+        }
 
-		//public int[] Data()
-		//{
-		//	return ints;
-		//}
+        //public int[] Data()
+        //{
+        //	return ints;
+        //}
 
-		[Benchmark]
+        [Benchmark]
         [ArgumentsSource(nameof(Data))]
         public void NetSort(int[] nums) => solution.ContainsDuplicate_NetSort(nums);
 
@@ -116,7 +116,7 @@ namespace ContainsDuplicate
                 int unsorted = i + 1;
 
                 // find smallest number index to the right
-                while(unsorted < nums.Length)
+                while (unsorted < nums.Length)
                 {
                     if (nums[smallest] > nums[unsorted])
                     {
@@ -142,10 +142,10 @@ namespace ContainsDuplicate
             return false;
         }
 
-        
+
         public bool ContainsDuplicate_InsertionSort(int[] nums)
         {
-            for(int i = 1; i < nums.Length; i++)
+            for (int i = 1; i < nums.Length; i++)
             {
                 int j = i; //start with current index
                 int val = nums[i]; //current value
@@ -166,9 +166,9 @@ namespace ContainsDuplicate
         {
             bool hasDuplicate = false;
             QuickSort(nums, 0, nums.Length - 1);
-            
+
             return hasDuplicate;
-			
+
             void QuickSort(int[] arr, int low, int high)
             {
                 if (low < high)
@@ -190,7 +190,7 @@ namespace ContainsDuplicate
                     while (arr[high] > pivot) high--;         //Check numbers until one needs to be swaped to left side of the pivot.
 
                     if (arr[low] == pivot || arr[high] == pivot)
-                    { 
+                    {
                         hasDuplicate = true;
                         return -1;
                     }
@@ -203,7 +203,7 @@ namespace ContainsDuplicate
                         high--;
                     }
 
-                    
+
                 }
 
                 return low;

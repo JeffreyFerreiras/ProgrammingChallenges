@@ -17,11 +17,11 @@ internal static class Program
         var scenarios = new[]
         {
             (Name: "Example 1", S: "leetcode", Dict: new[] { "leet", "code" }, Expected: true),
-            (Name: "Example 2", S: "applepenapple", Dict: new[] { "apple", "pen" }, Expected: true),
-            (Name: "Example 3", S: "catsandog", Dict: new[] { "cats", "dog", "sand", "and", "cat" }, Expected: false),
-            (Name: "Edge: Single", S: "a", Dict: new[] { "a" }, Expected: true),
-            (Name: "Failure", S: "aaaaab", Dict: new[] { "a", "aa", "aaa" }, Expected: false),
-            (Name: "Long String", S: string.Concat(Enumerable.Repeat("leet", 5)), Dict: new[] { "leet", "code" }, Expected: true)
+            (Name: "Example 2", S: "applepenapple", Dict: ["apple", "pen"], Expected: true),
+            (Name: "Example 3", S: "catsandog", Dict: ["cats", "dog", "sand", "and", "cat"], Expected: false),
+            (Name: "Edge: Single", S: "a", Dict: ["a"], Expected: true),
+            (Name: "Failure", S: "aaaaab", Dict: ["a", "aa", "aaa"], Expected: false),
+            (Name: "Long String", S: string.Concat(Enumerable.Repeat("leet", 5)), Dict: ["leet", "code"], Expected: true)
         };
 
         foreach (var scenario in scenarios)

@@ -16,32 +16,29 @@ internal static class Program
         [
             new(
                 "Example 1",
-                new Operation[]
-                {
+                [
                     new("set", "foo", "bar", 1),
                     new("get", "foo", null, 1),
                     new("get", "foo", null, 3),
                     new("set", "foo", "bar2", 4),
                     new("get", "foo", null, 4),
                     new("get", "foo", null, 5),
-                },
-                new string?[] { "bar", "bar", "bar2", "bar2" }
+                ],
+                ["bar", "bar", "bar2", "bar2"]
             ),
             new(
                 "Key Missing",
-                new Operation[]
-                {
+                [
                     new("set", "foo", "bar", 1),
                     new("get", "foo", null, 0),
                     new("get", "foo", null, 1),
                     new("get", "unknown", null, 5),
-                },
-                new string?[] { string.Empty, "bar", string.Empty }
+                ],
+                [string.Empty, "bar", string.Empty]
             ),
             new(
                 "Multiple Keys",
-                new Operation[]
-                {
+                [
                     new("set", "love", "high", 10),
                     new("set", "love", "low", 20),
                     new("set", "hate", "mild", 30),
@@ -50,8 +47,8 @@ internal static class Program
                     new("get", "love", null, 15),
                     new("get", "love", null, 25),
                     new("get", "hate", null, 35),
-                },
-                new string?[] { string.Empty, "high", "high", "low", "mild" }
+                ],
+                [string.Empty, "high", "high", "low", "mild"]
             ),
             new(
                 "Dense Timeline",

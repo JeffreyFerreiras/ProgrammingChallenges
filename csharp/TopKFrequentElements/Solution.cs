@@ -14,7 +14,7 @@ namespace TopKFrequentElements
                 }
             }
 
-            int[] result = new int [k];
+            int[] result = new int[k];
             PriorityQueue<int, int> queue = new();
 
             foreach (var item in counter)

@@ -8,15 +8,15 @@ Note that you must do this in-place without making a copy of the array.
 Console.WriteLine("Hello, World!");
 
 
-void MoveZeroes(int [] nums)
+void MoveZeroes(int[] nums)
 {
     int i = 0;
     int j = 0;
 
     // traverse the array and move all non-zero elements to the front
-    while(j < nums.Length)
+    while (j < nums.Length)
     {
-        if(nums[j] != 0)
+        if (nums[j] != 0)
         {
             nums[i] = nums[j];
             i++;
@@ -25,7 +25,7 @@ void MoveZeroes(int [] nums)
     }
 
     // set the rest of the array to 0
-    for(int k = i; k < nums.Length; k++)
+    for (int k = i; k < nums.Length; k++)
     {
         nums[k] = 0;
     }

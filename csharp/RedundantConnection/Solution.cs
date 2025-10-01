@@ -20,15 +20,16 @@ public class Solution
     2. In a transportation network, if there are multiple routes between two cities, one of those routes can be considered redundant. For example, if there are two highways connecting city A and city B, one of those highways can be considered redundant.
     */
 
-    public int[] FindRedundantConnection(int[][] edges) 
+    public int[] FindRedundantConnection(int[][] edges)
     {
-        List<List<int>> adj = new (edges.Length);
+        List<List<int>> adj = new(edges.Length);
         // Initialize adjacency list
         for (int i = 0; i <= edges.Length; i++) adj.Add([]);
-        
-        foreach (var edge in edges) {
+
+        foreach (var edge in edges)
+        {
             adj[edge[0]].Add(edge[1]);
-            adj[edge[1]].Add(edge[0]); 
+            adj[edge[1]].Add(edge[0]);
 
             var visited = new bool[edges.Length + 1];
             if (HasCycleDfs(edge[0], -1, visited))

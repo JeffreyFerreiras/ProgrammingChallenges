@@ -90,7 +90,7 @@ namespace ReverseNodesInkGroup
             Console.WriteLine($"[Solution.ReverseKGroup] Execution Time: {sw.ElapsedMilliseconds} ms");
             PrintList(head5);
             Console.WriteLine("[Empty list]");
-            
+
             // Additional Scenario 6: Single node list, k = 2
             // Input: 100, k = 2
             // Expected result: 100
@@ -149,5 +149,5 @@ namespace ReverseNodesInkGroup
         }
     }
 
-   
+
 }

@@ -12,7 +12,7 @@
             int[] profucts = GetProductsOfAllIntsExceptAtIndex(arr);
             //[84, 12, 28, 21]
             int[] arr2 = [3, 1, 2, 5, 6, 4];
-            int[]products2=GetProductsOfAllIntsExceptAtIndex(arr2);
+            int[] products2 = GetProductsOfAllIntsExceptAtIndex(arr2);
             //[1, 3, 3, 6, 30, 180]
         }
 
@@ -22,14 +22,14 @@
 
             int cachedProduct = 1;
 
-            for(int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < arr.Length; i++)
             {
                 products[i] = cachedProduct;
                 cachedProduct *= arr[i];
             }
 
             cachedProduct = 1;
-            for(int i = arr.Length-1; i >= 0; i--)
+            for (int i = arr.Length - 1; i >= 0; i--)
             {
                 products[i] *= cachedProduct;
                 cachedProduct *= arr[i];

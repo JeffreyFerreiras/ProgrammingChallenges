@@ -23,7 +23,7 @@
 
             int total = 0;
 
-            for(int i = 0; i < matrixSource.Length; i++)
+            for (int i = 0; i < matrixSource.Length; i++)
             {
                 total += Math.Abs(matrixSource[i] - matrixTarget[i]);
             }
@@ -35,9 +35,9 @@
         {
             int[] matrix = new int[26];
 
-            for(int i = 0; i < source.Length; i++)
+            for (int i = 0; i < source.Length; i++)
             {
-                if(char.IsLetter(source[i]))
+                if (char.IsLetter(source[i]))
                 {
                     matrix[source[i] - 97]++;
                 }

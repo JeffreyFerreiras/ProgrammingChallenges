@@ -28,14 +28,14 @@ class Program
     {
         // Test Scenario 1: Empty list array
         RunMergeKListsTest("TestScenario1", [], null);
-        
+
         // Test Scenario 2: Array with one empty list
         RunMergeKListsTest("TestScenario2", [null], null);
-        
+
         // Test Scenario 3: Single non-empty list
         var list1 = CreateLinkedList([1, 3, 5]);
         RunMergeKListsTest("TestScenario3", [list1], list1);
-        
+
         // Test Scenario 4: Multiple non-empty lists
         var list2 = CreateLinkedList([2, 4, 6]);
         var mergedExpected = CreateLinkedList([1, 2, 3, 4, 5, 6]); // expected result from merging list1 and list2
@@ -45,28 +45,28 @@ class Program
         var emptyListWrapper = CreateLinkedList([]); // returns null
         RunMergeKListsTest("TestScenario5", [emptyListWrapper], null);
     }
-    
+
     static void RunMergeKListsTest(string testName, ListNode[] lists, ListNode expected)
     {
         var solution = new Solution();
         var stopwatch = Stopwatch.StartNew();
-        
+
         ListNode result = solution.MergeKLists(lists);
-        
+
         stopwatch.Stop();
         long elapsedTicks = stopwatch.ElapsedTicks;
-        
+
         string resultStr = LinkedListToString(result);
         string expectedStr = LinkedListToString(expected);
-        
+
         Console.WriteLine($"{testName} - MergeKLists took {elapsedTicks} ticks. Result: {resultStr}, Expected: {expectedStr}");
     }
-    
+
     static ListNode CreateLinkedList(int[] values)
     {
         if (values == null || values.Length == 0)
             return null;
-        
+
         ListNode head = new(values[0]);
         ListNode current = head;
         for (int i = 1; i < values.Length; i++)
@@ -76,12 +76,12 @@ class Program
         }
         return head;
     }
-    
+
     static string LinkedListToString(ListNode? node)
     {
         if (node == null)
             return "null";
-        
+
         StringBuilder sb = new();
         while (node != null)
         {
@@ -110,12 +110,12 @@ public class Solution
 {
     public ListNode MergeKLists(ListNode[] lists)
     {
-        if(lists == null || lists.Length == 0)
+        if (lists == null || lists.Length == 0)
             return null;
         // define a priority queue to store the heads of the linked lists
         var priorityQueue = new PriorityQueue<int, int>();
         // loop through the lists and add the heads to the priority queue
-        
+
         //bfs approach
         var bfs = new Queue<ListNode>();
 
@@ -139,14 +139,14 @@ public class Solution
         ListNode root = new();
         ListNode node = root;
 
-        if(priorityQueue.Count == 0)
+        if (priorityQueue.Count == 0)
             return null;
 
         while (priorityQueue.Count > 0)
         {
             var min = priorityQueue.Dequeue();
 
-            if(priorityQueue.Count == 0)
+            if (priorityQueue.Count == 0)
             {
                 node.val = min;
                 break;

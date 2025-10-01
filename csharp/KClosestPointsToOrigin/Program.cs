@@ -15,47 +15,41 @@ internal static class Program
         [
             new(
                 "Example 1",
-                new[]
-                {
+                [
                     new[] { 1, 3 },
-                    new[] { -2, 2 },
-                },
+                    [-2, 2],
+                ],
                 1,
-                new[]
-                {
+                [
                     new[] { -2, 2 },
-                }
+                ]
             ),
             new(
                 "Example 2",
-                new[]
-                {
+                [
                     new[] { 3, 3 },
-                    new[] { 5, -1 },
-                    new[] { -2, 4 },
-                },
+                    [5, -1],
+                    [-2, 4],
+                ],
                 2,
-                new[]
-                {
+                [
                     new[] { 3, 3 },
-                    new[] { -2, 4 },
-                }
+                    [-2, 4],
+                ]
             ),
             new(
                 "K Equals Points",
-                new[]
-                {
+                [
                     new[] { 1, 0 },
-                    new[] { 2, 0 },
-                    new[] { 3, 0 },
-                },
+                    [2, 0],
+                    [3, 0],
+                ],
                 3,
-                new[]
-                {
+                [
                     new[] { 1, 0 },
-                    new[] { 2, 0 },
-                    new[] { 3, 0 },
-                }
+                    [2, 0],
+                    [3, 0],
+                ]
             ),
             new(
                 "Large Cloud",
@@ -79,7 +73,7 @@ internal static class Program
             double angle = i * (Math.PI * 2 / Math.Max(1, count));
             int x = (int)Math.Round(radius * Math.Cos(angle));
             int y = (int)Math.Round(radius * Math.Sin(angle));
-            points[i] = new[] { x, y };
+            points[i] = [x, y];
         }
         return points;
     }

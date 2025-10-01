@@ -20,12 +20,12 @@ internal class Program
 
         var scenarios = new[]
         {
-            (Name: "Example 1", Prices: new[] { 7, 1, 5, 3, 6, 4 }, Expected: 5),
-            (Name: "Example 2", Prices: new[] { 7, 6, 4, 3, 1 }, Expected: 0),
-            (Name: "Edge: Single Day", Prices: new[] { 5 }, Expected: 0),
-            (Name: "No Profit", Prices: new[] { 9, 8, 7, 6, 5 }, Expected: 0),
+            (Name: "Example 1", Prices: [7, 1, 5, 3, 6, 4], Expected: 5),
+            (Name: "Example 2", Prices: [7, 6, 4, 3, 1], Expected: 0),
+            (Name: "Edge: Single Day", Prices: [5], Expected: 0),
+            (Name: "No Profit", Prices: [9, 8, 7, 6, 5], Expected: 0),
             (Name: "Long Increasing Run", Prices: Enumerable.Range(1, 50).ToArray(), Expected: 49),
-            (Name: "Mixed Fluctuations", Prices: new[] { 3, 8, 2, 5, 1, 7, 4, 9 }, Expected: 8)
+            (Name: "Mixed Fluctuations", Prices: [3, 8, 2, 5, 1, 7, 4, 9], Expected: 8)
         };
 
         foreach (var scenario in scenarios)

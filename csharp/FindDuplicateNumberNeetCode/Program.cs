@@ -11,13 +11,13 @@ internal static class Program
 
         RunScenario(
             "Example: [1,3,4,2,2]",
-            () => Solution.FindDuplicate(new[] { 1, 3, 4, 2, 2 }),
+            () => Solution.FindDuplicate([1, 3, 4, 2, 2]),
             2
         );
 
         RunScenario(
             "Edge: minimal length",
-            () => Solution.FindDuplicate(new[] { 1, 1 }),
+            () => Solution.FindDuplicate([1, 1]),
             1
         );
 

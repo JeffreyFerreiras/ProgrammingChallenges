@@ -35,7 +35,7 @@ Here's why 22 is NOT a happy number:
         public static void Main(string[] args)
         {
             Console.WriteLine(IsHappyNumber(49));
-        
+
             // is happy number test 8/25/2022
             int num = 7;
             Console.WriteLine($"is happy {num}: result: {IsHappy(num)} expected: true");
@@ -48,29 +48,33 @@ Here's why 22 is NOT a happy number:
         /**
          * Returns 1 if the number is a happy number, 0 otherwise. 2022
          */
-        public static int IsHappy(int n){
+        public static int IsHappy(int n)
+        {
             /**
              *   1. If the number is 1, return 1.
              *   2. while the number is not 1, the number squared
              *   3. if the number is bigger than 9 then sum the number of each digit.
              *   4. if the number is in the cache, return 0 because the numbers are repeating.
              */
-            
+
             if (n == 1) return 1;
             var cache = new HashSet<int>();
 
-            while(n > 1){
+            while (n > 1)
+            {
                 n = SumOfSquares(n);
-                if (cache.Contains(n)) 
+                if (cache.Contains(n))
                     return 0;
                 cache.Add(n);
             }
 
             return n; // should be 1
 
-            int SumOfSquares(int num){
+            int SumOfSquares(int num)
+            {
                 int sum = 0;
-                while(n > 0){
+                while (n > 0)
+                {
                     int digit = n % 10;
                     sum += digit * digit;
                     n /= 10;
@@ -84,22 +88,22 @@ Here's why 22 is NOT a happy number:
          */
         static int IsHappyNumber(int num)
         { //SOLUTION
-             
+
             int sumOfRightDigit = 0;
 
-            while(num != 0)
+            while (num != 0)
             {
                 int digit = num % 10;
                 num = num / 10;
-                sumOfRightDigit += (int) Math.Pow(digit, 2);                                   
+                sumOfRightDigit += (int)Math.Pow(digit, 2);
             }
 
-            if(s_cache.Contains(sumOfRightDigit))
+            if (s_cache.Contains(sumOfRightDigit))
                 return 0;
 
             s_cache.Add(sumOfRightDigit);
 
-            if(sumOfRightDigit == 1)
+            if (sumOfRightDigit == 1)
                 return 1;
 
             return IsHappyNumber(sumOfRightDigit);

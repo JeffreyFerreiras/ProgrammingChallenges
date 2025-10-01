@@ -3,25 +3,30 @@
 // See https://aka.ms/new-console-template for more information
 
 // Minimal graph node definition
-public class Node {
+public class Node
+{
     public int val;
     public IList<Node> neighbors;
-    public Node(int _val) {
+    public Node(int _val)
+    {
         val = _val;
         neighbors = [];
     }
-    public Node(int _val, IList<Node> _neighbors) {
+    public Node(int _val, IList<Node> _neighbors)
+    {
         val = _val;
         neighbors = _neighbors;
     }
 }
 
-class Program {
-    static void Main(string[] args) {
+class Program
+{
+    static void Main(string[] args)
+    {
         // Test scenario 1: Single node with no neighbors
         // Node test1 = new Node(1);
         // Node expected1 = new Node(1); // Expected deep copy
-        
+
         // RunTest("CloneGraph_SingleNode", test1, expected1);
 
         // // Test scenario 2: Two connected nodes
@@ -69,9 +74,10 @@ class Program {
         node4.neighbors.Add(node3);
         RunTest("CloneGraph_AdjList", node1, node1);
     }
-    
-    static void RunTest(string testName, Node input, Node expected) {
-        Console.WriteLine($"Test: {testName}");        
+
+    static void RunTest(string testName, Node input, Node expected)
+    {
+        Console.WriteLine($"Test: {testName}");
         Stopwatch sw = Stopwatch.StartNew();
         Node result = Solution.CloneGraph(input);
         sw.Stop();

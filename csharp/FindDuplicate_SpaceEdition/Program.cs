@@ -32,7 +32,7 @@
             int floor = 1;
             int ceiling = arr.Length - 1;
 
-            while (floor < ceiling)                                                      
+            while (floor < ceiling)
             {
                 int mid = floor + (ceiling - floor) / 2;
                 int lowerRangeFloor = floor;
@@ -52,7 +52,7 @@
 
                 int distinctPossibleIntegers = lowerRangeCeiling - lowerRangeFloor + 1;
 
-                if(lowerRangeCount > distinctPossibleIntegers)
+                if (lowerRangeCount > distinctPossibleIntegers)
                 {
                     floor = lowerRangeFloor;
                     ceiling = lowerRangeCeiling;

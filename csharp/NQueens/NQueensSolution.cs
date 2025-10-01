@@ -68,7 +68,7 @@ public static class NQueensSolution
                 {
                     continue;
                 }
-                
+
                 var rowChars = currentBoard[row].ToCharArray();
                 rowChars[i] = 'Q';
                 currentBoard[row] = new string(rowChars);
@@ -155,7 +155,7 @@ public static class NQueensSolution
                 {
                     continue;
                 }
-                
+
                 // Set queen using StringBuilder indexer
                 currentBoard[row][i] = 'Q';
 

@@ -20,7 +20,7 @@ internal static class Program
             new("Example 3", [11, 13, 15, 17], 11),
             new("Single Element", [1], 1),
             new("Two Elements Rotated", [2, 1], 1),
-            new("Already Sorted", new[] { -9, -3, 0, 4, 7, 12 }, -9),
+            new("Already Sorted", [-9, -3, 0, 4, 7, 12], -9),
             new("Large Rotation", largeRotation, GetMinimumValue(largeRotation)),
         ];
 

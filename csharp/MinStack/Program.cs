@@ -50,7 +50,7 @@ class Program
         {
             Console.WriteLine($"Test: {testCase.name}");
             Console.WriteLine(
-                $"  Operations: {string.Join(", ", testCase.operations.Select(op => 
+                $"  Operations: {string.Join(", ", testCase.operations.Select(op =>
                 op.value.HasValue ? $"{op.action}({op.value})" : op.action))}"
             );
 

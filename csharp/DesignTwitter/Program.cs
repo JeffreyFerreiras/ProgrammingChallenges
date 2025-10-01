@@ -18,31 +18,29 @@ internal static class Program
         [
             new(
                 "Example 1",
-                new[]
-                {
+                [
                     Op.PostTweet(1, 5),
-                    Op.GetNewsFeed(1, new[] { 5 }),
+                    Op.GetNewsFeed(1, [5]),
                     Op.Follow(1, 2),
                     Op.PostTweet(2, 6),
-                    Op.GetNewsFeed(1, new[] { 6, 5 }),
+                    Op.GetNewsFeed(1, [6, 5]),
                     Op.Unfollow(1, 2),
-                    Op.GetNewsFeed(1, new[] { 5 }),
-                }
+                    Op.GetNewsFeed(1, [5]),
+                ]
             ),
             new(
                 "Multiple Users",
-                new[]
-                {
+                [
                     Op.PostTweet(2, 101),
                     Op.PostTweet(3, 102),
                     Op.PostTweet(1, 103),
                     Op.Follow(1, 2),
                     Op.Follow(1, 3),
-                    Op.GetNewsFeed(1, new[] { 103, 102, 101 }),
+                    Op.GetNewsFeed(1, [103, 102, 101]),
                     Op.Unfollow(1, 2),
                     Op.PostTweet(3, 104),
-                    Op.GetNewsFeed(1, new[] { 104, 103, 102 }),
-                }
+                    Op.GetNewsFeed(1, [104, 103, 102]),
+                ]
             ),
             new(
                 "Heavy Timeline",

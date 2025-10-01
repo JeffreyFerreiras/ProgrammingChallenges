@@ -18,7 +18,7 @@ int FirstBadVersion(int n)
     while (low <= high)
     {
         mid = low + (high - low) / 2; ;
-        
+
         if (IsBadVersion(mid))
         {
             high = mid - 1;

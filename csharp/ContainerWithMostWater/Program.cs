@@ -29,7 +29,7 @@ var input = new int[] { 1, 8, 6, 2, 5, 4, 8, 3, 7 };
 var result = MaxArea(input);
 Console.WriteLine($"expected: 49, actual: {result}");
 
-input = new int[] { 1, 1 };
+input = [1, 1];
 result = MaxArea(input);
 Console.WriteLine($"expected: 1, actual: {result}");
 

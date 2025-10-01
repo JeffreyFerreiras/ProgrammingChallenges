@@ -12,7 +12,7 @@ namespace Palindrome_Permutations
             Input: Tact Coa
             Output: True (taco cat, atco cta)
         */
-        
+
         static void Main(string[] args)
         {
             bool x = PermutationOfPalindrome("Taco cat");
@@ -20,10 +20,10 @@ namespace Palindrome_Permutations
 
         static bool PermutationOfPalindrome(string phrase)
         {
-            if(string.IsNullOrEmpty(phrase))
+            if (string.IsNullOrEmpty(phrase))
                 throw new NullReferenceException("phrase is empty");
 
-            int [] table = BuildCharTable(phrase.Replace(" ",""));
+            int[] table = BuildCharTable(phrase.Replace(" ", ""));
             return CheckMaxOneOdd(table);
         }
 
@@ -33,9 +33,9 @@ namespace Palindrome_Permutations
 
             foreach (var i in table)
             {
-                if(i % 2 == 1)
+                if (i % 2 == 1)
                 {
-                    if(hasOdd)
+                    if (hasOdd)
                         return false;
 
                     hasOdd = true;
@@ -47,22 +47,22 @@ namespace Palindrome_Permutations
 
         static int[] BuildCharTable(string phrase)
         {
-            int [] table = new int[25];
-            foreach(char c in phrase)
+            int[] table = new int[25];
+            foreach (char c in phrase)
             {
                 int x = GetCharNumber(c);
                 table[x]++;
             }
-            return table;          
+            return table;
         }
 
         static int GetCharNumber(char c) //NOTE: in C#.NET characters have default integer values corresponding to ASCII numbers. 
         {
             //return char.ToLower(c) - 'a';
 
-            if('a' <= c && c <= 'z')
+            if ('a' <= c && c <= 'z')
                 return c - 'a';
-            else if('A' <= c && c <= 'Z')
+            else if ('A' <= c && c <= 'Z')
                 return c - 'A';
             return -1;
         }

@@ -15,7 +15,7 @@
 
         private static int ProductOf3(int[] arrayOfInts)
         {
-            if(arrayOfInts.Length < 3)
+            if (arrayOfInts.Length < 3)
             {
                 throw new ArgumentException("Cannot have less than 3 numbers");
             }
@@ -28,7 +28,7 @@
 
             int highestProductOf3 = arrayOfInts[0] * arrayOfInts[1] * arrayOfInts[2];
 
-            for(int i = 2; i < arrayOfInts.Length; i++)
+            for (int i = 2; i < arrayOfInts.Length; i++)
             {
                 int current = arrayOfInts[i];
 

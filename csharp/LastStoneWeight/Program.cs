@@ -15,17 +15,17 @@ internal static class Program
         [
             new(
                 "Example 1",
-                new[] { 2, 7, 4, 1, 8, 1 },
+                [2, 7, 4, 1, 8, 1],
                 1
             ),
             new(
                 "Single Stone",
-                new[] { 1 },
+                [1],
                 1
             ),
             new(
                 "Even Smash",
-                new[] { 9, 3, 2, 10 },
+                [9, 3, 2, 10],
                 0
             ),
             new(

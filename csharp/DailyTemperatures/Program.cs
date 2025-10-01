@@ -47,14 +47,14 @@ class Program
 
         Run(
             "Example 1",
-            new[] { 73, 74, 75, 71, 69, 72, 76, 73 },
-            new[] { 1, 1, 4, 2, 1, 1, 0, 0 }
+            [73, 74, 75, 71, 69, 72, 76, 73],
+            [1, 1, 4, 2, 1, 1, 0, 0]
         );
-        Run("Example 2", new[] { 30, 40, 50, 60 }, new[] { 1, 1, 1, 0 });
-        Run("Example 3", new[] { 30, 60, 90 }, new[] { 1, 1, 0 });
-        Run("Single", new[] { 100 }, new[] { 0 });
-        Run("All equal", new[] { 50, 50, 50 }, new[] { 0, 0, 0 });
-        Run("Descending", new[] { 80, 70, 60, 50 }, new[] { 0, 0, 0, 0 });
+        Run("Example 2", [30, 40, 50, 60], [1, 1, 1, 0]);
+        Run("Example 3", [30, 60, 90], [1, 1, 0]);
+        Run("Single", [100], [0]);
+        Run("All equal", [50, 50, 50], [0, 0, 0]);
+        Run("Descending", [80, 70, 60, 50], [0, 0, 0, 0]);
 
         Console.WriteLine("Done.");
     }

@@ -42,15 +42,15 @@ namespace IsUniqueString
         {
             //SOLUTION with better time and space complexity.
 
-            if( !string.IsNullOrEmpty(str) && str.Length > 128)
+            if (!string.IsNullOrEmpty(str) && str.Length > 128)
                 return false;
 
-            while(str.Length > 0)
+            while (str.Length > 0)
             {
                 var character = str[0];
                 str = str.Substring(1);
 
-                if(str.Contains(character))
+                if (str.Contains(character))
                     return false;
             }
 

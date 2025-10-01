@@ -55,7 +55,7 @@ namespace ReverseLinkedList
             {
                 Console.WriteLine(testNode?.Value);
                 testNode = testNode.Next;
-             } while (testNode != null);
+            } while (testNode != null);
         }
 
         private static Node PopulateTestCase()
@@ -76,7 +76,7 @@ namespace ReverseLinkedList
 
             Node Recursive(Node node, Node nex)
             {
-                if(nex is null)
+                if (nex is null)
                 {
                     return node;
                 }
@@ -87,19 +87,19 @@ namespace ReverseLinkedList
                 return Recursive(nex, nextToNext);
             }
         }
-		
+
         private static Node ReverseLinkedList(Node root)
         {
             Node current = root;
             Node previous = null;
 
-            while(current != null)
+            while (current != null)
             {
-				Node next = current.Next;		//define a container for the next node
-				current.Next = previous;		// assign the previous node to next
-				previous = current;				// assign the current node to previous
-				current = next;					// assign the next node to current
-			}
+                Node next = current.Next;       //define a container for the next node
+                current.Next = previous;        // assign the previous node to next
+                previous = current;             // assign the current node to previous
+                current = next;                 // assign the next node to current
+            }
 
             return previous;
         }

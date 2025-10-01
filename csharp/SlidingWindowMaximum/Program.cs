@@ -18,11 +18,11 @@ internal class Program
         var scenarios = new[]
         {
             (Name: "Example 1", Nums: new[] { 1, 3, -1, -3, 5, 3, 6, 7 }, K: 3, Expected: new[] { 3, 3, 5, 5, 6, 7 }),
-            (Name: "Example 2", Nums: new[] { 1 }, K: 1, Expected: new[] { 1 }),
-            (Name: "Edge: Full Window", Nums: new[] { 9, 8, 7, 6, 5 }, K: 5, Expected: new[] { 9 }),
-            (Name: "Edge: Duplicates", Nums: new[] { 4, 4, 4, 4 }, K: 2, Expected: new[] { 4, 4, 4 }),
-            (Name: "Increasing Sequence", Nums: new[] { 1, 2, 3, 4, 5 }, K: 2, Expected: new[] { 2, 3, 4, 5 }),
-            (Name: "Long Example", Nums: new[] { 10, 6, 9, 8, 7, 5, 4, 3, 2, 1, 0, 12, 11, 13, 15 }, K: 4, Expected: new[] { 10, 9, 9, 8, 7, 5, 4, 3, 12, 12, 13, 15 })
+            (Name: "Example 2", Nums: [1], K: 1, Expected: [1]),
+            (Name: "Edge: Full Window", Nums: [9, 8, 7, 6, 5], K: 5, Expected: [9]),
+            (Name: "Edge: Duplicates", Nums: [4, 4, 4, 4], K: 2, Expected: [4, 4, 4]),
+            (Name: "Increasing Sequence", Nums: [1, 2, 3, 4, 5], K: 2, Expected: [2, 3, 4, 5]),
+            (Name: "Long Example", Nums: [10, 6, 9, 8, 7, 5, 4, 3, 2, 1, 0, 12, 11, 13, 15], K: 4, Expected: [10, 9, 9, 8, 7, 5, 4, 3, 12, 12, 13, 15])
         };
 
         foreach (var scenario in scenarios)

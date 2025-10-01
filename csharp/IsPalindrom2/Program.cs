@@ -78,7 +78,7 @@ s consists only of printable ASCII characters.
 
                 if (leftIsAlpha && rightIsAlpha)
                 {
-                    if (leftChar != rightChar) 
+                    if (leftChar != rightChar)
                         return false;
                     else
                     {
@@ -86,11 +86,11 @@ s consists only of printable ASCII characters.
                         right--;
                     }
                 }
-                else 
+                else
                 {
                     if (!leftIsAlpha) left++;
                     if (!rightIsAlpha) right--;
-                } 
+                }
             }
 
             return true;

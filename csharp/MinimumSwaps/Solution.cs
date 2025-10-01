@@ -33,12 +33,12 @@ namespace MinimumSwaps
             int currentOnesInWindow = 0, maxOnesInWindow = 0;
             int low = 0, high = 0;
 
-            while(high < data.Length)
+            while (high < data.Length)
             {
                 currentOnesInWindow += data[high];
                 high++;
 
-                if(high - low > totalOnes) // total ones is the window
+                if (high - low > totalOnes) // total ones is the window
                 {
                     currentOnesInWindow -= data[low];
                     low++;

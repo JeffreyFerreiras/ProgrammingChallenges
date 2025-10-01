@@ -60,7 +60,7 @@ namespace Fibonacci_Print
 
         private static int BasicFib(int current)
         {
-            if(current < 2)
+            if (current < 2)
                 return current;
 
             return BasicFib(current - 1) + BasicFib(current - 2);
@@ -70,10 +70,10 @@ namespace Fibonacci_Print
 
         private static int MemoizedFib(int current)
         {
-            if(cache.ContainsKey(current))
+            if (cache.ContainsKey(current))
                 return cache[current];
 
-            if(current < 2)
+            if (current < 2)
                 return current;
 
             int firstResult = MemoizedFib(current - 1);
@@ -99,13 +99,13 @@ namespace Fibonacci_Print
 
         private static int BottomUpFib(int n)
         {
-            if(n < 1) throw new ArgumentException("Nth Fibbonacci number cannot be less than 1");
-            if(n == 2) return n;
+            if (n < 1) throw new ArgumentException("Nth Fibbonacci number cannot be less than 1");
+            if (n == 2) return n;
 
             int fib = 1;
             int last = 1;
 
-            for(int i = 2; i < n; i++)
+            for (int i = 2; i < n; i++)
             {
                 int temp = fib;
                 fib += last;
@@ -117,13 +117,14 @@ namespace Fibonacci_Print
 
         private static int BottomUpFib2(int n)
         {
-            if(n <= 2) return n; 
+            if (n <= 2) return n;
 
             int current = 5;
             int prev = 2;
             int fibCount = 3;
 
-            while(fibCount++ < n){
+            while (fibCount++ < n)
+            {
                 int temp = current;
                 current += prev;
                 prev = temp;
@@ -132,10 +133,10 @@ namespace Fibonacci_Print
             return current;
         }
 
-        
+
         private static int PracticeFib(int n)
         {
-            if(n < 2)
+            if (n < 2)
             {
                 return n;
             }

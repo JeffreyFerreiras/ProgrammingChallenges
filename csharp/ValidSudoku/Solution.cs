@@ -26,7 +26,7 @@ namespace ValidSudoku
             }
 
             bool[] seen = new bool[9];
-            
+
             // check each row for duplicates
             for (byte rowIndex = 0; rowIndex < rowLength; rowIndex++)
             {

@@ -19,27 +19,27 @@ namespace KthLargestElement
             var testArray2 = new int[] { 3, 2, 3, 1, 2, 4, 5, 5, 6 };
             int k2 = 4;
             Console.WriteLine($"Test 2: {FindKthLargest(testArray2, k2)} (expected: 4)");
-            
+
             // Test case 3: Edge case - k=1, should return the largest element
             var testArray3 = new int[] { 3, 2, 1, 5, 6, 4 };
             int k3 = 1;
             Console.WriteLine($"Test 3: {FindKthLargest(testArray3, k3)} (expected: 6)");
-            
+
             // Test case 4: Edge case - k=array.length, should return the smallest element
             var testArray4 = new int[] { 3, 2, 1, 5, 6, 4 };
             int k4 = testArray4.Length;
             Console.WriteLine($"Test 4: {FindKthLargest(testArray4, k4)} (expected: 1)");
-            
+
             // Test case 5: Array with many duplicates
             var testArray5 = new int[] { 5, 5, 5, 5, 5 };
             int k5 = 1;
             Console.WriteLine($"Test 5: {FindKthLargest(testArray5, k5)} (expected: 5)");
-            
+
             // Test case 6: Single element array
             var testArray6 = new int[] { 42 };
             int k6 = 1;
             Console.WriteLine($"Test 6: {FindKthLargest(testArray6, k6)} (expected: 42)");
-            
+
             // Test case 7: Negative numbers
             var testArray7 = new int[] { -1, -2, -3, -4, -5 };
             int k7 = 2;

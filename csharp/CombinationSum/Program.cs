@@ -29,15 +29,15 @@ namespace CombinationSum
 
             RunTestCase([2, 3, 6, 7], 7,
             [
-                new List<int> { 2, 2, 3 }, 
-                new List<int> { 7 } 
+                new List<int> { 2, 2, 3 },
+                new List<int> { 7 }
             ]);
 
             RunTestCase([2, 3, 5], 8,
             [
-                new List<int> { 2, 2, 2, 2 }, 
-                new List<int> { 2, 3, 3 }, 
-                new List<int> { 3, 5 } 
+                new List<int> { 2, 2, 2, 2 },
+                new List<int> { 2, 3, 3 },
+                new List<int> { 3, 5 }
             ]);
 
             RunTestCase([2], 1, []);

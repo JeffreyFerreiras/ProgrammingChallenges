@@ -18,49 +18,45 @@ internal static class Program
             new(
                 "Example 1",
                 3,
-                new[] { 4, 5, 8, 2 },
-                new[]
-                {
+                [4, 5, 8, 2],
+                [
                     new Operation(3, 4),
                     new Operation(5, 5),
                     new Operation(10, 5),
                     new Operation(9, 8),
                     new Operation(4, 8),
-                }
+                ]
             ),
             new(
                 "Single Element Stream",
                 1,
-                new[] { 5 },
-                new[]
-                {
+                [5],
+                [
                     new Operation(2, 5),
                     new Operation(6, 6),
                     new Operation(4, 6),
-                }
+                ]
             ),
             new(
                 "Growing Stream",
                 2,
-                new[] { 7 },
-                new[]
-                {
+                [7],
+                [
                     new Operation(0, 7),
                     new Operation(3, 7),
                     new Operation(4, 7),
                     new Operation(10, 7),
                     new Operation(12, 10),
-                }
+                ]
             ),
             new(
                 "Large Input",
                 3,
                 GenerateDescendingArray(50_000),
-                new[]
-                {
+                [
                     new Operation(1_000_000, 999_998),
                     new Operation(1_000_001, 1_000_000),
-                }
+                ]
             ),
         ];
 

@@ -15,13 +15,13 @@ internal static class Program
 
         var scenarios = new[]
         {
-            (Name: "Example 1", Values: new int?[] { 3, 9, 20, null, null, 15, 7 }, Expected: 3),
-            (Name: "Example 2", Values: new int?[] { 1, null, 2 }, Expected: 2),
+            (Name: "Example 1", Values: [3, 9, 20, null, null, 15, 7], Expected: 3),
+            (Name: "Example 2", Values: [1, null, 2], Expected: 2),
             (Name: "Edge: Empty", Values: Array.Empty<int?>(), Expected: 0),
-            (Name: "Edge: Single Node", Values: new int?[] { 42 }, Expected: 1),
-            (Name: "Left Skewed", Values: new int?[] { 1, 2, null, 3, null, 4, null, 5 }, Expected: 5),
-            (Name: "Right Skewed", Values: new int?[] { 1, null, 2, null, 3, null, 4 }, Expected: 4),
-            (Name: "Balanced Larger", Values: new int?[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, Expected: 4)
+            (Name: "Edge: Single Node", Values: [42], Expected: 1),
+            (Name: "Left Skewed", Values: [1, 2, null, 3, null, 4, null, 5], Expected: 5),
+            (Name: "Right Skewed", Values: [1, null, 2, null, 3, null, 4], Expected: 4),
+            (Name: "Balanced Larger", Values: [1, 2, 3, 4, 5, 6, 7, 8, 9], Expected: 4)
         };
 
         foreach (var scenario in scenarios)

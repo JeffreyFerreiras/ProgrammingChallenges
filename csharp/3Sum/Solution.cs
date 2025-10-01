@@ -50,7 +50,7 @@ namespace _3Sum
             var result = new List<IList<int>>();
             var lookUp = new Dictionary<int, List<int>>();
             var usedIndex = new HashSet<string>();
-            
+
             for (int i = 0; i < nums.Length; i++)
             {
                 if (!lookUp.TryGetValue(nums[i], out List<int> value))
@@ -92,7 +92,7 @@ namespace _3Sum
 
             return result;
         }
-        
+
         // n ^ 3 solution
         public static IList<IList<int>> ThreeSumBrute(int[] nums)
         {
@@ -121,5 +121,5 @@ namespace _3Sum
             return output;
         }
     }
-    
+
 }

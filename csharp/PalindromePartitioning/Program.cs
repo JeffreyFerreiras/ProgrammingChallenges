@@ -21,7 +21,7 @@ class Program
     {
         Console.WriteLine("Palindrome Partitioning");
         Console.WriteLine("======================");
-        
+
         var solution = new Solution();
         var testCases = new Dictionary<string, IList<IList<string>>>
         {
@@ -31,33 +31,33 @@ class Program
             // Adding a longer test case to better demonstrate the performance difference
             { "aabbbaccccdd", null } // We're only interested in performance for this one
         };
-        
+
         foreach (var testCase in testCases)
         {
             var input = testCase.Key;
             var expected = testCase.Value;
-            
+
             Console.WriteLine($"Input: \"{input}\"");
-            
+
             // Test original method
             Stopwatch stopwatch1 = new();
             stopwatch1.Start();
             var result1 = solution.Partition(input);
             stopwatch1.Stop();
-            
+
             Console.WriteLine($"Original Method:");
             Console.WriteLine($"Time: {stopwatch1.ElapsedTicks} ticks");
-            
+
             // Test optimized method
             Stopwatch stopwatch2 = new();
             stopwatch2.Start();
             var result2 = solution.PartitionOptimized(input);
             stopwatch2.Stop();
-            
+
             Console.WriteLine($"Optimized Method:");
             Console.WriteLine($"Time: {stopwatch2.ElapsedTicks} ticks");
             Console.WriteLine($"Performance improvement: {(stopwatch1.ElapsedTicks / (double)stopwatch2.ElapsedTicks):F2}x");
-            
+
             // For shorter strings, validate the results match
             if (expected != null)
             {
@@ -71,17 +71,17 @@ class Program
             Console.WriteLine();
         }
     }
-    
+
     private static string FormatResult(IList<IList<string>> result)
     {
         if (result == null) return "null";
-        
+
         var outerList = new List<string>();
         foreach (var innerList in result)
         {
             outerList.Add("[" + string.Join(",", innerList.Select(s => $"\"{s}\"")) + "]");
         }
-        
+
         return "[" + string.Join(",", outerList) + "]";
     }
 }

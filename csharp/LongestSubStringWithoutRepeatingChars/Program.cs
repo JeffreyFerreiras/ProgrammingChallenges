@@ -16,7 +16,7 @@ namespace LongestSubStringWithoutRepeatingChars
             var seen = new Dictionary<char, int>();
             int max = 0, i = 0;
 
-            while(i < s.Length)
+            while (i < s.Length)
             {
                 if (seen.ContainsKey(s[i]))
                 {

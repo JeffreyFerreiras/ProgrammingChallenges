@@ -31,17 +31,17 @@ namespace Staircase
                 //SOLUTION.
                 int number = Convert.ToInt32(Console.ReadLine());
 
-                StringBuilder floor = new(number*number);
-                for(int i = 1; i < number + 1; i++)
+                StringBuilder floor = new(number * number);
+                for (int i = 1; i < number + 1; i++)
                 {
                     floor.Append(' ', number - i);
                     floor.Append('#', i);
-                    if(number != i) floor.Append(Environment.NewLine);
+                    if (number != i) floor.Append(Environment.NewLine);
                 }
                 Console.WriteLine(floor);
                 Console.ReadLine();
             }
-            catch(ArgumentException e)
+            catch (ArgumentException e)
             {
                 Console.Write(e);
             }

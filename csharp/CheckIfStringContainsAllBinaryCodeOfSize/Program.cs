@@ -10,7 +10,7 @@ namespace CheckIfStringContainsAllBinaryCodeOfSize
         {
             var lookup = new HashSet<string>();
 
-            if(k==1)
+            if (k == 1)
             {
                 return s.Contains("0") && s.Contains("1");
             }

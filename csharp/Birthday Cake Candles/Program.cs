@@ -15,12 +15,12 @@
 
             for (int i = 0; i < n; i++)
             {
-                if(tallest < ar[i])
+                if (tallest < ar[i])
                 {
                     tallest = ar[i];
                     tallestCandleCount = 1;
                 }
-                else if(tallest == ar[i])
+                else if (tallest == ar[i])
                 {
                     tallestCandleCount++;
                 }

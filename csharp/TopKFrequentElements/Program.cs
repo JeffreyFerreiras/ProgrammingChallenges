@@ -46,7 +46,7 @@ namespace TopKFrequentElements
             Console.WriteLine($"Expected: [{string.Join(",", expected)}]");
 
             Solution solution = new();
-            
+
             Stopwatch stopwatch = new();
             stopwatch.Start();
             int[] result = solution.TopKFrequent(nums, k);

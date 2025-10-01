@@ -43,21 +43,21 @@ namespace LinkedList_DetectCycle
                 hair = hair.Next?.Next;
             }
             while (turtle != hair);
-            
+
             return true;
         }
 
 
         private static bool HasCycle(Node head)
         {
-            if(head == null) return false;
+            if (head == null) return false;
 
             var seen = new HashSet<int>();
             var node = head;
 
-            while(node != null)
+            while (node != null)
             {
-                if(seen.Contains(node.GetHashCode()))
+                if (seen.Contains(node.GetHashCode()))
                 {
                     return true;
                 }

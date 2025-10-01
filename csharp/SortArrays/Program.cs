@@ -73,7 +73,7 @@
 
             int bigArrayIndex = Math.Min(firstIndex, secondIndex);
             int[] remainingArray = firstIndex > secondIndex ? secondArray : firstArray;
-            
+
             for (int i = mergedIndex; i < mergedArray.Length && bigArrayIndex < remainingArray.Length; i++, bigArrayIndex++)
             {
                 mergedArray[i] = remainingArray[bigArrayIndex];

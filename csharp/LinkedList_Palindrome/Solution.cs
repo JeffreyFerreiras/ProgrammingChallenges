@@ -17,14 +17,14 @@
             ListNode currentptr = new(headptr.val, headptr.next);
             ListNode current = currentptr;
 
-            while(headptr != null)
+            while (headptr != null)
             {
                 var node = new ListNode(headptr.val, null);
                 currentptr.next = node;
                 currentptr = currentptr.next;
                 headptr = headptr.next;
             }
-            
+
             ListNode prev = null;
 
             while (current != null)
@@ -34,7 +34,7 @@
                 prev = current;
                 current = next;
             }
-            
+
             while (head != null && prev != null)
             {
                 if (head.val != prev.val)

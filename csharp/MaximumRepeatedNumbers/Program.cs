@@ -32,11 +32,11 @@
 
             var seen = new HashSet<int>();
 
-            foreach(var num in arr)
+            foreach (var num in arr)
             {
-                if(seen.Contains(num))
+                if (seen.Contains(num))
                 {
-                    if(max < num)
+                    if (max < num)
                     {
                         max = num;
                     }
@@ -52,7 +52,7 @@
         {
             int sum = arr.Sum();
 
-            int total = (arr.Length+1) * arr.Length / 2;
+            int total = (arr.Length + 1) * arr.Length / 2;
             int result = total - sum;
 
             return result;
@@ -62,13 +62,13 @@
         {
             Array.Sort(arr);
 
-            int last=arr[0];
+            int last = arr[0];
 
-            foreach(int num in arr)
+            foreach (int num in arr)
             {
-                if(num == arr[0]) continue;
+                if (num == arr[0]) continue;
 
-                if(num != last+1)
+                if (num != last + 1)
                 {
                     return last + 1;
                 }
@@ -84,9 +84,9 @@
         {
             InsertionSort(arr);
 
-            for(int i = arr.Length - 1; 0 < i; i--)
+            for (int i = arr.Length - 1; 0 < i; i--)
             {
-                if(arr[i] == arr[i - 1]) return arr[i];
+                if (arr[i] == arr[i - 1]) return arr[i];
             }
 
             return -1; //no repeating numbers;
@@ -94,12 +94,12 @@
 
         private static void InsertionSort(int[] arr) //Insertion sort is faster than QuickSort with smaller sets.
         {
-            for(int i = 1; i < arr.Length; i++)
+            for (int i = 1; i < arr.Length; i++)
             {
                 int inner = i;
                 int value = arr[inner];
 
-                while(inner > 0 && arr[inner - 1] > value)
+                while (inner > 0 && arr[inner - 1] > value)
                 {
                     arr[inner] = arr[inner - 1];
                     arr[inner - 1] = value;

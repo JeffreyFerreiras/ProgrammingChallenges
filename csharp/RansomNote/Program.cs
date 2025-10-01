@@ -29,11 +29,11 @@
 
             AppendToDict(dict, magazine);
 
-            foreach(var word in ransom)
+            foreach (var word in ransom)
             {
-                if(dict.ContainsKey(word))
+                if (dict.ContainsKey(word))
                 {
-                    if(dict[word] == 0)
+                    if (dict[word] == 0)
                     {
                         return "No";
                     }
@@ -47,9 +47,9 @@
 
         private static void AppendToDict(Dictionary<string, int> allWords, string[] words)
         {
-            for(int i = 0; i < words.Length; i++)
+            for (int i = 0; i < words.Length; i++)
             {
-                if(allWords.ContainsKey(words[i]))
+                if (allWords.ContainsKey(words[i]))
                 {
                     allWords[words[i]]++;
                 }
@@ -65,16 +65,16 @@
         {
             int ransomWordCount = ransom.Length;
 
-            foreach(string word in ransom)
+            foreach (string word in ransom)
             {
-                for(int i = 0; i < magazine.Length; i++)
+                for (int i = 0; i < magazine.Length; i++)
                 {
-                    if(magazine[i] == word)
+                    if (magazine[i] == word)
                     {
                         magazine[i] = null;
                         ransomWordCount--;
 
-                        if(ransomWordCount == 0)
+                        if (ransomWordCount == 0)
                         {
                             return "Yes";
                         }

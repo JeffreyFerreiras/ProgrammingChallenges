@@ -16,12 +16,12 @@ internal static class Program
 
         var scenarios = new[]
         {
-            (Name: "Example 1", Values: new int?[] { 4, 2, 7, 1, 3, 6, 9 }, Expected: new int?[] { 4, 7, 2, 9, 6, 3, 1 }),
-            (Name: "Example 2", Values: new int?[] { 2, 1, 3 }, Expected: new int?[] { 2, 3, 1 }),
+            (Name: "Example 1", Values: [4, 2, 7, 1, 3, 6, 9], Expected: [4, 7, 2, 9, 6, 3, 1]),
+            (Name: "Example 2", Values: [2, 1, 3], Expected: [2, 3, 1]),
             (Name: "Example 3", Values: Array.Empty<int?>(), Expected: Array.Empty<int?>()),
-            (Name: "Edge: Single Node", Values: new int?[] { 1 }, Expected: new int?[] { 1 }),
-            (Name: "Left-leaning", Values: new int?[] { 5, 4, null, 3, null, 2, null, 1 }, Expected: new int?[] { 5, null, 4, null, 3, null, 2, null, 1 }),
-            (Name: "Perfect Tree", Values: new int?[] { 1, 2, 3, 4, 5, 6, 7 }, Expected: new int?[] { 1, 3, 2, 7, 6, 5, 4 })
+            (Name: "Edge: Single Node", Values: [1], Expected: [1]),
+            (Name: "Left-leaning", Values: [5, 4, null, 3, null, 2, null, 1], Expected: [5, null, 4, null, 3, null, 2, null, 1]),
+            (Name: "Perfect Tree", Values: [1, 2, 3, 4, 5, 6, 7], Expected: [1, 3, 2, 7, 6, 5, 4])
         };
 
         foreach (var scenario in scenarios)

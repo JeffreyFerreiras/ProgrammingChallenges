@@ -35,22 +35,22 @@ namespace FindMissingNumbers
             int incrementor = numbers[0];
             int[] result = new int[2];
 
-            if(numbers[0] != 1)
+            if (numbers[0] != 1)
             {
                 result[0] = 1;
             }
 
-            for(int i = 1; i < numbers.Length; i++)
+            for (int i = 1; i < numbers.Length; i++)
             {
                 int current = numbers[i];
                 int expected = incrementor + 1;
 
-                if(current != expected)
+                if (current != expected)
                 {
                     AssignMissingNumber(result, expected);
                 }
 
-                if(result.All(x => x > 0))
+                if (result.All(x => x > 0))
                 {
                     return result;
                 }
@@ -58,7 +58,7 @@ namespace FindMissingNumbers
                 incrementor = expected;
             }
 
-            if(numbers.Length < len) //the trailing number is missing.
+            if (numbers.Length < len) //the trailing number is missing.
             {
                 AssignMissingNumber(result, numbers.Last() + 1);
             }
@@ -66,7 +66,7 @@ namespace FindMissingNumbers
             return result;
         }
 
-        
+
 
         private static int FindMissingNumber(int[] numbers, int len)
         {
@@ -90,7 +90,7 @@ namespace FindMissingNumbers
         private static int FindMissingNumber(int[] numbers)
         {
             int sum = numbers.Sum();
-            int expectedTotal = ((numbers.Length * (numbers.Length +1))  / 2);
+            int expectedTotal = ((numbers.Length * (numbers.Length + 1)) / 2);
 
             return expectedTotal - sum;
         }
@@ -100,22 +100,22 @@ namespace FindMissingNumbers
             int incrementor = numbers[0];
             int[] result = new int[2];
 
-            if(numbers[0] != 1)
+            if (numbers[0] != 1)
             {
                 result[0] = 1;
             }
 
-            for(int i = 1; i < numbers.Length; i++)
+            for (int i = 1; i < numbers.Length; i++)
             {
                 int current = numbers[i];
                 int expected = incrementor + 1;
 
-                if(current != expected)
+                if (current != expected)
                 {
                     AssignMissingNumber(result, expected);
                 }
 
-                if(result.All(x => x > 0))
+                if (result.All(x => x > 0))
                 {
                     break;
                 }
@@ -125,12 +125,12 @@ namespace FindMissingNumbers
 
             return result;
 
-            
+
         }
 
-        private static void AssignMissingNumber(int[]result, int expected)
+        private static void AssignMissingNumber(int[] result, int expected)
         {
-            if(result[0] == 0)
+            if (result[0] == 0)
             {
                 result[0] = expected;
             }

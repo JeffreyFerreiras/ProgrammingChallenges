@@ -8,14 +8,9 @@ public static class Solution
     }
 }
 
-public sealed class RandomNode
+public sealed class RandomNode(int val)
 {
-    public int Val { get; set; }
+    public int Val { get; set; } = val;
     public RandomNode? Next { get; set; }
     public RandomNode? Random { get; set; }
-
-    public RandomNode(int val)
-    {
-        Val = val;
-    }
 }

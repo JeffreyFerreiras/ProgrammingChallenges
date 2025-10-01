@@ -11,31 +11,31 @@ internal static class Program
 
         RunScenario(
             "Example: three sorted lists",
-            () => Solution.MergeKLists(new[]
-            {
+            () => Solution.MergeKLists(
+            [
                 BuildList(1, 4, 5),
                 BuildList(1, 3, 4),
                 BuildList(2, 6)
-            }),
+            ]),
             "[1,1,2,3,4,4,5,6]"
         );
 
         RunScenario(
             "Edge: all lists empty",
-            () => Solution.MergeKLists(new ListNode?[] { null, null, null }),
+            () => Solution.MergeKLists([null, null, null]),
             "[]"
         );
 
         RunScenario(
             "Long: five lists interleaving",
-            () => Solution.MergeKLists(new[]
-            {
+            () => Solution.MergeKLists(
+            [
                 BuildList(0, 5, 10, 15),
                 BuildList(1, 6, 11, 16),
                 BuildList(2, 7, 12, 17),
                 BuildList(3, 8, 13, 18),
                 BuildList(4, 9, 14, 19)
-            }),
+            ]),
             "[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"
         );
     }

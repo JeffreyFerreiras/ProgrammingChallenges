@@ -40,12 +40,12 @@ public class Solution
         {
             int size = queue.Count; // Process all oranges at current time
             bool rottenAny = false;
-            
+
             // Process all oranges at the current minute
             for (int i = 0; i < size; i++)
             {
                 var (row, col) = queue.Dequeue();
-                
+
                 foreach (var coord in coords)
                 {
                     var newRow = row + coord[0];
@@ -68,7 +68,7 @@ public class Solution
                     rottenAny = true;
                 }
             }
-            
+
             // Only increment time if we rotted any oranges this minute
             if (rottenAny)
             {

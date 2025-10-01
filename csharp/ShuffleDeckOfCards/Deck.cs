@@ -18,7 +18,7 @@ namespace ShuffleDeckOfCards
         {
             Cards = [];
 
-            foreach(CardFace enumValue in typeof(CardFace).GetEnumValues())
+            foreach (CardFace enumValue in typeof(CardFace).GetEnumValues())
             {
                 Cards.AddRange(this.BuildCardSuite(enumValue));
             }
@@ -26,7 +26,7 @@ namespace ShuffleDeckOfCards
 
         private IEnumerable<Card> BuildCardSuite(CardFace suite)
         {
-            foreach(CardValue enumValue in typeof(CardValue).GetEnumValues())
+            foreach (CardValue enumValue in typeof(CardValue).GetEnumValues())
             {
                 yield return new Card()
                 {
@@ -38,7 +38,7 @@ namespace ShuffleDeckOfCards
 
         public void Display()
         {
-            foreach(Card card in this.Cards)
+            foreach (Card card in this.Cards)
             {
                 Console.WriteLine(string.Format("{0}: {1}", card.Face, card.Value));
             }
@@ -46,7 +46,7 @@ namespace ShuffleDeckOfCards
 
         private int GetRandomIndex()
         {
-            lock(s_syncLock)
+            lock (s_syncLock)
             {
                 return s_random.Next(0, Cards.Count);
             }
@@ -59,12 +59,12 @@ namespace ShuffleDeckOfCards
 
         private void InternalShuffle(int shuffleCount)
         {
-            for(int i = 0; i < this.Cards.Count; i++)
+            for (int i = 0; i < this.Cards.Count; i++)
             {
                 Swap(GetRandomIndex(), GetRandomIndex());
             }
 
-            if(shuffleCount < 3) InternalShuffle(++shuffleCount);
+            if (shuffleCount < 3) InternalShuffle(++shuffleCount);
         }
 
         private void Swap(int left, int right)

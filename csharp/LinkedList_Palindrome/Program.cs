@@ -18,12 +18,12 @@ ListNode CreateTestCase(string data)
 {
     ListNode root = new();
     ListNode head = root;
-    
+
     for (int i = 0; i < data.Length; i++)
     {
         root.val = data[i];
-        
-        if(i != data.Length -1)
+
+        if (i != data.Length - 1)
         {
             root.next = new ListNode();
             root = root.next;

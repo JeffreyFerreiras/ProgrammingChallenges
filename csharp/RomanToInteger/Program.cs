@@ -46,16 +46,16 @@ public class Program
 
         var allTestsPassed = true;
         var stopwatch = new System.Diagnostics.Stopwatch();
-        
+
         foreach (var (input, expected) in testCases)
         {
             stopwatch.Restart();
             var result = program.RomanToInt(input);
             stopwatch.Stop();
-            
+
             var passed = result == expected;
             allTestsPassed &= passed;
-            
+
             Console.WriteLine($"Input: {input}");
             Console.WriteLine($"Expected: {expected}");
             Console.WriteLine($"Result: {result}");
@@ -66,7 +66,7 @@ public class Program
 
         Console.WriteLine($"All tests {(allTestsPassed ? "PASSED!" : "FAILED!")}");
     }
-    
+
     /// <summary>
     /// Converts a Roman numeral string to an integer value
     /// </summary>

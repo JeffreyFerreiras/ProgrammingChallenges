@@ -1,13 +1,14 @@
-public class Solution{
+public class Solution
+{
 
     public static long maximumQuality(List<int> packets, int channels)
     {
         List<List<int>> qualityCollection = new List<List<int>>(channels);
-        for(int i = 0; i < channels; i++)
+        for (int i = 0; i < channels; i++)
         {
             qualityCollection.Add(new List<int>());
         }
-        
+
         //sort packets in ascending order
         packets.Sort();
 
@@ -29,13 +30,13 @@ public class Solution{
         {
 
             if (qualityItem.Count() > 2 && qualityItem.Count() % 2 == 0)
-            { 
+            {
                 //average out the two middle numbers
                 decimal ans = qualityItem[qualityItem.Count() / 2] + qualityItem[qualityItem.Count() / 2 - 1] / 2;
                 sum += (long)Math.Round(ans);
             }
             else
-            { 
+            {
                 //get the middle
                 sum += qualityItem[qualityItem.Count() / 2];
             }

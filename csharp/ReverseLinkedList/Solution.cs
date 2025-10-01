@@ -18,7 +18,7 @@ namespace ReverseLinkedList
         {
             ListNode current = root;
 
-            while(current != null)
+            while (current != null)
             {
                 ListNode next = current.next;
                 current.next = root;
@@ -26,13 +26,13 @@ namespace ReverseLinkedList
                 current = next;
             }
 
-            return root;            
+            return root;
         }
 
         public static ListNode ReverseLinkedListRecursive(ListNode root)
         {
             // Added null check to handle empty list
-            if(root == null) return null;
+            if (root == null) return null;
 
             ListNode next = root.next;
             root.next = null!;
@@ -41,7 +41,7 @@ namespace ReverseLinkedList
 
             static ListNode Recursive(ListNode node, ListNode nex)
             {
-                if(nex is null)
+                if (nex is null)
                 {
                     return node;
                 }

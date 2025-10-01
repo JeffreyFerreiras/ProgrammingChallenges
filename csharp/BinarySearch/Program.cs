@@ -15,31 +15,31 @@ internal static class Program
         [
             new(
                 "Example 1",
-                new[] { -1, 0, 3, 5, 9, 12 },
+                [-1, 0, 3, 5, 9, 12],
                 9,
                 4
             ),
             new(
                 "Target Missing",
-                new[] { -1, 0, 3, 5, 9, 12 },
+                [-1, 0, 3, 5, 9, 12],
                 2,
                 -1
             ),
             new(
                 "Single Element Hit",
-                new[] { 5 },
+                [5],
                 5,
                 0
             ),
             new(
                 "Single Element Miss",
-                new[] { 5 },
+                [5],
                 -5,
                 -1
             ),
             new(
                 "Negative Numbers",
-                new[] { -15, -9, -4, 0, 12, 18, 27 },
+                [-15, -9, -4, 0, 12, 18, 27],
                 -4,
                 2
             ),

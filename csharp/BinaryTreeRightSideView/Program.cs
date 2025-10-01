@@ -16,13 +16,13 @@ internal static class Program
 
         var scenarios = new[]
         {
-            (Name: "Example 1", Values: new int?[] { 1, 2, 3, null, 5, null, 4 }, Expected: new[] { 1, 3, 4 }),
-            (Name: "Example 2", Values: new int?[] { 1, null, 3 }, Expected: new[] { 1, 3 }),
+            (Name: "Example 1", Values: [1, 2, 3, null, 5, null, 4], Expected: [1, 3, 4]),
+            (Name: "Example 2", Values: [1, null, 3], Expected: [1, 3]),
             (Name: "Example 3", Values: Array.Empty<int?>(), Expected: Array.Empty<int>()),
-            (Name: "Single Node", Values: new int?[] { 7 }, Expected: new[] { 7 }),
-            (Name: "Left-heavy", Values: new int?[] { 1, 2, null, 3, null, 4, null, 5 }, Expected: new[] { 1, 2, 3, 4, 5 }),
-            (Name: "Full Tree", Values: new int?[] { 1, 2, 3, 4, 5, 6, 7 }, Expected: new[] { 1, 3, 7 }),
-            (Name: "Sparse", Values: new int?[] { 1, 2, 3, null, 5, null, null, null, null, 4 }, Expected: new[] { 1, 3, 4 })
+            (Name: "Single Node", Values: [7], Expected: [7]),
+            (Name: "Left-heavy", Values: [1, 2, null, 3, null, 4, null, 5], Expected: [1, 2, 3, 4, 5]),
+            (Name: "Full Tree", Values: [1, 2, 3, 4, 5, 6, 7], Expected: [1, 3, 7]),
+            (Name: "Sparse", Values: [1, 2, 3, null, 5, null, null, null, null, 4], Expected: [1, 3, 4])
         };
 
         foreach (var scenario in scenarios)

@@ -5,7 +5,7 @@ namespace BigSorting
     class Program
     {
         //NOTE: Did it manually for good training, but it could be easily done using Array.Sort with a customized comparer.
-        
+
         /*
          * Consider an array of numeric strings, 
          * where each string is a positive number with anywhere from 0 - N digits.
@@ -31,7 +31,7 @@ namespace BigSorting
 
             Sort(input);
 
-            foreach(string n in input)
+            foreach (string n in input)
             {
                 Console.WriteLine(n);
             }
@@ -47,7 +47,7 @@ namespace BigSorting
 
             Sort(input2);
 
-            foreach(string n in input2)
+            foreach (string n in input2)
             {
                 Console.WriteLine(n);
             }
@@ -60,7 +60,7 @@ namespace BigSorting
 
         static void Sort(string[] arr, int left, int right)
         {
-            if(left < right)
+            if (left < right)
             {
                 int index = Partition(arr, left, right);
 
@@ -73,12 +73,12 @@ namespace BigSorting
         {
             string pivot = arr[(left + right) / 2];
 
-            while(left <= right)
+            while (left <= right)
             {
-                while(IsBigger(pivot, arr[left])) left++;
-                while(IsBigger(arr[right], pivot)) right--;
+                while (IsBigger(pivot, arr[left])) left++;
+                while (IsBigger(arr[right], pivot)) right--;
 
-                if(left <= right)
+                if (left <= right)
                 {
                     //swap
                     string temp = arr[left];
@@ -95,16 +95,16 @@ namespace BigSorting
 
         private static bool IsBigger(string value, string target)
         {
-            if(string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(target))
+            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(target))
                 return false;
 
-            if(value.Length > target.Length) return true;
-            if(target.Length > value.Length) return false;
+            if (value.Length > target.Length) return true;
+            if (target.Length > value.Length) return false;
 
-            for(int i = 0; i < value.Length; i++) //equal length
+            for (int i = 0; i < value.Length; i++) //equal length
             {
-                if(value[i] > target[i]) return true;
-                if(target[i] > value[i]) return false;
+                if (value[i] > target[i]) return true;
+                if (target[i] > value[i]) return false;
             }
 
             return false; //They're equal

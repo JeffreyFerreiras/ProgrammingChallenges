@@ -11,12 +11,12 @@ namespace AlmostPalindrome
 Given a string S consisting of lowercase English characters determine if you can make it a palindrome by removing at most 1 character.
 */
 
-// aba - True, abacc - False, abba - True
+        // aba - True, abacc - False, abba - True
 
-/* 1. (palindrom, candidate)
+        /* 1. (palindrom, candidate)
 
-// aba , acba;
-// */
+        // aba , acba;
+        // */
 
 
         static void Main(string[] args)

@@ -29,9 +29,9 @@
 
             set.Add(node.Value);
 
-            while(node.Next != null)
+            while (node.Next != null)
             {
-                if(set.Contains(node.Next.Value))
+                if (set.Contains(node.Next.Value))
                 {
                     //delete
                     data.Remove(node.Next);

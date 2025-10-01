@@ -17,7 +17,7 @@ namespace LinkedList_DeleteMiddleNode
             {
                 Node next = this;
 
-                while(next.Next != null)
+                while (next.Next != null)
                 {
                     next = next.Next;
                 }
@@ -29,9 +29,9 @@ namespace LinkedList_DeleteMiddleNode
             {
                 Node node = this;
 
-                while(node != null)
+                while (node != null)
                 {
-                    if(node.Value == num)
+                    if (node.Value == num)
                     {
                         return node;
                     }
@@ -46,7 +46,7 @@ namespace LinkedList_DeleteMiddleNode
             {
                 Node node = this;
 
-                while(node != null)
+                while (node != null)
                 {
                     Console.WriteLine(node.Value);
 
@@ -68,7 +68,7 @@ namespace LinkedList_DeleteMiddleNode
 
         private static void Delete(Node node)
         {
-            if(node.Next != null)
+            if (node.Next != null)
             {
                 node.Value = node.Next.Value;
                 node.Next = node.Next.Next;

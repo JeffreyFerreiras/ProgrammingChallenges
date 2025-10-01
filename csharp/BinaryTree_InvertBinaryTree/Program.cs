@@ -8,9 +8,13 @@ namespace ProgrammingChallenges
         {
             var scenarios = new List<(int?[] input, int?[] expected, string name)>
             {
-                (new int?[] {4,2,7,1,3,6,9}, new int?[] {4,7,2,9,6,3,1}, "Scenario 1"),
-                (new int?[] {2,1,3}, new int?[] {2,3,1}, "Scenario 2"),
-                (new int?[] {}, new int?[] {}, "Scenario 3")
+                (
+                    new int?[] { 4, 2, 7, 1, 3, 6, 9 },
+                    new int?[] { 4, 7, 2, 9, 6, 3, 1 },
+                    "Scenario 1"
+                ),
+                (new int?[] { 2, 1, 3 }, new int?[] { 2, 3, 1 }, "Scenario 2"),
+                (new int?[] { }, new int?[] { }, "Scenario 3"),
             };
 
             foreach (var scenario in scenarios)
@@ -23,7 +27,9 @@ namespace ProgrammingChallenges
                 {
                     var result = InvertBinaryTreeSolution.InvertTree(root);
                     stopwatch.Stop();
-                    Console.WriteLine($"{scenario.name} - InvertTree took {stopwatch.ElapsedTicks} ticks");
+                    Console.WriteLine(
+                        $"{scenario.name} - InvertTree took {stopwatch.ElapsedTicks} ticks"
+                    );
                     Console.WriteLine($"Result:   {SerializeTree(result)}");
                     Console.WriteLine($"Expected: {SerializeTree(expectedTree)}");
                 }
@@ -39,7 +45,8 @@ namespace ProgrammingChallenges
         // Build a binary tree from level-order array
         static TreeNode BuildTree(int?[] arr)
         {
-            if (arr == null || arr.Length == 0 || arr[0] == null) return null;
+            if (arr == null || arr.Length == 0 || arr[0] == null)
+                return null;
             TreeNode root = new(arr[0].Value);
             Queue<TreeNode> queue = new();
             queue.Enqueue(root);
@@ -66,11 +73,12 @@ namespace ProgrammingChallenges
         // Serialize binary tree to a string using level order traversal
         static string SerializeTree(TreeNode root)
         {
-            if (root == null) return "[]";
+            if (root == null)
+                return "[]";
             List<string> result = [];
             Queue<TreeNode> queue = new();
             queue.Enqueue(root);
-            while(queue.Count > 0)
+            while (queue.Count > 0)
             {
                 var node = queue.Dequeue();
                 if (node == null)
@@ -84,9 +92,9 @@ namespace ProgrammingChallenges
             }
             // Remove trailing "null"s
             int lastNonNull = result.Count - 1;
-            while(lastNonNull >= 0 && result[lastNonNull] == "null")
+            while (lastNonNull >= 0 && result[lastNonNull] == "null")
                 lastNonNull--;
-            return "[" + string.Join(",", result.GetRange(0, lastNonNull+1)) + "]";
+            return "[" + string.Join(",", result.GetRange(0, lastNonNull + 1)) + "]";
         }
     }
 }

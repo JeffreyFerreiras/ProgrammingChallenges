@@ -51,7 +51,7 @@ public class Solution2
                     perm.RemoveAt(perm.Count - 1);
                 }
             }
-        }        
+        }
     }
 }
 public class Solution
@@ -80,12 +80,12 @@ public class Solution
             }
             else
             {
-                foreach(var num in counter.Keys)
+                foreach (var num in counter.Keys)
                 {
                     if (counter[num] == 0)
                         continue;
 
-                    perm.Add(num); 
+                    perm.Add(num);
                     counter[num]--;
 
                     Permute();

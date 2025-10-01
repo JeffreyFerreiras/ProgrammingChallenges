@@ -36,14 +36,14 @@ public class NumMatrix
 {
     // holds the sum of all elements from the top-left corner of the matrix to the current element
     private int[,] matrixSum;
-    
+
     public NumMatrix(int[][] matrix)
     {
         if (matrix == null || matrix.Length == 0) return; // edge case
 
         // add an extra row and column for the sum of the first row and column,
         // so we don't have to check for edge cases
-        matrixSum = new int[matrix.Length + 1, matrix[0].Length + 1]; 
+        matrixSum = new int[matrix.Length + 1, matrix[0].Length + 1];
 
         // fill the matrixSum array
         // iterate over the matrix and calculate the sum of all elements
@@ -56,7 +56,7 @@ public class NumMatrix
             }
         }
     }
-    
+
     public int SumRegion(int row1, int col1, int row2, int col2)
     {
         return matrixSum[row2 + 1, col2 + 1] - matrixSum[row1, col2 + 1] - matrixSum[row2 + 1, col1] + matrixSum[row1, col1];

@@ -41,14 +41,14 @@ namespace OneWay
         {
             bool foundDiff = false;
 
-            int longerIndex=0, shorterIndex=0;
+            int longerIndex = 0, shorterIndex = 0;
 
             string longer = source.Length > target.Length ? source : target;
             string shorter = source.Length > target.Length ? target : source;
 
             while (longerIndex < longer.Length && shorterIndex < shorter.Length)
             {
-                if(longer[longerIndex] != shorter[shorterIndex])
+                if (longer[longerIndex] != shorter[shorterIndex])
                 {
                     if (foundDiff)
                         return false;
@@ -73,7 +73,7 @@ namespace OneWay
 
             for (int i = 0; i < source.Length; i++)
             {
-                if(source[i] != target[i])
+                if (source[i] != target[i])
                 {
                     if (foundDiff)
                         return false;

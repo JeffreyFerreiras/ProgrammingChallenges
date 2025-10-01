@@ -23,7 +23,7 @@ Note: You may assume the string contains only lowercase English letters.
         static void Main(string[] args)
         {
             Console.WriteLine(FirstUniqChar("leetcode"));
-            Console.WriteLine(FirstUniqChar("cc")); 
+            Console.WriteLine(FirstUniqChar("cc"));
             Console.WriteLine(FirstUniqChar("acaadcad"));
             Console.WriteLine(FirstUniqChar("dddccdbba"));
 
@@ -33,12 +33,12 @@ Note: You may assume the string contains only lowercase English letters.
             {
                 if (string.IsNullOrEmpty(s)) return -1;
                 if (s.Length == 1) return 0;
-                
+
                 var seen = new HashSet<char>();
 
                 for (int i = 0; i < s.Length - 1; i++)
                 {
-                    int j = i+1;
+                    int j = i + 1;
 
                     if (seen.Contains(s[i])) continue;
 
@@ -49,7 +49,7 @@ Note: You may assume the string contains only lowercase English letters.
                         return i;
                     }
 
-                    if(j < s.Length)
+                    if (j < s.Length)
                     {
                         seen.Add(s[j]);
                     }

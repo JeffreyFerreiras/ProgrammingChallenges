@@ -30,7 +30,7 @@ public class Solution
                 s = s.Remove(i, 1).Insert(i, string.Empty);
             }
         }
-        
+
         return s.Split("-").ToList();
     }
 }

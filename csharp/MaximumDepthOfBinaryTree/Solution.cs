@@ -1,17 +1,10 @@
 ﻿namespace MaximumDepthOfBinaryTree;
 
-public class TreeNode
+public class TreeNode(int val, TreeNode? left = null, TreeNode? right = null)
 {
-    public int Val { get; }
-    public TreeNode? Left { get; set; }
-    public TreeNode? Right { get; set; }
-
-    public TreeNode(int val, TreeNode? left = null, TreeNode? right = null)
-    {
-        Val = val;
-        Left = left;
-        Right = right;
-    }
+    public int Val { get; } = val;
+    public TreeNode? Left { get; set; } = left;
+    public TreeNode? Right { get; set; } = right;
 }
 
 public class Solution

@@ -25,7 +25,7 @@ Console.WriteLine($"2 + 3 :" + result2);
 static int GetSum(int a, int b)
 {
     int result = 0,
-    
+
     carry = a & b; // carry now contains common set bits of "a" and "b"
 
     if (Convert.ToBoolean(carry))

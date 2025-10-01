@@ -16,13 +16,13 @@ internal static class Program
 
         var scenarios = new[]
         {
-            (Name: "Example 1", Values: new int?[] { 1, 2, 3, null, null, 4, 5 }, Serialized: "[1,2,3,null,null,4,5]"),
+            (Name: "Example 1", Values: [1, 2, 3, null, null, 4, 5], Serialized: "[1,2,3,null,null,4,5]"),
             (Name: "Example 2", Values: Array.Empty<int?>(), Serialized: "[]"),
-            (Name: "Single Node", Values: new int?[] { 7 }, Serialized: "[7]"),
-            (Name: "Left-heavy", Values: new int?[] { 5, 4, null, 3, null, 2, null, 1 }, Serialized: "[5,4,null,3,null,2,null,1]"),
-            (Name: "Right-heavy", Values: new int?[] { 5, null, 6, null, 7, null, 8 }, Serialized: "[5,null,6,null,7,null,8]"),
-            (Name: "Mixed Nulls", Values: new int?[] { 10, 5, 15, null, 7, null, 20 }, Serialized: "[10,5,15,null,7,null,20]"),
-            (Name: "Large Sparse", Values: new int?[] { 3, 9, 20, null, null, 15, 7, null, null, null, null, 12 }, Serialized: "[3,9,20,null,null,15,7,null,null,null,null,12]" )
+            (Name: "Single Node", Values: [7], Serialized: "[7]"),
+            (Name: "Left-heavy", Values: [5, 4, null, 3, null, 2, null, 1], Serialized: "[5,4,null,3,null,2,null,1]"),
+            (Name: "Right-heavy", Values: [5, null, 6, null, 7, null, 8], Serialized: "[5,null,6,null,7,null,8]"),
+            (Name: "Mixed Nulls", Values: [10, 5, 15, null, 7, null, 20], Serialized: "[10,5,15,null,7,null,20]"),
+            (Name: "Large Sparse", Values: [3, 9, 20, null, null, 15, 7, null, null, null, null, 12], Serialized: "[3,9,20,null,null,15,7,null,null,null,null,12]" )
         };
 
         foreach (var scenario in scenarios)

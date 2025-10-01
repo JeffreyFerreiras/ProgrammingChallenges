@@ -16,12 +16,12 @@ internal static class Program
         var scenarios = new[]
         {
             (Name: "Example 1", Values: new int?[] { 3, 1, 4, 3, null, 1, 5 }, Expected: 4),
-            (Name: "Example 2", Values: new int?[] { 3, 3, null, 4, 2 }, Expected: 3),
-            (Name: "Example 3", Values: new int?[] { 1 }, Expected: 1),
-            (Name: "Strictly Decreasing", Values: new int?[] { 5, 4, null, 3, null, 2, null, 1 }, Expected: 1),
-            (Name: "Strictly Increasing", Values: new int?[] { 1, null, 2, null, 3, null, 4 }, Expected: 4),
-            (Name: "Mixed Values", Values: new int?[] { 2, 2, 2, 1, 3, 2, 5 }, Expected: 5),
-            (Name: "Large Balanced", Values: new int?[] { 7, 3, 9, 3, 5, 9, 10, 3, null, null, 6, null, null, 10, 11 }, Expected: 6)
+            (Name: "Example 2", Values: [3, 3, null, 4, 2], Expected: 3),
+            (Name: "Example 3", Values: [1], Expected: 1),
+            (Name: "Strictly Decreasing", Values: [5, 4, null, 3, null, 2, null, 1], Expected: 1),
+            (Name: "Strictly Increasing", Values: [1, null, 2, null, 3, null, 4], Expected: 4),
+            (Name: "Mixed Values", Values: [2, 2, 2, 1, 3, 2, 5], Expected: 5),
+            (Name: "Large Balanced", Values: [7, 3, 9, 3, 5, 9, 10, 3, null, null, 6, null, null, 10, 11], Expected: 6)
         };
 
         foreach (var scenario in scenarios)

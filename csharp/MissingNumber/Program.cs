@@ -36,11 +36,11 @@ var nums = new int[] { 3, 0, 1 };
 var result = MissingNumber(nums);
 Console.WriteLine($"Result: {result} Expected: 2");
 
-nums = new int[] { 0, 1 };
+nums = [0, 1];
 result = MissingNumber(nums);
 Console.WriteLine($"Result: {result} Expected: 2");
 
-nums = new int[] { 9, 6, 4, 2, 3, 5, 7, 0, 1 };
+nums = [9, 6, 4, 2, 3, 5, 7, 0, 1];
 result = MissingNumber(nums);
 Console.WriteLine($"Result: {result} Expected: 8");
 
@@ -49,6 +49,7 @@ int MissingNumber_(int[] nums)
     return nums.Length * (nums.Length + 1) / 2 - nums.Sum();
 }
 
-int MissingNumber(int [] nums){
+int MissingNumber(int[] nums)
+{
     return Enumerable.Range(0, nums.Length).Select((x) => x + 1).Sum() - nums.Sum();
 }

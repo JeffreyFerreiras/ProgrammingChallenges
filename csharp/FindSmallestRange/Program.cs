@@ -32,7 +32,7 @@
             int[] result = [rangeSet.Min(), rangeSet.Max()];
             int minRange = result[1] - sample2[0];
 
-            while(first >= 0 && second >= 0 && third >= 0)
+            while (first >= 0 && second >= 0 && third >= 0)
             {
                 rangeSet[0] = sample[first];
                 rangeSet[1] = sample2[second];
@@ -41,7 +41,7 @@
                 int min = rangeSet.Min();
                 int max = rangeSet.Max();
 
-                if(minRange > (max - min))
+                if (minRange > (max - min))
                 {
                     minRange = (max - min);
 
@@ -51,11 +51,11 @@
 
                 int maxIndex = Array.IndexOf(rangeSet, max);
 
-                if(maxIndex == 0)
+                if (maxIndex == 0)
                 {
                     first--;
                 }
-                else if(maxIndex == 1)
+                else if (maxIndex == 1)
                 {
                     second--;
                 }

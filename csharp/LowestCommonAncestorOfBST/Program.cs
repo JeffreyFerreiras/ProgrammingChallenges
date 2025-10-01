@@ -17,12 +17,12 @@ internal static class Program
         var scenarios = new[]
         {
             (Name: "Example 1", Values: new int?[] { 6, 2, 8, 0, 4, 7, 9, null, null, 3, 5 }, P: 2, Q: 8, Expected: 6),
-            (Name: "Example 2", Values: new int?[] { 6, 2, 8, 0, 4, 7, 9, null, null, 3, 5 }, P: 2, Q: 4, Expected: 2),
-            (Name: "Edge: Same Node", Values: new int?[] { 5, 3, 7, 2, 4, 6, 8 }, P: 4, Q: 4, Expected: 4),
-            (Name: "Root as Ancestor", Values: new int?[] { 2, 1, 3 }, P: 1, Q: 3, Expected: 2),
-            (Name: "Left Heavy", Values: new int?[] { 5, 3, null, 2, null, 1 }, P: 1, Q: 3, Expected: 3),
-            (Name: "Right Heavy", Values: new int?[] { 5, null, 8, null, 10, null, 12 }, P: 8, Q: 12, Expected: 8),
-            (Name: "Deep Nodes", Values: new int?[] { 10, 5, 15, 2, 7, 12, 20, 1, 3, 6, 8, 11, 13, 18, 25 }, P: 3, Q: 8, Expected: 5)
+            (Name: "Example 2", Values: [6, 2, 8, 0, 4, 7, 9, null, null, 3, 5], P: 2, Q: 4, Expected: 2),
+            (Name: "Edge: Same Node", Values: [5, 3, 7, 2, 4, 6, 8], P: 4, Q: 4, Expected: 4),
+            (Name: "Root as Ancestor", Values: [2, 1, 3], P: 1, Q: 3, Expected: 2),
+            (Name: "Left Heavy", Values: [5, 3, null, 2, null, 1], P: 1, Q: 3, Expected: 3),
+            (Name: "Right Heavy", Values: [5, null, 8, null, 10, null, 12], P: 8, Q: 12, Expected: 8),
+            (Name: "Deep Nodes", Values: [10, 5, 15, 2, 7, 12, 20, 1, 3, 6, 8, 11, 13, 18, 25], P: 3, Q: 8, Expected: 5)
         };
 
         foreach (var scenario in scenarios)

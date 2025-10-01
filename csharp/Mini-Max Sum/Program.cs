@@ -31,14 +31,14 @@
 
             bool minFunc(long x, long y) => x < y;
             long min = GetMinMax(arr, minFunc);
-            
+
             return [min, max];
         }
 
         private static long GetMinMax(int[] arr, Func<long, long, bool> comparer)
         {
             var cache = new List<long>();
-            
+
             for (int i = 0; i < arr.Length; i++)
             {
                 long current = arr[i];
@@ -59,10 +59,10 @@
         private static void ReplaceMinMax(long current, List<long> cache, Func<long, long, bool> comparer)
         {
             long target = cache[0];
-            
+
             for (int i = 0; i < cache.Count; i++)
-            {  
-                if(comparer(target, cache[i]))
+            {
+                if (comparer(target, cache[i]))
                 {
                     target = cache[i];
                 }

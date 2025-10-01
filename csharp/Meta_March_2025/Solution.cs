@@ -8,7 +8,7 @@ class RefinedSolution
     static void Main(string[] args)
     {
         var solution = new RefinedSolution();
-        
+
         // Updated test scenarios: array, k (1-based), expected result
         var testCases = new[]
         {
@@ -18,9 +18,9 @@ class RefinedSolution
             ([5, 10, 15, 20, 25], 2, 20),    // 2nd largest is 20
             ([100, 50, 25, 75], 2, 75)       // 2nd largest is 75
         };
-        
+
         var stopwatch = new Stopwatch();
-        
+
         // Test FindKth1
         foreach (var (arr, k, expectedResult) in testCases)
         {
@@ -28,12 +28,12 @@ class RefinedSolution
             stopwatch.Restart();
             int result1 = solution.FindKth1(arrCopy, k);
             stopwatch.Stop();
-            
+
             Console.WriteLine($"Method: FindKth1, Time: {stopwatch.ElapsedMilliseconds}ms, Result: `{result1}`, Expected: `{expectedResult}`");
         }
-        
+
         Console.WriteLine();
-        
+
         // Test FindKth2
         foreach (var (arr, k, expected) in testCases)
         {
@@ -41,12 +41,12 @@ class RefinedSolution
             stopwatch.Restart();
             int result2 = solution.FindKth2(arrCopy, k);
             stopwatch.Stop();
-            
+
             Console.WriteLine($"Method: FindKth2, Time: {stopwatch.ElapsedMilliseconds}ms, Result: `{result2}`, Expected: `{expected}`");
         }
-        
+
         Console.WriteLine();
-        
+
         // Test Clone method
         Console.WriteLine("Testing Clone method:");
         var testDict = new Dictionary<int, int[]>
@@ -56,28 +56,28 @@ class RefinedSolution
             { 3, new[] { 1, 2 } },
             { 4, new[] { 2 } }
         };
-        
+
         stopwatch.Restart();
         var clonedDict = solution.Clone(testDict);
         stopwatch.Stop();
-        
+
         // Verify it's a deep clone by changing original
         testDict[1][0] = 999;
-        
+
         bool cloneSuccessful = testDict[1][0] == 999 && clonedDict[1][0] == 2;
         string expectedCloneResult = "Deep clone successful";
         string result = cloneSuccessful ? "Deep clone successful" : "Clone failed";
-        
+
         Console.WriteLine($"Method: Clone, Time: {stopwatch.ElapsedMilliseconds}ms, Result: `{result}`, Expected: `{expectedCloneResult}`");
-        
+
         // Print dictionaries for visual verification
         Console.WriteLine("Original dictionary after modification:");
         PrintDictionary(testDict);
-        
+
         Console.WriteLine("Cloned dictionary (should be unchanged):");
         PrintDictionary(clonedDict);
     }
-    
+
     static void PrintDictionary(Dictionary<int, int[]> dict)
     {
         foreach (var kvp in dict)

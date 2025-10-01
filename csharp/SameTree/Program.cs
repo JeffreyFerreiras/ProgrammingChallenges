@@ -16,13 +16,13 @@ internal static class Program
 
         var scenarios = new[]
         {
-            (Name: "Example 1", P: new int?[] { 1, 2, 3 }, Q: new int?[] { 1, 2, 3 }, Expected: true),
-            (Name: "Example 2", P: new int?[] { 1, 2 }, Q: new int?[] { 1, null, 2 }, Expected: false),
-            (Name: "Example 3", P: new int?[] { 1, 2, 1 }, Q: new int?[] { 1, 1, 2 }, Expected: false),
+            (Name: "Example 1", P: [1, 2, 3], Q: [1, 2, 3], Expected: true),
+            (Name: "Example 2", P: [1, 2], Q: [1, null, 2], Expected: false),
+            (Name: "Example 3", P: [1, 2, 1], Q: [1, 1, 2], Expected: false),
             (Name: "Edge: Both Empty", P: Array.Empty<int?>(), Q: Array.Empty<int?>(), Expected: true),
-            (Name: "Single Node Difference", P: new int?[] { 1 }, Q: new int?[] { 2 }, Expected: false),
-            (Name: "Different Structure", P: new int?[] { 1, 2, 3, null, 4 }, Q: new int?[] { 1, 2, 3, 4 }, Expected: false),
-            (Name: "Large Match", P: new int?[] { 5, 5, 5, 5, 6 }, Q: new int?[] { 5, 5, 5, 5, 6 }, Expected: true)
+            (Name: "Single Node Difference", P: [1], Q: [2], Expected: false),
+            (Name: "Different Structure", P: [1, 2, 3, null, 4], Q: [1, 2, 3, 4], Expected: false),
+            (Name: "Large Match", P: [5, 5, 5, 5, 6], Q: [5, 5, 5, 5, 6], Expected: true)
         };
 
         foreach (var scenario in scenarios)

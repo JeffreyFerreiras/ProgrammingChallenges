@@ -47,18 +47,18 @@ Explanation: It is impossible to finish all courses.
     static void RunTestCase(Solution solution, int numCourses, int[][] prerequisites, int[] expected)
     {
         Console.WriteLine($"Test Case: numCourses = {numCourses}, prerequisites = {GetPrerequisitesString(prerequisites)} => Expected: {GetArrayString(expected)}");
-        
+
         // Run DFS algorithm and report results
         RunAlgorithm(
-            "DFS", 
-            () => solution.FindOrderTopologicalDFS(numCourses, prerequisites), 
+            "DFS",
+            () => solution.FindOrderTopologicalDFS(numCourses, prerequisites),
             expected
         );
-        
+
         // Run BFS algorithm and report results
         RunAlgorithm(
-            "BFS (Kahn's algorithm)", 
-            () => solution.FindOrderTopologicalBFS(numCourses, prerequisites), 
+            "BFS (Kahn's algorithm)",
+            () => solution.FindOrderTopologicalBFS(numCourses, prerequisites),
             expected
         );
 
@@ -68,17 +68,17 @@ Explanation: It is impossible to finish all courses.
             () => solution.FindOrderAdjDfs(numCourses, prerequisites),
             expected
         );
-        
+
         Console.WriteLine(new string('-', 50));
     }
-    
+
     static void RunAlgorithm(string algorithmName, Func<int[]> algorithmFunction, int[] expected)
     {
         Stopwatch sw = new();
         sw.Start();
         int[] result = algorithmFunction();
         sw.Stop();
-        
+
         Console.WriteLine($"Find Order {algorithmName}: {sw.ElapsedTicks} ticks");
         Console.WriteLine($"Result: `{GetArrayString(result)}`");
         Console.WriteLine($"Expected: `{GetArrayString(expected)}`");
@@ -94,13 +94,13 @@ Explanation: It is impossible to finish all courses.
     {
         if (prerequisites.Length == 0)
             return "[]";
-            
+
         List<string> pairs = new();
         foreach (var pair in prerequisites)
         {
             pairs.Add($"[{pair[0]},{pair[1]}]");
         }
-        
+
         return "[" + string.Join(",", pairs) + "]";
     }
 }

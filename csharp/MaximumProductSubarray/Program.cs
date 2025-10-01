@@ -15,11 +15,11 @@ internal static class Program
         var scenarios = new[]
         {
             (Name: "Example 1", Nums: new[] { 2, 3, -2, 4 }, Expected: 6),
-            (Name: "Example 2", Nums: new[] { -2, 0, -1 }, Expected: 0),
-            (Name: "Single Negative", Nums: new[] { -3 }, Expected: -3),
-            (Name: "All Negative", Nums: new[] { -2, -3, -4 }, Expected: 12),
-            (Name: "Contains Zero", Nums: new[] { 0, 2, 0, 3, 4 }, Expected: 4),
-            (Name: "Mixed Values", Nums: new[] { -2, 3, -4 }, Expected: 24)
+            (Name: "Example 2", Nums: [-2, 0, -1], Expected: 0),
+            (Name: "Single Negative", Nums: [-3], Expected: -3),
+            (Name: "All Negative", Nums: [-2, -3, -4], Expected: 12),
+            (Name: "Contains Zero", Nums: [0, 2, 0, 3, 4], Expected: 4),
+            (Name: "Mixed Values", Nums: [-2, 3, -4], Expected: 24)
         };
 
         foreach (var scenario in scenarios)

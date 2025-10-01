@@ -23,9 +23,9 @@ namespace Permutations
 
         static void Main(string[] args)
         {
-            foreach(var p in Permute([1,2,3]))
+            foreach (var p in Permute([1, 2, 3]))
             {
-                Console.WriteLine(string.Join(',',p));
+                Console.WriteLine(string.Join(',', p));
             }
 
             Console.ReadLine();

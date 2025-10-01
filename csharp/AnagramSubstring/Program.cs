@@ -30,9 +30,9 @@ namespace AnagramSubstring
         {
             var btable = GetCharTable(b);
 
-            foreach(char c in a)
+            foreach (char c in a)
             {
-                if(btable[c-'a'] > 0)
+                if (btable[c - 'a'] > 0)
                 {
                     btable[c - 'a']--;
                 }
@@ -45,11 +45,11 @@ namespace AnagramSubstring
             return true;
         }
 
-        static int[] GetCharTable(string source) 
+        static int[] GetCharTable(string source)
         {
             var table = new int[26];
 
-            foreach(char c in source)
+            foreach (char c in source)
             {
                 int index = (c - 'a');
                 table[index]++;
@@ -60,9 +60,9 @@ namespace AnagramSubstring
 
         private static bool IsAnagramSubstring_BruteForce(string a, string b) //O(A x B) BruteForce
         {
-            foreach(char c in a)
+            foreach (char c in a)
             {
-                if(!b.Contains(c))
+                if (!b.Contains(c))
                 {
                     return false;
                 }

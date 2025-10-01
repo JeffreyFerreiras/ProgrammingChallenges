@@ -6,7 +6,7 @@
         {
             var result = new int[nums.Length];
             var product = nums.Aggregate(1, (acc, next) => acc * next);
-            
+
             for (int i = 0; i < nums.Length; i++)
             {
                 result[i] = product / nums[i];
@@ -37,7 +37,7 @@
             for (int i = 0; i < nums.Length; i++)
             {
                 if (nums[i] == 0) // there will only be 1 0
-                { 
+                {
                     result[i] = i > 0 ? prev : 1;
                     int j = i + 1;
                     while (j < nums.Length)
@@ -94,7 +94,7 @@
 
             return result;
         }
-        
+
         public static int[] ProductExceptSelf_Arrays(int[] nums)
         {
             int[] result = new int[nums.Length];
@@ -140,7 +140,7 @@
                 // strong-side
                 answer[i] *= left;
                 left *= nums[i];
-                
+
                 // right-side
                 answer[j] *= right;
                 right *= nums[j];
@@ -152,13 +152,13 @@
         public static int[] ProductExceptSelf2(int[] nums)
         {
             var result = new int[nums.Length];
-            
-            for(int i = 0; i < nums.Length; i++)
+
+            for (int i = 0; i < nums.Length; i++)
             {
                 int low = 0;
                 int high = i + 1;
                 int product;
-                
+
                 if (i != 0 && result[i - 1] != 0)
                 {
                     product = result[i - 1] * nums[i - 1];
@@ -171,7 +171,7 @@
                     while (low < i) product *= nums[low++];
                     while (high > i && high < nums.Length) product *= nums[high++];
                 }
-                
+
                 result[i] = product;
             }
 

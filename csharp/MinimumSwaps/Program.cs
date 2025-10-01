@@ -34,7 +34,7 @@ namespace MinimumSwaps
         {
             var solution = new Solution();
             var stopwatch = new System.Diagnostics.Stopwatch();
-            
+
             // Test scenarios
             var testCases = new[]
             {
@@ -47,7 +47,7 @@ namespace MinimumSwaps
             };
 
             Console.WriteLine("Running test scenarios...\n");
-            
+
             foreach (var test in testCases)
             {
                 stopwatch.Restart();

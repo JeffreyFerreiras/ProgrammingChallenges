@@ -19,32 +19,32 @@ internal static class Program
         [
             new(
                 "Example 1",
-                new[] { 1, 3 },
-                new[] { 2 },
+                [1, 3],
+                [2],
                 2.0
             ),
             new(
                 "Example 2",
-                new[] { 1, 2 },
-                new[] { 3, 4 },
+                [1, 2],
+                [3, 4],
                 2.5
             ),
             new(
                 "Zero Arrays",
-                new[] { 0, 0 },
-                new[] { 0, 0 },
+                [0, 0],
+                [0, 0],
                 0.0
             ),
             new(
                 "Single Non-Empty",
                 Array.Empty<int>(),
-                new[] { 2 },
+                [2],
                 2.0
             ),
             new(
                 "Different Lengths",
-                new[] { 1, 3, 8, 9, 15 },
-                new[] { 7, 11, 18, 19, 21, 25 },
+                [1, 3, 8, 9, 15],
+                [7, 11, 18, 19, 21, 25],
                 11.0
             ),
             new(

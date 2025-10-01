@@ -25,7 +25,7 @@ namespace SetMatrixZeroes
 
                 for (int j = 1; j < len; j++)
                 {
-                    if(matrix[i][j] == 0)
+                    if (matrix[i][j] == 0)
                     {
                         matrix[0][j] = 0;
                         matrix[i][0] = 0;
@@ -44,7 +44,7 @@ namespace SetMatrixZeroes
                 }
             }
 
-            if(matrix[0][0] == 0)
+            if (matrix[0][0] == 0)
             {
                 for (int i = 0; i < len; i++)
                 {
@@ -95,7 +95,7 @@ namespace SetMatrixZeroes
         public void SetZeroes_DFS(int[][] matrix)
         {
             int m = matrix.Length;
-            if(m == 0) return;
+            if (m == 0) return;
             int n = matrix[0].Length;
 
             bool[,] visited = new bool[m, n];
@@ -105,7 +105,7 @@ namespace SetMatrixZeroes
             {
                 for (int j = 0; j < n; j++)
                 {
-                    if(matrix[i][j] == 0 && !visited[i, j])
+                    if (matrix[i][j] == 0 && !visited[i, j])
                     {
                         DFS(matrix, i, j, visited);
                     }

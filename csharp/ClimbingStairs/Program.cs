@@ -96,7 +96,7 @@ public class Program
         var result = ClimbStairs(n - 1) + ClimbStairs(n - 2);
 
         cache.Add(n, result);
-        
+
         return result;
     }
 

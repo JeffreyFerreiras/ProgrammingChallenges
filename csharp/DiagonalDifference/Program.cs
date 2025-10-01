@@ -46,7 +46,7 @@ Difference: |4 - 19| = 15
             int n = Convert.ToInt32(Console.ReadLine());
             int[][] numArray = new int[n][];
 
-            for(int a_i = 0; a_i < n; a_i++)
+            for (int a_i = 0; a_i < n; a_i++)
             {
                 string[] a_temp = Console.ReadLine().Split(' ');
                 numArray[a_i] = Array.ConvertAll(a_temp, Int32.Parse);
@@ -59,12 +59,12 @@ Difference: |4 - 19| = 15
 
         private static void PrintArrayDiagnalSum(int[][] numArray)
         {//SOLUTION
-            if(numArray == null)
+            if (numArray == null)
                 throw new NullReferenceException("Array cannot be null");
 
             int firstDiagSum = 0, secondDiagSum = 0;
 
-            for(int i = 0; i < numArray.Length; i++)
+            for (int i = 0; i < numArray.Length; i++)
             {
                 firstDiagSum += numArray[i][i];
                 secondDiagSum += numArray[(numArray.Length - 1) - i][i];

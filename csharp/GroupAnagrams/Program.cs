@@ -37,11 +37,11 @@ namespace GroupAnagrams
             Console.WriteLine("----------------------");
 
             // Test cases
-            RunTest(["eat", "tea", "tan", "ate", "nat", "bat"], 
+            RunTest(["eat", "tea", "tan", "ate", "nat", "bat"],
                     "[[\"bat\"],[\"nat\",\"tan\"],[\"ate\",\"eat\",\"tea\"]]");
-            RunTest([""], 
+            RunTest([""],
                     "[[\"\"]]");
-            RunTest(["a"], 
+            RunTest(["a"],
                     "[[\"a\"]]");
         }
 
@@ -49,15 +49,15 @@ namespace GroupAnagrams
         {
             Solution solution = new();
             Stopwatch stopwatch = new();
-            
+
             Console.WriteLine($"Testing input: [{string.Join(", ", input.Select(s => $"\"{s}\""))}]");
-            
+
             stopwatch.Start();
             IList<IList<string>> result = solution.GroupAnagrams(input);
             stopwatch.Stop();
-            
+
             string resultStr = ConvertResultToString(result);
-            
+
             Console.WriteLine($"Method: GroupAnagrams");
             Console.WriteLine($"Time taken: {stopwatch.ElapsedTicks} ticks");
             Console.WriteLine($"Result: `{resultStr}`");
@@ -67,7 +67,7 @@ namespace GroupAnagrams
 
         static string ConvertResultToString(IList<IList<string>> result)
         {
-            return "[" + string.Join(",", result.Select(group => 
+            return "[" + string.Join(",", result.Select(group =>
                 "[" + string.Join(",", group.Select(s => $"\"{s}\"")) + "]")) + "]";
         }
     }

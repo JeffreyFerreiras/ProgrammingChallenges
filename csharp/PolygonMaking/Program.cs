@@ -21,18 +21,18 @@ namespace PolygonMaking
         {
             int sides = Convert.ToInt32(Console.ReadLine());
             string[] a_temp = Console.ReadLine().Split(' ');
-            int[] sideLengths = Array.ConvertAll(a_temp,Int32.Parse);
+            int[] sideLengths = Array.ConvertAll(a_temp, Int32.Parse);
 
             MinimumCuts(sideLengths);
         }
 
         private static int MinimumCuts(int[] sideLengths)
         {
-            int cuts=0;
+            int cuts = 0;
 
-            for(int i = 1; i < sideLengths.Length; i++)
+            for (int i = 1; i < sideLengths.Length; i++)
             {
-                if(sideLengths[i] >= sideLengths.Sum() / 2) cuts++;
+                if (sideLengths[i] >= sideLengths.Sum() / 2) cuts++;
             }
 
             return cuts;

@@ -13,10 +13,10 @@ internal static class Program
 
         TestScenario[] scenarios =
         [
-            new("Example 1", new[] { 3, 6, 7, 11 }, 8, 4),
-            new("Example 2", new[] { 30, 11, 23, 4, 20 }, 5, 30),
-            new("Example 3", new[] { 30, 11, 23, 4, 20 }, 6, 23),
-            new("Single Gigantic Pile", new[] { 1_000_000_000 }, 1, 1_000_000_000),
+            new("Example 1", [3, 6, 7, 11], 8, 4),
+            new("Example 2", [30, 11, 23, 4, 20], 5, 30),
+            new("Example 3", [30, 11, 23, 4, 20], 6, 23),
+            new("Single Gigantic Pile", [1_000_000_000], 1, 1_000_000_000),
             new("Many Small Piles", CreateRepeatedPiles(30, 5), 60, 3),
             new("Large Stress Test", CreateRampPiles(5_000, 1, 5), 5_000, 24_996),
         ];

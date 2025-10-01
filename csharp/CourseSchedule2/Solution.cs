@@ -5,7 +5,7 @@ public class Solution
     public int[] FindOrderAdjDfs(int numCourses, int[][] prerequisites)
     {
         List<int> result = [];
-        Dictionary<int, List<int>> adj = new (numCourses);
+        Dictionary<int, List<int>> adj = new(numCourses);
         HashSet<int> visited = [];
         HashSet<int> cycle = [];
 
@@ -101,7 +101,8 @@ public class Solution
     public int[] FindOrderTopologicalBFS(int numCourses, int[][] prerequisites)
     {
         List<List<int>> adj = [];               // Create an adjacency list to represent the graph
-        for (int i = 0; i < numCourses; i++){
+        for (int i = 0; i < numCourses; i++)
+        {
             adj.Add([]);                        // Initialize each course with an empty list of prerequisites
         }
 
@@ -109,39 +110,46 @@ public class Solution
         int[] indegrees = new int[numCourses];
 
         // Populate the adjacency list and in-degree array based on the prerequisites
-        foreach (var pre in prerequisites) {
+        foreach (var pre in prerequisites)
+        {
             indegrees[pre[1]]++;                // Increment the in-degree of the course that has a prerequisite
             adj[pre[0]].Add(pre[1]);            // Add the prerequisite to the adjacency list of the course
         }
 
         // Create a queue to store courses with in-degree of 0
         Queue<int> queue = [];
-        for (int i = 0; i < numCourses; i++) {
-            if(indegrees[i] == 0) {
+        for (int i = 0; i < numCourses; i++)
+        {
+            if (indegrees[i] == 0)
+            {
                 queue.Enqueue(i);               // Add courses with no prerequisites to the queue
             }
         }
 
         // Initialize variables for tracking the number of finished courses and the result array
         int finish = 0;
-        int [] result = new int[numCourses];
+        int[] result = new int[numCourses];
 
         // Process courses in the queue until it's empty
-        while(queue.Count > 0) {
+        while (queue.Count > 0)
+        {
             var node = queue.Dequeue(); // Dequeue a course from the queue
             result[numCourses - finish - 1] = node; // Add the course to the result array
             finish++; // Increment the number of finished courses
             // Iterate through the neighbors (prerequisites) of the current course
-            foreach(var neighbor in adj[node]){
+            foreach (var neighbor in adj[node])
+            {
                 indegrees[neighbor]--; // Decrement the in-degree of the neighbor
-                if(indegrees[neighbor] == 0) {
+                if (indegrees[neighbor] == 0)
+                {
                     queue.Enqueue(neighbor); // If the in-degree becomes 0, add it to the queue
                 }
             }
         }
-        
+
         // If not all courses have been finished, there is a cycle, so return an empty array
-        if(finish != numCourses) {
+        if (finish != numCourses)
+        {
             return [];
         }
         // Return the topological order of the courses

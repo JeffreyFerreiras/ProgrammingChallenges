@@ -1,5 +1,7 @@
-public static class Solution {
-    public static Node CloneGraph(Node node) {
+public static class Solution
+{
+    public static Node CloneGraph(Node node)
+    {
         if (node == null) return null!;
         Queue<Node> queue = [];
         Dictionary<Node, Node> seen = [];

@@ -118,22 +118,22 @@ namespace SurroundedRegions
         static void RunTest(string testName, char[][] board, char[][] expected)
         {
             var solution = new Solution();
-            
+
             // Create a deep copy of the input board for testing
             char[][] boardCopy = DeepCopyBoard(board);
-            
+
             // Start timing
             var stopwatch = Stopwatch.StartNew();
-            
+
             // Call the solution
             solution.Solve(boardCopy);
-            
+
             // Stop timing
             stopwatch.Stop();
-            
+
             // Validate results
             bool isCorrect = ValidateResult(boardCopy, expected);
-            
+
             // Print results
             Console.WriteLine($"{testName} - {(isCorrect ? "✓" : "✗")}");
             Console.WriteLine($"Time: {stopwatch.ElapsedTicks} ticks");
@@ -189,14 +189,14 @@ namespace SurroundedRegions
 
             StringBuilder sb = new();
             sb.Append("[\n");
-            
+
             foreach (var row in board)
             {
                 sb.Append("  [");
                 sb.Append(string.Join(", ", row.Select(c => $"'{c}'")));
                 sb.Append("]\n");
             }
-            
+
             sb.Append("]");
             Console.WriteLine(sb.ToString());
         }

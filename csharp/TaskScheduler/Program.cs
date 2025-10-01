@@ -17,19 +17,19 @@ internal static class Program
         [
             new(
                 "Example 1",
-                new[] { 'A', 'A', 'A', 'B', 'B', 'B' },
+                ['A', 'A', 'A', 'B', 'B', 'B'],
                 2,
                 8
             ),
             new(
                 "Example 2",
-                new[] { 'A', 'A', 'A', 'B', 'B', 'B' },
+                ['A', 'A', 'A', 'B', 'B', 'B'],
                 0,
                 6
             ),
             new(
                 "Mixed Letters",
-                new[] { 'A', 'A', 'A', 'B', 'C', 'C', 'D', 'D', 'D', 'E' },
+                ['A', 'A', 'A', 'B', 'C', 'C', 'D', 'D', 'D', 'E'],
                 2,
                 10
             ),
@@ -41,7 +41,7 @@ internal static class Program
             ),
             new(
                 "Single Task",
-                new[] { 'Z' },
+                ['Z'],
                 5,
                 1
             ),

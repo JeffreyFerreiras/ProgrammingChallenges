@@ -15,7 +15,7 @@ int expected2 = 9;
 int[] nums3 = [1, 0, 1, 2];
 int expected3 = 3;
 
-int[] nums4 = [1,2,3,4,5,6,7,8,9,10];
+int[] nums4 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 int expected4 = 10;
 
 int[] nums5 = [];

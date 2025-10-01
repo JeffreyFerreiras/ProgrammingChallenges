@@ -15,13 +15,21 @@ internal static class Program
 
         var scenarios = new[]
         {
-            (Name: "Example 1", Values: new int?[] { 3, 9, 20, null, null, 15, 7 }, Expected: true),
-            (Name: "Example 2", Values: new int?[] { 1, 2, 2, 3, 3, null, null, 4, 4 }, Expected: false),
+            (Name: "Example 1", Values: [3, 9, 20, null, null, 15, 7], Expected: true),
+            (
+                Name: "Example 2",
+                Values: [1, 2, 2, 3, 3, null, null, 4, 4],
+                Expected: false
+            ),
             (Name: "Edge: Empty", Values: Array.Empty<int?>(), Expected: true),
-            (Name: "Edge: Single Node", Values: new int?[] { 5 }, Expected: true),
-            (Name: "Left Heavy", Values: new int?[] { 1, 2, null, 3, null, 4 }, Expected: false),
-            (Name: "Right Heavy", Values: new int?[] { 1, null, 2, null, 3 }, Expected: false),
-            (Name: "Balanced Larger", Values: new int?[] { 1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4 }, Expected: true)
+            (Name: "Edge: Single Node", Values: [5], Expected: true),
+            (Name: "Left Heavy", Values: [1, 2, null, 3, null, 4], Expected: false),
+            (Name: "Right Heavy", Values: [1, null, 2, null, 3], Expected: false),
+            (
+                Name: "Balanced Larger",
+                Values: [1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4],
+                Expected: true
+            ),
         };
 
         foreach (var scenario in scenarios)

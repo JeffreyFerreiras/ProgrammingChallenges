@@ -11,7 +11,7 @@
                 if (grades[i] % 5 != 0)
                 {
                     int nearest = grades[i] % 5;
-                    
+
                     if (nearest >= 3 && grades[i] > 35)
                     {
                         grades[i] = (grades[i] - nearest) + 5;
@@ -31,7 +31,7 @@
                 38,
                 33
             ];
-            
+
             int[] result = solve(grades);
             Console.WriteLine(String.Join("\n", result));
 

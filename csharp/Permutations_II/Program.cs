@@ -11,7 +11,7 @@ public class Program
     static void Run(int[] nums)
     {
         var solution = new Solution();
-        var result = solution.PermuteUnique(nums); 
+        var result = solution.PermuteUnique(nums);
         foreach (var item in result)
         {
             Console.WriteLine(string.Join(", ", item));

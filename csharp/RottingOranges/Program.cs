@@ -28,7 +28,7 @@ public class Program
         Input: grid = [[0,2]]
         Output: 0
         */
-        
+
         // List of test scenarios: grid input, expected result, and a name identifier.
         var tests = new List<(int[][] grid, int expected, string name)> {
             ( new int[][] {
@@ -67,7 +67,7 @@ public class Program
                 [0,0,0,0]
               }, 0, "Test8" )
         };
-        
+
         foreach (var (grid, expected, name) in tests)
         {
             var sw = Stopwatch.StartNew();
@@ -77,16 +77,16 @@ public class Program
             Console.WriteLine($"{name} - Method: OrangesRotting, Time: {sw.ElapsedTicks} ticks, Result: {result}, Expected: {expected}");
         }
     }
-    
+
     public static int OrangesRotting(int[][] grid)
     {
         if (grid == null || grid.Length == 0) return -1;
-        
+
         int rows = grid.Length;
         int cols = grid[0].Length;
         var queue = new Queue<(int r, int c)>();
         int fresh = 0;
-        
+
         for (int i = 0; i < rows; i++)
         {
             for (int j = 0; j < cols; j++)
@@ -97,9 +97,9 @@ public class Program
                     fresh++;
             }
         }
-        
+
         if (fresh == 0) return 0; // no fresh oranges
-        
+
         int minutes = 0;
         int[][] directions = [
             [1, 0],
@@ -107,7 +107,7 @@ public class Program
             [0, 1],
             [0, -1]
         ];
-        
+
         while (queue.Count > 0)
         {
             int size = queue.Count;
@@ -130,7 +130,7 @@ public class Program
             }
             if (rottedThisMinute) minutes++;
         }
-        
+
         return fresh == 0 ? minutes : -1;
     }
 }

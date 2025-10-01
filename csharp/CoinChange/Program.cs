@@ -39,20 +39,20 @@ public class Program
         var result = CoinChange(coins, amount);
         Console.WriteLine($"Expected: {expected}, Result: {result}");
 
-        coins = new int[] { 2 };
+        coins = [2];
         amount = 3;
         expected = -1;
         result = CoinChange(coins, amount);
         Console.WriteLine($"Expected: {expected}, Result: {result}");
 
 
-        coins = new int[] { 1 };
+        coins = [1];
         amount = 0;
         expected = 0;
         result = CoinChange(coins, amount);
         Console.WriteLine($"Expected: {expected}, Result: {result}");
 
-        coins = new int[] { 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000 };
+        coins = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000];
         amount = 10000;
         expected = 5;
         result = CoinChange(coins, amount);
@@ -60,7 +60,7 @@ public class Program
 
         //[186,419,83,408]
         //6249
-        coins = new int[] { 186, 419, 83, 408 };
+        coins = [186, 419, 83, 408];
         amount = 6249;
         expected = 20;
         result = CoinChange(coins, amount);
@@ -88,7 +88,7 @@ public class Program
     }
     public static int CoinChangeX(int[] coins, int amount)
     {
-        if(amount == 0)
+        if (amount == 0)
         {
             return 0;
         }
@@ -99,20 +99,22 @@ public class Program
         int count = 0;
         int index = coins.Length - 1;
 
-        while(total < amount && index > -1)
+        while (total < amount && index > -1)
         {
             total += coins[index];
-            if(total > amount){
+            if (total > amount)
+            {
                 total -= coins[index];
                 index--;
             }
-            else 
+            else
             {
-                count ++;
+                count++;
             }
         }
 
-        if(total != amount){
+        if (total != amount)
+        {
             return -1;
         }
 

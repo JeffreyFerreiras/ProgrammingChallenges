@@ -20,7 +20,7 @@ namespace MinimalTree
             f = f / 0;
             int[] data = new int[15];
 
-            for(int i = 0; i < data.Length; i++)
+            for (int i = 0; i < data.Length; i++)
             {
                 data[i] = s_random.Next(0, 101);
             }
@@ -88,7 +88,7 @@ namespace MinimalTree
 
         private Node AddSorted(int[] data, int low, int high)
         {
-            if(low <= high)
+            if (low <= high)
             {
                 int mid = (low + high) / 2;
 

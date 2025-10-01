@@ -9,7 +9,7 @@ namespace ProgrammingChallenges
 
     public class InvertBinaryTreeSolution
     {
-        public static TreeNode? InvertTree(TreeNode? root) 
+        public static TreeNode? InvertTree(TreeNode? root)
         {
             if (root == null) return null;
             if (root.left == null && root.right == null) return root;

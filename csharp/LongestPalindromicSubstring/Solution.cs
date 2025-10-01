@@ -4,7 +4,7 @@ namespace LongestPalindromicSubstring
     {
         public string LongestPalindrome(string inputString)
         {
-            if (string.IsNullOrEmpty(inputString)) return ""; 
+            if (string.IsNullOrEmpty(inputString)) return "";
             int startIndex = 0, endIndex = 0;
 
             for (int i = 0; i < inputString.Length; i++)

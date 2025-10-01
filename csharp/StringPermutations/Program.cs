@@ -23,30 +23,30 @@
 
         static void Permutation(string str, string currentString)
         {
-            if(str.Length == 0)
+            if (str.Length == 0)
             {
                 Console.WriteLine($"{_count++}: {currentString}");
             }
             else
             {
-                for(int i = 0; i < str.Length; i++)
+                for (int i = 0; i < str.Length; i++)
                 {
-                    string remainingChars = str.Substring(0 , i) + str.Substring(i + 1);
+                    string remainingChars = str.Substring(0, i) + str.Substring(i + 1);
                     Permutation(remainingChars, currentString + str[i]);
                 }
             }
         }
 
-        
+
         static void Permute(string input, string permutation = "")
         {
-            if(input.Length == 0)
+            if (input.Length == 0)
             {
                 System.Console.WriteLine(permutation);
             }
             else
             {
-                for(int i = 0; i < input.Length; i++ )
+                for (int i = 0; i < input.Length; i++)
                 {
                     Permute(input[0..i] + input[(i + 1)..], permutation + input[i]);
                 }

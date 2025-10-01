@@ -78,7 +78,7 @@ namespace LinkedList_OddEvenList
                 current.next = current.next.next;
 
                 if (current.next == null) break;
-                
+
                 current = current.next;
             }
 

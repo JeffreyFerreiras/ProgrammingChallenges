@@ -19,37 +19,37 @@ internal static class Program
         [
             new(
                 "Example 1",
-                new[] { 4, 5, 6, 7, 0, 1, 2 },
+                [4, 5, 6, 7, 0, 1, 2],
                 0,
                 4
             ),
             new(
                 "Example 2",
-                new[] { 4, 5, 6, 7, 0, 1, 2 },
+                [4, 5, 6, 7, 0, 1, 2],
                 3,
                 -1
             ),
             new(
                 "Single Element Present",
-                new[] { 1 },
+                [1],
                 1,
                 0
             ),
             new(
                 "Single Element Missing",
-                new[] { 1 },
+                [1],
                 0,
                 -1
             ),
             new(
                 "All Positive Rotation",
-                new[] { 30, 34, 40, 2, 5, 8, 11 },
+                [30, 34, 40, 2, 5, 8, 11],
                 5,
                 4
             ),
             new(
                 "Negative and Positive",
-                new[] { 9, 12, 17, -4, -1, 0, 3 },
+                [9, 12, 17, -4, -1, 0, 3],
                 -1,
                 4
             ),

@@ -25,28 +25,28 @@ class Program
 
             // Test first solution method
             RunTest("SolveNQueens", n, expectedCount, () => NQueensSolution.SolveNQueens(n));
-            
+
             // Test second solution method using StringBuilder
             RunTest("SolveNQueens2", n, expectedCount, () => NQueensSolution.SolveNQueens2(n));
-            
+
             Console.WriteLine(new string('=', 50));
         }
     }
-    
+
     static void RunTest(string methodName, int n, int expectedCount, Func<IList<IList<string>>> solutionMethod)
     {
         Stopwatch stopwatch = new();
         stopwatch.Start();
-        
+
         IList<IList<string>> result = solutionMethod();
-        
+
         stopwatch.Stop();
-        
+
         Console.WriteLine($"Method: {methodName}(n={n})");
         Console.WriteLine($"Time: {stopwatch.ElapsedTicks} ticks");
         Console.WriteLine($"Result: {result.Count} solutions");
         Console.WriteLine($"Expected: {expectedCount} solutions");
-        
+
         // Print first solution as example if exists
         if (result.Count > 0)
         {
@@ -56,7 +56,7 @@ class Program
                 Console.WriteLine(row);
             }
         }
-        
+
         Console.WriteLine(new string('-', 40));
     }
 }

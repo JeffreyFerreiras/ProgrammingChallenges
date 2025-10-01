@@ -25,9 +25,9 @@ namespace AmazonEmployeeShift
             const int maxHours = 8;
 
             var result = new List<Employee>();
-            
+
             //take only 8 hours worth of tasks
-            if(tasks.Sum(t => t.Hours) > maxHours)
+            if (tasks.Sum(t => t.Hours) > maxHours)
             {
                 throw new InvalidOperationException($"Tasks exceed {maxHours} hours");
             }
@@ -54,13 +54,13 @@ namespace AmazonEmployeeShift
             {
                 throw new InvalidOperationException($"Tasks exceed {maxHours} hours");
             }
-            
+
             // Sort employees to try lower-skilled ones first
             var sortedEmployees = Employees.OrderBy(e => e.Skill).ToArray();
             int n = tasks.Length;
             List<Employee> bestAssignment = null;
             int bestCost = int.MaxValue;
-            
+
             // Recursive DFS to try unique assignments
             void DFS(int idx, List<Employee> currentAssignment, bool[] used, int currentCost)
             {
@@ -85,7 +85,7 @@ namespace AmazonEmployeeShift
                     }
                 }
             }
-            
+
             DFS(0, [], new bool[sortedEmployees.Length], 0);
             if (bestAssignment == null)
             {

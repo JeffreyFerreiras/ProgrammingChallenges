@@ -89,13 +89,14 @@ class Program
         return true;
     }
 
-    static bool IsAnagram2(string s, string t){
+    static bool IsAnagram2(string s, string t)
+    {
         if (s.Length != t.Length) return false;
 
         Dictionary<char, int> counter = [];
         foreach (char c in s)
         {
-            if(!counter.TryAdd(c, 1))
+            if (!counter.TryAdd(c, 1))
                 counter[c] += 1;
         }
 

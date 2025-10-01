@@ -96,18 +96,18 @@
                 AddMarbles(table, marbleValues[i], pos, count);
                 pos += count;
             }
-            
+
             return table;
         }
 
-        static void AddMarbles(int [] marbles, int marbleValue, int start, int end)
+        static void AddMarbles(int[] marbles, int marbleValue, int start, int end)
         {
             for (int i = start; i < (start + end); i++)
             {
                 marbles[i] = marbleValue;
             }
         }
-        
+
         private static void WriteOutStats(int[] results)
         {
             // TODO: output the total number of red, green, blue and orange marbles based on the array of results passed into you.
@@ -115,10 +115,10 @@
 
             Console.WriteLine("\nResults:");
 
-            int redTotal=0;
-            int greenTotal=0;
-            int blueTotal=0;
-            int orangeTotal=0;
+            int redTotal = 0;
+            int greenTotal = 0;
+            int blueTotal = 0;
+            int orangeTotal = 0;
 
             for (int i = 0; i < results.Length; i++)
             {

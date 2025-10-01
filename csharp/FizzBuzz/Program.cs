@@ -3,7 +3,7 @@
 namespace FizzBuzz
 {
     class Program
-        {
+    {
         /*
         "Write a program that prints the numbers from 1 to N.
         But for multiples of three print “Fizz” instead of the number 
@@ -31,25 +31,25 @@ namespace FizzBuzz
         FizzBuzz"
         */
 
-            static void Main(string[] args)
-            {
-                PrintFizzBuzz(100);
-                Console.ReadLine();
-            }
+        static void Main(string[] args)
+        {
+            PrintFizzBuzz(100);
+            Console.ReadLine();
+        }
 
-            static void PrintFizzBuzz(int n)
+        static void PrintFizzBuzz(int n)
+        {
+            for (int i = 1; i <= n; i++)
             {
-                for(int i = 1; i <= n; i++)
-                {
-                    if(i % (3*5) == 0)
-                        Console.WriteLine("FizzBuzz");
-                    else if(i % 3 == 0)
-                        Console.WriteLine("Fizz");
-                    else if(i % 5 == 0)
-                        Console.WriteLine("Buzz");
-                    else
-                        Console.WriteLine(i);
-                }
+                if (i % (3 * 5) == 0)
+                    Console.WriteLine("FizzBuzz");
+                else if (i % 3 == 0)
+                    Console.WriteLine("Fizz");
+                else if (i % 5 == 0)
+                    Console.WriteLine("Buzz");
+                else
+                    Console.WriteLine(i);
             }
         }
+    }
 }

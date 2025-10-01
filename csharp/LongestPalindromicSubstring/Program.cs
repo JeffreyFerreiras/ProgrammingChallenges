@@ -28,9 +28,9 @@ namespace LongestPalindromicSubstring
                 "a",
                 "ac"
             ];
-            
+
             var solution = new Solution();
-            foreach(var test in testCases)
+            foreach (var test in testCases)
             {
                 Stopwatch sw = Stopwatch.StartNew();
                 string result = solution.LongestPalindrome(test);

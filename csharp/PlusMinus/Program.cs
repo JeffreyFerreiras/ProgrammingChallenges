@@ -44,16 +44,16 @@ Sample Output
         {
             int n = Convert.ToInt32(Console.ReadLine());
             string[] arr_temp = Console.ReadLine().Split(' ');
-            int[] arr = Array.ConvertAll(arr_temp,Int32.Parse);
+            int[] arr = Array.ConvertAll(arr_temp, Int32.Parse);
 
             //Solution
-            float pos=0, neg =0, zero = 0;
+            float pos = 0, neg = 0, zero = 0;
             int arrLen = arr.Length;
-            for(int i = 0; i < arrLen; i++)
+            for (int i = 0; i < arrLen; i++)
             {
-                if(arr[i] == 0) zero += 1;
-                if(arr[i] < 0) neg += 1;
-                if(arr[i] > 0) pos += 1;
+                if (arr[i] == 0) zero += 1;
+                if (arr[i] < 0) neg += 1;
+                if (arr[i] > 0) pos += 1;
             }
             Console.WriteLine(pos / arrLen);
             Console.WriteLine(neg / arrLen);

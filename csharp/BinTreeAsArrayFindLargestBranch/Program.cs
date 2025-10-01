@@ -32,11 +32,11 @@ namespace BinTreeAsArrayFindLargestBranch
                 isSkipStep = !isSkipStep;
             }
 
-            if(sumLeft > sumRight)
+            if (sumLeft > sumRight)
             {
                 return Left;
             }
-            else if(sumRight > sumLeft)
+            else if (sumRight > sumLeft)
             {
                 return Right;
             }

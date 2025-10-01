@@ -22,19 +22,19 @@ using System.Collections.Generic;
 using System;
 using System.Collections.Generic;
 
-var testCases = new List<int[][]> 
+var testCases = new List<int[][]>
 {
     new int[][]
     {
-        new int[] {1, 2, 3},
-        new int[] {4, 5, 6},
-        new int[] {7, 8, 9}
-    },  
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+    },
     new int[][]
     {
-        new int[] {1, 2, 3, 4},
-        new int[] {5, 6, 7, 8},
-        new int[] {9, 10, 11, 12}
+        [1, 2, 3, 4],
+        [5, 6, 7, 8],
+        [9, 10, 11, 12]
     }
 };
 

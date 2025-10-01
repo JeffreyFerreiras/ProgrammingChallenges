@@ -17,14 +17,14 @@
 
         static bool IsPalindrome(string phrase) //SOLUTION - O(n)
         {
-            if(string.IsNullOrWhiteSpace(phrase)) return false;
+            if (string.IsNullOrWhiteSpace(phrase)) return false;
 
-            for(int i = 0; i < phrase.Length / 2; i++)
+            for (int i = 0; i < phrase.Length / 2; i++)
             {
                 char left = (char)(phrase[i] | ' ');                        //OR | bitwise operator used to always compare lower case.
                 char right = (char)(phrase[phrase.Length - 1 - i] | ' ');
 
-                if(left != right) return false;
+                if (left != right) return false;
             }
 
             return true;

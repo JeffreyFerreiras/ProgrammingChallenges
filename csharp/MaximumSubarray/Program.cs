@@ -86,7 +86,7 @@ Follow up: If you have figured out the O(n) solution, try coding another solutio
             int end = nums.Length - 1;
             int offset = nums.Length - 1;
 
-            while(offset >= 0)
+            while (offset >= 0)
             {
                 while (end < nums.Length)
                 {
@@ -105,7 +105,7 @@ Follow up: If you have figured out the O(n) solution, try coding another solutio
                 offset--;
                 end = start + offset;
             }
-            
+
 
             return maxSum;
         }

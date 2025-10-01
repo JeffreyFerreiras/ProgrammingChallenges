@@ -13,13 +13,16 @@ public static class Solution
             adj.Add([]);
         }
 
-        foreach(var edge in edges) {
+        foreach (var edge in edges)
+        {
             adj[edge[0]].Add(edge[1]);
             adj[edge[1]].Add(edge[0]);
         }
 
-        for(int node = 0; node < n; node++) {
-            if(!visited[node]) {
+        for (int node = 0; node < n; node++)
+        {
+            if (!visited[node])
+            {
                 Dfs(node);
                 componentCount += 1;
             }
@@ -27,10 +30,13 @@ public static class Solution
 
         return componentCount;
 
-        void Dfs(int node) {
+        void Dfs(int node)
+        {
             visited[node] = true;
-            foreach(var neighbor in adj[node]) {
-                if(!visited[neighbor]) {
+            foreach (var neighbor in adj[node])
+            {
+                if (!visited[neighbor])
+                {
                     Dfs(neighbor);
                 }
             }

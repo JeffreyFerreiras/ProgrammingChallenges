@@ -14,11 +14,11 @@ internal static class Program
 
         var scenarios = new[]
         {
-            (Name: "Example 1", Nums: new[] { 2, 3, 1, 1, 4 }, Expected: 2),
-            (Name: "Example 2", Nums: new[] { 2, 3, 0, 1, 4 }, Expected: 2),
-            (Name: "Edge: Single", Nums: new[] { 0 }, Expected: 0),
-            (Name: "Single Jump", Nums: new[] { 5, 0, 0, 0 }, Expected: 1),
-            (Name: "Increasing Reach", Nums: new[] { 1, 2, 3, 4, 5 }, Expected: 3),
+            (Name: "Example 1", Nums: [2, 3, 1, 1, 4], Expected: 2),
+            (Name: "Example 2", Nums: [2, 3, 0, 1, 4], Expected: 2),
+            (Name: "Edge: Single", Nums: [0], Expected: 0),
+            (Name: "Single Jump", Nums: [5, 0, 0, 0], Expected: 1),
+            (Name: "Increasing Reach", Nums: [1, 2, 3, 4, 5], Expected: 3),
             (Name: "Long Array", Nums: BuildRange(10), Expected: 3)
         };
 

@@ -19,65 +19,61 @@ internal static class Program
         [
             new(
                 "Example 1",
-                new[]
-                {
+                [
                     new[] { 1, 3, 5, 7 },
-                    new[] { 10, 11, 16, 20 },
-                    new[] { 23, 30, 34, 60 },
-                },
+                    [10, 11, 16, 20],
+                    [23, 30, 34, 60],
+                ],
                 3,
                 true
             ),
             new(
                 "Example 2",
-                new[]
-                {
+                [
                     new[] { 1, 3, 5, 7 },
-                    new[] { 10, 11, 16, 20 },
-                    new[] { 23, 30, 34, 60 },
-                },
+                    [10, 11, 16, 20],
+                    [23, 30, 34, 60],
+                ],
                 13,
                 false
             ),
             new(
                 "Single Element Present",
-                new[] { new[] { 5 } },
+                [new[] { 5 }],
                 5,
                 true
             ),
             new(
                 "Single Element Missing",
-                new[] { new[] { 5 } },
+                [new[] { 5 }],
                 1,
                 false
             ),
             new(
                 "Empty Row",
-                new[] { Array.Empty<int>() },
+                [Array.Empty<int>()],
                 1,
                 false
             ),
             new(
                 "Tall Matrix",
-                new[]
-                {
+                [
                     new[] { 1, 4, 7 },
-                    new[] { 10, 13, 16 },
-                    new[] { 19, 22, 25 },
-                    new[] { 28, 31, 34 },
-                    new[] { 37, 40, 43 },
-                    new[] { 46, 49, 52 },
-                    new[] { 55, 58, 61 },
-                },
+                    [10, 13, 16],
+                    [19, 22, 25],
+                    [28, 31, 34],
+                    [37, 40, 43],
+                    [46, 49, 52],
+                    [55, 58, 61],
+                ],
                 40,
                 true
             ),
             new(
                 "Wide Matrix",
-                new[]
-                {
+                [
                     new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
-                },
+                ],
                 11,
                 false
             ),

@@ -54,7 +54,7 @@ public class Solution
         {
             if (visited.Contains(course)) return false;
             if (adj[course].Count == 0) return true;
-            
+
             visited.Add(course);
 
             foreach (int n in adj[course])

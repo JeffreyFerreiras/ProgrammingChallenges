@@ -13,8 +13,8 @@ namespace SumNumbersInArray
          */
         static void Main(string[] args)
         {
-            int[] arr = new[] { 1, 2, 3, 9 };
-            int[] arr2 = new[] { 1, 2, 4, 4 };
+            int[] arr = [1, 2, 3, 9];
+            int[] arr2 = [1, 2, 4, 4];
 
 
             bool isSumUp = HasSumWithSorted(arr, 8);
@@ -49,7 +49,7 @@ namespace SumNumbersInArray
 
                 if (sum == x)
                     return true;
-                else if(sum > x)
+                else if (sum > x)
                     high--;
                 else
                     low++;
@@ -64,7 +64,7 @@ namespace SumNumbersInArray
 
             foreach (var value in arr)
             {
-                if(value <= x)
+                if (value <= x)
                 {
                     if (compliment.Contains(value))
                     {

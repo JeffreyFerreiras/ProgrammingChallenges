@@ -25,18 +25,18 @@ class Program
         // Test cases
         RunTestCase("Example 1",
         [
-            [1, 2], 
-            [1, 3], 
-            [2, 3] 
+            [1, 2],
+            [1, 3],
+            [2, 3]
         ], [2, 3]);
 
         RunTestCase("Example 2",
         [
-            [1, 2], 
-            [2, 3], 
-            [3, 4], 
-            [1, 4], 
-            [1, 5] 
+            [1, 2],
+            [2, 3],
+            [3, 4],
+            [1, 4],
+            [1, 5]
         ], [1, 4]);
 
         // Additional test case
@@ -59,18 +59,18 @@ class Program
     {
         Console.WriteLine($"\nRunning {testName}:");
         Console.WriteLine($"Input: {FormatEdges(edges)}");
-        
+
         var solution = new Solution();
         var stopwatch = new Stopwatch();
-        
+
         stopwatch.Start();
         var result = solution.FindRedundantConnection(edges);
         stopwatch.Stop();
-        
+
         Console.WriteLine($"Output: [{result[0]},{result[1]}]");
         Console.WriteLine($"Expected: [{expectedResult[0]},{expectedResult[1]}]");
         Console.WriteLine($"Time Elapsed: {stopwatch.ElapsedTicks} ticks ({stopwatch.ElapsedMilliseconds} ms)");
-        
+
         if (result[0] == expectedResult[0] && result[1] == expectedResult[1])
             Console.WriteLine("✓ Test Passed");
         else

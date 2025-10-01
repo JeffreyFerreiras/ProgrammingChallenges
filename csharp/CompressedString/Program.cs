@@ -21,12 +21,12 @@ namespace CompressedString
             {
                 int count = 1;
 
-                while(i + count < value.Length && value[i + count-1] == value[i + count])
+                while (i + count < value.Length && value[i + count - 1] == value[i + count])
                 {
                     count++;
                 }
 
-                i = i + count-1;
+                i = i + count - 1;
 
                 result.Append(count.ToString() + value[i]);
             }

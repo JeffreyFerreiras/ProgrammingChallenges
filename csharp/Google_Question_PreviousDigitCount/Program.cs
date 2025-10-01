@@ -31,7 +31,7 @@
 
             for (int i = 1; i < sequence.Length; i++)
             {
-                if(c == sequence[i])
+                if (c == sequence[i])
                 {
                     count++;
                 }
@@ -53,7 +53,7 @@
             string input = n.ToString();
             string result = string.Empty;
 
-            if(input.Length == 1)
+            if (input.Length == 1)
             {
                 return 1 + input;
             }
@@ -62,19 +62,19 @@
 
             int count = 1;
 
-            for(int i = 1; i < input.Length; i++)
+            for (int i = 1; i < input.Length; i++)
             {
-                if(input[i] != prev)
+                if (input[i] != prev)
                 {
                     result += count.ToString() + prev.ToString();
-                    count=1;
+                    count = 1;
                 }
                 else
                 {
                     count++;
                 }
 
-                prev = input[i];             
+                prev = input[i];
             }
 
             return result + count.ToString() + prev.ToString();

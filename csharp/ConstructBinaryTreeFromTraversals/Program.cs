@@ -17,11 +17,11 @@ internal static class Program
         var scenarios = new[]
         {
             (Name: "Example 1", Preorder: new[] { 3, 9, 20, 15, 7 }, Inorder: new[] { 9, 3, 15, 20, 7 }, Expected: new int?[] { 3, 9, 20, null, null, 15, 7 }),
-            (Name: "Example 2", Preorder: new[] { -1 }, Inorder: new[] { -1 }, Expected: new int?[] { -1 }),
-            (Name: "Left Skewed", Preorder: new[] { 4, 3, 2, 1 }, Inorder: new[] { 1, 2, 3, 4 }, Expected: new int?[] { 4, null, 3, null, 2, null, 1 }),
-            (Name: "Right Skewed", Preorder: new[] { 1, 2, 3, 4 }, Inorder: new[] { 4, 3, 2, 1 }, Expected: new int?[] { 1, 2, null, 3, null, 4 }),
-            (Name: "Balanced", Preorder: new[] { 8, 4, 2, 6, 12, 10, 14 }, Inorder: new[] { 2, 4, 6, 8, 10, 12, 14 }, Expected: new int?[] { 8, 4, 12, 2, 6, 10, 14 }),
-            (Name: "Large", Preorder: new[] { 10, 5, 2, 7, 15, 12, 20, 17 }, Inorder: new[] { 2, 5, 7, 10, 12, 15, 17, 20 }, Expected: new int?[] { 10, 5, 15, 2, 7, 12, 20, null, null, null, null, null, null, 17 })
+            (Name: "Example 2", Preorder: [-1], Inorder: [-1], Expected: [-1]),
+            (Name: "Left Skewed", Preorder: [4, 3, 2, 1], Inorder: [1, 2, 3, 4], Expected: [4, null, 3, null, 2, null, 1]),
+            (Name: "Right Skewed", Preorder: [1, 2, 3, 4], Inorder: [4, 3, 2, 1], Expected: [1, 2, null, 3, null, 4]),
+            (Name: "Balanced", Preorder: [8, 4, 2, 6, 12, 10, 14], Inorder: [2, 4, 6, 8, 10, 12, 14], Expected: [8, 4, 12, 2, 6, 10, 14]),
+            (Name: "Large", Preorder: [10, 5, 2, 7, 15, 12, 20, 17], Inorder: [2, 5, 7, 10, 12, 15, 17, 20], Expected: [10, 5, 15, 2, 7, 12, 20, null, null, null, null, null, null, 17])
         };
 
         foreach (var scenario in scenarios)
