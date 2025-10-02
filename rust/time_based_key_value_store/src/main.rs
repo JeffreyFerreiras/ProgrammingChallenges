@@ -69,11 +69,97 @@ fn main() {
             operations: build_dense_operations(),
             expected: build_dense_expected(),
         },
+        Scenario {
+            name: "Empty Store",
+            operations: vec![
+                get_op("foo", 1),
+                get_op("bar", 100),
+            ],
+            expected: vec!["".to_string(), "".to_string()],
+        },
+        Scenario {
+            name: "Single Key Many Updates",
+            operations: vec![
+                set_op("key", "v1", 1),
+                set_op("key", "v2", 2),
+                set_op("key", "v3", 3),
+                set_op("key", "v4", 4),
+                set_op("key", "v5", 5),
+                get_op("key", 1),
+                get_op("key", 2),
+                get_op("key", 3),
+                get_op("key", 4),
+                get_op("key", 5),
+                get_op("key", 6),
+            ],
+            expected: vec!["v1".to_string(), "v2".to_string(), "v3".to_string(), "v4".to_string(), "v5".to_string(), "v5".to_string()],
+        },
+        Scenario {
+            name: "Sparse Timestamps",
+            operations: vec![
+                set_op("key", "v1", 1),
+                set_op("key", "v100", 100),
+                set_op("key", "v1000", 1000),
+                get_op("key", 50),
+                get_op("key", 100),
+                get_op("key", 500),
+                get_op("key", 1000),
+                get_op("key", 2000),
+            ],
+            expected: vec!["v1".to_string(), "v100".to_string(), "v100".to_string(), "v1000".to_string(), "v1000".to_string()],
+        },
+        Scenario {
+            name: "Same Timestamp Multiple Sets",
+            operations: vec![
+                set_op("key", "first", 1),
+                set_op("key", "second", 1),
+                set_op("key", "third", 1),
+                get_op("key", 1),
+                get_op("key", 2),
+            ],
+            expected: vec!["third".to_string(), "third".to_string()],
+        },
+        Scenario {
+            name: "Large Timestamp Values",
+            operations: vec![
+                set_op("key", "v1", i32::MAX - 2),
+                set_op("key", "v2", i32::MAX - 1),
+                get_op("key", i32::MAX - 3),
+                get_op("key", i32::MAX - 2),
+                get_op("key", i32::MAX - 1),
+                get_op("key", i32::MAX),
+            ],
+            expected: vec!["".to_string(), "v1".to_string(), "v2".to_string(), "v2".to_string()],
+        },
+        Scenario {
+            name: "Interleaved Keys",
+            operations: vec![
+                set_op("a", "a1", 1),
+                set_op("b", "b1", 1),
+                set_op("a", "a2", 2),
+                set_op("b", "b2", 2),
+                get_op("a", 1),
+                get_op("b", 1),
+                get_op("a", 2),
+                get_op("b", 2),
+                get_op("a", 3),
+                get_op("b", 3),
+            ],
+            expected: vec!["a1".to_string(), "b1".to_string(), "a2".to_string(), "b2".to_string(), "a2".to_string(), "b2".to_string()],
+        },
     ];
 
+    let mut passed = 0;
+    let total = scenarios.len();
+
     for scenario in scenarios {
-        run_scenario("create_time_map", &scenario);
+        if run_scenario("create_time_map", &scenario) {
+            passed += 1;
+        }
     }
+
+    println!("\n================================");
+    println!("Tests Passed: {}/{}", passed, total);
 }
 
 fn set_op(key: &str, value: &str, timestamp: i32) -> Operation {
@@ -113,7 +199,7 @@ fn build_dense_expected() -> Vec<String> {
     expected
 }
 
-fn run_scenario(method_name: &str, scenario: &Scenario) {
+fn run_scenario(method_name: &str, scenario: &Scenario) -> bool {
     println!("Scenario: {}", scenario.name);
     println!("  Method: {}", method_name);
     println!("  Operations: {}", scenario.operations.len());
@@ -125,8 +211,17 @@ fn run_scenario(method_name: &str, scenario: &Scenario) {
 
     println!("  Elapsed: {:.4} ms", elapsed.as_secs_f64() * 1000.0);
 
-    match result {
-        Ok(outputs) => println!("  Result: {}", format_outputs(&outputs)),
+    let passed = match result {
+        Ok(outputs) => {
+            println!("  Result: {}", format_outputs(&outputs));
+            let passed = outputs == scenario.expected;
+            if passed {
+                println!("  Status: ✓ PASSED");
+            } else {
+                println!("  Status: ✗ FAILED");
+            }
+            passed
+        }
         Err(payload) => {
             let message = if let Some(msg) = payload.downcast_ref::<&str>() {
                 msg.to_string()
@@ -136,10 +231,13 @@ fn run_scenario(method_name: &str, scenario: &Scenario) {
                 "panic".to_string()
             };
             println!("  Result: panic ({})", message);
+            println!("  Status: ✗ FAILED");
+            false
         }
-    }
+    };
 
     println!();
+    passed
 }
 
 fn execute_operations(operations: &[Operation]) -> Vec<String> {
@@ -150,10 +248,10 @@ fn execute_operations(operations: &[Operation]) -> Vec<String> {
         match operation.kind {
             OperationKind::Set => {
                 let value = operation.value.as_ref().expect("set requires a value");
-                time_map.set(&operation.key, value, operation.timestamp);
+                time_map.set(operation.key.clone(), value.to_string(), operation.timestamp);
             }
             OperationKind::Get => {
-                let value = time_map.get(&operation.key, operation.timestamp);
+                let value = time_map.get(operation.key.clone(), operation.timestamp);
                 outputs.push(value);
             }
         }
