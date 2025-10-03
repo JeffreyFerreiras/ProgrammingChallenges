@@ -3,7 +3,12 @@ using System.Globalization;
 
 namespace MedianOfTwoSortedArrays;
 
-internal record TestScenario(string Name, int[] FirstArray, int[] SecondArray, double ExpectedMedian);
+internal record TestScenario(
+    string Name,
+    int[] FirstArray,
+    int[] SecondArray,
+    double ExpectedMedian
+);
 
 internal static class Program
 {
@@ -17,42 +22,13 @@ internal static class Program
 
         TestScenario[] scenarios =
         [
-            new(
-                "Example 1",
-                [1, 3],
-                [2],
-                2.0
-            ),
-            new(
-                "Example 2",
-                [1, 2],
-                [3, 4],
-                2.5
-            ),
-            new(
-                "Zero Arrays",
-                [0, 0],
-                [0, 0],
-                0.0
-            ),
-            new(
-                "Single Non-Empty",
-                Array.Empty<int>(),
-                [2],
-                2.0
-            ),
-            new(
-                "Different Lengths",
-                [1, 3, 8, 9, 15],
-                [7, 11, 18, 19, 21, 25],
-                11.0
-            ),
-            new(
-                "Large Balanced Arrays",
-                largeA,
-                largeB,
-                99_999.5
-            ),
+            new("Example 1", [1, 3], [2], 2.0),
+            new("Example 2", [1, 2], [3, 4], 2.5),
+            new("Zero Arrays", [0, 0], [0, 0], 0.0),
+            new("Single Non-Empty", Array.Empty<int>(), [2], 2.0),
+            new("Different Lengths", [1, 3, 8, 9, 15], [7, 11, 18, 19, 21, 25], 11.0),
+            new("Unbalanced Lengths", [1, 2, 3, 4, 5], [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 9.0),
+            new("Large Balanced Arrays", largeA, largeB, 99_999.5),
         ];
 
         foreach (TestScenario scenario in scenarios)
@@ -75,7 +51,9 @@ internal static class Program
     {
         Console.WriteLine($"Scenario: {scenario.Name}");
         Console.WriteLine($"Method: {methodName}");
-        Console.WriteLine($"Expected Median: {scenario.ExpectedMedian.ToString("F4", CultureInfo.InvariantCulture)}");
+        Console.WriteLine(
+            $"Expected Median: {scenario.ExpectedMedian.ToString("F4", CultureInfo.InvariantCulture)}"
+        );
         Console.WriteLine($"First Array Length: {scenario.FirstArray.Length}");
         Console.WriteLine($"Second Array Length: {scenario.SecondArray.Length}");
         Console.WriteLine($"First Array Preview: {FormatArrayPreview(scenario.FirstArray)}");
@@ -86,7 +64,10 @@ internal static class Program
 
         try
         {
-            double result = solution.FindMedianSortedArrays(scenario.FirstArray, scenario.SecondArray);
+            double result = solution.FindMedianSortedArrays(
+                scenario.FirstArray,
+                scenario.SecondArray
+            );
             resultDisplay = result.ToString("F4", CultureInfo.InvariantCulture);
         }
         catch (NotImplementedException ex)
