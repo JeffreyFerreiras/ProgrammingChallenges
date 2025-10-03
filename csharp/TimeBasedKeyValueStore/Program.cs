@@ -1,8 +1,10 @@
 using System.Diagnostics;
+using System.Linq;
 
 namespace TimeBasedKeyValueStore;
 
 internal record Operation(string Command, string Key, string? Value, int Timestamp);
+
 internal record TestScenario(string Name, Operation[] Operations, string?[] ExpectedResponses);
 
 internal static class Program
@@ -50,11 +52,7 @@ internal static class Program
                 ],
                 [string.Empty, "high", "high", "low", "mild"]
             ),
-            new(
-                "Dense Timeline",
-                BuildDenseScenario(),
-                BuildDenseExpected()
-            ),
+            new("Dense Timeline", BuildDenseScenario(), BuildDenseExpected()),
         ];
 
         foreach (TestScenario scenario in scenarios)
@@ -97,11 +95,13 @@ internal static class Program
 
         Stopwatch stopwatch = Stopwatch.StartNew();
         string resultDisplay;
+        bool pass = false;
 
         try
         {
             Solution.TimeMap timeMap = solution.CreateTimeMap();
             string?[] results = ExecuteOperations(timeMap, scenario.Operations);
+            pass = results.SequenceEqual(scenario.ExpectedResponses, StringComparer.Ordinal);
             resultDisplay = FormatResponses(results);
         }
         catch (NotImplementedException ex)
@@ -118,7 +118,7 @@ internal static class Program
         }
 
         Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-        Console.WriteLine($"Result: {resultDisplay}");
+        Console.WriteLine($"Result: {resultDisplay}{(pass ? " ✓" : "")}");
         Console.WriteLine();
     }
 
@@ -151,7 +151,9 @@ internal static class Program
                     responses[index++] = timeMap.Get(operation.Key, operation.Timestamp);
                     break;
                 default:
-                    throw new InvalidOperationException($"Unsupported command: {operation.Command}");
+                    throw new InvalidOperationException(
+                        $"Unsupported command: {operation.Command}"
+                    );
             }
         }
 
