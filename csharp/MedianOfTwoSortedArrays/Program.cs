@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Globalization;
+using System.Reflection;
 
 namespace MedianOfTwoSortedArrays;
 
@@ -15,7 +16,6 @@ internal static class Program
     public static void Main()
     {
         var solution = new Solution();
-        var methodName = nameof(Solution.FindMedianSortedArrays);
 
         int[] largeA = GenerateSequentialArray(0, 100_000);
         int[] largeB = GenerateSequentialArray(100_000, 100_000);
@@ -31,9 +31,25 @@ internal static class Program
             new("Large Balanced Arrays", largeA, largeB, 99_999.5),
         ];
 
-        foreach (TestScenario scenario in scenarios)
+        // Get all public methods that return double and take two int[] parameters
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Public | BindingFlags.Instance)
+            .Where(m => m.ReturnType == typeof(double) &&
+                       m.GetParameters().Length == 2 &&
+                       m.GetParameters().All(p => p.ParameterType == typeof(int[])))
+            .ToArray();
+
+        foreach (var method in methods)
         {
-            RunScenario(solution, methodName, scenario);
+            Console.WriteLine($"========== Testing Method: {method.Name} ==========");
+            Console.WriteLine();
+
+            foreach (TestScenario scenario in scenarios)
+            {
+                RunScenario(solution, method, scenario);
+            }
+
+            Console.WriteLine();
         }
     }
 
@@ -47,10 +63,10 @@ internal static class Program
         return result;
     }
 
-    private static void RunScenario(Solution solution, string methodName, TestScenario scenario)
+    private static void RunScenario(Solution solution, MethodInfo method, TestScenario scenario)
     {
         Console.WriteLine($"Scenario: {scenario.Name}");
-        Console.WriteLine($"Method: {methodName}");
+        Console.WriteLine($"Method: {method.Name}");
         Console.WriteLine(
             $"Expected Median: {scenario.ExpectedMedian.ToString("F4", CultureInfo.InvariantCulture)}"
         );
@@ -64,10 +80,7 @@ internal static class Program
 
         try
         {
-            double result = solution.FindMedianSortedArrays(
-                scenario.FirstArray,
-                scenario.SecondArray
-            );
+            double result = (double)method.Invoke(solution, [scenario.FirstArray, scenario.SecondArray])!;
             resultDisplay = result.ToString("F4", CultureInfo.InvariantCulture);
         }
         catch (NotImplementedException ex)
