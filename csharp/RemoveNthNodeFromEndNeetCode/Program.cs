@@ -26,6 +26,31 @@ internal static class Program
             () => Solution.RemoveNthFromEnd(BuildList(Enumerable.Range(1, 10)), 10),
             "[2,3,4,5,6,7,8,9,10]"
         );
+
+        // added scenarios
+        RunScenario(
+            "Remove tail: [1,2,3], n=1",
+            () => Solution.RemoveNthFromEnd(BuildList(1, 2, 3), 1),
+            "[1,2]"
+        );
+
+        RunScenario(
+            "Remove middle: [1,2,3], n=2",
+            () => Solution.RemoveNthFromEnd(BuildList(1, 2, 3), 2),
+            "[1,3]"
+        );
+
+        RunScenario(
+            "Duplicates: [1,2,3,3,4], n=2 (remove second 3)",
+            () => Solution.RemoveNthFromEnd(BuildList(1, 2, 3, 3, 4), 2),
+            "[1,2,3,4]"
+        );
+
+        RunScenario(
+            "Long tail removal: [1..20], n=1",
+            () => Solution.RemoveNthFromEnd(BuildList(Enumerable.Range(1, 20)), 1),
+            "[" + string.Join(",", Enumerable.Range(1, 19)) + "]"
+        );
     }
 
     private static void RunScenario(string name, Func<ListNode?> action, string expected)
@@ -35,10 +60,15 @@ internal static class Program
         {
             ListNode? result = action();
             stopwatch.Stop();
+
+            string resultStr = FormatList(result);
+            bool pass = resultStr == expected;
+
             Console.WriteLine($"Scenario: {name}");
             Console.WriteLine($"  Time: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine($"  Result: {FormatList(result)}");
+            Console.WriteLine($"  Result: {resultStr}");
             Console.WriteLine($"  Expected: {expected}");
+            Console.WriteLine($"  Status: {(pass ? "PASS ✓" : "FAIL ✗")}");
         }
         catch (NotImplementedException)
         {
