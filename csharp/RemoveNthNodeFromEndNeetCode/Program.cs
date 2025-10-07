@@ -99,7 +99,7 @@ internal static class Program
             }
             else
             {
-                tail!.Next = node;
+                tail!.next = node;
             }
 
             tail = node;
@@ -122,7 +122,7 @@ internal static class Program
         while (current is not null)
         {
             values.Add(current.Val);
-            current = current.Next;
+            current = current.next;
         }
 
         return $"[{string.Join(",", values)}]";

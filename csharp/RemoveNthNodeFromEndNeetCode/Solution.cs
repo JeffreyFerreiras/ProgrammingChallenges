@@ -12,23 +12,23 @@ public static class Solution
         while (node != null)
         {
             length++;
-            node = node.Next;
+            node = node.next;
         }
 
         if (length == n)
         {
-            return head?.Next;
+            return head?.next;
         }
 
         node = head;
         int target = length - n;
         while (target-- > 1)
         {
-            node = node.Next;
+            node = node.next;
         }
         if (node != null && target == 0)
         {
-            node.Next = node?.Next?.Next;
+            node.next = node?.next?.next;
         }
 
         return head;
@@ -38,5 +38,5 @@ public static class Solution
 public sealed class ListNode(int val = 0, ListNode? next = null)
 {
     public int Val { get; set; } = val;
-    public ListNode? Next { get; set; } = next;
+    public ListNode? next { get; set; } = next;
 }
