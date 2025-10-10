@@ -26,40 +26,87 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.WriteLine("=== Testing MergeKLists ===");
         // Test Scenario 1: Empty list array
-        RunMergeKListsTest("TestScenario1", [], null);
+        RunMergeKListsTest("TestScenario1", [], null, "MergeKLists");
 
         // Test Scenario 2: Array with one empty list
-        RunMergeKListsTest("TestScenario2", [null], null);
+        RunMergeKListsTest("TestScenario2", [null], null, "MergeKLists");
 
         // Test Scenario 3: Single non-empty list
         var list1 = CreateLinkedList([1, 3, 5]);
-        RunMergeKListsTest("TestScenario3", [list1], list1);
+        RunMergeKListsTest("TestScenario3", [list1], CreateLinkedList([1, 3, 5]), "MergeKLists");
 
         // Test Scenario 4: Multiple non-empty lists
-        var list2 = CreateLinkedList([2, 4, 6]);
+        var list2a = CreateLinkedList([1, 3, 5]);
+        var list2b = CreateLinkedList([2, 4, 6]);
         var mergedExpected = CreateLinkedList([1, 2, 3, 4, 5, 6]); // expected result from merging list1 and list2
-        RunMergeKListsTest("TestScenario4", [list1, list2], mergedExpected);
+        RunMergeKListsTest("TestScenario4", [list2a, list2b], mergedExpected, "MergeKLists");
 
         // Test Scenario 5: Use case [[]] - an array with an empty list created as a linked list with no elements
         var emptyListWrapper = CreateLinkedList([]); // returns null
-        RunMergeKListsTest("TestScenario5", [emptyListWrapper], null);
+        RunMergeKListsTest("TestScenario5", [emptyListWrapper], null, "MergeKLists");
+
+        Console.WriteLine("\n=== Testing MergeKLists_Iterative ===");
+        // Test Scenario 1: Empty list array
+        RunMergeKListsTest("TestScenario1", [], null, "MergeKLists_Iterative");
+
+        // Test Scenario 2: Array with one empty list
+        RunMergeKListsTest("TestScenario2", [null], null, "MergeKLists_Iterative");
+
+        // Test Scenario 3: Single non-empty list
+        var list3 = CreateLinkedList([1, 3, 5]);
+        RunMergeKListsTest(
+            "TestScenario3",
+            [list3],
+            CreateLinkedList([1, 3, 5]),
+            "MergeKLists_Iterative"
+        );
+
+        // Test Scenario 4: Multiple non-empty lists
+        var list4a = CreateLinkedList([1, 3, 5]);
+        var list4b = CreateLinkedList([2, 4, 6]);
+        var mergedExpected2 = CreateLinkedList([1, 2, 3, 4, 5, 6]); // expected result from merging list1 and list2
+        RunMergeKListsTest(
+            "TestScenario4",
+            [list4a, list4b],
+            mergedExpected2,
+            "MergeKLists_Iterative"
+        );
+
+        // Test Scenario 5: Use case [[]] - an array with an empty list created as a linked list with no elements
+        var emptyListWrapper2 = CreateLinkedList([]); // returns null
+        RunMergeKListsTest("TestScenario5", [emptyListWrapper2], null, "MergeKLists_Iterative");
     }
 
-    static void RunMergeKListsTest(string testName, ListNode[] lists, ListNode expected)
+    static void RunMergeKListsTest(
+        string testName,
+        ListNode[] lists,
+        ListNode expected,
+        string methodName
+    )
     {
         var solution = new Solution();
         var stopwatch = Stopwatch.StartNew();
 
-        ListNode result = solution.MergeKLists(lists);
+        ListNode result = methodName switch
+        {
+            "MergeKLists" => solution.MergeKLists(lists),
+            "MergeKLists_Iterative" => solution.MergeKLists_Iterative(lists),
+            _ => throw new ArgumentException($"Unknown method: {methodName}"),
+        };
 
         stopwatch.Stop();
         long elapsedTicks = stopwatch.ElapsedTicks;
 
         string resultStr = LinkedListToString(result);
         string expectedStr = LinkedListToString(expected);
+        bool passed = resultStr == expectedStr;
+        string checkmark = passed ? "✓" : "✗";
 
-        Console.WriteLine($"{testName} - MergeKLists took {elapsedTicks} ticks. Result: {resultStr}, Expected: {expectedStr}");
+        Console.WriteLine(
+            $"{checkmark} {testName} - {methodName} took {elapsedTicks} ticks. Result: {resultStr}, Expected: {expectedStr}"
+        );
     }
 
     static ListNode CreateLinkedList(int[] values)
@@ -91,71 +138,5 @@ class Program
             node = node?.next;
         }
         return sb.ToString();
-    }
-}
-
-/**
- * Definition for singly-linked list.
- */
-public class ListNode(int val = 0, ListNode? next = null)
-{
-    public int val = val;
-    public ListNode next = next;
-}
-
-/**
- * Solution class to merge k sorted linked lists.
- */
-public class Solution
-{
-    public ListNode MergeKLists(ListNode[] lists)
-    {
-        if (lists == null || lists.Length == 0)
-            return null;
-        // define a priority queue to store the heads of the linked lists
-        var priorityQueue = new PriorityQueue<int, int>();
-        // loop through the lists and add the heads to the priority queue
-
-        //bfs approach
-        var bfs = new Queue<ListNode>();
-
-        foreach (ListNode listHeadNode in lists)
-        {
-            if (listHeadNode != null)
-                bfs.Enqueue(listHeadNode);
-        }
-
-        while (bfs.Count > 0)
-        {
-            var current = bfs.Dequeue();
-            if (current != null)
-            {
-                priorityQueue.Enqueue(current.val, current.val);
-                bfs.Enqueue(current.next);
-            }
-        }
-
-        // while the priority queue is not empty, extract the minimum node
-        ListNode root = new();
-        ListNode node = root;
-
-        if (priorityQueue.Count == 0)
-            return null;
-
-        while (priorityQueue.Count > 0)
-        {
-            var min = priorityQueue.Dequeue();
-
-            if (priorityQueue.Count == 0)
-            {
-                node.val = min;
-                break;
-            }
-            node.next ??= new ListNode();
-            node.val = min;
-            node = node.next;
-        }
-
-        return root;
     }
 }
