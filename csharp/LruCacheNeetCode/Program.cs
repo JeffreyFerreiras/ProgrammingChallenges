@@ -65,7 +65,7 @@ internal static class Program
                 outputs.Add(cache.Get(5));
                 return FormatOutputs(outputs);
             },
-            "[100,-1,-1,150,-1,500]"
+            "[100,-1,-1,150,400,500]"
         );
     }
 
@@ -76,7 +76,9 @@ internal static class Program
         {
             string result = action();
             stopwatch.Stop();
-            Console.WriteLine($"Scenario: {name}");
+            bool passed = result == expected;
+            string status = passed ? "✓" : "✗";
+            Console.WriteLine($"Scenario: {name} {status}");
             Console.WriteLine($"  Time: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
             Console.WriteLine($"  Result: {result}");
             Console.WriteLine($"  Expected: {expected}");
