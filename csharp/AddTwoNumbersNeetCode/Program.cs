@@ -23,10 +23,7 @@ internal static class Program
 
         RunScenario(
             "Long: cascading carry",
-            () => Solution.AddTwoNumbers(
-                BuildList(9, 9, 9, 9, 9, 9, 9),
-                BuildList(9, 9, 9, 9)
-            ),
+            () => Solution.AddTwoNumbers(BuildList(9, 9, 9, 9, 9, 9, 9), BuildList(9, 9, 9, 9)),
             "[8,9,9,9,0,0,0,1]"
         );
     }
@@ -47,7 +44,9 @@ internal static class Program
         {
             stopwatch.Stop();
             Console.WriteLine($"Scenario: {name}");
-            Console.WriteLine($"  Status: NOT IMPLEMENTED [{stopwatch.Elapsed.TotalMilliseconds:F4} ms]");
+            Console.WriteLine(
+                $"  Status: NOT IMPLEMENTED [{stopwatch.Elapsed.TotalMilliseconds:F4} ms]"
+            );
             Console.WriteLine($"  Expected: {expected}");
         }
         catch (Exception ex)
