@@ -29,12 +29,12 @@
 public class ListNode(int val = 0, ListNode? next = null)
 {
     public int val = val;
-    public ListNode next = next;
+    public ListNode? next = next;
 }
 
 public class Solution
 {
-    public ListNode MergeKLists(ListNode[] lists)
+    public ListNode? MergeKLists(ListNode[] lists)
     {
         if (lists == null || lists.Length == 0)
             return null;
@@ -85,7 +85,7 @@ public class Solution
         return root;
     }
 
-    public ListNode MergeKLists_Iterative(ListNode[] lists)
+    public ListNode? MergeKLists_Iterative(ListNode[] lists)
     {
         if (lists == null || lists.Length == 0)
             return null!;
