@@ -1,44 +1,47 @@
-﻿namespace LongestRepeatingCharacterReplacement;
+﻿using System.Runtime.CompilerServices;
+
+namespace LongestRepeatingCharacterReplacement;
 
 public class Solution
 {
     /// <summary>
     /// Computes the length of the longest repeating character substring after at most k replacements.
-    /// TODO: Maintain a sliding window tracking the highest frequency within the window.
+    /// Uses a sliding window tracking the highest frequency within the window.
     /// </summary>
     public int CharacterReplacement(string s, int k)
     {
-        if (s?.Length <= 1)
-            return s?.Length ?? 0;
+        if (string.IsNullOrEmpty(s))
+            return 0;
 
         int maxLength = 0;
-        for (int i = 0; i < s!.Length; i++)
+        int maxFreq = 0;
+        int left = 0;
+        var charCount = new Dictionary<char, int>();
+
+        for (int right = 0; right < s.Length; right++)
         {
-            int rep = k;
-            int max = 1;
-
-            for (int j = 0; j < s.Length; j++)
+            // Add current character to window
+            if (!charCount.ContainsKey(s[right]))
+                charCount[s[right]] = 0;
+            
+            charCount[s[right]]++;
+            
+            // Update max frequency in current window
+            maxFreq = Math.Max(maxFreq, charCount[s[right]]);
+            
+            // Calculate replacements needed
+            int windowSize = right - left + 1;
+            int replacements = windowSize - maxFreq;
+            
+            // If we need more than k replacements, shrink window from left
+            if (replacements > k)
             {
-                if (j == i)
-                    continue;
-                if (s[j] == s[i])
-                {
-                    max++;
-                }
-                else if (rep > 0)
-                {
-                    rep--;
-                    max++;
-                }
-                else
-                    break;
+                charCount[s[left]]--;
+                left++;
             }
-
-            maxLength = Math.Max(maxLength, max);
-            if (max > (s.Length - i))
-            {
-                break;
-            }
+            
+            // Update max length
+            maxLength = Math.Max(maxLength, right - left + 1);
         }
 
         return maxLength;
