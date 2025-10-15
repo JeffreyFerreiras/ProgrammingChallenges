@@ -14,32 +14,34 @@ public class Solution
             return 0;
 
         int maxLength = 0;
-        int maxFreq = 0;
+        int highestCharacterCount = 0;
         int left = 0;
         var charCount = new Dictionary<char, int>();
 
         for (int right = 0; right < s.Length; right++)
         {
+            char currentChar = s[right];
+
             // Add current character to window
-            if (!charCount.ContainsKey(s[right]))
-                charCount[s[right]] = 0;
-            
-            charCount[s[right]]++;
-            
+            if (!charCount.ContainsKey(currentChar))
+               charCount[currentChar] = 0;
+
+            charCount[currentChar]++;
+
             // Update max frequency in current window
-            maxFreq = Math.Max(maxFreq, charCount[s[right]]);
-            
+            highestCharacterCount = Math.Max(highestCharacterCount, charCount[currentChar]);
+
             // Calculate replacements needed
             int windowSize = right - left + 1;
-            int replacements = windowSize - maxFreq;
-            
+            int replacements = windowSize - highestCharacterCount;
+
             // If we need more than k replacements, shrink window from left
             if (replacements > k)
             {
                 charCount[s[left]]--;
                 left++;
             }
-            
+
             // Update max length
             maxLength = Math.Max(maxLength, right - left + 1);
         }

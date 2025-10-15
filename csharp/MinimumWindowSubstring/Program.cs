@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace MinimumWindowSubstring;
 
@@ -23,28 +25,63 @@ internal class Program
             (Name: "Impossible", S: "a", T: "b", Expected: string.Empty),
             (Name: "Repeated Characters", S: "bbaa", T: "aba", Expected: "baa"),
             (Name: "Long Example", S: "NNNNNABCOOOABCNNNN", T: "ABC", Expected: "ABC"),
-            (Name: "Another Example", S: "abcdebdde", T: "bde", Expected: "bdde")
+            (Name: "Another Example", S: "abcdebdde", T: "bde", Expected: "deb")
         };
 
-        foreach (var scenario in scenarios)
+        // Use reflection to find all public methods that match the signature
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+            .Where(m => m.ReturnType == typeof(string) && 
+                   m.GetParameters().Length == 2 &&
+                   m.GetParameters()[0].ParameterType == typeof(string) &&
+                   m.GetParameters()[1].ParameterType == typeof(string))
+            .ToList();
+
+        if (methods.Count == 0)
         {
-            RunScenario(solution, scenario.Name, scenario.S, scenario.T, scenario.Expected);
+            Console.WriteLine("No matching methods found in Solution class.");
+            return;
+        }
+
+        foreach (var method in methods)
+        {
+            Console.WriteLine($"\n{'═',80}\n");
+            Console.WriteLine($"Testing Method: {method.Name}");
+            Console.WriteLine($"{'═',80}\n");
+
+            int passedCount = 0;
+            int totalCount = scenarios.Length;
+
+            foreach (var scenario in scenarios)
+            {
+                bool passed = RunScenario(solution, method, scenario.Name, scenario.S, scenario.T, scenario.Expected);
+                if (passed) passedCount++;
+            }
+
+            Console.WriteLine($"\n{'─',80}");
+            Console.WriteLine($"Summary: {passedCount}/{totalCount} test cases passed");
+            Console.WriteLine($"{'─',80}");
         }
     }
 
-    private static void RunScenario(Solution solution, string name, string s, string t, string expected)
+    private static bool RunScenario(Solution solution, MethodInfo method, string name, string s, string t, string expected)
     {
         var stopwatch = Stopwatch.StartNew();
-        var result = solution.MinWindow(s, t);
+        var result = (string?)method.Invoke(solution, new object[] { s, t }) ?? string.Empty;
         stopwatch.Stop();
 
-        string FormatDisplay(string value) => value is null ? "null" : $"\"{value}\"";
+        bool passed = result == expected;
+        string statusIcon = passed ? "✓" : "✗";
 
-        Console.WriteLine($"Scenario: {name}");
-        Console.WriteLine($"Method: {nameof(Solution.MinWindow)}");
-        Console.WriteLine($"Input: s = \"{s}\", t = \"{t}\"");
-        Console.WriteLine($"Result: {FormatDisplay(result)}, Expected: {FormatDisplay(expected)}");
-        Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
+        string FormatDisplay(string value) => string.IsNullOrEmpty(value) && value != expected ? "null" : $"\"{value}\"";
+
+        Console.WriteLine($"{statusIcon} Scenario: {name}");
+        Console.WriteLine($"  Method: {method.Name}");
+        Console.WriteLine($"  Input: s = \"{s}\", t = \"{t}\"");
+        Console.WriteLine($"  Result: {FormatDisplay(result)}, Expected: {FormatDisplay(expected)}");
+        Console.WriteLine($"  Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
         Console.WriteLine(new string('-', 60));
+
+        return passed;
     }
 }
