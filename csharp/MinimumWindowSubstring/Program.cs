@@ -45,6 +45,7 @@ internal class Program
                    m.GetParameters().Length == 2 &&
                    m.GetParameters()[0].ParameterType == typeof(string) &&
                    m.GetParameters()[1].ParameterType == typeof(string))
+            .OrderBy(m => m.Name)
             .ToList();
 
         if (methods.Count == 0)
@@ -53,45 +54,56 @@ internal class Program
             return;
         }
 
+        // Display header
+        Console.WriteLine($"{"Scenario",-25} {"Method",-30} {"Result",-10} {"Expected",-10} {"Status",-8} {"Time (ms)",-12}");
+        Console.WriteLine(new string('═', 100));
+
+        // Track overall results
+        var methodResults = methods.ToDictionary(m => m.Name, m => new { Passed = 0, Total = 0 });
+
+        foreach (var scenario in scenarios)
+        {
+            Console.WriteLine($"\n{scenario.Name}:");
+            Console.WriteLine(new string('-', 100));
+
+            foreach (var method in methods)
+            {
+                var result = RunScenarioCompact(solution, method, scenario.S, scenario.T, scenario.Expected);
+                
+                // Update results
+                var stats = methodResults[method.Name];
+                methodResults[method.Name] = new { Passed = stats.Passed + (result.Passed ? 1 : 0), Total = stats.Total + 1 };
+
+                Console.WriteLine($"{"",25} {method.Name,-30} {FormatResult(result.Result),-10} {FormatResult(scenario.Expected),-10} {(result.Passed ? "✓" : "✗"),-8} {result.ElapsedMs,-12:F4}");
+            }
+        }
+
+        // Display summary
+        Console.WriteLine($"\n{new string('═', 100)}");
+        Console.WriteLine("SUMMARY:");
+        Console.WriteLine($"{"Method",-30} {"Passed/Total",-15} {"Success Rate",-15}");
+        Console.WriteLine(new string('-', 60));
+        
         foreach (var method in methods)
         {
-            Console.WriteLine($"\n{'═',80}\n");
-            Console.WriteLine($"Testing Method: {method.Name}");
-            Console.WriteLine($"{'═',80}\n");
-
-            int passedCount = 0;
-            int totalCount = scenarios.Length;
-
-            foreach (var scenario in scenarios)
-            {
-                bool passed = RunScenario(solution, method, scenario.Name, scenario.S, scenario.T, scenario.Expected);
-                if (passed) passedCount++;
-            }
-
-            Console.WriteLine($"\n{'─',80}");
-            Console.WriteLine($"Summary: {passedCount}/{totalCount} test cases passed");
-            Console.WriteLine($"{'─',80}");
+            var stats = methodResults[method.Name];
+            double successRate = stats.Total > 0 ? (double)stats.Passed / stats.Total * 100 : 0;
+            Console.WriteLine($"{method.Name,-30} {stats.Passed}/{stats.Total,-15} {successRate,-15:F1}%");
         }
     }
 
-    private static bool RunScenario(Solution solution, MethodInfo method, string name, string s, string t, string expected)
+    private static (bool Passed, string Result, double ElapsedMs) RunScenarioCompact(Solution solution, MethodInfo method, string s, string t, string expected)
     {
         var stopwatch = Stopwatch.StartNew();
         var result = (string?)method.Invoke(solution, new object[] { s, t }) ?? string.Empty;
         stopwatch.Stop();
 
         bool passed = result == expected;
-        string statusIcon = passed ? "✓" : "✗";
+        return (passed, result, stopwatch.Elapsed.TotalMilliseconds);
+    }
 
-        string FormatDisplay(string value) => string.IsNullOrEmpty(value) && value != expected ? "null" : $"\"{value}\"";
-
-        Console.WriteLine($"{statusIcon} Scenario: {name}");
-        Console.WriteLine($"  Method: {method.Name}");
-        Console.WriteLine($"  Input: s = \"{s}\", t = \"{t}\"");
-        Console.WriteLine($"  Result: {FormatDisplay(result)}, Expected: {FormatDisplay(expected)}");
-        Console.WriteLine($"  Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-        Console.WriteLine(new string('-', 60));
-
-        return passed;
+    private static string FormatResult(string value)
+    {
+        return string.IsNullOrEmpty(value) ? "\"\"" : $"\"{value}\"";
     }
 }

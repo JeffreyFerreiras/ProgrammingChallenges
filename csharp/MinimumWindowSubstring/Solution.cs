@@ -11,8 +11,7 @@ public class Solution
         if (string.IsNullOrEmpty(s) || string.IsNullOrEmpty(t) || s.Length < t.Length)
             return string.Empty;
 
-        // Build frequency map for t
-        var tCounts = t.GroupBy(c => c).ToDictionary(g => g.Key, g => g.Count());
+        var characterFrequencyMap = t.GroupBy(c => c).ToDictionary(g => g.Key, g => g.Count());
 
         // Sliding window with frequency tracking
         var windowCounts = new Dictionary<char, int>();
@@ -24,15 +23,20 @@ public class Solution
         for (int right = 0; right < s.Length; right++)
         {
             // Expand window: add character from right
-            char c = s[right];
-            windowCounts[c] = windowCounts.GetValueOrDefault(c) + 1;
+            char rightChar = s[right];
+            windowCounts[rightChar] = windowCounts.GetValueOrDefault(rightChar) + 1;
 
             // Check if this character now meets the requirement
-            if (tCounts.TryGetValue(c, out int value) && windowCounts[c] == value)
+            if (
+                characterFrequencyMap.TryGetValue(rightChar, out int value)
+                && windowCounts[rightChar] == value
+            )
+            {
                 matched++;
+            }
 
             // Contract window: try to minimize while valid
-            while (matched == tCounts.Count)
+            while (matched == characterFrequencyMap.Count)
             {
                 // Update minimum window
                 if (right - left + 1 < minLen)
@@ -43,8 +47,13 @@ public class Solution
 
                 // Remove character from left
                 char leftChar = s[left];
-                if (tCounts.TryGetValue(leftChar, out int cnt) && windowCounts[leftChar] == cnt)
+                if (
+                    characterFrequencyMap.TryGetValue(leftChar, out int cnt)
+                    && windowCounts[leftChar] == cnt
+                )
+                {
                     matched--;
+                }
 
                 windowCounts[leftChar]--;
                 left++;
