@@ -11,46 +11,47 @@ public class Solution
         if (string.IsNullOrEmpty(s) || string.IsNullOrEmpty(t) || s.Length < t.Length)
             return string.Empty;
 
-        // map t with character counts
-        var sCounts = new Dictionary<char, List<int>>();
+        // Build frequency map for t
+        var tCounts = t.GroupBy(c => c).ToDictionary(g => g.Key, g => g.Count());
 
-        for (int i = 0; i < s.Length; i++)
+        // Sliding window with frequency tracking
+        var windowCounts = new Dictionary<char, int>();
+        int left = 0,
+            minLen = int.MaxValue,
+            minStart = 0;
+        int matched = 0; // Count of characters that meet the required frequency
+
+        for (int right = 0; right < s.Length; right++)
         {
-            var c = s[i];
-            if (sCounts.ContainsKey(c))
-                sCounts[c].Add(i);
-            else
-                sCounts[c] = [i];
-        }
+            // Expand window: add character from right
+            char c = s[right];
+            windowCounts[c] = windowCounts.GetValueOrDefault(c) + 1;
 
-        var window = string.Empty;
-        //find all posible windows
-        while (t.All(target => sCounts.ContainsKey(target) && sCounts[target].Count > 0))
-        {
-            int left = s.Length;
-            int right = -1;
+            // Check if this character now meets the requirement
+            if (tCounts.TryGetValue(c, out int value) && windowCounts[c] == value)
+                matched++;
 
-            foreach (var c in t)
+            // Contract window: try to minimize while valid
+            while (matched == tCounts.Count)
             {
-                if (!sCounts.ContainsKey(c))
-                    break;
+                // Update minimum window
+                if (right - left + 1 < minLen)
+                {
+                    minLen = right - left + 1;
+                    minStart = left;
+                }
 
-                var maxIndex = sCounts[c].Max();
+                // Remove character from left
+                char leftChar = s[left];
+                if (tCounts.TryGetValue(leftChar, out int cnt) && windowCounts[leftChar] == cnt)
+                    matched--;
 
-                sCounts[c].Remove(maxIndex);
-
-                if (sCounts[c].Count == 0)
-                    sCounts.Remove(c);
-
-                left = Math.Min(left, maxIndex);
-                right = Math.Max(right, maxIndex);
+                windowCounts[leftChar]--;
+                left++;
             }
-            var currentWindow = s[left..(right + 1)];
-            if (window == string.Empty || currentWindow.Length < window.Length)
-                window = currentWindow;
         }
 
-        return window;
+        return minLen == int.MaxValue ? string.Empty : s[minStart..(minStart + minLen)];
     }
 
     /// <summary>
