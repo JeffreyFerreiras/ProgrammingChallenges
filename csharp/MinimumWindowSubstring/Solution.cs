@@ -26,7 +26,7 @@ public class Solution
             char rightChar = s[right];
             windowCounts[rightChar] = windowCounts.GetValueOrDefault(rightChar) + 1;
 
-            // Check if this character now meets the requirement
+            // Check if the window character is in target map
             if (
                 characterFrequencyMap.TryGetValue(rightChar, out int value)
                 && windowCounts[rightChar] == value
