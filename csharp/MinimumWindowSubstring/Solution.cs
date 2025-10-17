@@ -32,13 +32,13 @@ public class Solution
             char rightChar = source[right];
             windowCounts[rightChar] = windowCounts.GetValueOrDefault(rightChar) + 1;
 
-            // Check if the window character is in target map
+            // Check if the window character is in substring and meets the required frequency
             if (
                 substringCharCounts.TryGetValue(rightChar, out int value)
                 && windowCounts[rightChar] == value
             )
             {
-                matched++;
+                matched++; // One more character requirement met
             }
 
             // Contract window: try to minimize while valid
@@ -55,14 +55,14 @@ public class Solution
                 char leftChar = source[left];
                 if (
                     substringCharCounts.TryGetValue(leftChar, out int occurrenceCount)
-                    && windowCounts[leftChar] == occurrenceCount
+                    && windowCounts[leftChar] == occurrenceCount // Before decrementing, it previously met the character and frequency requirement, so now it won't after decrementing
                 )
                 {
-                    matched--;
+                    matched--; // One character requirement no longer met, its okay to not match the window anymore because minLen and minStart have already been updated
                 }
 
-                windowCounts[leftChar]--;
-                left++;
+                windowCounts[leftChar]--; // Decrease count of left character
+                left++; // decrease window size from the left
             }
         }
 
