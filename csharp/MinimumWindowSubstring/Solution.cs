@@ -6,29 +6,35 @@ public class Solution
     /// Returns the smallest substring of s that contains all characters of t.
     /// Optimized sliding window approach.
     /// </summary>
-    public string MinWindow(string s, string t)
+    public string MinWindow(string source, string substring)
     {
-        if (string.IsNullOrEmpty(s) || string.IsNullOrEmpty(t) || s.Length < t.Length)
+        if (
+            string.IsNullOrEmpty(source)
+            || string.IsNullOrEmpty(substring)
+            || source.Length < substring.Length
+        )
             return string.Empty;
 
-        var characterFrequencyMap = t.GroupBy(c => c).ToDictionary(g => g.Key, g => g.Count());
+        var substringCharCounts = substring
+            .GroupBy(c => c)
+            .ToDictionary(g => g.Key, g => g.Count());
 
         // Sliding window with frequency tracking
         var windowCounts = new Dictionary<char, int>();
-        int left = 0,
-            minLen = int.MaxValue,
-            minStart = 0;
+        int left = 0;
+        int minLen = int.MaxValue;
+        int minStart = 0;
         int matched = 0; // Count of characters that meet the required frequency
 
-        for (int right = 0; right < s.Length; right++)
+        for (int right = 0; right < source.Length; right++)
         {
             // Expand window: add character from right
-            char rightChar = s[right];
+            char rightChar = source[right];
             windowCounts[rightChar] = windowCounts.GetValueOrDefault(rightChar) + 1;
 
             // Check if the window character is in target map
             if (
-                characterFrequencyMap.TryGetValue(rightChar, out int value)
+                substringCharCounts.TryGetValue(rightChar, out int value)
                 && windowCounts[rightChar] == value
             )
             {
@@ -36,20 +42,20 @@ public class Solution
             }
 
             // Contract window: try to minimize while valid
-            while (matched == characterFrequencyMap.Count)
+            while (matched == substringCharCounts.Count)
             {
                 // Update minimum window
-                if (right - left + 1 < minLen)
+                if ((right - left + 1) < minLen)
                 {
                     minLen = right - left + 1;
                     minStart = left;
                 }
 
                 // Remove character from left
-                char leftChar = s[left];
+                char leftChar = source[left];
                 if (
-                    characterFrequencyMap.TryGetValue(leftChar, out int cnt)
-                    && windowCounts[leftChar] == cnt
+                    substringCharCounts.TryGetValue(leftChar, out int occurrenceCount)
+                    && windowCounts[leftChar] == occurrenceCount
                 )
                 {
                     matched--;
@@ -60,7 +66,7 @@ public class Solution
             }
         }
 
-        return minLen == int.MaxValue ? string.Empty : s[minStart..(minStart + minLen)];
+        return minLen == int.MaxValue ? string.Empty : source[minStart..(minStart + minLen)];
     }
 
     /// <summary>
