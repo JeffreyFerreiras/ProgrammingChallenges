@@ -110,7 +110,11 @@ internal class Program
     )
     {
         var stopwatch = Stopwatch.StartNew();
-        var result = (int[])method.Invoke(solution, new object[] { nums, k });
+
+        // Changed: use proper parameters array and safe cast to nullable int[]
+        object? invokeResult = method.Invoke(solution, [nums, k]);
+        int[]? result = invokeResult as int[];
+
         stopwatch.Stop();
 
         bool passed = result != null && expected != null && result.SequenceEqual(expected);
@@ -126,13 +130,14 @@ internal class Program
         return (passed, stopwatch.Elapsed.TotalMilliseconds);
     }
 
-    private static string FormatArray(int[] values)
+    // Changed signature to accept nullable array because result may be null
+    private static string FormatArray(int[]? values)
     {
         if (values is null)
         {
             return "null";
         }
 
-        return $"[" + string.Join(", ", values) + "]";
+        return "[" + string.Join(", ", values) + "]";
     }
 }
