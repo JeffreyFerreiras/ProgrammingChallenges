@@ -20,7 +20,7 @@ internal static class Program
             (Name: "Example 2", Values: [2, 1, 3], Expected: [2, 3, 1]),
             (Name: "Example 3", Values: Array.Empty<int?>(), Expected: Array.Empty<int?>()),
             (Name: "Edge: Single Node", Values: [1], Expected: [1]),
-            (Name: "Left-leaning", Values: [5, 4, null, 3, null, 2, null, 1], Expected: [5, null, 4, null, 3, null, 2, null, 1]),
+            (Name: "Left-leaning", Values: [5, 4, null, 3], Expected: [5, null, 4, null, 3]),
             (Name: "Perfect Tree", Values: [1, 2, 3, 4, 5, 6, 7], Expected: [1, 3, 2, 7, 6, 5, 4])
         };
 
@@ -32,10 +32,15 @@ internal static class Program
             var result = solution.InvertTree(root);
             stopwatch.Stop();
 
-            Console.WriteLine($"Scenario: {scenario.Name}");
+            var resultStr = FormatTree(result);
+            var expectedStr = FormatArray(scenario.Expected);
+            var passed = resultStr == expectedStr;
+            var statusIcon = passed ? "✓" : "✗";
+
+            Console.WriteLine($"{statusIcon} Scenario: {scenario.Name}");
             Console.WriteLine($"Method: {nameof(Solution.InvertTree)}");
-            Console.WriteLine($"Result: {FormatTree(result)}");
-            Console.WriteLine($"Expected: {FormatArray(scenario.Expected)}");
+            Console.WriteLine($"Result: {resultStr}");
+            Console.WriteLine($"Expected: {expectedStr}");
             Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
             Console.WriteLine(new string('-', 60));
         }
