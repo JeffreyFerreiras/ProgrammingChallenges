@@ -2,9 +2,9 @@
 
 public class TreeNode(int val, TreeNode? left = null, TreeNode? right = null)
 {
-    public int Val { get; } = val;
-    public TreeNode? Left { get; set; } = left;
-    public TreeNode? Right { get; set; } = right;
+    public int val { get; } = val;
+    public TreeNode? left { get; set; } = left;
+    public TreeNode? right { get; set; } = right;
 }
 
 public class Solution
@@ -15,6 +15,12 @@ public class Solution
     /// </summary>
     public int MaxDepth(TreeNode? root)
     {
-        return 0;
+        if (root is null)
+            return 0;
+
+        var leftDepth = MaxDepth(root.left);
+        var rightDepth = MaxDepth(root.right);
+
+        return Math.Max(leftDepth, rightDepth) + 1;
     }
 }

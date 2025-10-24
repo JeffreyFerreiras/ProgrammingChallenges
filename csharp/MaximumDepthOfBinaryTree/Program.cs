@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace MaximumDepthOfBinaryTree;
 
@@ -13,30 +15,47 @@ internal static class Program
 
         var solution = new Solution();
 
+        // Get all public methods from Solution class
+        var solutionMethods = typeof(Solution)
+            .GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName) // Exclude property getters/setters
+            .ToList();
+
         var scenarios = new[]
         {
-            (Name: "Example 1", Values: [3, 9, 20, null, null, 15, 7], Expected: 3),
-            (Name: "Example 2", Values: [1, null, 2], Expected: 2),
+            (Name: "Example 1", Values: new int?[] { 3, 9, 20, null, null, 15, 7 }, Expected: 3),
+            (Name: "Example 2", Values: new int?[] { 1, null, 2 }, Expected: 2),
             (Name: "Edge: Empty", Values: Array.Empty<int?>(), Expected: 0),
-            (Name: "Edge: Single Node", Values: [42], Expected: 1),
-            (Name: "Left Skewed", Values: [1, 2, null, 3, null, 4, null, 5], Expected: 5),
-            (Name: "Right Skewed", Values: [1, null, 2, null, 3, null, 4], Expected: 4),
-            (Name: "Balanced Larger", Values: [1, 2, 3, 4, 5, 6, 7, 8, 9], Expected: 4)
+            (Name: "Edge: Single Node", Values: new int?[] { 42 }, Expected: 1),
+            (Name: "Left Skewed", Values: new int?[] { 1, 2, null, 3 }, Expected: 3),
+            (Name: "Right Skewed", Values: new int?[] { 1, null, 2 }, Expected: 2),
+            (Name: "Balanced Larger", Values: new int?[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, Expected: 4)
         };
 
-        foreach (var scenario in scenarios)
+        foreach (var method in solutionMethods)
         {
-            var root = BuildTree(scenario.Values);
+            Console.WriteLine($"Testing method: {method.Name}");
+            Console.WriteLine(new string('=', 60));
 
-            var stopwatch = Stopwatch.StartNew();
-            var result = solution.MaxDepth(root);
-            stopwatch.Stop();
+            foreach (var scenario in scenarios)
+            {
+                var root = BuildTree(scenario.Values);
 
-            Console.WriteLine($"Scenario: {scenario.Name}");
-            Console.WriteLine($"Method: {nameof(Solution.MaxDepth)}");
-            Console.WriteLine($"Result: {result}, Expected: {scenario.Expected}");
-            Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine(new string('-', 60));
+                var stopwatch = Stopwatch.StartNew();
+                var result = method.Invoke(solution, new object?[] { root });
+                stopwatch.Stop();
+
+                var passed = result?.Equals(scenario.Expected) ?? scenario.Expected == 0;
+                var statusIcon = passed ? "✓" : "✗";
+
+                Console.WriteLine($"{statusIcon} Scenario: {scenario.Name}");
+                Console.WriteLine($"Method: {method.Name}");
+                Console.WriteLine($"Result: {result}, Expected: {scenario.Expected}");
+                Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
+                Console.WriteLine(new string('-', 60));
+            }
+
+            Console.WriteLine();
         }
     }
 
@@ -69,12 +88,12 @@ internal static class Program
 
             if (leftIndex < values.Count)
             {
-                current.Left = nodes[leftIndex];
+                current.left = nodes[leftIndex];
             }
 
             if (rightIndex < values.Count)
             {
-                current.Right = nodes[rightIndex];
+                current.right = nodes[rightIndex];
             }
         }
 
