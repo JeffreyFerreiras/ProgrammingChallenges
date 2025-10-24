@@ -15,6 +15,14 @@ public class Solution
     /// </summary>
     public bool IsSameTree(TreeNode? p, TreeNode? q)
     {
+        if (p is null && q is null)
+            return true;
+
+        if (p.Val == q?.Val)
+        {
+            return IsSameTree(p.Left, q.Left) && IsSameTree(p.Right, q.Right);
+        }
+
         return false;
     }
 }
