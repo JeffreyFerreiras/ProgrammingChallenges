@@ -41,7 +41,7 @@ public class Solution
             || IsSubtree(root.left, subRoot)
             || IsSubtree(root.right, subRoot);
     }
-    
+
     private bool IsSameTree(TreeNode? p, TreeNode? q)
     {
         if (p is null && q is null)

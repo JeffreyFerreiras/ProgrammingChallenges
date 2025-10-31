@@ -16,14 +16,39 @@ internal static class Program
 
         var scenarios = new[]
         {
-            (Name: "Example 1", Root: new int?[] { 3, 4, 5, 1, 2 }, SubRoot: new int?[] { 4, 1, 2 }, Expected: true),
-            (Name: "Example 2", Root: [3, 4, 5, 1, 2, null, null, null, null, 0], SubRoot: [4, 1, 2], Expected: false),
+            (
+                Name: "Example 1",
+                Root: new int?[] { 3, 4, 5, 1, 2 },
+                SubRoot: new int?[] { 4, 1, 2 },
+                Expected: true
+            ),
+            (
+                Name: "Example 2",
+                Root: [3, 4, 5, 1, 2, null, null, null, null, 0],
+                SubRoot: [4, 1, 2],
+                Expected: false
+            ),
             (Name: "Edge: Single Node Match", Root: [1], SubRoot: [1], Expected: true),
             (Name: "Edge: Single Node Mismatch", Root: [1], SubRoot: [2], Expected: false),
-            (Name: "Deep Candidate", Root: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], SubRoot: [5, 10], Expected: true),
-            (Name: "Large Match", Root: [4, 2, 6, 1, 3, 5, 7, null, null, null, null, null, null, null, 8], SubRoot: [6, 5, 7], Expected: false),
-            (Name: "Custom: [3,4,5,1,2] vs [4,1,2]", Root: [3, 4, 5, 1, 2], SubRoot: [4, 1, 2], Expected: true),
-            (Name: "Testcase: [1,1] vs [1]", Root: [1, 1], SubRoot: [1], Expected: true)
+            (
+                Name: "Deep Candidate",
+                Root: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                SubRoot: [5, 10],
+                Expected: true
+            ),
+            (
+                Name: "Large Match",
+                Root: [4, 2, 6, 1, 3, 5, 7, null, null, null, null, null, null, null, 8],
+                SubRoot: [6, 5, 7],
+                Expected: false
+            ),
+            (
+                Name: "Custom: [3,4,5,1,2] vs [4,1,2]",
+                Root: [3, 4, 5, 1, 2],
+                SubRoot: [4, 1, 2],
+                Expected: true
+            ),
+            (Name: "Testcase: [1,1] vs [1]", Root: [1, 1], SubRoot: [1], Expected: true),
         };
 
         foreach (var scenario in scenarios)
