@@ -16,13 +16,12 @@ internal static class Program
 
         var scenarios = new[]
         {
-            (
-                Name: "Example 1",
-                Values: new int?[] { 6, 2, 8, 0, 4, 7, 9, null, null, 3, 5 },
-                P: 2,
-                Q: 8,
-                Expected: 6
-            ),
+            // Very simple cases - 2-3 nodes
+            (Name: "2 Nodes: Root and Left Child", Values: [2, 1], P: 1, Q: 2, Expected: 2),
+            (Name: "2 Nodes: Root and Right Child", Values: [2, null, 3], P: 2, Q: 3, Expected: 2),
+            (Name: "3 Nodes: Balanced", Values: [2, 1, 3], P: 1, Q: 3, Expected: 2),
+            // Simple cases - small trees with straightforward LCA
+            (Name: "Root as Ancestor", Values: [2, 1, 3], P: 1, Q: 3, Expected: 2),
             (
                 Name: "Example 2",
                 Values: [6, 2, 8, 0, 4, 7, 9, null, null, 3, 5],
@@ -30,8 +29,24 @@ internal static class Program
                 Q: 4,
                 Expected: 2
             ),
+            // Moderate cases - medium complexity trees
+            (
+                Name: "Example 1",
+                Values: new int?[] { 6, 2, 8, 0, 4, 7, 9, null, null, 3, 5 },
+                P: 2,
+                Q: 8,
+                Expected: 6
+            ),
+            // Complex cases - deep or unbalanced trees
+            (
+                Name: "Deep Nodes",
+                Values: [10, 5, 15, 2, 7, 12, 20, 1, 3, 6, 8, 11, 13, 18, 25],
+                P: 3,
+                Q: 8,
+                Expected: 5
+            ),
+            // Edge cases - run last
             (Name: "Edge: Same Node", Values: [5, 3, 7, 2, 4, 6, 8], P: 4, Q: 4, Expected: 4),
-            (Name: "Root as Ancestor", Values: [2, 1, 3], P: 1, Q: 3, Expected: 2),
             (Name: "Left Heavy", Values: [5, 3, null, 2, null, 1], P: 1, Q: 3, Expected: 3),
             (
                 Name: "Right Heavy",
@@ -40,17 +55,15 @@ internal static class Program
                 Q: 12,
                 Expected: 8
             ),
-            (
-                Name: "Deep Nodes",
-                Values: [10, 5, 15, 2, 7, 12, 20, 1, 3, 6, 8, 11, 13, 18, 25],
-                P: 3,
-                Q: 8,
-                Expected: 5
-            ),
         };
 
         foreach (var scenario in scenarios)
         {
+            Console.WriteLine($"Scenario: {scenario.Name}");
+            Console.WriteLine($"Method: {nameof(Solution.LowestCommonAncestor)}");
+            Console.WriteLine($"Tree: {FormatArray(scenario.Values)}");
+            Console.WriteLine($"Inputs: p = {scenario.P}, q = {scenario.Q}");
+
             var root = BuildTree(scenario.Values);
             var pNode = FindNode(root, scenario.P);
             var qNode = FindNode(root, scenario.Q);
@@ -59,10 +72,6 @@ internal static class Program
             var result = solution.LowestCommonAncestor(root, pNode, qNode);
             stopwatch.Stop();
 
-            Console.WriteLine($"Scenario: {scenario.Name}");
-            Console.WriteLine($"Method: {nameof(Solution.LowestCommonAncestor)}");
-            Console.WriteLine($"Tree: {FormatArray(scenario.Values)}");
-            Console.WriteLine($"Inputs: p = {scenario.P}, q = {scenario.Q}");
             var passMark = result?.val == scenario.Expected ? " ✓" : string.Empty;
             Console.WriteLine(
                 $"Result: {FormatNode(result)}, Expected: {scenario.Expected}{passMark}"

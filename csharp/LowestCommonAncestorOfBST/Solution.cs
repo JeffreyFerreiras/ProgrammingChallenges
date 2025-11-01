@@ -10,44 +10,32 @@ public class TreeNode(int val, TreeNode? left = null, TreeNode? right = null)
 public class Solution
 {
     /// <summary>
-    /// Finds the lowest common ancestor of nodes p and q in the given BST.
-    /// TODO: Leverage BST ordering to walk down toward the split point.
+    /// Finds the lowest common ancestor of two nodes in a binary tree.
     /// </summary>
+    /// <param name="root">The root of the binary tree.</param>
+    /// <param name="p">The first node.</param>
+    /// <param name="q">The second node.</param>
+    /// <returns>The lowest common ancestor node, or null if not found.</returns>
     public TreeNode? LowestCommonAncestor(TreeNode? root, TreeNode? p, TreeNode? q)
     {
-        if (root is null || p is null || q is null)
+        if (root is null)
         {
-            return root ?? p ?? q;
+            return null;
         }
 
-        var currentMin = root;
-        var leftMin = Min(root, p, currentMin);
-        var rightMin = Min(root, q, currentMin);
-        
-        return leftMin.val > rightMin.val ? rightMin : leftMin;
-    }
-
-    private TreeNode? Min(TreeNode? current, TreeNode target, TreeNode currentMin)
-    {
-        if (current is null)
+        if (root == p || root == q)
         {
-            return currentMin;
+            return root;
         }
 
-        if (current != currentMin && current.val < currentMin?.val)
+        var leftLCA = LowestCommonAncestor(root.left, p, q);
+        var rightLCA = LowestCommonAncestor(root.right, p, q);
+
+        if (leftLCA is not null && rightLCA is not null)
         {
-            currentMin = current;
+            return root;
         }
 
-        if (current == target)
-        {
-            // Found target, return current minimum or target if it's the smallest
-            return currentMin?.val < current.val ? currentMin : current;
-        }
-
-        var left = Min(current.left, target, currentMin);
-        var right = Min(current.right, target, currentMin);
-
-        return left ?? right;
+        return leftLCA ?? rightLCA;
     }
 }
