@@ -17,6 +17,24 @@ public class Solution
     /// </summary>
     public IList<IList<int>> LevelOrder(TreeNode? root)
     {
-        return new List<IList<int>>();
+        var result = new List<IList<int>>();
+
+        LO(root, 0);
+
+        return result;
+
+        void LO(TreeNode? node, int level)
+        {
+            if (node is null)
+                return;
+
+            if (result.Count <= level)
+                result.Add([node.Val]);
+            else
+                result[level].Add(node.Val);
+
+            LO(node.Left, level + 1);
+            LO(node.Right, level + 1);
+        }
     }
 }
