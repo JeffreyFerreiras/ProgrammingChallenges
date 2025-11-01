@@ -16,13 +16,37 @@ internal static class Program
 
         var scenarios = new[]
         {
-            (Name: "Example 1", Values: new int?[] { 6, 2, 8, 0, 4, 7, 9, null, null, 3, 5 }, P: 2, Q: 8, Expected: 6),
-            (Name: "Example 2", Values: [6, 2, 8, 0, 4, 7, 9, null, null, 3, 5], P: 2, Q: 4, Expected: 2),
+            (
+                Name: "Example 1",
+                Values: new int?[] { 6, 2, 8, 0, 4, 7, 9, null, null, 3, 5 },
+                P: 2,
+                Q: 8,
+                Expected: 6
+            ),
+            (
+                Name: "Example 2",
+                Values: [6, 2, 8, 0, 4, 7, 9, null, null, 3, 5],
+                P: 2,
+                Q: 4,
+                Expected: 2
+            ),
             (Name: "Edge: Same Node", Values: [5, 3, 7, 2, 4, 6, 8], P: 4, Q: 4, Expected: 4),
             (Name: "Root as Ancestor", Values: [2, 1, 3], P: 1, Q: 3, Expected: 2),
             (Name: "Left Heavy", Values: [5, 3, null, 2, null, 1], P: 1, Q: 3, Expected: 3),
-            (Name: "Right Heavy", Values: [5, null, 8, null, 10, null, 12], P: 8, Q: 12, Expected: 8),
-            (Name: "Deep Nodes", Values: [10, 5, 15, 2, 7, 12, 20, 1, 3, 6, 8, 11, 13, 18, 25], P: 3, Q: 8, Expected: 5)
+            (
+                Name: "Right Heavy",
+                Values: [5, null, 8, null, 10, null, 12],
+                P: 8,
+                Q: 12,
+                Expected: 8
+            ),
+            (
+                Name: "Deep Nodes",
+                Values: [10, 5, 15, 2, 7, 12, 20, 1, 3, 6, 8, 11, 13, 18, 25],
+                P: 3,
+                Q: 8,
+                Expected: 5
+            ),
         };
 
         foreach (var scenario in scenarios)
@@ -39,7 +63,10 @@ internal static class Program
             Console.WriteLine($"Method: {nameof(Solution.LowestCommonAncestor)}");
             Console.WriteLine($"Tree: {FormatArray(scenario.Values)}");
             Console.WriteLine($"Inputs: p = {scenario.P}, q = {scenario.Q}");
-            Console.WriteLine($"Result: {FormatNode(result)}, Expected: {scenario.Expected}");
+            var passMark = result?.val == scenario.Expected ? " ✓" : string.Empty;
+            Console.WriteLine(
+                $"Result: {FormatNode(result)}, Expected: {scenario.Expected}{passMark}"
+            );
             Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
             Console.WriteLine(new string('-', 60));
         }
@@ -74,12 +101,12 @@ internal static class Program
 
             if (leftIndex < values.Count)
             {
-                current.Left = nodes[leftIndex];
+                current.left = nodes[leftIndex];
             }
 
             if (rightIndex < values.Count)
             {
-                current.Right = nodes[rightIndex];
+                current.right = nodes[rightIndex];
             }
         }
 
@@ -103,13 +130,13 @@ internal static class Program
                 continue;
             }
 
-            if (node.Val == value)
+            if (node.val == value)
             {
                 return node;
             }
 
-            queue.Enqueue(node.Left);
-            queue.Enqueue(node.Right);
+            queue.Enqueue(node.left);
+            queue.Enqueue(node.right);
         }
 
         return null;
@@ -127,6 +154,6 @@ internal static class Program
 
     private static string FormatNode(TreeNode? node)
     {
-        return node?.Val.ToString() ?? "null";
+        return node?.val.ToString() ?? "null";
     }
 }

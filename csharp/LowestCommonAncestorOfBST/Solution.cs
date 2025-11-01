@@ -2,9 +2,9 @@
 
 public class TreeNode(int val, TreeNode? left = null, TreeNode? right = null)
 {
-    public int Val { get; } = val;
-    public TreeNode? Left { get; set; } = left;
-    public TreeNode? Right { get; set; } = right;
+    public int val { get; } = val;
+    public TreeNode? left { get; set; } = left;
+    public TreeNode? right { get; set; } = right;
 }
 
 public class Solution
@@ -15,6 +15,39 @@ public class Solution
     /// </summary>
     public TreeNode? LowestCommonAncestor(TreeNode? root, TreeNode? p, TreeNode? q)
     {
-        return root;
+        if (root is null || p is null || q is null)
+        {
+            return root ?? p ?? q;
+        }
+
+        var currentMin = root;
+        var leftMin = Min(root, p, currentMin);
+        var rightMin = Min(root, q, currentMin);
+        
+        return leftMin.val > rightMin.val ? rightMin : leftMin;
+    }
+
+    private TreeNode? Min(TreeNode? current, TreeNode target, TreeNode currentMin)
+    {
+        if (current is null)
+        {
+            return currentMin;
+        }
+
+        if (current != currentMin && current.val < currentMin?.val)
+        {
+            currentMin = current;
+        }
+
+        if (current == target)
+        {
+            // Found target, return current minimum or target if it's the smallest
+            return currentMin?.val < current.val ? currentMin : current;
+        }
+
+        var left = Min(current.left, target, currentMin);
+        var right = Min(current.right, target, currentMin);
+
+        return left ?? right;
     }
 }
