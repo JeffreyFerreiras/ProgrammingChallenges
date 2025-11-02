@@ -17,6 +17,24 @@ public class Solution
     /// </summary>
     public IList<int> RightSideView(TreeNode? root)
     {
-        return new List<int>();
+        List<List<int>> levelOrder = [];
+
+        Traverse(root, 0);
+
+        return levelOrder.Select(level => level.Last()).ToList();
+
+        void Traverse(TreeNode? node, int level)
+        {
+            if (node == null)
+                return;
+                
+            if (levelOrder.Count <= level)
+                levelOrder.Add([]);
+
+            levelOrder[level].Add(node.Val);
+
+            Traverse(node.Left, level + 1);
+            Traverse(node.Right, level + 1);
+        }
     }
 }

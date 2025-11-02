@@ -20,9 +20,9 @@ internal static class Program
             (Name: "Example 2", Values: [1, null, 3], Expected: [1, 3]),
             (Name: "Example 3", Values: Array.Empty<int?>(), Expected: Array.Empty<int>()),
             (Name: "Single Node", Values: [7], Expected: [7]),
-            (Name: "Left-heavy", Values: [1, 2, null, 3, null, 4, null, 5], Expected: [1, 2, 3, 4, 5]),
+            (Name: "Left-heavy", Values: [1, 2, null, 3, null, 4, null, 5], Expected: [1, 2, 3, 5]),
             (Name: "Full Tree", Values: [1, 2, 3, 4, 5, 6, 7], Expected: [1, 3, 7]),
-            (Name: "Sparse", Values: [1, 2, 3, null, 5, null, null, null, null, 4], Expected: [1, 3, 4])
+            (Name: "Sparse", Values: [1, 2, 3, null, 5, null, null, null, null, 4], Expected: [1, 3, 5, 4])
         };
 
         foreach (var scenario in scenarios)
