@@ -11,10 +11,10 @@ public class Solution
 {
     public bool IsValidBST(TreeNode? root)
     {
-        return IsValidBSTHelper(root, long.MinValue, long.MaxValue);
+        return IsValidBST(root, long.MinValue, long.MaxValue);
     }
 
-    private bool IsValidBSTHelper(TreeNode? node, long minValue, long maxValue)
+    private bool IsValidBST(TreeNode? node, long minValue, long maxValue)
     {
         if (node is null)
         {
@@ -29,7 +29,44 @@ public class Solution
 
         // Recursively validate left subtree (values must be less than current node)
         // and right subtree (values must be greater than current node)
-        return IsValidBSTHelper(node.Left, minValue, node.Val)
-            && IsValidBSTHelper(node.Right, node.Val, maxValue);
+        return IsValidBST(node.Left, minValue, node.Val)
+            && IsValidBST(node.Right, node.Val, maxValue);
+    }
+
+    public bool IsValidBST_2(TreeNode? root)
+    {
+        if (root is null)
+        {
+            return true;
+        }
+
+        var stack = new Stack<TreeNode>();
+        stack.Push(root);
+        while (stack.Count > 0)
+        {
+            var node = stack.Pop();
+
+            if (node.Left is not null)
+            {
+                if (node.Left.Val > node.Val)
+                {
+                    return false;
+                }
+
+                stack.Push(node.Left);
+            }
+
+            if (node.Right is not null)
+            {
+                if (node.Right.Val < node.Val)
+                {
+                    return false;
+                }
+
+                stack.Push(node.Right);
+            }
+        }
+
+        return true;
     }
 }
