@@ -11,26 +11,22 @@ public class Solution
 {
     public bool IsValidBST(TreeNode? root)
     {
-        return IsValidBST(root, long.MinValue, long.MaxValue);
-    }
+        return IsValid(root, long.MinValue, long.MaxValue);
 
-    private bool IsValidBST(TreeNode? node, long minValue, long maxValue)
-    {
-        if (node is null)
+        static bool IsValid(TreeNode? node, long minValue, long maxValue)
         {
-            return true;
-        }
+            if (node is null)
+                return true;
 
-        // Current node's value must be within the valid range
-        if (node.val <= minValue || node.val >= maxValue)
-        {
-            return false;
-        }
+            if (node.val <= minValue
+                || node.val >= maxValue)
+            {
+                return false;
+            }
 
-        // Recursively validate left subtree (values must be less than current node)
-        // and right subtree (values must be greater than current node)
-        return IsValidBST(node.left, minValue, node.val)
-            && IsValidBST(node.right, node.val, maxValue);
+            return IsValid(node.left, minValue, node.val)
+                && IsValid(node.right, node.val, maxValue);
+        }
     }
 
     public bool IsValidBST_2(TreeNode? root)
