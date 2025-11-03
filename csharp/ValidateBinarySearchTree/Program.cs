@@ -20,6 +20,7 @@ public class Program
             (Name: "Single Node", Values: [8], Expected: true),
             (Name: "Duplicates", Values: [2, 2, 2], Expected: false),
             (Name: "Deep Violation", Values: [10, 5, 15, null, null, 6, 20], Expected: false),
+            (Name: "Right Subtree Violation", Values: [5, 4, 6, null, null, 3, 7], Expected: false),
             (
                 Name: "Valid Large",
                 Values: [13, 9, 17, 5, 11, 15, 19, 3, 7, 10, 12, 14, 16, 18, 21],
@@ -35,7 +36,8 @@ public class Program
             Console.WriteLine($"Tree: {FormatArray(scenario.Values)}");
 
             var solutionType = typeof(Solution);
-            var methods = solutionType.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+            var methods = solutionType
+                .GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
                 .Where(m => !m.IsSpecialName)
                 .Where(m =>
                 {
@@ -46,7 +48,9 @@ public class Program
 
             if (methods.Length == 0)
             {
-                Console.WriteLine("No invocable methods found on Solution matching signature (TreeNode?) -> *.");
+                Console.WriteLine(
+                    "No invocable methods found on Solution matching signature (TreeNode?) -> *."
+                );
                 Console.WriteLine(new string('-', 60));
                 continue;
             }
@@ -100,12 +104,12 @@ public class Program
 
                 if (leftIndex < values.Count)
                 {
-                    current.Left = nodes[leftIndex];
+                    current.left = nodes[leftIndex];
                 }
 
                 if (rightIndex < values.Count)
                 {
-                    current.Right = nodes[rightIndex];
+                    current.right = nodes[rightIndex];
                 }
             }
 

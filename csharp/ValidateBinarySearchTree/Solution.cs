@@ -2,9 +2,9 @@ namespace ValidateBinarySearchTree;
 
 public class TreeNode(int val = 0, TreeNode? left = null, TreeNode? right = null)
 {
-    public int Val = val;
-    public TreeNode? Left = left;
-    public TreeNode? Right = right;
+    public int val = val;
+    public TreeNode? left = left;
+    public TreeNode? right = right;
 }
 
 public class Solution
@@ -22,49 +22,43 @@ public class Solution
         }
 
         // Current node's value must be within the valid range
-        if (node.Val <= minValue || node.Val >= maxValue)
+        if (node.val <= minValue || node.val >= maxValue)
         {
             return false;
         }
 
         // Recursively validate left subtree (values must be less than current node)
         // and right subtree (values must be greater than current node)
-        return IsValidBST(node.Left, minValue, node.Val)
-            && IsValidBST(node.Right, node.Val, maxValue);
+        return IsValidBST(node.left, minValue, node.val)
+            && IsValidBST(node.right, node.val, maxValue);
     }
 
     public bool IsValidBST_2(TreeNode? root)
     {
-        if (root is null)
-        {
-            return true;
-        }
-
+        // Iterative in-order traversal: values must be strictly increasing for a valid BST
         var stack = new Stack<TreeNode>();
-        stack.Push(root);
-        while (stack.Count > 0)
+        var current = root;
+        long prev = long.MinValue;
+
+        while (current is not null || stack.Count > 0)
         {
+            // Go left as far as possible
+            while (current is not null)
+            {
+                stack.Push(current);
+                current = current.left;
+            }
+
             var node = stack.Pop();
-
-            if (node.Left is not null)
+            // In-order sequence must be strictly increasing (no duplicates allowed)
+            if (node.val <= prev)
             {
-                if (node.Left.Val > node.Val)
-                {
-                    return false;
-                }
-
-                stack.Push(node.Left);
+                return false;
             }
+            prev = node.val;
 
-            if (node.Right is not null)
-            {
-                if (node.Right.Val < node.Val)
-                {
-                    return false;
-                }
-
-                stack.Push(node.Right);
-            }
+            // Visit right subtree
+            current = node.right;
         }
 
         return true;
