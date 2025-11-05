@@ -20,8 +20,8 @@ internal static class Program
             (Name: "Example 2", Values: [5, 3, 6, 2, 4, null, null, 1], K: 3, Expected: 3),
             (Name: "Edge: Smallest", Values: [2, 1, 3], K: 1, Expected: 1),
             (Name: "Edge: Largest", Values: [2, 1, 3], K: 3, Expected: 3),
-            (Name: "Right Skewed", Values: [1, null, 2, null, 3, null, 4], K: 4, Expected: 4),
-            (Name: "Balanced", Values: [8, 3, 10, 1, 6, null, 14, null, null, 4, 7, 13], K: 5, Expected: 7),
+            (Name: "Right Skewed", Values: [1, null, 2, null, null, null, 3, null, null, null, null, null, null, null, 4], K: 4, Expected: 4),
+            (Name: "Balanced", Values: [8, 3, 10, 1, 6, null, 14, null, null, 4, 7, null, null, 13], K: 5, Expected: 7),
             (Name: "Large", Values: [15, 10, 20, 8, 12, 17, 25, 6, 9, 11, 13, 16, 19, 22, 27], K: 8, Expected: 15)
         };
 
@@ -33,11 +33,12 @@ internal static class Program
             var result = solution.KthSmallest(root, scenario.K);
             stopwatch.Stop();
 
+            var passMark = result == scenario.Expected ? " ✓" : " ✗";
             Console.WriteLine($"Scenario: {scenario.Name}");
             Console.WriteLine($"Method: {nameof(Solution.KthSmallest)}");
             Console.WriteLine($"Tree: {FormatArray(scenario.Values)}");
             Console.WriteLine($"Input k: {scenario.K}");
-            Console.WriteLine($"Result: {result}, Expected: {scenario.Expected}");
+            Console.WriteLine($"Result: {result}, Expected: {scenario.Expected}{passMark}");
             Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
             Console.WriteLine(new string('-', 60));
         }
@@ -72,12 +73,12 @@ internal static class Program
 
             if (leftIndex < values.Count)
             {
-                current.Left = nodes[leftIndex];
+                current.left = nodes[leftIndex];
             }
 
             if (rightIndex < values.Count)
             {
-                current.Right = nodes[rightIndex];
+                current.right = nodes[rightIndex];
             }
         }
 

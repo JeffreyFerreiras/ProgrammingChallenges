@@ -2,9 +2,9 @@
 
 public class TreeNode(int val, TreeNode? left = null, TreeNode? right = null)
 {
-    public int Val { get; } = val;
-    public TreeNode? Left { get; set; } = left;
-    public TreeNode? Right { get; set; } = right;
+    public int val { get; } = val;
+    public TreeNode? left { get; set; } = left;
+    public TreeNode? right { get; set; } = right;
 }
 
 public class Solution
@@ -15,6 +15,22 @@ public class Solution
     /// </summary>
     public int KthSmallest(TreeNode? root, int k)
     {
-        return 0;
+        int position = 0;
+        int result = int.MinValue;
+        InOrder(root);
+        return result;
+
+        void InOrder(TreeNode? node) {
+            if (node is null) return;
+            
+            InOrder(node.left);
+            position++;
+            if (position == k)
+            {
+                result = node.val;
+                return;
+            }
+            InOrder(node.right);
+        }
     }
 }
