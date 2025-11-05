@@ -24,7 +24,8 @@ public class Solution
 {
     public IList<IList<int>> LevelOrder(TreeNode? root)
     {
-        if (root == null) return [];
+        if (root == null)
+            return [];
         IList<IList<int>> result = [];
 
         //assign current level
@@ -39,7 +40,8 @@ public class Solution
 
     void Traverse(TreeNode? node, IList<IList<int>> result, int level)
     {
-        if (node == null) return;
+        if (node == null)
+            return;
 
         //make sure result has that index
         if (result.Count - 1 < level)

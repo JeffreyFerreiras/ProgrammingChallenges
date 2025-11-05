@@ -15,6 +15,14 @@ public class Solution
     /// </summary>
     public TreeNode? InvertTree(TreeNode? root)
     {
+        if (root is null)
+            return null;
+
+        var right = root.Right;
+        var left = root.Left;
+        root.Right = InvertTree(left);
+        root.Left = InvertTree(right);
+
         return root;
     }
 }

@@ -2,9 +2,9 @@
 
 public class TreeNode(int val, TreeNode? left = null, TreeNode? right = null)
 {
-    public int Val { get; } = val;
-    public TreeNode? Left { get; set; } = left;
-    public TreeNode? Right { get; set; } = right;
+    public int val { get; } = val;
+    public TreeNode? left { get; set; } = left;
+    public TreeNode? right { get; set; } = right;
 }
 
 public class Solution
@@ -15,6 +15,40 @@ public class Solution
     /// </summary>
     public bool IsSubtree(TreeNode? root, TreeNode? subRoot)
     {
-        return false;
+        if (root is null && subRoot is null)
+            return true;
+
+        if (root is null || subRoot is null)
+            return false;
+
+        if (
+            subRoot.left is null
+            && subRoot.right is null
+            && root.left is null
+            && root.right is null
+        ) //subRoot is a leaf and root is a leaf
+        {
+            return root.val == subRoot.val;
+        }
+
+        if (root.val != subRoot.val) //not a match at this node, search children
+        {
+            return IsSubtree(root.left, subRoot) || IsSubtree(root.right, subRoot);
+        }
+
+        // Values match, check children
+        return IsSameTree(root, subRoot)
+            || IsSubtree(root.left, subRoot)
+            || IsSubtree(root.right, subRoot);
+    }
+
+    private bool IsSameTree(TreeNode? p, TreeNode? q)
+    {
+        if (p is null && q is null)
+            return true;
+        if (p is null || q is null)
+            return false;
+
+        return p.val == q.val && IsSameTree(p.left, q.left) && IsSameTree(p.right, q.right);
     }
 }

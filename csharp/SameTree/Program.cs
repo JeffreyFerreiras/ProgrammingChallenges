@@ -38,7 +38,8 @@ internal static class Program
             Console.WriteLine($"Method: {nameof(Solution.IsSameTree)}");
             Console.WriteLine($"Tree P: {FormatArray(scenario.P)}");
             Console.WriteLine($"Tree Q: {FormatArray(scenario.Q)}");
-            Console.WriteLine($"Result: {result}, Expected: {scenario.Expected}");
+            var passMark = result == scenario.Expected ? " ✓" : string.Empty;
+            Console.WriteLine($"Result: {result}, Expected: {scenario.Expected}{passMark}");
             Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
             Console.WriteLine(new string('-', 60));
         }
