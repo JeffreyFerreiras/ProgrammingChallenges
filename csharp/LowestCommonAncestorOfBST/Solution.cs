@@ -13,23 +13,23 @@ public class Solution
     /// Finds the lowest common ancestor of two nodes in a binary tree.
     /// </summary>
     /// <param name="root">The root of the binary tree.</param>
-    /// <param name="p">The first node.</param>
-    /// <param name="q">The second node.</param>
+    /// <param name="nodeA">The first node.</param>
+    /// <param name="nodeB">The second node.</param>
     /// <returns>The lowest common ancestor node, or null if not found.</returns>
-    public TreeNode? LowestCommonAncestor(TreeNode? root, TreeNode? p, TreeNode? q)
+    public TreeNode? LowestCommonAncestor(TreeNode? root, TreeNode? nodeA, TreeNode? nodeB)
     {
         if (root is null)
         {
             return null;
         }
 
-        if (root == p || root == q)
+        if (root == nodeA || root == nodeB)
         {
             return root;
         }
 
-        var leftLCA = LowestCommonAncestor(root.left, p, q);
-        var rightLCA = LowestCommonAncestor(root.right, p, q);
+        var leftLCA = LowestCommonAncestor(root.left, nodeA, nodeB);
+        var rightLCA = LowestCommonAncestor(root.right, nodeA, nodeB);
 
         if (leftLCA is not null && rightLCA is not null)
         {
