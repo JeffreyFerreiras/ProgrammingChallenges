@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 
 namespace ConstructBinaryTreeFromTraversals;
 
@@ -16,28 +13,38 @@ internal static class Program
 
         var scenarios = new[]
         {
-            (Name: "Example 1", Preorder: new[] { 3, 9, 20, 15, 7 }, Inorder: new[] { 9, 3, 15, 20, 7 }, Expected: new int?[] { 3, 9, 20, null, null, 15, 7 }),
-            (Name: "Example 2", Preorder: [-1], Inorder: [-1], Expected: [-1]),
-            (Name: "Left Skewed", Preorder: [4, 3, 2, 1], Inorder: [1, 2, 3, 4], Expected: [4, null, 3, null, 2, null, 1]),
-            (Name: "Right Skewed", Preorder: [1, 2, 3, 4], Inorder: [4, 3, 2, 1], Expected: [1, 2, null, 3, null, 4]),
-            (Name: "Balanced", Preorder: [8, 4, 2, 6, 12, 10, 14], Inorder: [2, 4, 6, 8, 10, 12, 14], Expected: [8, 4, 12, 2, 6, 10, 14]),
-            (Name: "Large", Preorder: [10, 5, 2, 7, 15, 12, 20, 17], Inorder: [2, 5, 7, 10, 12, 15, 17, 20], Expected: [10, 5, 15, 2, 7, 12, 20, null, null, null, null, null, null, 17])
+            (Name: "Example 1",     Preorder: new[] { 3, 9, 20, 15, 7 }, Inorder: new[] { 9, 3, 15, 20, 7 }, Expected: new int?[] { 3, 9, 20, null, null, 15, 7 }),
+            (Name: "Example 2",     Preorder: [-1], Inorder: [-1], Expected: [-1]),
+            (Name: "Left Skewed",   Preorder: [4, 3, 2, 1], Inorder: [1, 2, 3, 4], Expected: [4, 3, null, 2, null, 1]),
+            (Name: "Right Skewed",  Preorder: [1, 2, 3, 4], Inorder: [1, 2, 3, 4], Expected: [1, null, 2, null, 3, null, 4]),
+            (Name: "Balanced",      Preorder: [8, 4, 2, 6, 12, 10, 14], Inorder: [2, 4, 6, 8, 10, 12, 14], Expected: [8, 4, 12, 2, 6, 10, 14]),
+            (Name: "Large",         Preorder: [10, 5, 2, 7, 15, 12, 20, 17], Inorder: [2, 5, 7, 10, 12, 15, 17, 20], Expected: [10, 5, 15, 2, 7, 12, 20, null, null, null, null, null, null, 17]),
+            (Name: "Perfect Height 2", Preorder: [1, 2, 4, 5, 3, 6, 7], Inorder: [4, 2, 5, 1, 6, 3, 7], Expected: [1, 2, 3, 4, 5, 6, 7]),
+            (Name: "Root Right With Left Child", Preorder: [1, 2, 3, 4], Inorder: [2, 1, 4, 3], Expected: [1, 2, 3, null, null, 4]),
+            (Name: "ZigZag Right-Left", Preorder: [1, 2, 3, 4], Inorder: [1, 3, 4, 2], Expected: [1, null, 2, 3, null, null, 4]),
+            (Name: "Missing One Leaf",  Preorder: [5, 3, 2, 8, 7, 9], Inorder: [2, 3, 5, 7, 8, 9], Expected: [5, 3, 8, 2, null, 7, 9])
         };
 
-        foreach (var scenario in scenarios)
+        foreach (var (Name, Preorder, Inorder, Expected) in scenarios)
         {
-            var stopwatch = Stopwatch.StartNew();
-            var result = solution.BuildTree(scenario.Preorder, scenario.Inorder);
-            stopwatch.Stop();
+            var methods = solution.GetType().GetMethods().Where(m => m.DeclaringType == typeof(Solution) && m.IsPublic);
+            foreach (var method in methods)
+            {
+                var stopwatch = Stopwatch.StartNew();
+                var result = method.Invoke(solution, [Preorder, Inorder]) as TreeNode;
+                stopwatch.Stop();
 
-            Console.WriteLine($"Scenario: {scenario.Name}");
-            Console.WriteLine($"Method: {nameof(Solution.BuildTree)}");
-            Console.WriteLine($"Preorder: {FormatArray(scenario.Preorder)}");
-            Console.WriteLine($"Inorder: {FormatArray(scenario.Inorder)}");
-            Console.WriteLine($"Result: {FormatTree(result)}");
-            Console.WriteLine($"Expected: {FormatArray(scenario.Expected)}");
-            Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine(new string('-', 60));
+                Console.WriteLine($"Scenario: {Name}");
+                Console.WriteLine($"Method: {method.Name}");
+                Console.WriteLine($"Preorder: {FormatArray(Preorder)}");
+                Console.WriteLine($"Inorder: {FormatArray(Inorder)}");
+                Console.WriteLine($"Result: {FormatTree(result)}");
+                Console.WriteLine($"Expected: {FormatArray(Expected)}");
+                Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
+                Console.WriteLine($"Passed: {((FormatTree(result) == FormatArray(Expected)) ? "✔️" : "❌")}");
+
+                Console.WriteLine(new string('-', 60));
+            }
         }
     }
 
@@ -71,9 +78,9 @@ internal static class Program
                 continue;
             }
 
-            values.Add(node.Val.ToString());
-            queue.Enqueue(node.Left);
-            queue.Enqueue(node.Right);
+            values.Add(node.val.ToString());
+            queue.Enqueue(node.left);
+            queue.Enqueue(node.right);
         }
 
         for (var i = values.Count - 1; i >= 0; i--)
