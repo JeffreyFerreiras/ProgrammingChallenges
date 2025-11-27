@@ -51,16 +51,13 @@ public class Solution
     /// </summary>
     public TreeNode? Deserialize(string data)
     {
-        var values = data.Trim('[', ']')
+        List<TreeNode?> values = [.. data.Trim('[', ']')
             .Split(',', StringSplitOptions.RemoveEmptyEntries)
             .Select(s => s == "null" ? null : new TreeNode(int.Parse(s)))
-            .ToList();
+            ];
 
-        if (values.Count == 0)
-        {
-            return null;
-        }
-
+        if (values.Count == 0) return null;
+        
         var queue = new Queue<TreeNode>();
         queue.Enqueue(values[0]!);
 
