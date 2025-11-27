@@ -16,13 +16,38 @@ internal static class Program
 
         var scenarios = new[]
         {
+            // Tree:
+            //     1
+            //    / \
+            //   2   3
+            //      / \
+            //     4   5
             (Name: "Example 1", Values: [1, 2, 3, null, null, 4, 5], Serialized: "[1,2,3,null,null,4,5]"),
+
+            // Tree: (empty)
             (Name: "Example 2", Values: Array.Empty<int?>(), Serialized: "[]"),
+
+            // Tree:
+            //  7
             (Name: "Single Node", Values: [7], Serialized: "[7]"),
-            (Name: "Left-heavy", Values: [5, 4, null, 3, null, 2, null, 1], Serialized: "[5,4,null,3,null,2,null,1]"),
-            (Name: "Right-heavy", Values: [5, null, 6, null, 7, null, 8], Serialized: "[5,null,6,null,7,null,8]"),
+
+            // Tree (mixed nulls):
+            //     10
+            //    /  \
+            //   5   15
+            //    \    \
+            //     7    20
             (Name: "Mixed Nulls", Values: [10, 5, 15, null, 7, null, 20], Serialized: "[10,5,15,null,7,null,20]"),
-            (Name: "Large Sparse", Values: [3, 9, 20, null, null, 15, 7, null, null, null, null, 12], Serialized: "[3,9,20,null,null,15,7,null,null,null,null,12]" )
+
+            // Tree:
+            //       1
+            //      / \
+            //     2   3
+            //    / \ / \
+            //   n  n 4  5
+            //          / \
+            //         6   7
+            (Name: "Example with Bottom Level", Values: [1, 2, 3, null, null, 4, 5, 6, 7], Serialized: "[1,2,3,null,null,4,5,6,7]")
         };
 
         foreach (var scenario in scenarios)
@@ -35,7 +60,8 @@ internal static class Program
 
             Console.WriteLine($"Scenario: {scenario.Name}");
             Console.WriteLine($"Method: {nameof(Solution.Serialize)}");
-            Console.WriteLine($"Result: {serialized}");
+            var serializePassed = string.Equals(serialized, scenario.Serialized, StringComparison.Ordinal);
+            Console.WriteLine($"Result: {serialized} {(serializePassed ? "✔️" : "❌")}");
             Console.WriteLine($"Expected: {scenario.Serialized}");
             Console.WriteLine($"Elapsed: {serializeWatch.Elapsed.TotalMilliseconds:F4} ms");
 
@@ -44,7 +70,9 @@ internal static class Program
             deserializeWatch.Stop();
 
             Console.WriteLine($"Method: {nameof(Solution.Deserialize)}");
-            Console.WriteLine($"Result: {FormatTree(deserialized)}");
+            var deserializedStr = FormatTree(deserialized);
+            var deserializePassed = string.Equals(deserializedStr, FormatArray(scenario.Values), StringComparison.Ordinal);
+            Console.WriteLine($"Result: {deserializedStr} {(deserializePassed ? "✔️" : "❌")}");
             Console.WriteLine($"Expected: {FormatArray(scenario.Values)}");
             Console.WriteLine($"Elapsed: {deserializeWatch.Elapsed.TotalMilliseconds:F4} ms");
             Console.WriteLine(new string('-', 60));
@@ -53,43 +81,44 @@ internal static class Program
 
     private static TreeNode? BuildTree(IReadOnlyList<int?> values)
     {
-        if (values.Count == 0)
+        if (values.Count == 0 || values[0] is null)
         {
             return null;
         }
 
-        var nodes = new TreeNode?[values.Count];
-        for (var i = 0; i < values.Count; i++)
+        var root = new TreeNode(values[0]!.Value);
+        var queue = new Queue<TreeNode>();
+        queue.Enqueue(root);
+
+        var i = 1;
+        while (i < values.Count && queue.Count > 0)
         {
-            if (values[i].HasValue)
+            var current = queue.Dequeue();
+
+            // Left child
+            if (i < values.Count)
             {
-                nodes[i] = new TreeNode(values[i]!.Value);
+                if (values[i].HasValue)
+                {
+                    current.left = new TreeNode(values[i]!.Value);
+                    queue.Enqueue(current.left);
+                }
+                i++;
+            }
+
+            // Right child
+            if (i < values.Count)
+            {
+                if (values[i].HasValue)
+                {
+                    current.right = new TreeNode(values[i]!.Value);
+                    queue.Enqueue(current.right);
+                }
+                i++;
             }
         }
 
-        for (var i = 0; i < values.Count; i++)
-        {
-            var current = nodes[i];
-            if (current is null)
-            {
-                continue;
-            }
-
-            var leftIndex = 2 * i + 1;
-            var rightIndex = 2 * i + 2;
-
-            if (leftIndex < values.Count)
-            {
-                current.Left = nodes[leftIndex];
-            }
-
-            if (rightIndex < values.Count)
-            {
-                current.Right = nodes[rightIndex];
-            }
-        }
-
-        return nodes[0];
+        return root;
     }
 
     private static string FormatTree(TreeNode? root)
@@ -112,9 +141,9 @@ internal static class Program
                 continue;
             }
 
-            values.Add(node.Val.ToString());
-            queue.Enqueue(node.Left);
-            queue.Enqueue(node.Right);
+            values.Add(node.val.ToString());
+            queue.Enqueue(node.left);
+            queue.Enqueue(node.right);
         }
 
         for (var i = values.Count - 1; i >= 0; i--)
