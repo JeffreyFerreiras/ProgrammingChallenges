@@ -21,7 +21,7 @@ public class Solution
         }
 
         List<string> values = [];
-        Queue<TreeNode?> queue = new ();
+        Queue<TreeNode?> queue = new();
         queue.Enqueue(root);
 
         while (queue.Count > 0)
@@ -34,7 +34,7 @@ public class Solution
             }
 
             values.Add(node.val.ToString());
-            
+
             queue.Enqueue(node.left);
             queue.Enqueue(node.right);
         }
@@ -51,13 +51,16 @@ public class Solution
     /// </summary>
     public TreeNode? Deserialize(string data)
     {
-        List<TreeNode?> values = [.. data.Trim('[', ']')
-            .Split(',', StringSplitOptions.RemoveEmptyEntries)
-            .Select(s => s == "null" ? null : new TreeNode(int.Parse(s)))
-            ];
+        List<TreeNode?> values =
+        [
+            .. data.Trim('[', ']')
+                .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                .Select(s => s == "null" ? null : new TreeNode(int.Parse(s))),
+        ];
 
-        if (values.Count == 0) return null;
-        
+        if (values.Count == 0)
+            return null;
+
         var queue = new Queue<TreeNode>();
         queue.Enqueue(values[0]!);
 
