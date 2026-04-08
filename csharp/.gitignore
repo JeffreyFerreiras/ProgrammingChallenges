@@ -1,0 +1,10 @@
+# Build output
+**/bin/
+**/obj/
+
+# VS Code / Visual Studio artifacts
+.vs/
+.vscode/
+
+# C# Dev Kit cache
+*.lscache
