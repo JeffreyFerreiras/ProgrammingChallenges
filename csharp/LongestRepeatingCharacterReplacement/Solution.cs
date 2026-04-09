@@ -24,7 +24,7 @@ public class Solution
 
             // Add current character to window
             if (!charCount.ContainsKey(currentChar))
-               charCount[currentChar] = 0;
+                charCount[currentChar] = 0;
 
             charCount[currentChar]++;
 

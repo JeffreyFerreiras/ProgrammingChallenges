@@ -74,7 +74,7 @@ public class Solution
         }
         return false;
     }
-    
+
     public bool CheckInclusion_Optimized(string s1, string s2)
     {
         if (s1.Length > s2.Length) return false;
@@ -123,7 +123,7 @@ public class Solution
     private bool DictionariesMatch(Dictionary<char, int> dict1, Dictionary<char, int> dict2)
     {
         if (dict1.Count != dict2.Count) return false;
-        
+
         foreach (var kvp in dict1)
         {
             if (!dict2.TryGetValue(kvp.Key, out int value) || value != kvp.Value)
@@ -131,7 +131,7 @@ public class Solution
                 return false;
             }
         }
-        
+
         return true;
     }
 }

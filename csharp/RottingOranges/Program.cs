@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 
 namespace RottingOranges;
+
 public class Program
 {
     public static void Main(string[] args)

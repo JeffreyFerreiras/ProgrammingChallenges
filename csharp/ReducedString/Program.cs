@@ -13,12 +13,13 @@ namespace ReducedString
             Console.Write(result.Length > 0 ? result : "Empty String");
             Console.ReadLine();
         }
+
         static string GetReducedString(string reduced, string original)
         {
             if (original == reduced)
                 return original;
 
-            string input = String.Copy(reduced);
+            string input = reduced;
             StringBuilder sb = new();
 
             while (input.Length >= 1)

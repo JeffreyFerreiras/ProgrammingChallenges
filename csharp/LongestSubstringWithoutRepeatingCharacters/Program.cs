@@ -33,8 +33,8 @@ internal class Program
             // Use reflection to get all public methods that return int and take a string parameter
             var solutionType = typeof(Solution);
             var methods = solutionType.GetMethods(BindingFlags.Public | BindingFlags.Instance)
-                .Where(m => m.ReturnType == typeof(int) && 
-                           m.GetParameters().Length == 1 && 
+                .Where(m => m.ReturnType == typeof(int) &&
+                           m.GetParameters().Length == 1 &&
                            m.GetParameters()[0].ParameterType == typeof(string))
                 .ToArray();
 
@@ -42,15 +42,15 @@ internal class Program
             {
                 RunScenarioWithReflection(solution, method, scenario.Name, scenario.Input, scenario.Expected);
             }
-            
+
             if (methods.Length > 1)
                 Console.WriteLine(); // Add spacing between scenario groups when multiple methods
         }
 
         // Summary of all public methods tested
         var allMethods = typeof(Solution).GetMethods(BindingFlags.Public | BindingFlags.Instance)
-            .Where(m => m.ReturnType == typeof(int) && 
-                       m.GetParameters().Length == 1 && 
+            .Where(m => m.ReturnType == typeof(int) &&
+                       m.GetParameters().Length == 1 &&
                        m.GetParameters()[0].ParameterType == typeof(string))
             .ToArray();
 

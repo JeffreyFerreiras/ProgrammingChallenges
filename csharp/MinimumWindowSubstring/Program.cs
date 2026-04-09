@@ -41,7 +41,7 @@ internal class Program
         // Use reflection to find all public methods that match the signature
         var methods = typeof(Solution)
             .GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
-            .Where(m => m.ReturnType == typeof(string) && 
+            .Where(m => m.ReturnType == typeof(string) &&
                    m.GetParameters().Length == 2 &&
                    m.GetParameters()[0].ParameterType == typeof(string) &&
                    m.GetParameters()[1].ParameterType == typeof(string))
@@ -69,7 +69,7 @@ internal class Program
             foreach (var method in methods)
             {
                 var result = RunScenarioCompact(solution, method, scenario.S, scenario.T, scenario.Expected);
-                
+
                 // Update results
                 var stats = methodResults[method.Name];
                 methodResults[method.Name] = new { Passed = stats.Passed + (result.Passed ? 1 : 0), Total = stats.Total + 1 };
@@ -83,7 +83,7 @@ internal class Program
         Console.WriteLine("SUMMARY:");
         Console.WriteLine($"{"Method",-30} {"Passed/Total",-15} {"Success Rate",-15}");
         Console.WriteLine(new string('-', 60));
-        
+
         foreach (var method in methods)
         {
             var stats = methodResults[method.Name];

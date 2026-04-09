@@ -24,7 +24,7 @@ public class Solution
             return new TreeNode(preorder[0]);
         }
 
-        TreeNode root = new(preorder[0]); 
+        TreeNode root = new(preorder[0]);
         int inorderTreeRootIndex = inorder.Index().First(x => x.Item == preorder[0]).Index;
         root.left = BuildTree(preorder[1..(inorderTreeRootIndex + 1)], inorder[0..inorderTreeRootIndex]);
         root.right = BuildTree(preorder[(inorderTreeRootIndex + 1)..], inorder[(inorderTreeRootIndex + 1)..]);
@@ -48,9 +48,9 @@ public class Solution
             if (leftInorderIndex > rightInorderIndex) return null;
 
             int rootValue = preorder[preOrderIndex++]; // Get root value and increment preorder index
-            TreeNode root = new (rootValue);
+            TreeNode root = new(rootValue);
             int inorderTreeRootIndex = inorderIndexMap[rootValue];
-            
+
             root.left = Dfs(preorder, leftInorderIndex, inorderTreeRootIndex - 1);
             root.right = Dfs(preorder, inorderTreeRootIndex + 1, rightInorderIndex);
 

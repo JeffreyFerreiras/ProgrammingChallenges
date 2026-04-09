@@ -44,7 +44,7 @@ public class Solution
     {
         if (s?.Length < 2)
             return s?.Length ?? 0;
-        
+
         int maxLength = 0;
         const short MaxPossible = 26;
 
@@ -72,7 +72,7 @@ public class Solution
         }
 
         int maxLength = 0;
-        
+
         for (int i = 0; i < s.Length; i++)
         {
             var seen = new HashSet<char>();
@@ -84,7 +84,7 @@ public class Solution
             }
             maxLength = Math.Max(maxLength, seen.Count);
         }
-        
+
         return maxLength;
     }
 }

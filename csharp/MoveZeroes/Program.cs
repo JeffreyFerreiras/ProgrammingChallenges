@@ -5,8 +5,9 @@ Given an integer array nums, move all 0's to the end of it while maintaining the
 Note that you must do this in-place without making a copy of the array.
 */
 
-Console.WriteLine("Hello, World!");
-
+int[] nums = [0, 1, 0, 3, 12];
+MoveZeroes(nums);
+Console.WriteLine(string.Join(", ", nums)); // Expected: 1, 3, 12, 0, 0
 
 void MoveZeroes(int[] nums)
 {

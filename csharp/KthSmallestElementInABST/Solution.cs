@@ -20,9 +20,10 @@ public class Solution
         InOrder(root);
         return result;
 
-        void InOrder(TreeNode? node) {
+        void InOrder(TreeNode? node)
+        {
             if (node is null) return;
-            
+
             InOrder(node.left);
             position++;
             if (position == k)

@@ -27,7 +27,7 @@ public class Solution
         {
             if (node == null)
                 return;
-                
+
             if (levelOrder.Count <= level)
                 levelOrder.Add([]);
 
