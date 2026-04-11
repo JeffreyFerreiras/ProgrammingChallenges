@@ -24,7 +24,12 @@ namespace _3Sum
                 for (int j = i + 1; j < nums.Count() - 1; j++)
                 {
                     int difference = (nums[i] + nums[j]) * -1;
-                    int diffIndex = Array.BinarySearch(nums, j + 1, nums.Count() - j - 1, difference);
+                    int diffIndex = Array.BinarySearch(
+                        nums,
+                        j + 1,
+                        nums.Count() - j - 1,
+                        difference
+                    );
                     if (diffIndex >= 2 && diffIndex != i && diffIndex != j)
                     {
                         var answer = new List<int> { nums[i], nums[j], difference };
@@ -53,7 +58,7 @@ namespace _3Sum
 
             for (int i = 0; i < nums.Length; i++)
             {
-                if (!lookUp.TryGetValue(nums[i], out List<int> value))
+                if (!lookUp.TryGetValue(nums[i], out List<int>? value))
                 {
                     lookUp.Add(nums[i], [i]);
                 }
@@ -68,7 +73,7 @@ namespace _3Sum
                 for (int j = i + 1; j < nums.Length - 1; j++)
                 {
                     var missing = (nums[i] + nums[j]) * -1;
-                    if (lookUp.TryGetValue(missing, out List<int> missingIndex))
+                    if (lookUp.TryGetValue(missing, out List<int>? missingIndex))
                     {
                         foreach (var index in missingIndex)
                         {
@@ -103,11 +108,11 @@ namespace _3Sum
             }
 
             // brute force solution
-            for (int i = 0; i < nums.Count() - 2; i++)
+            for (int i = 0; i < nums.Length - 2; i++)
             {
-                for (int j = i + 1; j < nums.Count() - 1; j++)
+                for (int j = i + 1; j < nums.Length - 1; j++)
                 {
-                    for (int k = j + 1; k < nums.Count(); k++)
+                    for (int k = j + 1; k < nums.Length; k++)
                     {
                         if (nums[i] + nums[j] + nums[k] == 0)
                         {
@@ -121,5 +126,4 @@ namespace _3Sum
             return output;
         }
     }
-
 }
