@@ -37,117 +37,22 @@ Follow up: If you have figured out the O(n) solution, try coding another solutio
     {
         static void Main(string[] args)
         {
+            var solution = new Solution();
             // create test data
             //[-2,1,-3,4,-1,2,1,-5,4]
             var nums = new int[] { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
             var expected = 6;
 
-            var result = Solution.MaxSubArray(nums);
+            var result = solution.MaxSubArray(nums);
 
             Console.WriteLine($"result: {result} expected: {expected}");
 
             //[1]
             nums = [1];
             expected = 1;
-            result = Solution.MaxSubArray(nums);
+            result = solution.MaxSubArray(nums);
             Console.WriteLine($"result: {result} expected: {expected}");
         }
 
-    }
-
-    public class Solution
-    {
-        public static int MaxSubArray(int[] nums)
-        {
-            int sum = 0;
-            int maxSum = nums[0];
-
-            for (int i = 0; i < nums.Length; i++)
-            {
-                sum += nums[i];
-                if (nums[i] > sum)
-                {
-                    sum = nums[i];
-                }
-                if (sum > maxSum)
-                {
-                    maxSum = sum;
-                }
-            }
-            return maxSum;
-        }
-
-        public static int MaxSubArray_Jeffrey(int[] nums)
-        {
-            //[-2,1,-3,4,-1,2,1,-5,4]
-            int maxSum = int.MinValue;
-            int sum = 0;
-            int start = 0;
-            int end = nums.Length - 1;
-            int offset = nums.Length - 1;
-
-            while (offset >= 0)
-            {
-                while (end < nums.Length)
-                {
-                    sum = MaxSubArraySum(nums, start, end);
-
-                    if (sum > maxSum)
-                    {
-                        maxSum = sum;
-                    }
-
-                    start++;
-                    end = start + offset;
-                }
-
-                start = 0;
-                offset--;
-                end = start + offset;
-            }
-
-
-            return maxSum;
-        }
-
-        public static int MaxSubArray_Brute(int[] nums)
-        {
-            int maxSum = int.MinValue;
-            int currentSum;
-
-            for (int i = 0; i < nums.Length; i++)
-            {
-                int end = nums.Length - 1;
-
-                while (end >= i)
-                {
-                    currentSum = MaxSubArraySum(nums, i, end);
-
-                    if (currentSum > maxSum)
-                    {
-                        maxSum = currentSum;
-                    }
-
-                    end--;
-                }
-            }
-
-
-            return maxSum;
-        }
-
-        private static int MaxSubArraySum(int[] nums, int start, int end)
-        {
-            int currentSum = 0;
-
-            while (start <= end)
-            {
-                currentSum += nums[start];
-
-                start++;
-            }
-
-            return currentSum;
-        }
     }
 }
