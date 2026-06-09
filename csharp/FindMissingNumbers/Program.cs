@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace FindMissingNumbers
+﻿namespace FindMissingNumbers
 {
     class Program
     {

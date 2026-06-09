@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BinTreeAsArrayFindLargestBranch
+﻿namespace BinTreeAsArrayFindLargestBranch
 {
     class Program
     {

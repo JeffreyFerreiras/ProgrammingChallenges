@@ -42,8 +42,6 @@ Constraints:
 tokens[i] is either an operator: "+", "-", "*", or "/", or an integer in the range [-200, 200].
 */
 
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 
 namespace EvaluateReversePolishNotation;

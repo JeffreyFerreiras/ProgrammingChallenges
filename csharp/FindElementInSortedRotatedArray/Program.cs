@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics; // Import Stopwatch
+﻿using System.Diagnostics; // Import Stopwatch
 
 namespace FindElementInSortedRotatedArray
 {

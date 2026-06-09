@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace HappyNumbers
+﻿namespace HappyNumbers
 {
     /*
 Programming Challenge Description:

@@ -31,8 +31,6 @@ Constraints:
 Only one valid answer exists.
 */
 
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 
 namespace _2Sum;

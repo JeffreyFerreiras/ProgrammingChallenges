@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LinkedList_OddEvenList
+﻿namespace LinkedList_OddEvenList
 {
     internal class Program
     {

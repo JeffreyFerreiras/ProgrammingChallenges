@@ -17,9 +17,6 @@ Constraints:
 1 <= n <= 8
 */
 
-using System;
-using System.Collections.Generic;
-
 namespace GenerateParentheses;
 
 public class Solution

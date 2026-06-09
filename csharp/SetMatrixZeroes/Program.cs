@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SetMatrixZeroes
+﻿namespace SetMatrixZeroes
 {
     class Program
     {

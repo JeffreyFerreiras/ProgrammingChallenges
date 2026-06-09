@@ -1,5 +1,4 @@
-﻿using System;
-namespace TimeConversion
+﻿namespace TimeConversion
 {
     class Program
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace IsPalindrom2
+﻿namespace IsPalindrom2
 {
     class Program
     {

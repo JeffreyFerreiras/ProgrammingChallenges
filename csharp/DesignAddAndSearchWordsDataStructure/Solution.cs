@@ -1,5 +1,3 @@
-using System.Data.Common;
-
 namespace DesignAddAndSearchWordsDataStructure;
 
 public class Solution

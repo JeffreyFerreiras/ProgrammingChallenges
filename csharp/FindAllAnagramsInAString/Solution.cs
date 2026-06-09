@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace FindAllAnagramsInAString;
+﻿namespace FindAllAnagramsInAString;
 
 public class Solution
 {

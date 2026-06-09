@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace LongestRepeatingCharacterReplacement;
+﻿namespace LongestRepeatingCharacterReplacement;
 
 public class Solution
 {

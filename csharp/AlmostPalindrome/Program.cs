@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AlmostPalindrome
+﻿namespace AlmostPalindrome
 {
     class Program
     {

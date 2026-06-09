@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BigSorting
+﻿namespace BigSorting
 {
     class Program
     {

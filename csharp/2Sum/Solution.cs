@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace _2Sum;
 
 public class Solution

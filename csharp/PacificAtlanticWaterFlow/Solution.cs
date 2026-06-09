@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace PacificAtlanticWaterFlow;
 
 public class Solution

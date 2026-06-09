@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace BinaryTreeRightSideView;
+﻿namespace BinaryTreeRightSideView;
 
 public class TreeNode(int val, TreeNode? left = null, TreeNode? right = null)
 {

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace AmazonEmployeeShift
 {
     public class Task(int minSkill, int hours)

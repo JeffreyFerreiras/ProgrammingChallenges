@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LeftRotation
+﻿namespace LeftRotation
 {
     class Program
     {

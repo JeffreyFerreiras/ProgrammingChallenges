@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace _3Sum
+﻿namespace _3Sum
 {
     /*
     Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] 

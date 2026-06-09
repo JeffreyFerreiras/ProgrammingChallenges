@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace LongestSubstringWithoutRepeatingCharacters;
+﻿namespace LongestSubstringWithoutRepeatingCharacters;
 
 public class Solution
 {

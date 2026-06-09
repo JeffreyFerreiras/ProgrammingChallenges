@@ -24,8 +24,6 @@
  *    Output: 0 (no swaps needed)
  */
 
-using System;
-
 namespace MinimumSwaps
 {
     class Program

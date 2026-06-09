@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace LinkedList_DetectCycle
+﻿namespace LinkedList_DetectCycle
 {
     public class Node
     {

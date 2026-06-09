@@ -1,5 +1,4 @@
-﻿using System;
-namespace Palindrome_Permutations
+﻿namespace Palindrome_Permutations
 {
     class Program
     {

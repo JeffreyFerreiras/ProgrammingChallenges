@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace BinaryTreeLevelOrderTraversalNeetCode;
+﻿namespace BinaryTreeLevelOrderTraversalNeetCode;
 
 public class TreeNode(int val, TreeNode? left = null, TreeNode? right = null)
 {

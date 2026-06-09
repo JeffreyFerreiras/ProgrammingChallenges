@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace IsUniqueString
+﻿namespace IsUniqueString
 {
     class Program
     {

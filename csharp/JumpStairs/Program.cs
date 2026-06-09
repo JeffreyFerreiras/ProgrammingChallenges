@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace JumpStairs
+﻿namespace JumpStairs
 {
     class Program
     {

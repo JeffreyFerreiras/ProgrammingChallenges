@@ -1,5 +1,3 @@
-using System;
-
 namespace ValidAnagram
 {
     /// <summary>

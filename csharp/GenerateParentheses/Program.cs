@@ -17,10 +17,7 @@ Constraints:
 1 <= n <= 8
 */
 
-using System;
-using System.Collections.Generic;
 using System.Text;
-using System.Text.Json;
 
 namespace GenerateParentheses;
 

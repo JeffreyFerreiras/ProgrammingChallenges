@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ShuffleDeckOfCards
+﻿namespace ShuffleDeckOfCards
 {
     class Program
     {
