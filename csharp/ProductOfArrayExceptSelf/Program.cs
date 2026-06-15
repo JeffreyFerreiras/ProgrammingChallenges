@@ -42,13 +42,13 @@ class Program
 
                     Console.WriteLine($"  {methodNames[index]}: " +
                                      (isCorrect ? "PASSED" : "FAILED") +
-                                     $" [{methodStopwatch.ElapsedMilliseconds} ms]");
+                                     $" [{methodStopwatch.ElapsedTicks} ticks]");
                     Console.WriteLine($"    Result: {string.Join(",", result.Take(Math.Min(5, result.Length)))}{(result.Length > 5 ? "..." : "")}");
                 }
                 catch (Exception ex)
                 {
                     methodStopwatch.Stop();
-                    Console.WriteLine($"  {methodNames[index]}: FAILED (Error) [{methodStopwatch.ElapsedMilliseconds} ms]");
+                    Console.WriteLine($"  {methodNames[index]}: FAILED (Error) [{methodStopwatch.ElapsedTicks} ticks]");
                     Console.WriteLine($"    Error: {ex.Message}");
                 }
             }

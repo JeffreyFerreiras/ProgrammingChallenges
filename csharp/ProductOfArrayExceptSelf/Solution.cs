@@ -11,8 +11,10 @@
             {
                 result[i] = product / nums[i];
             }
+
             return result;
         }
+
         public static int[] ProductExceptSelf_2025(int[] nums)
         {
             int[] result = new int[nums.Length];
@@ -127,7 +129,6 @@
         /// </summary>
         public static int[] ProductExceptSelf_Official(int[] nums)
         {
-
             var answer = Enumerable
                 .Repeat(1, nums.Length)
                 .ToArray();
@@ -149,63 +150,81 @@
             return answer;
         }
 
-        public static int[] ProductExceptSelf2(int[] nums)
+        /// <summary>
+        /// Some people's first attempt - brute force O(n^2) solution. Not efficient but works and is easy to understand.
+        /// In practice, this solution is very performant with the test cases provided, but it will struggle with larger inputs due to its O(n^2) time complexity. It's a good starting point for understanding the problem before optimizing.
+        /// </summary>
+        public static int[] ProductExceptSelf_2026(int [] nums)
         {
-            var result = new int[nums.Length];
+            int[] answer = new int[nums.Length];
 
             for (int i = 0; i < nums.Length; i++)
             {
-                int low = 0;
-                int high = i + 1;
-                int product;
-
-                if (i != 0 && result[i - 1] != 0)
-                {
-                    product = result[i - 1] * nums[i - 1];
-                    product = Divide(product, nums[i]);
-                }
-                else
-                {
-                    product = 1;
-
-                    while (low < i) product *= nums[low++];
-                    while (high > i && high < nums.Length) product *= nums[high++];
-                }
-
-                result[i] = product;
+                answer[i] = Mult(i);
             }
+            
+            return answer;
 
-            return result;
+            int Mult(int skipIndex)
+            {
+                int product = 1;
+                for (int j = 0; j < nums.Length; j++)
+                {
+                    if(j == skipIndex) continue;
+                    product *= nums[j];
+                }
+                return product;
+            }
         }
 
-        //write a method to divide two numbers
-        public static int Divide(int dividend, int divisor)
+        /// <summary>
+        /// What if we do one pass to multiply all the numbers together, and then a second pass to divide by each number? This is O(n) time but also O(1) space (ignoring the output array).
+        /// This is a common solution to this problem, but it has a major flaw: it doesn't handle zeros correctly. If there's a zero in the input array, the product will be zero and all results will be zero, which is not correct.
+        /// </summary>
+        /// <remarks>
+        /// The updated logic does the right thing:
+        /// - If there are 2+ zeros: return all zeros.
+        /// - If there is exactly 1 zero:
+        ///  - the zero position gets the product of all non-zero values
+        ///  - all other positions get zero.
+        /// - If there are no zeros: return product divided by each element.
+        /// </remarks>
+        public static int[] ProductExceptSelf_2026_Divide(int[] nums)
         {
-            if (divisor == 0) return 0;
-            if (dividend == 0) return 0;
-            if (dividend == divisor) return 1;
-            if (divisor == 1) return dividend;
-            if (divisor == -1) return -dividend;
+            int[] answer = new int[nums.Length];
+            int product = 1;
 
 
-            var isNegative = dividend < 0 && divisor > 0 || dividend > 0 && divisor < 0;
-
-            dividend = Math.Abs(dividend);
-            divisor = Math.Abs(divisor);
-
-            var result = 0;
-            while (dividend >= divisor)
+            int zeroCount = nums.Count(n => n == 0);
+            
+            if (zeroCount > 1)
             {
-                dividend -= divisor;
-                result++;
+                return answer; // all zeros
             }
 
-            if (isNegative)
+            for (int i = 0; i < nums.Length; i++)
             {
-                result = -result;
+                if (nums[i] == 0) continue; // skip the 1 zero
+                product *= nums[i];
             }
-            return result;
+
+            // if we get here, there are either 0 or 1 zeros in the input
+            // get the index of the zero (if it exists) and set that position
+            // to the product of all non-zero values, and all other positions to zero
+            int zeroIndex = Array.IndexOf(nums, 0);
+
+            if (zeroIndex != -1)
+            {
+                answer[zeroIndex] = product;
+                return answer; // all other positions are already zero
+            }
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                answer[i] = product / nums[i];
+            }
+
+            return answer;
         }
-
     }
 }
