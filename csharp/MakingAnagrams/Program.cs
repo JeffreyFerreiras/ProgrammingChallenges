@@ -14,6 +14,7 @@
 
             int deleteCount = GetExcludedCount(a, b);
             //expect 102
+            Console.WriteLine($"answer: {deleteCount}, expected: 102");
         }
 
         static int GetExcludedCount(string first, string second)

@@ -1,27 +1,32 @@
 ﻿using System.Numerics;
 
-namespace ExtraLongFactorial
+/*
+* You are given an integer N. Print the factorial of this number.
+*/
+
+Run(Factorial, nameof(Factorial));
+
+void Run(Func<BigInteger, BigInteger> calc, string methodName = "")
 {
-    class Program
+    var scenarios = new BigInteger[] { 5, 19, 25 };
+
+    Console.WriteLine($"Running {methodName} for scenarios: {string.Join(", ", scenarios)}");
+    foreach (var scenario in scenarios)
     {
-        /*
-         * You are given an integer N. Print the factorial of this number.
-         */
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+        var ans = calc(scenario);
 
-        static void Main(string[] args)
-        {
-            Console.WriteLine(Factorial(5));
-            Console.WriteLine(Factorial(19));
-            Console.WriteLine(Factorial(25));
-
-            Console.ReadLine();
-        }
-
-        static System.Numerics.BigInteger Factorial(BigInteger n)
-        {
-            if (n == 1) return n;
-
-            return n * Factorial(n - 1);
-        }
+        watch.Stop();
+        Console.WriteLine("-----------------------------");
+        Console.WriteLine($"Answer for {scenario}: {ans}");
+        Console.WriteLine($"Execution Time for {scenario}: {watch.Elapsed}");
     }
+}
+
+BigInteger Factorial(BigInteger n)
+{
+    if (n == 1)
+        return n;
+
+    return n * Factorial(n - 1);
 }

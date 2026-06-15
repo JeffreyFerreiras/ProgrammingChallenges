@@ -1,16 +1,18 @@
 # Extra Long Factorial
 
 ## Problem Description
+
 You are given an integer N. Print the factorial of this number.
 
-The factorial of a non-negative integer N, denoted by N!, is the product of all positive integers less than or equal to N. 
+The factorial of a non-negative integer N, denoted by N!, is the product of all positive integers less than or equal to N.
 
 For example, 5! = 5 × 4 × 3 × 2 × 1 = 120.
 
 The challenge here is to calculate factorial values for large integers that would normally cause integer overflow.
 
-## Examples:
-```
+## Examples
+
+```text
 Input: 5
 Output: 120
 
@@ -21,10 +23,12 @@ Input: 25
 Output: 15511210043330985984000000
 ```
 
-## Constraints:
+## Constraints
+
 - 1 ≤ N ≤ 100
 
 ## Solution Approach
+
 The solution uses C#'s BigInteger from the System.Numerics namespace to handle arbitrarily large integers:
 
 1. Implement a recursive factorial function using BigInteger
@@ -32,6 +36,7 @@ The solution uses C#'s BigInteger from the System.Numerics namespace to handle a
 3. Return the result as a BigInteger
 
 The recursive implementation is elegantly simple:
+
 - Base case: If N = 1, return 1
 - Recursive step: Return N * factorial(N-1)
 
