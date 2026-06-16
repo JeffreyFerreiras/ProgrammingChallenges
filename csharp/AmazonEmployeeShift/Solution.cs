@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+
 namespace AmazonEmployeeShift
 {
     public class Task(int minSkill, int hours)
@@ -8,86 +11,112 @@ namespace AmazonEmployeeShift
 
     public class Employee
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public int Skill { get; set; }
     }
 
     public class Solution
     {
-        public Employee[] Employees { get; set; }
+        public Employee[] Employees { get; set; } = [];
 
-        public IEnumerable<Employee> GreedyAssignment(Task[] tasks)
+        public int MinimumEmployeesRequired(Task[] tasks)
         {
-            const int maxHours = 8;
-
-            var result = new List<Employee>();
-
-            //take only 8 hours worth of tasks
-            if (tasks.Sum(t => t.Hours) > maxHours)
-            {
-                throw new InvalidOperationException($"Tasks exceed {maxHours} hours");
-            }
-
-            //sort employees by skill
-            Employees = [.. Employees.OrderBy(e => e.Skill)];
-
-            foreach (var task in tasks)
-            {
-                var employee = Employees.FirstOrDefault(e => e.Skill >= task.Skill)
-                    ?? throw new InvalidOperationException("No employee available for the task");
-
-                result.Add(employee);
-            }
-
-            return result;
+            return MinimumEmployeesRequired_BruteForce(tasks);
         }
 
-        // New method: OptimalAssignment assigns each task to a unique employee
-        public IEnumerable<Employee> OptimalAssignment(Task[] tasks)
+        public int MinimumEmployeesRequired_BruteForce(Task[] tasks)
         {
-            const int maxHours = 8;
-            if (tasks.Sum(t => t.Hours) > maxHours)
+            if (tasks == null || tasks.Length == 0)
             {
-                throw new InvalidOperationException($"Tasks exceed {maxHours} hours");
+                return 0;
             }
 
-            // Sort employees to try lower-skilled ones first
-            var sortedEmployees = Employees.OrderBy(e => e.Skill).ToArray();
-            int n = tasks.Length;
-            List<Employee> bestAssignment = null;
-            int bestCost = int.MaxValue;
-
-            // Recursive DFS to try unique assignments
-            void DFS(int idx, List<Employee> currentAssignment, bool[] used, int currentCost)
+            if (Employees == null || Employees.Length == 0)
             {
-                if (idx == n)
+                return -1;
+            }
+
+            var availableEmployees = Employees
+                .Where(e => e != null)
+                .OrderBy(e => e.Skill)
+                .ToArray();
+
+            if (availableEmployees.Length == 0)
+            {
+                return -1;
+            }
+
+            var sortedTasks = tasks
+                .Where(t => t != null)
+                .OrderByDescending(t => t.Hours)
+                .ThenByDescending(t => t.Skill)
+                .ToArray();
+
+            if (sortedTasks.Any(t => t.Hours > 8 || t.Hours <= 0))
+            {
+                return -1;
+            }
+
+            var currentHours = new int[availableEmployees.Length];
+            var currentEmployeeUsed = new bool[availableEmployees.Length];
+            var best = int.MaxValue;
+
+            void Search(int taskIndex, int usedEmployees)
+            {
+                if (usedEmployees >= best)
                 {
-                    if (currentCost < bestCost)
-                    {
-                        bestCost = currentCost;
-                        bestAssignment = [.. currentAssignment];
-                    }
                     return;
                 }
-                foreach (var (employee, i) in sortedEmployees.Select((emp, i) => (emp, i)))
+
+                if (taskIndex == sortedTasks.Length)
                 {
-                    if (!used[i] && employee.Skill >= tasks[idx].Skill)
+                    best = Math.Min(best, usedEmployees);
+                    return;
+                }
+
+                var task = sortedTasks[taskIndex];
+
+                for (var employeeIndex = 0; employeeIndex < availableEmployees.Length; employeeIndex++)
+                {
+                    if (!currentEmployeeUsed[employeeIndex])
                     {
-                        used[i] = true;
-                        currentAssignment.Add(employee);
-                        DFS(idx + 1, currentAssignment, used, currentCost + (employee.Skill - tasks[idx].Skill));
-                        currentAssignment.RemoveAt(currentAssignment.Count - 1);
-                        used[i] = false;
+                        continue;
                     }
+
+                    var employee = availableEmployees[employeeIndex];
+                    if (employee.Skill < task.Skill || currentHours[employeeIndex] + task.Hours > 8)
+                    {
+                        continue;
+                    }
+
+                    currentHours[employeeIndex] += task.Hours;
+                    Search(taskIndex + 1, usedEmployees);
+                    currentHours[employeeIndex] -= task.Hours;
+                }
+
+                for (var employeeIndex = 0; employeeIndex < availableEmployees.Length; employeeIndex++)
+                {
+                    if (currentEmployeeUsed[employeeIndex])
+                    {
+                        continue;
+                    }
+
+                    var employee = availableEmployees[employeeIndex];
+                    if (employee.Skill < task.Skill)
+                    {
+                        continue;
+                    }
+
+                    currentEmployeeUsed[employeeIndex] = true;
+                    currentHours[employeeIndex] = task.Hours;
+                    Search(taskIndex + 1, usedEmployees + 1);
+                    currentHours[employeeIndex] = 0;
+                    currentEmployeeUsed[employeeIndex] = false;
                 }
             }
 
-            DFS(0, [], new bool[sortedEmployees.Length], 0);
-            if (bestAssignment == null)
-            {
-                throw new InvalidOperationException("No valid optimal assignment found");
-            }
-            return bestAssignment;
+            Search(0, 0);
+            return best == int.MaxValue ? -1 : best;
         }
     }
 }

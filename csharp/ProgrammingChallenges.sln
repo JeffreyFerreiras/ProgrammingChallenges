@@ -1,4 +1,5 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31815.197
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -311,6 +312,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImplementTrie", "ImplementTrie\ImplementTrie.csproj", "{CB38BDE5-2BB0-44DE-B185-215A38EA49DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignAddAndSearchWordsDataStructure", "DesignAddAndSearchWordsDataStructure\DesignAddAndSearchWordsDataStructure.csproj", "{4BFF2C99-1129-48A0-8489-0A92E29C21EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordSearchII", "WordSearchII\WordSearchII.csproj", "{8E90A179-A401-4210-9C04-171C651917AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -2182,6 +2185,18 @@ Global
 		{4BFF2C99-1129-48A0-8489-0A92E29C21EA}.Release|x64.Build.0 = Release|Any CPU
 		{4BFF2C99-1129-48A0-8489-0A92E29C21EA}.Release|x86.ActiveCfg = Release|Any CPU
 		{4BFF2C99-1129-48A0-8489-0A92E29C21EA}.Release|x86.Build.0 = Release|Any CPU
+		{8E90A179-A401-4210-9C04-171C651917AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E90A179-A401-4210-9C04-171C651917AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E90A179-A401-4210-9C04-171C651917AB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8E90A179-A401-4210-9C04-171C651917AB}.Debug|x64.Build.0 = Debug|Any CPU
+		{8E90A179-A401-4210-9C04-171C651917AB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8E90A179-A401-4210-9C04-171C651917AB}.Debug|x86.Build.0 = Debug|Any CPU
+		{8E90A179-A401-4210-9C04-171C651917AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E90A179-A401-4210-9C04-171C651917AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E90A179-A401-4210-9C04-171C651917AB}.Release|x64.ActiveCfg = Release|Any CPU
+		{8E90A179-A401-4210-9C04-171C651917AB}.Release|x64.Build.0 = Release|Any CPU
+		{8E90A179-A401-4210-9C04-171C651917AB}.Release|x86.ActiveCfg = Release|Any CPU
+		{8E90A179-A401-4210-9C04-171C651917AB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
