@@ -124,27 +124,24 @@
         }
 
         /// <summary>
-        /// Official LeetCode solution
+        /// Official LeetCode solution O(n) 
         /// JF 3/2025 - forgot about this! nice solution.
         /// </summary>
         public static int[] ProductExceptSelf_Official(int[] nums)
         {
-            var answer = Enumerable
-                .Repeat(1, nums.Length)
-                .ToArray();
+            var answer = Enumerable.Repeat(1, nums.Length).ToArray();
 
-            int left = 1,
-                right = 1;
+            int leftProduct = 1, rightProduct = 1;
 
             for (int i = 0, j = nums.Length - 1; i < nums.Length && j >= 0; i++, j--)
             {
                 // strong-side
-                answer[i] *= left;
-                left *= nums[i];
+                answer[i] *= leftProduct;
+                leftProduct *= nums[i];
 
                 // right-side
-                answer[j] *= right;
-                right *= nums[j];
+                answer[j] *= rightProduct;
+                rightProduct *= nums[j];
             }
 
             return answer;
