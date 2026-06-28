@@ -2,60 +2,89 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace WordSearchII
-{
-    public class Solution
-    {
-        public IList<string> FindWords(char[][] board, string[] words)
-        {
-            throw new NotImplementedException("Implement the trie-based solution here.");
-        }
+namespace WordSearchII;
 
-        public IList<string> FindWords_BruteForce(char[][] board, string[] words)
+public class Solution
+{
+    public class TrieNode(char value)
+    {
+        public Dictionary<char, TrieNode> Trie = [];
+
+        public bool IsWord {get; set;}
+
+        public char Value {get; private set; } = value;
+
+        void AddWord(string word)
         {
-            if (board == null || board.Length == 0 || words == null || words.Length == 0)
+            if(string.IsNullOrEmpty(word))
             {
-                return Array.Empty<string>();
+                return;
             }
 
-            var rows = board.Length;
-            var cols = board[0].Length;
-            var matches = new HashSet<string>(StringComparer.Ordinal);
+            Value = word[0];
 
-            foreach (var word in words.Where(w => !string.IsNullOrWhiteSpace(w)))
+            foreach(char character in word[1..])
             {
-                if (word.Length == 0)
-                {
-                    continue;
-                }
+                Trie[character] = new TrieNode(character);
+                Trie[character].AddWord(word[1..]);
+            }
 
-                for (var row = 0; row < rows; row++)
+            if(Trie.Count == 0) // No more characters to add, mark this node as a complete word
+            {
+                IsWord = true;
+            }
+        }
+    }
+
+    public IList<string> FindWords(char[][] board, string[] words)
+    {
+        throw new NotImplementedException("Implement the trie-based solution here.");
+    }
+
+    public IList<string> FindWords_BruteForce(char[][] board, string[] words)
+    {
+        if (board == null || board.Length == 0 || words == null || words.Length == 0)
+        {
+            return Array.Empty<string>();
+        }
+
+        var rows = board.Length;
+        var cols = board[0].Length;
+        var matches = new HashSet<string>(StringComparer.Ordinal);
+
+        foreach (var word in words.Where(w => !string.IsNullOrWhiteSpace(w)))
+        {
+            if (word.Length == 0)
+            {
+                continue;
+            }
+
+            for (var row = 0; row < rows; row++)
+            {
+                for (var col = 0; col < cols; col++)
                 {
-                    for (var col = 0; col < cols; col++)
+                    if (board[row][col] != word[0])
                     {
-                        if (board[row][col] != word[0])
-                        {
-                            continue;
-                        }
-
-                        if (Search(board, row, col, word, 0, new bool[rows, cols]))
-                        {
-                            matches.Add(word);
-                            break;
-                        }
+                        continue;
                     }
 
-                    if (matches.Contains(word))
+                    if (Search(board, row, col, word, 0, new bool[rows, cols]))
                     {
+                        matches.Add(word);
                         break;
                     }
                 }
-            }
 
-            return matches.OrderBy(word => word).ToList();
+                if (matches.Contains(word))
+                {
+                    break;
+                }
+            }
         }
 
-        private static bool Search(char[][] board, int row, int col, string word, int index, bool[,] visited)
+        return matches.OrderBy(word => word).ToList();
+    
+        static bool Search(char[][] board, int row, int col, string word, int index, bool[,] visited)
         {
             if (index == word.Length)
             {
