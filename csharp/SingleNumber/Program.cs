@@ -1,41 +1,62 @@
-﻿namespace SingleNumber
+﻿using System.Diagnostics;
+using System.Reflection;
+
+namespace SingleNumber;
+
+class Program
 {
-    class Program
+    static readonly (int[] Input, int Expected)[] Scenarios =
+    [
+        ([2, 2, 1],          1),
+        ([4, 1, 2, 1, 2],   4),
+        ([1],                1),
+        ([2, 2, 1, 1, 3],   3),
+        ([-1, -1, -2],      -2),
+        ([0, 0, 5],          5),
+    ];
+
+    static void Main(string[] args)
     {
-        // Find non-repeated number [2,2,1,1,3] ans: 3
+        var solution = new Solution();
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Public | BindingFlags.Instance)
+            .Where(m => m.ReturnType == typeof(int)
+                     && m.GetParameters() is [{ ParameterType: { } t } p] && t == typeof(int[]))
+            .ToArray();
 
-        static void Main(string[] args)
+        foreach (var method in methods)
         {
-            Console.WriteLine("Hello World!");
-        }
+            Console.WriteLine($"\n=== {method.Name} ===");
+            bool allPassed = true;
 
-        public static int SingleNumber(int[] nums)
-        {
-            if (nums.Length == 1)
+            foreach (var (input, expected) in Scenarios)
             {
-                return nums.First();
+                int actual;
+                bool skipped = false;
+
+                var sw = Stopwatch.StartNew();
+                try
+                {
+                    actual = (int)method.Invoke(solution, [(int[])input.Clone()])!;
+                }
+                catch (TargetInvocationException ex) when (ex.InnerException is NotImplementedException)
+                {
+                    Console.WriteLine($"  [{string.Join(", ", input),-20}]  SKIPPED (not implemented)");
+                    skipped = true;
+                    actual = 0;
+                }
+                sw.Stop();
+
+                if (skipped) continue;
+
+                bool passed = actual == expected;
+                allPassed &= passed;
+                string status = passed ? "✅ PASS" : "❌ FAIL";
+                Console.WriteLine($"  [{string.Join(", ", input),-20}]  got={actual,5}  exp={expected,5}  {status}  ({sw.Elapsed.TotalMicroseconds:F1} µs)");
             }
 
-            for (int i = 0; i < nums.Length - 1; i++)
-            {
-                if (nums[i] == -1) continue;
-
-                int j = i + 1;
-
-                while (j < nums.Length - 1 && nums[j] != nums[i])
-                {
-                    j++;
-                }
-
-                if (nums[j] != nums[i])
-                {
-                    return nums[i];
-                }
-
-                nums[j] = -1;
-            }
-
-            return nums.Last();
+            if (allPassed)
+                Console.WriteLine("  All scenarios passed.");
         }
     }
 }
