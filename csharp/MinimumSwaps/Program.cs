@@ -1,77 +1,44 @@
-/*
- * MinimumSwaps Program
- * 
- * This program calculates the minimum number of swaps required to group all 1's together
- * in a binary array. The input is a sequence of 0s and 1s separated by spaces.
- * 
- * Examples:
- * 1. Simple case:
- *    Input:  1 0 1 0 1
- *    Output: 1 (result: 1 1 1 0 0)
- * 
- * 2. Already grouped:
- *    Input:  1 1 1 0 0
- *    Output: 0 (no swaps needed)
- * 
- * 3. Worst case:
- *    Input:  1 0 1 0 1 0
- *    Output: 2 (result: 1 1 1 0 0 0)
- * 
- * 4. All zeros or ones:
- *    Input:  0 0 0 0
- *    Output: 0 (no swaps needed)
- *    Input:  1 1 1 1
- *    Output: 0 (no swaps needed)
- */
+// Minimum Swaps - sliding window
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace MinimumSwaps
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            var solution = new Solution();
-            var stopwatch = new System.Diagnostics.Stopwatch();
-
-            // Test scenarios
-            var testCases = new[]
+            var scenarios = new[]
             {
-                new { Name = "Sample 1", Input = new[] { 1, 0, 1, 0, 1 }, Expected = 1 },
-                new { Name = "Sample 2", Input = new[] { 0, 0, 0, 1, 0 }, Expected = 0 },
-                new { Name = "Sample 3", Input = new[] { 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1 }, Expected = 3 },
-                new { Name = "Already grouped", Input = new[] { 1, 1, 1, 0, 0 }, Expected = 0 },
-                new { Name = "All zeros", Input = new[] { 0, 0, 0, 0 }, Expected = 0 },
-                new { Name = "All ones", Input = new[] { 1, 1, 1, 1 }, Expected = 0 }
+                new Scenario("Example 1", new[] { 1,0,1,0,1 }, 1),
+                new Scenario("Example 2", new[] { 0,0,0,1,0 }, 0),
+                new Scenario("Example 3", new[] { 1,0,1,0,1,0,0,1,1,0,1 }, 3),
+                new Scenario("All ones", new[] { 1,1,1 }, 0),
             };
-
-            Console.WriteLine("Running test scenarios...\n");
-
-            foreach (var test in testCases)
-            {
-                stopwatch.Restart();
-                var result = solution.MinSwaps(test.Input);
-                stopwatch.Stop();
-
-                Console.WriteLine($"Test: {test.Name}");
-                Console.WriteLine($"Input: {string.Join(" ", test.Input)}");
-                Console.WriteLine($"Expected: {test.Expected} ✓");
-                Console.WriteLine($"Result: {result} {(result == test.Expected ? "✓" : "✗")}");
-                Console.WriteLine($"Time: {stopwatch.ElapsedTicks:N0} ticks ({stopwatch.ElapsedMilliseconds}ms)");
-                Console.WriteLine(new string('-', 50) + "\n");
-            }
-
-            // Interactive mode
-            Console.WriteLine("\nEnter your own test case:");
-            Console.WriteLine("Enter the binary array (0s and 1s) separated by spaces:");
-            string input = Console.ReadLine();
-            int[] binaryArray = Array.ConvertAll(input.Split(' '), int.Parse);
-
-            stopwatch.Restart();
-            int minimumSwaps = solution.MinSwaps(binaryArray);
-            stopwatch.Stop();
-
-            Console.WriteLine($"\nResult: {minimumSwaps}");
-            Console.WriteLine($"Time: {stopwatch.ElapsedTicks:N0} ticks ({stopwatch.ElapsedMilliseconds}ms)");
+            foreach (var scenario in scenarios) RunScenario(scenario);
+            Console.WriteLine();
         }
+        private static void RunScenario(Scenario scenario)
+        {
+            Console.WriteLine($"\n=== {scenario.Name} ===");
+            var solution = new Solution();
+            var methods = typeof(Solution).GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName).Where(m => m.GetParameters().Length == 1)
+                .Where(m => m.GetParameters()[0].ParameterType == typeof(int[])).Where(m => m.ReturnType == typeof(int))
+                .OrderBy(m => m.Name).ToArray();
+            foreach (var method in methods)
+            {
+                var sw = Stopwatch.StartNew(); object? result = null; Exception? ex = null;
+                try { result = method.Invoke(method.IsStatic ? null : solution, new object?[] { scenario.Data }); }
+                catch (Exception e) { ex = e; } finally { sw.Stop(); }
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
+                if (ex != null) { Console.WriteLine($"ERROR: {ex.GetBaseException().Message}"); continue; }
+                var actual = result?.ToString() ?? "null"; var expected = scenario.Expected.ToString();
+                Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "\u2705 PASS" : "\u274c FAIL")}");
+            }
+        }
+        private sealed record Scenario(string Name, int[] Data, int Expected);
     }
 }

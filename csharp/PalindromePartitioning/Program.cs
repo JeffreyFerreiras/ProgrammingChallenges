@@ -1,87 +1,70 @@
-﻿using System.Diagnostics;
-
-/*
- * LeetCode Problem 131 - Palindrome Partitioning
- * 
- * Given a string s, partition s such that every substring of the partition is a palindrome.
- * Return all possible palindrome partitioning of s.
- * 
- * Example 1:
- * Input: s = "aab"
- * Output: [["a","a","b"],["aa","b"]]
- * 
- * Example 2:
- * Input: s = "a"
- * Output: [["a"]]
- */
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 class Program
 {
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
-        Console.WriteLine("Palindrome Partitioning");
-        Console.WriteLine("======================");
-
-        var solution = new Solution();
-        var testCases = new Dictionary<string, IList<IList<string>>>
+        var scenarios = new[]
         {
-            { "aab", new List<IList<string>> { new List<string> { "a", "a", "b" }, new List<string> { "aa", "b" } } },
-            { "a", new List<IList<string>> { new List<string> { "a" } } },
-            { "bb", new List<IList<string>> { new List<string> { "b", "b" }, new List<string> { "bb" } } },
-            // Adding a longer test case to better demonstrate the performance difference
-            { "aabbbaccccdd", null } // We're only interested in performance for this one
+            new Scenario("aab", "aab", "[[a,a,b],[aa,b]]"),
+            new Scenario("a",   "a",   "[[a]]"),
+            new Scenario("bb",  "bb",  "[[b,b],[bb]]"),
         };
 
-        foreach (var testCase in testCases)
-        {
-            var input = testCase.Key;
-            var expected = testCase.Value;
+        foreach (var scenario in scenarios)
+            RunScenario(scenario);
 
-            Console.WriteLine($"Input: \"{input}\"");
-
-            // Test original method
-            Stopwatch stopwatch1 = new();
-            stopwatch1.Start();
-            var result1 = solution.Partition(input);
-            stopwatch1.Stop();
-
-            Console.WriteLine($"Original Method:");
-            Console.WriteLine($"Time: {stopwatch1.ElapsedTicks} ticks");
-
-            // Test optimized method
-            Stopwatch stopwatch2 = new();
-            stopwatch2.Start();
-            var result2 = solution.PartitionOptimized(input);
-            stopwatch2.Stop();
-
-            Console.WriteLine($"Optimized Method:");
-            Console.WriteLine($"Time: {stopwatch2.ElapsedTicks} ticks");
-            Console.WriteLine($"Performance improvement: {(stopwatch1.ElapsedTicks / (double)stopwatch2.ElapsedTicks):F2}x");
-
-            // For shorter strings, validate the results match
-            if (expected != null)
-            {
-                Console.WriteLine($"Result: {FormatResult(result2)}");
-                Console.WriteLine($"Expected: {FormatResult(expected)}");
-            }
-            else
-            {
-                Console.WriteLine($"Partitions found: {result2.Count}");
-            }
-            Console.WriteLine();
-        }
+        Console.WriteLine();
     }
 
-    private static string FormatResult(IList<IList<string>> result)
+    private static void RunScenario(Scenario scenario)
     {
-        if (result == null) return "null";
+        Console.WriteLine($"\n=== {scenario.Name} ===");
 
-        var outerList = new List<string>();
-        foreach (var innerList in result)
+        var solution = new Solution();
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length == 1)
+            .Where(m => m.GetParameters()[0].ParameterType == typeof(string))
+            .Where(m => m.ReturnType == typeof(IList<IList<string>>))
+            .OrderBy(m => m.Name)
+            .ToArray();
+
+        foreach (var method in methods)
         {
-            outerList.Add("[" + string.Join(",", innerList.Select(s => $"\"{s}\"")) + "]");
-        }
+            var stopwatch = Stopwatch.StartNew();
+            object? result = null;
+            Exception? exception = null;
 
-        return "[" + string.Join(",", outerList) + "]";
+            try
+            {
+                result = method.Invoke(solution, new object?[] { scenario.S });
+            }
+            catch (Exception ex) { exception = ex; }
+            finally { stopwatch.Stop(); }
+
+            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
+
+            if (exception != null)
+            {
+                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
+                continue;
+            }
+
+            var actual = FormatResult((IList<IList<string>>)result!);
+            Console.WriteLine($"{actual} | Expected {scenario.Expected} | {(actual == scenario.Expected ? "✅ PASS" : "❌ FAIL")}");
+        }
     }
+
+    private static string FormatResult(IList<IList<string>> parts) =>
+        "[" + string.Join(",", parts
+            .Select(p => "[" + string.Join(",", p) + "]")
+            .OrderBy(s => s)) + "]";
+
+    private sealed record Scenario(string Name, string S, string Expected);
 }

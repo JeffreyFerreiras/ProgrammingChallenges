@@ -1,108 +1,60 @@
-﻿// using System;
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-//original
-// // To execute C#, please define "static void Main" on a class
-// // named Solution.
-// //Jeffrey
-// class Solution
-// {
-//     static void Main(string[] args)
-//     {
-//         for (var i = 0; i < 5; i++)
-//         {
-//             Console.WriteLine("Hello, World");
-//         }
-//     }
+class Program
+{
+    private static void Main(string[] args)
+    {
+        Console.WriteLine("Meta March 2025\n");
 
-//     void Run()
-//     {
+        var solution = new RefinedSolution();
 
-//     }
-//     //approach 1
-//     private int FindKth(int[] arr, int k)
-//     {
-//         // 2
-//         Array.Sort(arr); // nlogn - run time
-//         return arr[(arr.Length - 1) - k];
-//     }
+        var scenarios = new[]
+        {
+            new Scenario("[-1,1,3,4,-2] k=1", new[] { -1,1,3,4,-2 }, 1, 4),
+            new Scenario("[-1,1,3,4,-2] k=2", new[] { -1,1,3,4,-2 }, 2, 3),
+            new Scenario("[5,10,15,20,25] k=2", new[] { 5,10,15,20,25 }, 2, 20),
+            new Scenario("[100,50,25,75] k=2",   new[] { 100,50,25,75 }, 2, 75),
+        };
 
-//     private int FindKth(int[] arr, int k)
-//     {
-//         // 2
-//         // n * log (size of queue) = n * log (k)
-//         var priorityQueue = new PriorityQueue<int, int>();
+        var methods = typeof(RefinedSolution)
+            .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length == 2)
+            .Where(m => m.GetParameters()[0].ParameterType == typeof(int[]))
+            .Where(m => m.GetParameters()[1].ParameterType == typeof(int))
+            .Where(m => m.ReturnType == typeof(int))
+            .OrderBy(m => m.Name)
+            .ToArray();
 
-//         foreach (var elem in arr)
-//         {
-//             if (priorityQueue.Count >= k)
-//             {
-//                 var high = priorityQueue.Peek();
-//                 if (elem > high)
-//                 {
-//                     priorityQueue.Enqueue(elem, elem);
-//                     priorityQueue.Dequeue();
-//                 }
-//             }
-//             else
-//             {
-//                 priorityQueue.Enqueue(elem, elem); // nlogn
-//             }
-//         }
-//         return priorityQueue.Peek();
+        foreach (var scenario in scenarios)
+        {
+            Console.WriteLine($"\n=== {scenario.Name} ===");
 
-//         // for(int i = 0; i < k; i++){
-//         //     (int value, int rank) = priorityQueue.Dequeu();
-//         //     if(rank == (arr.Length - k)){
-//         //         return value;
-//         //     }
-//         // }
+            foreach (var method in methods)
+            {
+                var sw = Stopwatch.StartNew();
+                object? result = null;
+                Exception? exception = null;
 
-//         // return -1;
-//     }
+                try { result = method.Invoke(solution, new object?[] { (int[])scenario.Nums.Clone(), scenario.K }); }
+                catch (Exception ex) { exception = ex; }
+                finally { sw.Stop(); }
 
-//     private Dictionary<int, int[]> Clone(Dictionary<int, int[]> input)
-//     {
-//         Dictionary<int, int[]> clone = [];
-//         foreach (var val in input)
-//         {
-//             if (!clone.ContainsKey(val.key))
-//             {
-//                 var cloneArr = new int[val.Value.Length];
-//                 for (int i = 0; i < val.Value.Length; i++)
-//                 {
-//                     cloneArr[i] = val.Value[i];
-//                 }
-//                 clone.Add(val.Key, cloneArr);
-//             }
-//         }
-//         // { 1':[2']; 2'':[1'']}
-//         return clone;
-//     }
-// }
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
 
+                if (exception != null) { Console.WriteLine($"ERROR: {exception.GetBaseException().Message}"); continue; }
 
-// // Your previous Plain Text content is preserved below:
+                var actual = result!.ToString()!;
+                var expected = scenario.Expected.ToString();
+                Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "✅ PASS" : "❌ FAIL")}");
+            }
+        }
 
-// // Welcome to Meta!
+        Console.WriteLine();
+    }
 
-// // This is just a simple shared plaintext pad, with no execution capabilities.
-
-// // When you know what language you would like to use for your interview,
-// // simply choose it from the dropdown in the left bar.
-
-// // Enjoy your interview!
-
-// // Find the kth largest element in an array
-// // array = [-1,1,3,4,-2], 1st largest element = 4, 4th largest = -1. Assume there is no duplicate element. 
-
-// // 1-2, 1-2-3
-// // {
-// //     node: arry[neighbour_nodes]
-// // }
-// // 1-2 -> 1'-2'
-// // {
-// //     1:[2]
-// //     2:[1]
-// // }
-// // nodes, neighbours for each node; 
-// // G
+    private sealed record Scenario(string Name, int[] Nums, int K, int Expected);
+}

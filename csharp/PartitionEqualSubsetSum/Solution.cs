@@ -4,10 +4,27 @@ public class Solution
 {
     /// <summary>
     /// Determines whether the array can be partitioned into two subsets with equal sum.
-    /// TODO: Use subset-sum style dynamic programming to check reachability of half the total.
     /// </summary>
     public bool CanPartition(int[] nums)
     {
-        return false;
+        var sum = nums.Sum();
+        if (sum % 2 != 0)
+        {
+            return false;
+        }
+
+        var target = sum / 2;
+        var reachable = new bool[target + 1];
+        reachable[0] = true;
+
+        foreach (var num in nums)
+        {
+            for (var total = target; total >= num; total--)
+            {
+                reachable[total] = reachable[total] || reachable[total - num];
+            }
+        }
+
+        return reachable[target];
     }
 }

@@ -1,82 +1,86 @@
-﻿using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace CountGoodNodesInBinaryTree;
 
-internal static class Program
+internal class Program
 {
-    private static void Main()
+    private static void Main(string[] args)
     {
-        Console.WriteLine("Count Good Nodes in Binary Tree");
-        Console.WriteLine(new string('=', 32) + "\n");
-
-        var solution = new Solution();
-
         var scenarios = new[]
         {
-            (Name: "Example 1", Values: new int?[] { 3, 1, 4, 3, null, 1, 5 }, Expected: 4),
-            (Name: "Example 2", Values: [3, 3, null, 4, 2], Expected: 3),
-            (Name: "Example 3", Values: [1], Expected: 1),
-            (Name: "Strictly Decreasing", Values: [5, 4, null, 3, null, 2, null, 1], Expected: 1),
-            // Note: With this level-order array and BuildTree's indexing, the reachable chain is 1 -> 2 -> 4; expected good nodes = 3
-            (Name: "Strictly Increasing", Values: [1, null, 2, null, 3, null, 4], Expected: 3),
-            (Name: "Mixed Values", Values: [2, 2, 2, 1, 3, 2, 5], Expected: 6),
-            (Name: "Large Balanced", Values: [7, 3, 9, 3, 5, 9, 10, 3, null, null, 6, null, null, 10, 11], Expected: 6)
+            new Scenario("Example 1 [3,1,4,3,null,1,5]", BuildTree(new int?[]{3,1,4,3,null,1,5}), 4),
+            new Scenario("Example 2 [3,3,null,4,2]",     BuildTree(new int?[]{3,3,null,4,2}),     3),
+            new Scenario("Single node [1]",               BuildTree(new int?[]{1}),                1),
+            new Scenario("Mixed [2,2,2,1,3,2,5]",        BuildTree(new int?[]{2,2,2,1,3,2,5}),    6),
         };
 
         foreach (var scenario in scenarios)
-        {
-            var root = BuildTree(scenario.Values);
+            RunScenario(scenario);
 
-            var stopwatch = Stopwatch.StartNew();
-            var result = solution.GoodNodes(root);
-            stopwatch.Stop();
-
-            Console.WriteLine($"Scenario: {scenario.Name}");
-            Console.WriteLine($"Method: {nameof(Solution.GoodNodes)}");
-            Console.WriteLine($"Result: {result}, Expected: {scenario.Expected}");
-            Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine(new string('-', 60));
-        }
+        Console.WriteLine();
     }
 
-    private static TreeNode? BuildTree(IReadOnlyList<int?> values)
+    private static void RunScenario(Scenario scenario)
     {
-        if (values.Count == 0)
-        {
-            return null;
-        }
+        Console.WriteLine($"\n=== {scenario.Name} ===");
 
-        var nodes = new TreeNode?[values.Count];
-        for (var i = 0; i < values.Count; i++)
+        var solution = new Solution();
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length == 1)
+            .Where(m => m.GetParameters()[0].ParameterType == typeof(TreeNode).MakeByRefType() ||
+                        m.GetParameters()[0].ParameterType == typeof(TreeNode))
+            .Where(m => m.ReturnType == typeof(int))
+            .OrderBy(m => m.Name)
+            .ToArray();
+
+        foreach (var method in methods)
         {
-            if (values[i].HasValue)
+            var stopwatch = Stopwatch.StartNew();
+            object? result = null;
+            Exception? exception = null;
+
+            try
             {
-                nodes[i] = new TreeNode(values[i]!.Value);
+                result = method.Invoke(solution, new object?[] { scenario.Root });
             }
-        }
+            catch (Exception ex) { exception = ex; }
+            finally { stopwatch.Stop(); }
 
-        for (var i = 0; i < values.Count; i++)
-        {
-            var current = nodes[i];
-            if (current is null)
+            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
+
+            if (exception != null)
             {
+                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
                 continue;
             }
 
-            var leftIndex = 2 * i + 1;
-            var rightIndex = 2 * i + 2;
-
-            if (leftIndex < values.Count)
-            {
-                current.Left = nodes[leftIndex];
-            }
-
-            if (rightIndex < values.Count)
-            {
-                current.Right = nodes[rightIndex];
-            }
+            var actual   = result!.ToString()!;
+            var expected = scenario.Expected.ToString();
+            Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "✅ PASS" : "❌ FAIL")}");
         }
+    }
 
+    private static TreeNode? BuildTree(int?[] values)
+    {
+        if (values.Length == 0) return null;
+        var nodes = new TreeNode?[values.Length];
+        for (int i = 0; i < values.Length; i++)
+            if (values[i].HasValue) nodes[i] = new TreeNode(values[i]!.Value);
+        for (int i = 0; i < values.Length; i++)
+        {
+            if (nodes[i] is null) continue;
+            int l = 2 * i + 1, r = 2 * i + 2;
+            if (l < values.Length) nodes[i]!.Left = nodes[l];
+            if (r < values.Length) nodes[i]!.Right = nodes[r];
+        }
         return nodes[0];
     }
+
+    private sealed record Scenario(string Name, TreeNode? Root, int Expected);
 }

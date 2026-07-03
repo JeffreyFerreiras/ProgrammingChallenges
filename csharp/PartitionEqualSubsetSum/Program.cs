@@ -1,47 +1,44 @@
-﻿using System.Diagnostics;
+// LeetCode 416 - Partition Equal Subset Sum
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-namespace PartitionEqualSubsetSum;
-
-internal static class Program
+namespace PartitionEqualSubsetSum
 {
-    private static void Main()
+    internal class Program
     {
-        Console.WriteLine("Partition Equal Subset Sum");
-        Console.WriteLine(new string('=', 30) + "\n");
-
-        var solution = new Solution();
-
-        var scenarios = new[]
+        private static void Main(string[] args)
         {
-            (Name: "Example 1", Nums: [1, 5, 11, 5], Expected: true),
-            (Name: "Example 2", Nums: [1, 2, 3, 5], Expected: false),
-            (Name: "Edge: Two Elements", Nums: [2, 2], Expected: true),
-            (Name: "Odd Sum", Nums: [1, 1, 3], Expected: false),
-            (Name: "Many Ones", Nums: BuildRepeated(20, 1), Expected: true),
-            (Name: "Large Input", Nums: BuildRepeated(30, 3), Expected: false)
-        };
-
-        foreach (var scenario in scenarios)
-        {
-            var stopwatch = Stopwatch.StartNew();
-            var result = solution.CanPartition(scenario.Nums);
-            stopwatch.Stop();
-
-            Console.WriteLine($"Scenario: {scenario.Name}");
-            Console.WriteLine($"Method: {nameof(Solution.CanPartition)}");
-            Console.WriteLine($"Input: nums = {FormatArray(scenario.Nums)}");
-            Console.WriteLine($"Result: {result}, Expected: {scenario.Expected}");
-            Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine(new string('-', 60));
+            var scenarios = new[]
+            {
+                new Scenario("Example 1", new[] { 1,5,11,5 }, true),
+                new Scenario("Example 2", new[] { 1,2,3,5 }, false),
+                new Scenario("All equal", new[] { 2,2,2,2 }, true),
+                new Scenario("Small true", new[] { 1,2,3 }, true),
+            };
+            foreach (var scenario in scenarios) RunScenario(scenario);
+            Console.WriteLine();
         }
+        private static void RunScenario(Scenario scenario)
+        {
+            Console.WriteLine($"\n=== {scenario.Name} ===");
+            var solution = new Solution();
+            var methods = typeof(Solution).GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName).Where(m => m.GetParameters().Length == 1)
+                .Where(m => m.GetParameters()[0].ParameterType == typeof(int[])).Where(m => m.ReturnType == typeof(bool))
+                .OrderBy(m => m.Name).ToArray();
+            foreach (var method in methods)
+            {
+                var sw = Stopwatch.StartNew(); object? result = null; Exception? ex = null;
+                try { result = method.Invoke(method.IsStatic ? null : solution, new object?[] { scenario.Nums }); }
+                catch (Exception e) { ex = e; } finally { sw.Stop(); }
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
+                if (ex != null) { Console.WriteLine($"ERROR: {ex.GetBaseException().Message}"); continue; }
+                var actual = result?.ToString() ?? "null"; var expected = scenario.Expected.ToString();
+                Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "\u2705 PASS" : "\u274c FAIL")}");
+            }
+        }
+        private sealed record Scenario(string Name, int[] Nums, bool Expected);
     }
-
-    private static int[] BuildRepeated(int count, int value)
-    {
-        var result = new int[count];
-        Array.Fill(result, value);
-        return result;
-    }
-
-    private static string FormatArray(int[] values) => "[" + string.Join(",", values) + "]";
 }

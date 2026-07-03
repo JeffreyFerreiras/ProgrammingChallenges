@@ -1,73 +1,73 @@
-﻿using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-namespace CombinationSum
+namespace CombinationSum;
+
+internal class Program
 {
-    public class Program
+    private static void Main(string[] args)
     {
-        /*
-         * Leetcode 39. Combination Sum
-         * 
-         * Given an array of distinct integers candidates and a target integer target,
-         * return a list of all unique combinations of candidates where the chosen numbers sum to target.
-         * You may return the combinations in any order.
-         * 
-         * The same number may be chosen from candidates an unlimited number of times. 
-         * Two combinations are unique if the frequency of at least one of the chosen numbers is different.
-         * 
-         * It is guaranteed that the number of unique combinations that sum up to target is less than 150 combinations for the given input.
-         * 
-         * Constraints:
-         * 1 <= candidates.length <= 30
-         * 1 <= candidates[i] <= 200
-         * All elements of candidates are distinct.
-         * 1 <= target <= 500
-         */
-        public static void Main(string[] args)
+        var scenarios = new[]
         {
-            Console.WriteLine("Leetcode 39. Combination Sum");
-            Console.WriteLine("----------------------------");
+            new Scenario("[2,3,6,7] t=7", new int[]{2,3,6,7}, 7, "[[2,2,3],[7]]"),
+            new Scenario("[2,3,5] t=8",   new int[]{2,3,5},   8, "[[2,2,2,2],[2,3,3],[3,5]]"),
+            new Scenario("[2] t=1",        new int[]{2},        1, "[]"),
+        };
 
-            RunTestCase([2, 3, 6, 7], 7,
-            [
-                new List<int> { 2, 2, 3 },
-                new List<int> { 7 }
-            ]);
+        foreach (var scenario in scenarios)
+            RunScenario(scenario);
 
-            RunTestCase([2, 3, 5], 8,
-            [
-                new List<int> { 2, 2, 2, 2 },
-                new List<int> { 2, 3, 3 },
-                new List<int> { 3, 5 }
-            ]);
+        Console.WriteLine();
+    }
 
-            RunTestCase([2], 1, []);
-        }
+    private static void RunScenario(Scenario scenario)
+    {
+        Console.WriteLine($"\n=== {scenario.Name} ===");
 
-        private static void RunTestCase(int[] candidates, int target, IList<IList<int>> expected)
+        var solution = new Solution();
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length == 2)
+            .Where(m => m.GetParameters()[0].ParameterType == typeof(int[]))
+            .Where(m => m.GetParameters()[1].ParameterType == typeof(int))
+            .Where(m => m.ReturnType == typeof(IList<IList<int>>))
+            .OrderBy(m => m.Name)
+            .ToArray();
+
+        foreach (var method in methods)
         {
-            Console.WriteLine($"Test Case: candidates = [{string.Join(", ", candidates)}], target = {target}");
-            Console.WriteLine($"Expected: {FormatResult(expected)}");
+            var stopwatch = Stopwatch.StartNew();
+            object? result = null;
+            Exception? exception = null;
 
-            var solution = new Solution();
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-            var result = solution.CombinationSum(candidates, target);
-            stopwatch.Stop();
+            try
+            {
+                result = method.Invoke(solution, new object?[] { (int[])scenario.Candidates.Clone(), scenario.Target });
+            }
+            catch (Exception ex) { exception = ex; }
+            finally { stopwatch.Stop(); }
 
-            Console.WriteLine($"Result: {FormatResult(result)}");
-            Console.WriteLine($"Time elapsed: {stopwatch.ElapsedMilliseconds} ms ({stopwatch.ElapsedTicks} ticks)");
-            Console.WriteLine();
-        }
+            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
 
-        private static string FormatResult(IList<IList<int>> result)
-        {
-            if (result.Count == 0) return "[]";
+            if (exception != null)
+            {
+                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
+                continue;
+            }
 
-            var formattedCombinations = result
-                .Select(combo => $"[{string.Join(", ", combo)}]")
-                .ToArray();
-
-            return $"[{string.Join(", ", formattedCombinations)}]";
+            var actual = FormatResult((IList<IList<int>>)result!);
+            Console.WriteLine($"{actual} | Expected {scenario.Expected} | {(actual == scenario.Expected ? "✅ PASS" : "❌ FAIL")}");
         }
     }
+
+    private static string FormatResult(IList<IList<int>> lists) =>
+        "[" + string.Join(",", lists
+            .Select(inner => "[" + string.Join(",", inner.OrderBy(x => x)) + "]")
+            .OrderBy(s => s)) + "]";
+
+    private sealed record Scenario(string Name, int[] Candidates, int Target, string Expected);
 }

@@ -1,93 +1,70 @@
-﻿/*
-1. Two Sum
-Easy
-Topics
-Companies
-Hint
-Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
-You may assume that each input would have exactly one solution, and you may not use the same element twice.
-You can return the answer in any order.
-
-Example 1:
-
-Input: nums = [2,7,11,15], target = 9
-Output: [0,1]
-Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
-Example 2:
-
-Input: nums = [3,2,4], target = 6
-Output: [1,2]
-Example 3:
-
-Input: nums = [3,3], target = 6
-Output: [0,1]
- 
-
-Constraints:
-
-2 <= nums.length <= 104
--109 <= nums[i] <= 109
--109 <= target <= 109
-Only one valid answer exists.
-*/
-
-using System.Text.Json;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace _2Sum;
 
-class Program
+internal class Program
 {
     private static void Main(string[] args)
     {
-        var solution = new Solution();
-        var inputs = new List<KeyValuePair<int, int[]>>
+        var scenarios = new[]
         {
-            new(9, [2, 7, 11, 15]),
-            new(6, [3, 2, 4]),
-            new(6, [3, 3])
+            new Scenario("Scenario 1 - [2,7,11,15] t=9", new int[] { 2, 7, 11, 15 }, 9, new int[] { 0, 1 }),
+            new Scenario("Scenario 2 - [3,2,4] t=6",     new int[] { 3, 2, 4 },       6, new int[] { 1, 2 }),
+            new Scenario("Scenario 3 - [3,3] t=6",       new int[] { 3, 3 },           6, new int[] { 0, 1 }),
         };
 
-        foreach (var input in inputs)
+        foreach (var scenario in scenarios)
+            RunScenario(scenario);
+
+        Console.WriteLine();
+    }
+
+    private static void RunScenario(Scenario scenario)
+    {
+        Console.WriteLine($"\n=== {scenario.Name} ===");
+
+        var solution = new Solution();
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length == 2)
+            .Where(m => m.GetParameters()[0].ParameterType == typeof(int[]))
+            .Where(m => m.GetParameters()[1].ParameterType == typeof(int))
+            .Where(m => m.ReturnType == typeof(int[]))
+            .OrderBy(m => m.Name)
+            .ToArray();
+
+        foreach (var method in methods)
         {
-            //print the input
-            Console.WriteLine($@"{nameof(input)}	{JsonSerializer.Serialize(input)}");
-            ExecuteTwoSumBenchmark(solution, input.Key, input.Value);
-            //new line
-            Console.WriteLine();
+            var inputCopy = (int[])scenario.Input.Clone();
+            var stopwatch = Stopwatch.StartNew();
+            object? result = null;
+            Exception? exception = null;
+
+            try
+            {
+                result = method.Invoke(solution, new object?[] { inputCopy, scenario.Target });
+            }
+            catch (Exception ex) { exception = ex; }
+            finally { stopwatch.Stop(); }
+
+            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
+
+            if (exception != null)
+            {
+                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
+                continue;
+            }
+
+            var actual   = string.Join(",", (int[])result!);
+            var expected = string.Join(",", scenario.Expected);
+            Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "✅ PASS" : "❌ FAIL")}");
         }
     }
 
-    private static void ExecuteTwoSumBenchmark(Solution solution, int target, int[] arr)
-    {
-        var funcTwoSum = (int[] arr, int target) =>
-        {
-            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
-            var result = solution.TwoSum(arr, target);
-            stopwatch.Stop();
-            Console.WriteLine($@"{nameof(Solution.TwoSum)}	{stopwatch.ElapsedTicks} ticks");
-            return result;
-        };
-
-        var funcTwoSumMemoized = (int[] arr, int target) =>
-        {
-            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
-            var result = solution.TwoSumMemoized(arr, target);
-            stopwatch.Stop();
-            Console.WriteLine($@"{nameof(Solution.TwoSumMemoized)}	{stopwatch.ElapsedTicks} ticks");
-            return result;
-        };
-
-        var funcTwoSumBinarySearch = (int[] arr, int target) =>
-        {
-            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
-            var result = solution.TwoSumBinarySearch(arr, target);
-            stopwatch.Stop();
-            Console.WriteLine($@"{nameof(Solution.TwoSumBinarySearch)}	{stopwatch.ElapsedTicks} ticks");
-            return result;
-        };
-
-        Console.WriteLine($@"{nameof(Solution.TwoSum)}	{JsonSerializer.Serialize(funcTwoSum(arr, target))}");
-        Console.WriteLine($@"{nameof(Solution.TwoSumMemoized)}	{JsonSerializer.Serialize(funcTwoSumMemoized(arr, target))}");
-        Console.WriteLine($@"{nameof(Solution.TwoSumBinarySearch)}	{JsonSerializer.Serialize(funcTwoSumBinarySearch(arr, target))}");
-    }
+    private sealed record Scenario(string Name, int[] Input, int Target, int[] Expected);
 }

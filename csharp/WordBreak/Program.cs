@@ -1,41 +1,71 @@
-﻿using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace WordBreak;
 
-internal static class Program
+internal class Program
 {
-    private static void Main()
+    private static void Main(string[] args)
     {
-        Console.WriteLine("Word Break");
-        Console.WriteLine(new string('=', 10) + "\n");
-
-        var solution = new Solution();
-
         var scenarios = new[]
         {
-            (Name: "Example 1", S: "leetcode", Dict: new[] { "leet", "code" }, Expected: true),
-            (Name: "Example 2", S: "applepenapple", Dict: ["apple", "pen"], Expected: true),
-            (Name: "Example 3", S: "catsandog", Dict: ["cats", "dog", "sand", "and", "cat"], Expected: false),
-            (Name: "Edge: Single", S: "a", Dict: ["a"], Expected: true),
-            (Name: "Failure", S: "aaaaab", Dict: ["a", "aa", "aaa"], Expected: false),
-            (Name: "Long String", S: string.Concat(Enumerable.Repeat("leet", 5)), Dict: ["leet", "code"], Expected: true)
+            new Scenario("Example 1 leetcode",    "leetcode",    new[] { "leet","code" },              true),
+            new Scenario("Example 2 applepenapple","applepenapple",new[] { "apple","pen" },            true),
+            new Scenario("Example 3 catsandog",   "catsandog",   new[] { "cats","dog","sand","and","cat" }, false),
+            new Scenario("Edge single",            "a",           new[] { "a" },                        true),
+            new Scenario("Failure aaaaab",         "aaaaab",      new[] { "a","aa","aaa" },              false),
         };
 
         foreach (var scenario in scenarios)
-        {
-            var wordDict = (IList<string>)scenario.Dict;
-            var stopwatch = Stopwatch.StartNew();
-            var result = solution.WordBreak(scenario.S, wordDict);
-            stopwatch.Stop();
+            RunScenario(scenario);
 
-            Console.WriteLine($"Scenario: {scenario.Name}");
-            Console.WriteLine($"Method: {nameof(Solution.WordBreak)}");
-            Console.WriteLine($"Input: s = \"{scenario.S}\", wordDict = {FormatList(wordDict)}");
-            Console.WriteLine($"Result: {result}, Expected: {scenario.Expected}");
-            Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine(new string('-', 60));
+        Console.WriteLine();
+    }
+
+    private static void RunScenario(Scenario scenario)
+    {
+        Console.WriteLine($"\n=== {scenario.Name} ===");
+
+        var solution = new Solution();
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length == 2)
+            .Where(m => m.GetParameters()[0].ParameterType == typeof(string))
+            .Where(m => m.GetParameters()[1].ParameterType == typeof(IList<string>))
+            .Where(m => m.ReturnType == typeof(bool))
+            .OrderBy(m => m.Name)
+            .ToArray();
+
+        foreach (var method in methods)
+        {
+            var stopwatch = Stopwatch.StartNew();
+            object? result = null;
+            Exception? exception = null;
+
+            try
+            {
+                result = method.Invoke(solution, new object?[] { scenario.S, (IList<string>)scenario.WordDict.ToList() });
+            }
+            catch (Exception ex) { exception = ex; }
+            finally { stopwatch.Stop(); }
+
+            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
+
+            if (exception != null)
+            {
+                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
+                continue;
+            }
+
+            var actual   = result!.ToString()!;
+            var expected = scenario.Expected.ToString();
+            Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "✅ PASS" : "❌ FAIL")}");
         }
     }
 
-    private static string FormatList(IEnumerable<string> values) => "[" + string.Join(",", values.Select(v => $"\"{v}\"")) + "]";
+    private sealed record Scenario(string Name, string S, string[] WordDict, bool Expected);
 }

@@ -1,87 +1,70 @@
-﻿using System.Diagnostics;
-
-// See https://aka.ms/new-console-template for more information
-
-// Minimal graph node definition
-public class Node
-{
-    public int val;
-    public IList<Node> neighbors;
-    public Node(int _val)
-    {
-        val = _val;
-        neighbors = [];
-    }
-    public Node(int _val, IList<Node> _neighbors)
-    {
-        val = _val;
-        neighbors = _neighbors;
-    }
-}
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 class Program
 {
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
-        // Test scenario 1: Single node with no neighbors
-        // Node test1 = new Node(1);
-        // Node expected1 = new Node(1); // Expected deep copy
+        Console.WriteLine("133. Clone Graph\n");
 
-        // RunTest("CloneGraph_SingleNode", test1, expected1);
+        // Build test graph: 1-2-3-4-1 cycle
+        var n1 = new Node(1); var n2 = new Node(2); var n3 = new Node(3); var n4 = new Node(4);
+        n1.neighbors = new List<Node> { n2, n4 };
+        n2.neighbors = new List<Node> { n1, n3 };
+        n3.neighbors = new List<Node> { n2, n4 };
+        n4.neighbors = new List<Node> { n1, n3 };
 
-        // // Test scenario 2: Two connected nodes
-        // Node test2a = new Node(1);
-        // Node test2b = new Node(2);
-        // test2a.neighbors.Add(test2b);
-        // test2b.neighbors.Add(test2a);
-        // // For testing we assume expected graph structure similar to input.
-        // Node expected2 = test2a; 
+        var scenarios = new[]
+        {
+            ("4-node cycle", n1),
+            ("Single node", new Node(1)),
+            ("Null", (Node?)null),
+        };
 
-        // RunTest("CloneGraph_TwoNodes", test2a, expected2);
+        foreach (var (name, input) in scenarios)
+        {
+            Console.WriteLine($"\n=== {name} ===");
+            var sw = Stopwatch.StartNew();
+            Node? result = null;
+            Exception? exception = null;
 
-        // // Test scenario 3: Graph with cycle (4 nodes)
-        // Node cycA = new Node(1);
-        // Node cycB = new Node(2);
-        // Node cycC = new Node(3);
-        // Node cycD = new Node(4);
-        // cycA.neighbors.Add(cycB);
-        // cycB.neighbors.Add(cycC);
-        // cycC.neighbors.Add(cycD);
-        // cycD.neighbors.Add(cycA);
-        // RunTest("CloneGraph_Cycle", cycA, cycA);
+            try { result = Solution.CloneGraph(input!); }
+            catch (Exception ex) { exception = ex; }
+            finally { sw.Stop(); }
 
-        // // Test scenario 4: Graph with self-loop
-        // Node selfLoop = new Node(5);
-        // selfLoop.neighbors.Add(selfLoop);
-        // RunTest("CloneGraph_SelfLoop", selfLoop, selfLoop);
+            Console.Write($"CloneGraph | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
 
-        // // Test scenario 5: Null input
-        // RunTest("CloneGraph_NullInput", null, null);
+            if (exception != null) { Console.WriteLine($"ERROR: {exception.GetBaseException().Message}"); continue; }
 
-        // Test scenario 6: Adjacency List Matching
-        // adjList = [[2,4],[1,3],[2,4],[1,3]]
-        Node node1 = new(1);
-        Node node2 = new(2);
-        Node node3 = new(3);
-        Node node4 = new(4);
-        node1.neighbors.Add(node2);
-        node1.neighbors.Add(node4);
-        node2.neighbors.Add(node1);
-        node2.neighbors.Add(node3);
-        node3.neighbors.Add(node2);
-        node3.neighbors.Add(node4);
-        node4.neighbors.Add(node1);
-        node4.neighbors.Add(node3);
-        RunTest("CloneGraph_AdjList", node1, node1);
+            var originalStr = FormatGraph(input);
+            var cloneStr    = FormatGraph(result);
+            var notSameRef  = !ReferenceEquals(input, result);
+            Console.WriteLine($"Original: {originalStr} | Clone: {cloneStr} | Different ref: {notSameRef} | {(originalStr == cloneStr && notSameRef ? "✅ PASS" : "❌ FAIL")}");
+        }
+
+        Console.WriteLine();
     }
 
-    static void RunTest(string testName, Node input, Node expected)
+    private static string FormatGraph(Node? node)
     {
-        Console.WriteLine($"Test: {testName}");
-        Stopwatch sw = Stopwatch.StartNew();
-        Node result = Solution.CloneGraph(input);
-        sw.Stop();
-        long ticks = sw.ElapsedTicks;
-        Console.WriteLine($"Method: CloneGraph, Ticks: {ticks}, Result: {result?.val}, Expected: {expected?.val}");
+        if (node is null) return "null";
+        var visited = new HashSet<int>();
+        var parts = new List<string>();
+        var queue = new Queue<Node>();
+        queue.Enqueue(node);
+        visited.Add(node.val);
+        while (queue.Count > 0)
+        {
+            var curr = queue.Dequeue();
+            var neighborVals = string.Join(",", curr.neighbors.Select(n => n.val));
+            parts.Add($"{curr.val}:[{neighborVals}]");
+            foreach (var nb in curr.neighbors)
+                if (!visited.Contains(nb.val)) { visited.Add(nb.val); queue.Enqueue(nb); }
+        }
+        parts.Sort();
+        return "{" + string.Join(";", parts) + "}";
     }
 }

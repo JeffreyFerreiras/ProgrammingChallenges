@@ -4,10 +4,19 @@ public class Solution
 {
     /// <summary>
     /// Determines the minimum cost required to climb to the top given step costs.
-    /// TODO: Apply dynamic programming tracking the cheapest cumulative cost up to each step.
     /// </summary>
     public int MinCostClimbingStairs(int[] cost)
     {
-        return 0;
+        var twoStepsBack = 0;
+        var oneStepBack = 0;
+
+        for (var step = 2; step <= cost.Length; step++)
+        {
+            var current = Math.Min(oneStepBack + cost[step - 1], twoStepsBack + cost[step - 2]);
+            twoStepsBack = oneStepBack;
+            oneStepBack = current;
+        }
+
+        return oneStepBack;
     }
 }

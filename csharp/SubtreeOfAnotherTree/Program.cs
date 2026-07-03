@@ -1,121 +1,86 @@
-﻿using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace SubtreeOfAnotherTree;
 
-internal static class Program
+internal class Program
 {
-    private static void Main()
+    private static void Main(string[] args)
     {
-        Console.WriteLine("Subtree of Another Tree");
-        Console.WriteLine(new string('=', 26) + "\n");
-
-        var solution = new Solution();
-
         var scenarios = new[]
         {
-            (
-                Name: "Example 1",
-                Root: new int?[] { 3, 4, 5, 1, 2 },
-                SubRoot: new int?[] { 4, 1, 2 },
-                Expected: true
-            ),
-            (
-                Name: "Example 2",
-                Root: [3, 4, 5, 1, 2, null, null, null, null, 0],
-                SubRoot: [4, 1, 2],
-                Expected: false
-            ),
-            (Name: "Edge: Single Node Match", Root: [1], SubRoot: [1], Expected: true),
-            (Name: "Edge: Single Node Mismatch", Root: [1], SubRoot: [2], Expected: false),
-            (
-                Name: "Deep Candidate",
-                Root: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                SubRoot: [5, 10],
-                Expected: true
-            ),
-            (
-                Name: "Large Match",
-                Root: [4, 2, 6, 1, 3, 5, 7, null, null, null, null, null, null, null, 8],
-                SubRoot: [6, 5, 7],
-                Expected: false
-            ),
-            (
-                Name: "Custom: [3,4,5,1,2] vs [4,1,2]",
-                Root: [3, 4, 5, 1, 2],
-                SubRoot: [4, 1, 2],
-                Expected: true
-            ),
-            (Name: "Testcase: [1,1] vs [1]", Root: [1, 1], SubRoot: [1], Expected: true),
+            new Scenario("Example 1 [3,4,5,1,2] sub [4,1,2]",
+                BuildTree(new int?[]{3,4,5,1,2}), BuildTree(new int?[]{4,1,2}), true),
+            new Scenario("Example 2 with extra child",
+                BuildTree(new int?[]{3,4,5,1,2,null,null,null,null,0}), BuildTree(new int?[]{4,1,2}), false),
+            new Scenario("Single match [1] sub [1]",   BuildTree(new int?[]{1}), BuildTree(new int?[]{1}), true),
+            new Scenario("Single mismatch [1] sub [2]",BuildTree(new int?[]{1}), BuildTree(new int?[]{2}), false),
         };
 
         foreach (var scenario in scenarios)
-        {
-            var root = BuildTree(scenario.Root);
-            var subRoot = BuildTree(scenario.SubRoot);
+            RunScenario(scenario);
 
-            var stopwatch = Stopwatch.StartNew();
-            var result = solution.IsSubtree(root, subRoot);
-            stopwatch.Stop();
-
-            Console.WriteLine($"Scenario: {scenario.Name}");
-            Console.WriteLine($"Method: {nameof(Solution.IsSubtree)}");
-            Console.WriteLine($"Root: {FormatArray(scenario.Root)}");
-            Console.WriteLine($"SubRoot: {FormatArray(scenario.SubRoot)}");
-            var passMark = result == scenario.Expected ? " ✓" : string.Empty;
-            Console.WriteLine($"Result: {result}, Expected: {scenario.Expected}{passMark}");
-            Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine(new string('-', 60));
-        }
+        Console.WriteLine();
     }
 
-    private static TreeNode? BuildTree(IReadOnlyList<int?> values)
+    private static void RunScenario(Scenario scenario)
     {
-        if (values.Count == 0)
-        {
-            return null;
-        }
+        Console.WriteLine($"\n=== {scenario.Name} ===");
 
-        var nodes = new TreeNode?[values.Count];
-        for (var i = 0; i < values.Count; i++)
+        var solution = new Solution();
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length == 2)
+            .Where(m => m.ReturnType == typeof(bool))
+            .OrderBy(m => m.Name)
+            .ToArray();
+
+        foreach (var method in methods)
         {
-            if (values[i].HasValue)
+            var stopwatch = Stopwatch.StartNew();
+            object? result = null;
+            Exception? exception = null;
+
+            try
             {
-                nodes[i] = new TreeNode(values[i]!.Value);
+                result = method.Invoke(solution, new object?[] { scenario.Root, scenario.SubRoot });
             }
-        }
+            catch (Exception ex) { exception = ex; }
+            finally { stopwatch.Stop(); }
 
-        for (var i = 0; i < values.Count; i++)
-        {
-            var current = nodes[i];
-            if (current is null)
+            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
+
+            if (exception != null)
             {
+                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
                 continue;
             }
 
-            var leftIndex = 2 * i + 1;
-            var rightIndex = 2 * i + 2;
-
-            if (leftIndex < values.Count)
-            {
-                current.left = nodes[leftIndex];
-            }
-
-            if (rightIndex < values.Count)
-            {
-                current.right = nodes[rightIndex];
-            }
+            var actual   = result!.ToString()!;
+            var expected = scenario.Expected.ToString();
+            Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "✅ PASS" : "❌ FAIL")}");
         }
+    }
 
+    private static TreeNode? BuildTree(int?[] values)
+    {
+        if (values.Length == 0) return null;
+        var nodes = new TreeNode?[values.Length];
+        for (int i = 0; i < values.Length; i++)
+            if (values[i].HasValue) nodes[i] = new TreeNode(values[i]!.Value);
+        for (int i = 0; i < values.Length; i++)
+        {
+            if (nodes[i] is null) continue;
+            int l = 2 * i + 1, r = 2 * i + 2;
+            if (l < values.Length) nodes[i]!.left = nodes[l];
+            if (r < values.Length) nodes[i]!.right = nodes[r];
+        }
         return nodes[0];
     }
 
-    private static string FormatArray(IReadOnlyList<int?> values)
-    {
-        if (values.Count == 0)
-        {
-            return "[]";
-        }
-
-        return "[" + string.Join(",", values.Select(v => v?.ToString() ?? "null")) + "]";
-    }
+    private sealed record Scenario(string Name, TreeNode? Root, TreeNode? SubRoot, bool Expected);
 }

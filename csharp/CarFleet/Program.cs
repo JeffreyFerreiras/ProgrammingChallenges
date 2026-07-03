@@ -1,138 +1,73 @@
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
-using CarFleet;
 
-class Program
+namespace CarFleet;
+
+internal class Program
 {
-    delegate int SolutionMethod(int target, int[] position, int[] speed);
-
-    static void Main()
+    private static void Main(string[] args)
     {
-        Console.WriteLine("853. Car Fleet");
-        Console.WriteLine("===============\n");
-
-        // Discover public static methods returning int and taking (int, int[], int[])
-        MethodInfo[] methodsInfo =
-        [
-            .. typeof(Solution)
-                .GetMethods(BindingFlags.Public | BindingFlags.Static)
-                .Where(m =>
-                    m.ReturnType == typeof(int)
-                    && m.GetParameters().Length == 3
-                    && m.GetParameters()[0].ParameterType == typeof(int)
-                    && m.GetParameters()[1].ParameterType == typeof(int[])
-                    && m.GetParameters()[2].ParameterType == typeof(int[])
-                ),
-        ];
-
-        string[] methodNames = [.. methodsInfo.Select(m => m.Name)];
-        SolutionMethod[] methods =
-        [
-            .. methodsInfo.Select(m =>
-                (SolutionMethod)Delegate.CreateDelegate(typeof(SolutionMethod), m)
-            ),
-        ];
-
-        void Run(string name, int target, int[] position, int[] speed, int expected)
+        var scenarios = new[]
         {
-            Console.WriteLine($"Test: {name}");
-            Console.WriteLine(
-                $"  Input: target={target}, position=[{string.Join(",", position)}], speed=[{string.Join(",", speed)}]"
-            );
-            foreach (var (method, idx) in methods.Select((m, i) => (m, i)))
-            {
-                var sw = Stopwatch.StartNew();
-                try
-                {
-                    int result = method(target, position, speed);
-                    sw.Stop();
-                    bool ok = result == expected;
-                    string status = ok ? "✓ PASSED" : "✗ FAILED";
-                    Console.WriteLine(
-                        $"  {methodNames[idx]}: {status} [{sw.Elapsed.TotalMilliseconds:F4} ms]"
-                    );
-                    Console.WriteLine($"    Result: {result}, Expected: {expected}");
-                }
-                catch (NotImplementedException)
-                {
-                    sw.Stop();
-                    Console.WriteLine(
-                        $"  {methodNames[idx]}: ⚠ NOT IMPLEMENTED [{sw.Elapsed.TotalMilliseconds:F4} ms]"
-                    );
-                    Console.WriteLine($"    Expected: {expected}");
-                }
-                catch (Exception ex)
-                {
-                    sw.Stop();
-                    Console.WriteLine(
-                        $"  {methodNames[idx]}: ✗ ERROR [{sw.Elapsed.TotalMilliseconds:F4} ms]"
-                    );
-                    Console.WriteLine($"    Error: {ex.Message}");
-                }
-            }
-            Console.WriteLine();
-        }
+            new Scenario("Example 1", 12, new int[] { 10,8,0,5,3 },   new int[] { 2,4,1,1,3 }, 3),
+            new Scenario("Example 2", 10, new int[] { 3 },             new int[] { 3 },          1),
+            new Scenario("Example 3", 100, new int[] { 0,2,4 },        new int[] { 4,2,1 },      1),
+            new Scenario("Single",    10, new int[] { 5 },             new int[] { 2 },          1),
+            new Scenario("2 same fleet", 10, new int[] { 8,6 },        new int[] { 1,2 },        1),
+            new Scenario("2 sep fleets", 10, new int[] { 8,6 },        new int[] { 2,1 },        2),
+            new Scenario("All same speed", 100, new int[] { 10,20,30 },new int[] { 5,5,5 },      3),
+        };
 
-        // Example test cases
-        Run("Example 1", 12, [10, 8, 0, 5, 3], [2, 4, 1, 1, 3], 3);
-        Run("Example 2", 10, [3], [3], 1);
-        Run("Example 3", 100, [0, 2, 4], [4, 2, 1], 1);
+        foreach (var scenario in scenarios)
+            RunScenario(scenario);
 
-        // Edge cases
-        Run("Single car", 10, [5], [2], 1);
-        Run("Two cars same fleet", 10, [8, 6], [1, 2], 1);
-        Run("Two cars separate fleets", 10, [8, 6], [2, 1], 2);
-        Run("All same speed", 100, [10, 20, 30], [5, 5, 5], 3);
-
-        // Longer scenarios with 10+ cars
-        Run("Large convoy - all merge to one fleet",
-            1000,
-            [900, 800, 700, 600, 500, 400, 300, 200, 100, 50, 10],
-            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-            1);
-
-        Run("Multiple fleets - complex scenario",
-            100,
-            [90, 85, 80, 70, 60, 50, 40, 30, 20, 10, 5],
-            [1, 3, 2, 5, 4, 8, 6, 10, 9, 15, 12],
-            1);
-
-        Run("Highway traffic simulation",
-            500,
-            [450, 400, 350, 300, 250, 200, 150, 100, 80, 60, 40, 20, 10],
-            [2, 4, 3, 6, 5, 8, 7, 10, 12, 15, 18, 20, 25],
-            2);
-
-        Run("Rush hour - slow and fast lanes",
-            200,
-            [180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 70, 60, 50],
-            [1, 10, 2, 9, 3, 8, 4, 7, 5, 6, 11, 12, 13, 14],
-            1);
-
-        Run("Racing scenario - varying speeds",
-            1000,
-            [950, 900, 850, 800, 750, 700, 650, 600, 550, 500, 450, 400, 350, 300, 250],
-            [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75],
-            1);
-
-        Run("Complex merge patterns",
-            300,
-            [290, 280, 270, 250, 240, 220, 210, 200, 180, 170, 150, 140, 120, 100, 80, 60],
-            [2, 1, 4, 3, 6, 5, 8, 7, 10, 9, 12, 11, 14, 13, 16, 15],
-            2);
-
-        Run("Large scale test - 20 cars",
-            1000,
-            [950, 900, 850, 800, 750, 700, 650, 600, 550, 500, 450, 400, 350, 300, 250, 200, 150, 100, 50, 25],
-            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
-            1);
-
-        Run("Alternating fast-slow pattern",
-            400,
-            [390, 380, 370, 360, 350, 340, 330, 320, 310, 300, 290, 280],
-            [1, 20, 2, 19, 3, 18, 4, 17, 5, 16, 6, 15],
-            6);
-
-        Console.WriteLine("Done.");
+        Console.WriteLine();
     }
+
+    private static void RunScenario(Scenario scenario)
+    {
+        Console.WriteLine($"\n=== {scenario.Name} ===");
+
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length == 3)
+            .Where(m => m.GetParameters()[0].ParameterType == typeof(int))
+            .Where(m => m.GetParameters()[1].ParameterType == typeof(int[]))
+            .Where(m => m.GetParameters()[2].ParameterType == typeof(int[]))
+            .Where(m => m.ReturnType == typeof(int))
+            .OrderBy(m => m.Name)
+            .ToArray();
+
+        foreach (var method in methods)
+        {
+            var stopwatch = Stopwatch.StartNew();
+            object? result = null;
+            Exception? exception = null;
+
+            try
+            {
+                result = method.Invoke(null, new object?[] { scenario.Target, (int[])scenario.Position.Clone(), (int[])scenario.Speed.Clone() });
+            }
+            catch (Exception ex) { exception = ex; }
+            finally { stopwatch.Stop(); }
+
+            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
+
+            if (exception != null)
+            {
+                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
+                continue;
+            }
+
+            var actual   = result!.ToString()!;
+            var expected = scenario.Expected.ToString();
+            Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "✅ PASS" : "❌ FAIL")}");
+        }
+    }
+
+    private sealed record Scenario(string Name, int Target, int[] Position, int[] Speed, int Expected);
 }

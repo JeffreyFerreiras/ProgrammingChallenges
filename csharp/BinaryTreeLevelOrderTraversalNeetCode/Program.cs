@@ -1,182 +1,86 @@
-﻿using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace BinaryTreeLevelOrderTraversalNeetCode;
 
-internal static class Program
+internal class Program
 {
-    private static void Main()
+    private static void Main(string[] args)
     {
-        Console.WriteLine("Binary Tree Level Order Traversal");
-        Console.WriteLine(new string('=', 37) + "\n");
-
-        var solution = new Solution();
-
         var scenarios = new[]
         {
-            // Very simple cases - 2-3 nodes
-            (Name: "2 Nodes: Root and Left", Values: [1, 2], Expected: [[1], [2]]),
-            (Name: "2 Nodes: Root and Right", Values: [1, null, 2], Expected: [[1], [2]]),
-            (Name: "3 Nodes: Balanced", Values: [1, 2, 3], Expected: [[1], [2, 3]]),
-            // Simple cases - single node
-            (Name: "Single Node", Values: [1], Expected: [[1]]),
-            // Moderate cases
-            (
-                Name: "Example 1",
-                Values: [3, 9, 20, null, null, 15, 7],
-                Expected: [[3], [9, 20], [15, 7]]
-            ),
-            // Complex cases
-            (
-                Name: "Left-heavy",
-                Values: [1, 2, null, 3, null, null, null, 4],
-                Expected: [[1], [2], [3], [4]]
-            ),
-            (
-                Name: "Right-heavy",
-                Values:
-                [
-                    1,
-                    null,
-                    2,
-                    null,
-                    null,
-                    null,
-                    3,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    4,
-                ],
-                Expected: [[1], [2], [3], [4]]
-            ),
-            (
-                Name: "Complete Tree",
-                Values: [1, 2, 3, 4, 5, 6, 7],
-                Expected: [[1], [2, 3], [4, 5, 6, 7]]
-            ),
-            // Edge cases
-            (Name: "Empty Tree", Values: Array.Empty<int?>(), Expected: Array.Empty<int[]>()),
+            new Scenario("Example [3,9,20,null,null,15,7]", BuildTree(new int?[]{3,9,20,null,null,15,7}), "[[3],[9,20],[15,7]]"),
+            new Scenario("Single [1]",                       BuildTree(new int?[]{1}),                      "[[1]]"),
+            new Scenario("Empty",                            null,                                           "[]"),
+            new Scenario("Balanced [1,2,3,4,5,6,7]",       BuildTree(new int?[]{1,2,3,4,5,6,7}),          "[[1],[2,3],[4,5,6,7]]"),
         };
 
         foreach (var scenario in scenarios)
-        {
-            Console.WriteLine($"Scenario: {scenario.Name}");
-            Console.WriteLine($"Method: {nameof(Solution.LevelOrder)}");
+            RunScenario(scenario);
 
-            var root = BuildTree(scenario.Values);
-
-            var stopwatch = Stopwatch.StartNew();
-            var result = solution.LevelOrder(root);
-            stopwatch.Stop();
-
-            var isCorrect = AreEqual(result, scenario.Expected);
-            var mark = isCorrect ? "✓" : "✗";
-
-            Console.WriteLine($"Result: {FormatLevels(result)}");
-            Console.WriteLine($"Expected: {FormatLevels(scenario.Expected)} {mark}");
-            Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine(new string('-', 60));
-        }
+        Console.WriteLine();
     }
 
-    private static TreeNode? BuildTree(IReadOnlyList<int?> values)
+    private static void RunScenario(Scenario scenario)
     {
-        if (values.Count == 0)
-        {
-            return null;
-        }
+        Console.WriteLine($"\n=== {scenario.Name} ===");
 
-        var nodes = new TreeNode?[values.Count];
-        for (var i = 0; i < values.Count; i++)
+        var solution = new Solution();
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length == 1)
+            .Where(m => m.ReturnType == typeof(IList<IList<int>>))
+            .OrderBy(m => m.Name)
+            .ToArray();
+
+        foreach (var method in methods)
         {
-            if (values[i].HasValue)
+            var stopwatch = Stopwatch.StartNew();
+            object? result = null;
+            Exception? exception = null;
+
+            try
             {
-                nodes[i] = new TreeNode(values[i]!.Value);
+                result = method.Invoke(solution, new object?[] { scenario.Root });
             }
-        }
+            catch (Exception ex) { exception = ex; }
+            finally { stopwatch.Stop(); }
 
-        for (var i = 0; i < values.Count; i++)
-        {
-            var current = nodes[i];
-            if (current is null)
+            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
+
+            if (exception != null)
             {
+                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
                 continue;
             }
 
-            var leftIndex = 2 * i + 1;
-            var rightIndex = 2 * i + 2;
-
-            if (leftIndex < values.Count)
-            {
-                current.Left = nodes[leftIndex];
-            }
-
-            if (rightIndex < values.Count)
-            {
-                current.Right = nodes[rightIndex];
-            }
+            var actual = FormatLevels((IList<IList<int>>)result!);
+            Console.WriteLine($"{actual} | Expected {scenario.Expected} | {(actual == scenario.Expected ? "✅ PASS" : "❌ FAIL")}");
         }
+    }
 
+    private static string FormatLevels(IList<IList<int>> levels) =>
+        "[" + string.Join(",", levels.Select(l => "[" + string.Join(",", l) + "]")) + "]";
+
+    private static TreeNode? BuildTree(int?[] values)
+    {
+        if (values.Length == 0) return null;
+        var nodes = new TreeNode?[values.Length];
+        for (int i = 0; i < values.Length; i++)
+            if (values[i].HasValue) nodes[i] = new TreeNode(values[i]!.Value);
+        for (int i = 0; i < values.Length; i++)
+        {
+            if (nodes[i] is null) continue;
+            int l = 2 * i + 1, r = 2 * i + 2;
+            if (l < values.Length) nodes[i]!.Left = nodes[l];
+            if (r < values.Length) nodes[i]!.Right = nodes[r];
+        }
         return nodes[0];
     }
 
-    private static string FormatLevels(IEnumerable<IEnumerable<int>>? levels)
-    {
-        if (levels is null)
-        {
-            return "[]";
-        }
-
-        var formatted = levels.Select(level => "[" + string.Join(",", level) + "]").ToArray();
-        return "[" + string.Join(",", formatted) + "]";
-    }
-
-    private static bool AreEqual(
-        IEnumerable<IEnumerable<int>>? result,
-        IEnumerable<int[]>? expected
-    )
-    {
-        if (result is null && expected is null)
-        {
-            return true;
-        }
-
-        if (result is null || expected is null)
-        {
-            return false;
-        }
-
-        var resultList = result.ToList();
-        var expectedList = expected.ToList();
-
-        if (resultList.Count != expectedList.Count)
-        {
-            return false;
-        }
-
-        for (var i = 0; i < resultList.Count; i++)
-        {
-            var resultLevel = resultList[i].ToList();
-            var expectedLevel = expectedList[i].ToList();
-
-            if (resultLevel.Count != expectedLevel.Count)
-            {
-                return false;
-            }
-
-            for (var j = 0; j < resultLevel.Count; j++)
-            {
-                if (resultLevel[j] != expectedLevel[j])
-                {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
+    private sealed record Scenario(string Name, TreeNode? Root, string Expected);
 }

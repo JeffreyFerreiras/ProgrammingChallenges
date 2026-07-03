@@ -4,7 +4,21 @@ public static class Solution
 {
     public static bool HasCycle(ListNode? head)
     {
-        throw new NotImplementedException();
+        ListNode? slow = head;
+        ListNode? fast = head;
+
+        while (fast?.Next is not null)
+        {
+            slow = slow!.Next;
+            fast = fast.Next.Next;
+
+            if (ReferenceEquals(slow, fast))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
 

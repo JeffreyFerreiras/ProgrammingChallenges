@@ -1,54 +1,57 @@
+// LeetCode 207 - Course Schedule
+using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-namespace CourseSchedule;
-
-public class Program
+namespace CourseSchedule
 {
-    public static void Main(string[] args)
+    internal class Program
     {
-        Console.WriteLine("207. Course Schedule");
-        Console.WriteLine("====================");
-        Console.WriteLine();
-        Console.WriteLine("Problem: There are numCourses courses labeled from 0 to numCourses - 1.");
-        Console.WriteLine("Some courses have prerequisites. For example, if prerequisites[i] = [a_i, b_i],");
-        Console.WriteLine("you must take course b_i first before taking a_i.");
-        Console.WriteLine("Is it possible to finish all courses?");
-        Console.WriteLine();
-
-        // Test cases
-        RunTestCase(2, [[1, 0]], true);
-        RunTestCase(2, [[1, 0], [0, 1]], false);
-        RunTestCase(3, [[1, 0], [2, 1]], true);
-        RunTestCase(4, [[1, 0], [2, 1], [3, 2], [0, 3]], false);
-        RunTestCase(5, [[1, 0], [2, 1], [3, 2], [4, 3]], true);
-    }
-
-    private static void RunTestCase(int numCourses, int[][] prerequisites, bool expected)
-    {
-        var solution = new Solution();
-        var sw = Stopwatch.StartNew();
-
-        bool result = solution.CanFinish(numCourses, prerequisites);
-
-        sw.Stop();
-
-        Console.WriteLine($"CanFinish({numCourses}, {FormatPrerequisites(prerequisites)})");
-        Console.WriteLine($"Result: {result} ✓ Expected: {expected}");
-        Console.WriteLine($"Time: {sw.ElapsedTicks} ticks ({sw.ElapsedMilliseconds}ms)");
-        Console.WriteLine();
-    }
-
-    private static string FormatPrerequisites(int[][] prerequisites)
-    {
-        if (prerequisites == null || prerequisites.Length == 0)
-            return "[]";
-
-        var result = "[";
-        foreach (var prereq in prerequisites)
+        private static void Main(string[] args)
         {
-            result += $"[{prereq[0]},{prereq[1]}],";
+            var scenarios = new[]
+            {
+                new Scenario("Example 1", 2, new int[][] { new[]{1,0} }, true),
+                new Scenario("Example 2", 2, new int[][] { new[]{1,0}, new[]{0,1} }, false),
+                new Scenario("Three courses", 3, new int[][] { new[]{1,0}, new[]{2,1} }, true),
+                new Scenario("Cycle of 4", 4, new int[][] { new[]{1,0}, new[]{2,1}, new[]{3,2}, new[]{0,3} }, false),
+                new Scenario("Five sequential", 5, new int[][] { new[]{1,0}, new[]{2,1}, new[]{3,2}, new[]{4,3} }, true),
+            };
+
+            foreach (var scenario in scenarios)
+                RunScenario(scenario);
+            Console.WriteLine();
         }
-        result = result.TrimEnd(',') + "]";
-        return result;
+
+        private static void RunScenario(Scenario scenario)
+        {
+            Console.WriteLine($"\n=== {scenario.Name} ===");
+            var solution = new Solution();
+            var methods = typeof(Solution)
+                .GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName)
+                .Where(m => m.GetParameters().Length == 2)
+                .Where(m => m.GetParameters()[0].ParameterType == typeof(int))
+                .Where(m => m.GetParameters()[1].ParameterType == typeof(int[][]))
+                .Where(m => m.ReturnType == typeof(bool))
+                .OrderBy(m => m.Name)
+                .ToArray();
+
+            foreach (var method in methods)
+            {
+                var sw = Stopwatch.StartNew();
+                object? result = null; Exception? ex = null;
+                try { result = method.Invoke(method.IsStatic ? null : solution, new object?[] { scenario.NumCourses, scenario.Prerequisites }); }
+                catch (Exception e) { ex = e; } finally { sw.Stop(); }
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
+                if (ex != null) { Console.WriteLine($"ERROR: {ex.GetBaseException().Message}"); continue; }
+                var actual = result?.ToString() ?? "null";
+                var expected = scenario.Expected.ToString();
+                Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "\u2705 PASS" : "\u274c FAIL")}");
+            }
+        }
+
+        private sealed record Scenario(string Name, int NumCourses, int[][] Prerequisites, bool Expected);
     }
 }

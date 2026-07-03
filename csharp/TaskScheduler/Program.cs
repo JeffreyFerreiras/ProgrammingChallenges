@@ -1,114 +1,45 @@
-using System.Collections.Generic;
+// LeetCode 621 - Task Scheduler
+using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 
-namespace TaskScheduler;
-
-internal record TestScenario(string Name, char[] Tasks, int Cooldown, int Expected);
-
-internal static class Program
+namespace TaskScheduler
 {
-    public static void Main()
+    internal class Program
     {
-        var solution = new Solution();
-        var methodName = nameof(Solution.LeastInterval);
-
-        TestScenario[] scenarios =
-        [
-            new(
-                "Example 1",
-                ['A', 'A', 'A', 'B', 'B', 'B'],
-                2,
-                8
-            ),
-            new(
-                "Example 2",
-                ['A', 'A', 'A', 'B', 'B', 'B'],
-                0,
-                6
-            ),
-            new(
-                "Mixed Letters",
-                ['A', 'A', 'A', 'B', 'C', 'C', 'D', 'D', 'D', 'E'],
-                2,
-                10
-            ),
-            new(
-                "Large Alphabet",
-                GenerateAlphabetWorkload(5),
-                3,
-                130
-            ),
-            new(
-                "Single Task",
-                ['Z'],
-                5,
-                1
-            ),
-        ];
-
-        foreach (TestScenario scenario in scenarios)
+        private static void Main(string[] args)
         {
-            RunScenario(solution, methodName, scenario);
-        }
-    }
-
-    private static char[] GenerateAlphabetWorkload(int repeats)
-    {
-        List<char> tasks = new(26 * repeats);
-        for (int i = 0; i < repeats; i++)
-        {
-            for (char c = 'A'; c <= 'Z'; c++)
+            var scenarios = new[]
             {
-                tasks.Add(c);
+                new Scenario("Example 1", new[] { 'A','A','A','B','B','B' }, 2, 8),
+                new Scenario("Example 2", new[] { 'A','C','A','B','D','B' }, 1, 6),
+                new Scenario("No cooling", new[] { 'A','A','A','B','B','B' }, 0, 6),
+                new Scenario("Single task", new[] { 'A' }, 5, 1),
+            };
+            foreach (var scenario in scenarios) RunScenario(scenario);
+            Console.WriteLine();
+        }
+        private static void RunScenario(Scenario scenario)
+        {
+            Console.WriteLine($"\n=== {scenario.Name} ===");
+            var solution = new Solution();
+            var methods = typeof(Solution).GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName).Where(m => m.GetParameters().Length == 2)
+                .Where(m => m.GetParameters()[0].ParameterType == typeof(char[]))
+                .Where(m => m.GetParameters()[1].ParameterType == typeof(int))
+                .Where(m => m.ReturnType == typeof(int)).OrderBy(m => m.Name).ToArray();
+            foreach (var method in methods)
+            {
+                var sw = Stopwatch.StartNew(); object? result = null; Exception? ex = null;
+                try { result = method.Invoke(method.IsStatic ? null : solution, new object?[] { scenario.Tasks, scenario.N }); }
+                catch (Exception e) { ex = e; } finally { sw.Stop(); }
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
+                if (ex != null) { Console.WriteLine($"ERROR: {ex.GetBaseException().Message}"); continue; }
+                var actual = result?.ToString() ?? "null"; var expected = scenario.Expected.ToString();
+                Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "\u2705 PASS" : "\u274c FAIL")}");
             }
         }
-        return tasks.ToArray();
-    }
-
-    private static void RunScenario(Solution solution, string methodName, TestScenario scenario)
-    {
-        Console.WriteLine($"Scenario: {scenario.Name}");
-        Console.WriteLine($"Method: {methodName}");
-        Console.WriteLine($"Cooldown: {scenario.Cooldown}");
-        Console.WriteLine($"Task Count: {scenario.Tasks.Length}");
-        Console.WriteLine($"Expected: {scenario.Expected}");
-        Console.WriteLine($"Tasks Preview: {FormatTasks(scenario.Tasks)}");
-
-        Stopwatch stopwatch = Stopwatch.StartNew();
-        string resultDisplay;
-
-        try
-        {
-            int result = solution.LeastInterval((char[])scenario.Tasks.Clone(), scenario.Cooldown);
-            stopwatch.Stop();
-            resultDisplay = result.ToString();
-        }
-        catch (NotImplementedException ex)
-        {
-            stopwatch.Stop();
-            resultDisplay = $"Not Implemented ({ex.Message})";
-        }
-        catch (Exception ex)
-        {
-            stopwatch.Stop();
-            resultDisplay = $"Error ({ex.GetType().Name}: {ex.Message})";
-        }
-
-        Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-        Console.WriteLine($"Result: {resultDisplay}");
-        Console.WriteLine();
-    }
-
-    private static string FormatTasks(char[] tasks)
-    {
-        const int previewCount = 16;
-        if (tasks.Length <= previewCount)
-        {
-            return $"[{string.Join(",", tasks)}]";
-        }
-
-        string prefix = string.Join(",", tasks.Take(previewCount));
-        return $"[{prefix}, ... x{tasks.Length - previewCount} more]";
+        private sealed record Scenario(string Name, char[] Tasks, int N, int Expected);
     }
 }

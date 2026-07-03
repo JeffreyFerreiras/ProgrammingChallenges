@@ -1,102 +1,86 @@
-﻿// 102. Binary Tree Level Order Traversal
-//
-// Challenge Description:
-// Given the root of a binary tree, return the level order traversal of its nodes' values.
-// (i.e., from left to right, level by level).
-//
-// Performance Stats:
-// - Test Case 1: Balanced Tree with 1,000 nodes
-//   - Time: 2 ms
-//   - Memory: 30 MB
-//
-// - Test Case 2: Unbalanced Tree with 1,000 nodes
-//   - Time: 3 ms
-//   - Memory: 32 MB
-//
-// - Test Case 3: Empty Tree
-//   - Time: 0 ms
-//   - Memory: 20 MB
-//
-// These statistics were gathered using Stopwatch across multiple test cases.
-
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-namespace BinaryTreeLevelOrderTraversal
+namespace BinaryTreeLevelOrderTraversal;
+
+internal class Program
 {
-    internal class Program
+    private static void Main(string[] args)
     {
-        static void Main()
+        var scenarios = new[]
         {
-            Solution solution = new();
+            new Scenario("Example 1 [3,9,20,null,null,15,7]", BuildTree(new int?[]{3,9,20,null,null,15,7}), "[[3],[9,20],[15,7]]"),
+            new Scenario("Single [1]",                         BuildTree(new int?[]{1}),                      "[[1]]"),
+            new Scenario("Empty",                              null,                                           "[]"),
+            new Scenario("Balanced [1,2,3,4,5,6,7]",         BuildTree(new int?[]{1,2,3,4,5,6,7}),          "[[1],[2,3],[4,5,6,7]]"),
+        };
 
-            // Test Case 1: Balanced Tree with 7 nodes
-            TreeNode balancedRoot = new(1,
-                new TreeNode(2, new TreeNode(4), new TreeNode(5)),
-                new TreeNode(3, new TreeNode(6), new TreeNode(7)));
-            IList<IList<int>> expectedBalanced = [
-                    [1],
-                    [2, 3],
-                    [4, 5, 6, 7]
-                ];
-            ExecuteTestCase(solution, balancedRoot, "Balanced Tree with 7 nodes", expectedBalanced);
+        foreach (var scenario in scenarios)
+            RunScenario(scenario);
 
-            // Test Case 2: Unbalanced Tree with 5 nodes
-            TreeNode? unbalancedRoot = new(1,
-                new TreeNode(2,
-                    new TreeNode(4,
-                        new TreeNode(5),
-                        null),
-                    null),
-                null);
-            IList<IList<int>> expectedUnbalanced = [
-                    [1],
-                    [2],
-                    [4],
-                    [5]
-                ];
-            ExecuteTestCase(solution, unbalancedRoot, "Unbalanced Tree with 5 nodes", expectedUnbalanced);
+        Console.WriteLine();
+    }
 
-            // Test Case 3: Empty Tree
-            TreeNode? emptyRoot = null;
-            IList<IList<int>> expectedEmpty = [];
-            ExecuteTestCase(solution, emptyRoot, "Empty Tree", expectedEmpty);
-        }
+    private static void RunScenario(Scenario scenario)
+    {
+        Console.WriteLine($"\n=== {scenario.Name} ===");
 
-        static void ExecuteTestCase(Solution solution, TreeNode? root, string testCaseName, IList<IList<int>> expected)
+        var solution = new Solution();
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length == 1)
+            .Where(m => m.ReturnType == typeof(IList<IList<int>>))
+            .OrderBy(m => m.Name)
+            .ToArray();
+
+        foreach (var method in methods)
         {
-            Stopwatch stopwatch = Stopwatch.StartNew();
-            IList<IList<int>> actual = solution.LevelOrder(root);
-            stopwatch.Stop();
+            var stopwatch = Stopwatch.StartNew();
+            object? result = null;
+            Exception? exception = null;
 
-            Console.WriteLine($"{testCaseName}:");
-            Console.WriteLine("Expected Result:");
-            PrintResult(expected);
-            Console.WriteLine("Actual Result:");
-            PrintResult(actual);
-            Console.WriteLine($"Test {(AreEqual(expected, actual) ? "Passed" : "Failed")}");
-            Console.WriteLine($"Time Elapsed: {stopwatch.ElapsedMilliseconds} ms\n");
-        }
-
-        static void PrintResult(IList<IList<int>> levels)
-        {
-            foreach (var level in levels)
+            try
             {
-                Console.WriteLine(string.Join(", ", level));
+                result = method.Invoke(solution, new object?[] { scenario.Root });
             }
-        }
+            catch (Exception ex) { exception = ex; }
+            finally { stopwatch.Stop(); }
 
-        static bool AreEqual(IList<IList<int>> expected, IList<IList<int>> actual)
-        {
-            if (expected.Count != actual.Count) return false;
-            for (int i = 0; i < expected.Count; i++)
+            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
+
+            if (exception != null)
             {
-                if (expected[i].Count != actual[i].Count) return false;
-                for (int j = 0; j < expected[i].Count; j++)
-                {
-                    if (expected[i][j] != actual[i][j]) return false;
-                }
+                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
+                continue;
             }
-            return true;
+
+            var actual = FormatLevels((IList<IList<int>>)result!);
+            Console.WriteLine($"{actual} | Expected {scenario.Expected} | {(actual == scenario.Expected ? "✅ PASS" : "❌ FAIL")}");
         }
     }
+
+    private static string FormatLevels(IList<IList<int>> levels) =>
+        "[" + string.Join(",", levels.Select(l => "[" + string.Join(",", l) + "]")) + "]";
+
+    private static TreeNode? BuildTree(int?[] values)
+    {
+        if (values.Length == 0) return null;
+        var nodes = new TreeNode?[values.Length];
+        for (int i = 0; i < values.Length; i++)
+            if (values[i].HasValue) nodes[i] = new TreeNode(values[i]!.Value);
+        for (int i = 0; i < values.Length; i++)
+        {
+            if (nodes[i] is null) continue;
+            int l = 2 * i + 1, r = 2 * i + 2;
+            if (l < values.Length) nodes[i]!.left = nodes[l];
+            if (r < values.Length) nodes[i]!.right = nodes[r];
+        }
+        return nodes[0];
+    }
+
+    private sealed record Scenario(string Name, TreeNode? Root, string Expected);
 }

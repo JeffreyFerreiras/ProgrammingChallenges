@@ -1,82 +1,44 @@
+// LeetCode 42 - Trapping Rain Water
+using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
-using TrappingRainWater;
 
-class Program
+namespace TrappingRainWater
 {
-    delegate int SolutionMethod(int[] height);
-
-    static void Main()
+    internal class Program
     {
-        Console.WriteLine("42. Trapping Rain Water");
-        Console.WriteLine("========================\n");
-
-        // Discover public static methods returning int and taking (int[])
-        MethodInfo[] methodsInfo =
-        [
-            .. typeof(Solution)
-                .GetMethods(BindingFlags.Public | BindingFlags.Static)
-                .Where(m =>
-                    m.ReturnType == typeof(int)
-                    && m.GetParameters().Length == 1
-                    && m.GetParameters()[0].ParameterType == typeof(int[])
-                ),
-        ];
-
-        string[] methodNames = [.. methodsInfo.Select(m => m.Name)];
-        SolutionMethod[] methods =
-        [
-            .. methodsInfo.Select(m =>
-                (SolutionMethod)Delegate.CreateDelegate(typeof(SolutionMethod), m)
-            ),
-        ];
-
-        void Run(string name, int[] height, int expected)
+        private static void Main(string[] args)
         {
-            Console.WriteLine($"Test: {name}");
-            Console.WriteLine($"  Input: height=[{string.Join(",", height)}]");
-            foreach (var (method, idx) in methods.Select((m, i) => (m, i)))
+            var scenarios = new[]
             {
-                var sw = Stopwatch.StartNew();
-                try
-                {
-                    int result = method(height);
-                    sw.Stop();
-                    bool ok = result == expected;
-                    string status = ok ? "✓ PASSED" : "✗ FAILED";
-                    Console.WriteLine(
-                        $"  {methodNames[idx]}: {status} [{sw.Elapsed.TotalMilliseconds:F4} ms]"
-                    );
-                    Console.WriteLine($"    Result: {result}, Expected: {expected}");
-                }
-                catch (NotImplementedException)
-                {
-                    sw.Stop();
-                    Console.WriteLine(
-                        $"  {methodNames[idx]}: ⚠ NOT IMPLEMENTED [{sw.Elapsed.TotalMilliseconds:F4} ms]"
-                    );
-                    Console.WriteLine($"    Expected: {expected}");
-                }
-                catch (Exception ex)
-                {
-                    sw.Stop();
-                    Console.WriteLine(
-                        $"  {methodNames[idx]}: ✗ ERROR [{sw.Elapsed.TotalMilliseconds:F4} ms]"
-                    );
-                    Console.WriteLine($"    Error: {ex.Message}");
-                }
-            }
+                new Scenario("Example 1", new[] { 0,1,0,2,1,0,1,3,2,1,2,1 }, 6),
+                new Scenario("Example 2", new[] { 4,2,0,3,2,5 }, 9),
+                new Scenario("No water", new[] { 1,2,3,4 }, 0),
+                new Scenario("Single valley", new[] { 3,0,3 }, 3),
+            };
+            foreach (var scenario in scenarios) RunScenario(scenario);
             Console.WriteLine();
         }
-
-        // Test cases
-        Run("Example 0", [0, 1, 0, 1], 1);
-        Run("Example 1", [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1], 6);
-        Run("Example 2", [4, 2, 0, 3, 2, 5], 9);
-        Run("No water", [1, 2, 3], 0);
-        Run("Flat", [3, 3, 3], 0);
-        Run("Edge case", [1], 0);
-        Run("Two bars", [4, 2], 0);
-        Run("Simple basin", [3, 0, 2, 0, 4], 7);
+        private static void RunScenario(Scenario scenario)
+        {
+            Console.WriteLine($"\n=== {scenario.Name} ===");
+            var solution = new Solution();
+            var methods = typeof(Solution).GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName).Where(m => m.GetParameters().Length == 1)
+                .Where(m => m.GetParameters()[0].ParameterType == typeof(int[])).Where(m => m.ReturnType == typeof(int))
+                .OrderBy(m => m.Name).ToArray();
+            foreach (var method in methods)
+            {
+                var sw = Stopwatch.StartNew(); object? result = null; Exception? ex = null;
+                try { result = method.Invoke(method.IsStatic ? null : solution, new object?[] { scenario.Height }); }
+                catch (Exception e) { ex = e; } finally { sw.Stop(); }
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
+                if (ex != null) { Console.WriteLine($"ERROR: {ex.GetBaseException().Message}"); continue; }
+                var actual = result?.ToString() ?? "null"; var expected = scenario.Expected.ToString();
+                Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "\u2705 PASS" : "\u274c FAIL")}");
+            }
+        }
+        private sealed record Scenario(string Name, int[] Height, int Expected);
     }
 }

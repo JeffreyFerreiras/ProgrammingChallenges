@@ -1,43 +1,67 @@
-﻿using System.Diagnostics;
-
-// Full LeetCode Problem Explanation and Examples:
-// Problem 17. Letter Combinations of a Phone Number
-// Given a string containing digits from 2-9 inclusive, return all possible letter combinations
-// that the number could represent. A mapping of digit to letters (just like on the telephone buttons)
-// is given below. Note that 1 does not map to any letters.
-// Example:
-// Input: digits = "23"
-// Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
-// Explanation: 
-// 2 maps to "abc", 3 maps to "def". Thus the combinations are as above.
-// ... (full explanation and examples can be added as needed)
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace LetterCombinationsofAPhoneNumber;
 
-class Program
+internal class Program
 {
     private static void Main(string[] args)
     {
-        var solution = new Solution();
-        var testScenarios = new List<(string input, IList<string> expected, string methodName)>
+        var scenarios = new[]
         {
-            ("23", new List<string> { "ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf" }, "LetterCombinations"),
-            // Add more scenarios if needed.
+            new Scenario("digits=23", "23", "ad,ae,af,bd,be,bf,cd,ce,cf"),
+            new Scenario("digits=2",  "2",  "a,b,c"),
+            new Scenario("empty",     "",   ""),
         };
 
-        foreach (var scenario in testScenarios)
-        {
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-            var result = solution.LetterCombinations(scenario.input);
-            stopwatch.Stop();
+        foreach (var scenario in scenarios)
+            RunScenario(scenario);
 
-            Console.WriteLine($"Method: {scenario.methodName}");
-            Console.WriteLine($"Time (ticks): {stopwatch.ElapsedTicks}");
-            Console.WriteLine($"Input: {scenario.input}");
-            Console.WriteLine($"Result: [{string.Join(", ", result)}]");
-            Console.WriteLine($"Expected: [{string.Join(", ", scenario.expected)}]");
-            Console.WriteLine(new string('-', 40));
+        Console.WriteLine();
+    }
+
+    private static void RunScenario(Scenario scenario)
+    {
+        Console.WriteLine($"\n=== {scenario.Name} ===");
+
+        var solution = new Solution();
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length == 1)
+            .Where(m => m.GetParameters()[0].ParameterType == typeof(string))
+            .Where(m => m.ReturnType == typeof(IList<string>))
+            .OrderBy(m => m.Name)
+            .ToArray();
+
+        foreach (var method in methods)
+        {
+            var stopwatch = Stopwatch.StartNew();
+            object? result = null;
+            Exception? exception = null;
+
+            try
+            {
+                result = method.Invoke(solution, new object?[] { scenario.Digits });
+            }
+            catch (Exception ex) { exception = ex; }
+            finally { stopwatch.Stop(); }
+
+            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
+
+            if (exception != null)
+            {
+                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
+                continue;
+            }
+
+            var actual = string.Join(",", ((IList<string>)result!).OrderBy(s => s));
+            Console.WriteLine($"{actual} | Expected {scenario.Expected} | {(actual == scenario.Expected ? "✅ PASS" : "❌ FAIL")}");
         }
     }
+
+    private sealed record Scenario(string Name, string Digits, string Expected);
 }

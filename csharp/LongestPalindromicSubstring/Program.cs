@@ -1,42 +1,45 @@
+// LeetCode 5 - Longest Palindromic Substring
+using System;
 using System.Diagnostics;
-
-// LeetCode Problem: Longest Palindromic Substring
-// 
-// Given a string s, return the longest palindromic substring in s.
-// For example:
-//   Input: s = "babad"
-//   Output: "bab" 
-//   (Note: "aba" is also a valid answer.)
-//
-// Constraints:
-//   • 1 <= s.length <= 1000
-//   • s consists of only digits and English letters.
-//
-// Approach:
-//   Uses "expand around center" technique.
-// Testcases are timed for performance.
+using System.Linq;
+using System.Reflection;
 
 namespace LongestPalindromicSubstring
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            string[] testCases = [
-                "babad",
-                "cbbd",
-                "a",
-                "ac"
-            ];
-
-            var solution = new Solution();
-            foreach (var test in testCases)
+            var scenarios = new[]
             {
-                Stopwatch sw = Stopwatch.StartNew();
-                string result = solution.LongestPalindrome(test);
-                sw.Stop();
-                Console.WriteLine($"Input: {test}  |  Result: {result}  |  Time(ms): {sw.Elapsed.TotalMilliseconds}");
+                new Scenario("Example 1", "babad", "bab"),
+                new Scenario("Example 2", "cbbd", "bb"),
+                new Scenario("Single char", "a", "a"),
+                new Scenario("All same", "aaaa", "aaaa"),
+                new Scenario("No palindrome", "abcd", "a"),
+            };
+            foreach (var scenario in scenarios) RunScenario(scenario);
+            Console.WriteLine();
+        }
+        private static void RunScenario(Scenario scenario)
+        {
+            Console.WriteLine($"\n=== {scenario.Name} ===");
+            var solution = new Solution();
+            var methods = typeof(Solution).GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName).Where(m => m.GetParameters().Length == 1)
+                .Where(m => m.GetParameters()[0].ParameterType == typeof(string)).Where(m => m.ReturnType == typeof(string))
+                .OrderBy(m => m.Name).ToArray();
+            foreach (var method in methods)
+            {
+                var sw = Stopwatch.StartNew(); object? result = null; Exception? ex = null;
+                try { result = method.Invoke(method.IsStatic ? null : solution, new object?[] { scenario.S }); }
+                catch (Exception e) { ex = e; } finally { sw.Stop(); }
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
+                if (ex != null) { Console.WriteLine($"ERROR: {ex.GetBaseException().Message}"); continue; }
+                var actual = result?.ToString() ?? "null"; var expected = scenario.Expected;
+                Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "\u2705 PASS" : "\u274c FAIL")}");
             }
         }
+        private sealed record Scenario(string Name, string S, string Expected);
     }
 }

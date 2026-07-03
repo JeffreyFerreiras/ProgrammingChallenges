@@ -1,102 +1,79 @@
+using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace AddTwoNumbersNeetCode;
 
-internal static class Program
+internal class Program
 {
-    private static void Main()
+    private static void Main(string[] args)
     {
-        Console.WriteLine("2. Add Two Numbers");
-        Console.WriteLine("====================================================================");
+        var scenarios = new[]
+        {
+            new Scenario("[2,4,3]+[5,6,4]",          Build(2,4,3), Build(5,6,4),   "[7,0,8]"),
+            new Scenario("[0]+[0]",                    Build(0),     Build(0),        "[0]"),
+            new Scenario("[9,9,9,9,9,9,9]+[9,9,9,9]", Build(9,9,9,9,9,9,9), Build(9,9,9,9), "[8,9,9,9,0,0,0,1]"),
+        };
 
-        RunScenario(
-            "Example: [2,4,3] + [5,6,4]",
-            () => Solution.AddTwoNumbers(BuildList(2, 4, 3), BuildList(5, 6, 4)),
-            "[7,0,8]"
-        );
+        foreach (var scenario in scenarios)
+            RunScenario(scenario);
 
-        RunScenario(
-            "Edge: zero plus zero",
-            () => Solution.AddTwoNumbers(BuildList(0), BuildList(0)),
-            "[0]"
-        );
-
-        RunScenario(
-            "Long: cascading carry",
-            () => Solution.AddTwoNumbers(BuildList(9, 9, 9, 9, 9, 9, 9), BuildList(9, 9, 9, 9)),
-            "[8,9,9,9,0,0,0,1]"
-        );
+        Console.WriteLine();
     }
 
-    private static void RunScenario(string name, Func<ListNode?> action, string expected)
+    private static void RunScenario(Scenario scenario)
     {
-        var stopwatch = Stopwatch.StartNew();
-        try
-        {
-            ListNode? result = action();
-            stopwatch.Stop();
-            Console.WriteLine($"Scenario: {name}");
-            Console.WriteLine($"  Time: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine($"  Result: {FormatList(result)}");
-            Console.WriteLine($"  Expected: {expected}");
-        }
-        catch (NotImplementedException)
-        {
-            stopwatch.Stop();
-            Console.WriteLine($"Scenario: {name}");
-            Console.WriteLine(
-                $"  Status: NOT IMPLEMENTED [{stopwatch.Elapsed.TotalMilliseconds:F4} ms]"
-            );
-            Console.WriteLine($"  Expected: {expected}");
-        }
-        catch (Exception ex)
-        {
-            stopwatch.Stop();
-            Console.WriteLine($"Scenario: {name}");
-            Console.WriteLine($"  Status: ERROR [{stopwatch.Elapsed.TotalMilliseconds:F4} ms]");
-            Console.WriteLine($"  Message: {ex.Message}");
-        }
-    }
+        Console.WriteLine($"\n=== {scenario.Name} ===");
 
-    private static ListNode? BuildList(IEnumerable<int> values)
-    {
-        ListNode? head = null;
-        ListNode? tail = null;
-        foreach (int value in values)
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length == 2)
+            .Where(m => m.ReturnType == typeof(ListNode))
+            .OrderBy(m => m.Name)
+            .ToArray();
+
+        foreach (var method in methods)
         {
-            var node = new ListNode(value);
-            if (head is null)
+            var stopwatch = Stopwatch.StartNew();
+            object? result = null;
+            Exception? exception = null;
+
+            try
             {
-                head = node;
+                result = method.Invoke(null, new object?[] { scenario.L1, scenario.L2 });
             }
-            else
+            catch (Exception ex) { exception = ex; }
+            finally { stopwatch.Stop(); }
+
+            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
+
+            if (exception != null)
             {
-                tail!.Next = node;
+                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
+                continue;
             }
 
-            tail = node;
+            var actual = Format((ListNode?)result);
+            Console.WriteLine($"{actual} | Expected {scenario.Expected} | {(actual == scenario.Expected ? "✅ PASS" : "❌ FAIL")}");
         }
-
-        return head;
     }
 
-    private static ListNode? BuildList(params int[] values) => BuildList((IEnumerable<int>)values);
-
-    private static string FormatList(ListNode? head)
+    private static string Format(ListNode? node)
     {
-        if (head is null)
-        {
-            return "[]";
-        }
-
-        var values = new List<int>();
-        ListNode? current = head;
-        while (current is not null)
-        {
-            values.Add(current.Val);
-            current = current.Next;
-        }
-
-        return $"[{string.Join(",", values)}]";
+        var parts = new System.Collections.Generic.List<int>();
+        while (node != null) { parts.Add(node.Val); node = node.Next; }
+        return "[" + string.Join(",", parts) + "]";
     }
+
+    private static ListNode Build(params int[] vals)
+    {
+        var dummy = new ListNode();
+        var cur = dummy;
+        foreach (var v in vals) { cur.Next = new ListNode(v); cur = cur.Next; }
+        return dummy.Next!;
+    }
+
+    private sealed record Scenario(string Name, ListNode? L1, ListNode? L2, string Expected);
 }

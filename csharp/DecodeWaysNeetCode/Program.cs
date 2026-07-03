@@ -1,39 +1,58 @@
-﻿using System.Diagnostics;
+﻿// LeetCode 91 - Decode Ways
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-namespace DecodeWaysNeetCode;
-
-internal static class Program
+namespace DecodeWaysNeetCode
 {
-    private static void Main()
+    internal class Program
     {
-        Console.WriteLine("Decode Ways");
-        Console.WriteLine(new string('=', 11) + "\n");
-
-        var solution = new Solution();
-
-        var scenarios = new[]
+        private static void Main(string[] args)
         {
-            (Name: "Example 1", S: "12", Expected: 2),
-            (Name: "Example 2", S: "226", Expected: 3),
-            (Name: "Example 3", S: "06", Expected: 0),
-            (Name: "Edge: Zero", S: "0", Expected: 0),
-            (Name: "Single Digit", S: "7", Expected: 1),
-            (Name: "Long String", S: new string('1', 10), Expected: 89),
-            (Name: "Zeros Inside", S: "1010", Expected: 1)
-        };
+            var scenarios = new[]
+            {
+                new Scenario("Example 1", "12", 2),
+                new Scenario("Example 2", "226", 3),
+                new Scenario("Example 3", "06", 0),
+                new Scenario("Edge: Zero", "0", 0),
+                new Scenario("Single Digit", "7", 1),
+                new Scenario("Long String", "1111111111", 89),
+                new Scenario("Zeros Inside", "1010", 1),
+            };
 
-        foreach (var scenario in scenarios)
-        {
-            var stopwatch = Stopwatch.StartNew();
-            var result = solution.NumDecodings(scenario.S);
-            stopwatch.Stop();
-
-            Console.WriteLine($"Scenario: {scenario.Name}");
-            Console.WriteLine($"Method: {nameof(Solution.NumDecodings)}");
-            Console.WriteLine($"Input: s = \"{scenario.S}\"");
-            Console.WriteLine($"Result: {result}, Expected: {scenario.Expected}");
-            Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine(new string('-', 60));
+            foreach (var scenario in scenarios)
+                RunScenario(scenario);
+            Console.WriteLine();
         }
+
+        private static void RunScenario(Scenario scenario)
+        {
+            Console.WriteLine($"\n=== {scenario.Name} ===");
+            var solution = new Solution();
+            var methods = typeof(Solution)
+                .GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName)
+                .Where(m => m.GetParameters().Length == 1)
+                .Where(m => m.GetParameters()[0].ParameterType == typeof(string))
+                .Where(m => m.ReturnType == typeof(int))
+                .OrderBy(m => m.Name)
+                .ToArray();
+
+            foreach (var method in methods)
+            {
+                var sw = Stopwatch.StartNew();
+                object? result = null; Exception? ex = null;
+                try { result = method.Invoke(method.IsStatic ? null : solution, new object?[] { scenario.S }); }
+                catch (Exception e) { ex = e; } finally { sw.Stop(); }
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
+                if (ex != null) { Console.WriteLine($"ERROR: {ex.GetBaseException().Message}"); continue; }
+                var actual = result?.ToString() ?? "null";
+                var expected = scenario.Expected.ToString();
+                Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "\u2705 PASS" : "\u274c FAIL")}");
+            }
+        }
+
+        private sealed record Scenario(string Name, string S, int Expected);
     }
 }

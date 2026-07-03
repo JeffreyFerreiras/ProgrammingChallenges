@@ -1,62 +1,46 @@
+// LeetCode 347 - Top K Frequent Elements
+using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace TopKFrequentElements
 {
-    class Program
+    internal class Program
     {
-        /*
-         * 347. Top K Frequent Elements
-         * 
-         * Given an integer array nums and an integer k, return the k most frequent elements. 
-         * You may return the answer in any order.
-         * 
-         * Example 1:
-         * Input: nums = [1,1,1,2,2,3], k = 2
-         * Output: [1,2]
-         * 
-         * Example 2:
-         * Input: nums = [1], k = 1
-         * Output: [1]
-         * 
-         * Constraints:
-         * 1 <= nums.length <= 10^5
-         * -10^4 <= nums[i] <= 10^4
-         * k is in the range [1, the number of unique elements in the array].
-         * It is guaranteed that the answer is unique.
-         * 
-         * Follow up: Your algorithm's time complexity must be better than O(n log n), where n is the array's size.
-         */
-
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Console.WriteLine("347. Top K Frequent Elements");
-            Console.WriteLine("============================");
-
-            // Test cases
-            RunTest([1, 1, 1, 2, 2, 3], 2, [1, 2]);
-            RunTest([1], 1, [1]);
-            RunTest([4, 1, 1, 1, 2, 2, 3, 4, 4, 4, 4], 2, [4, 1]);
-
-            Console.ReadLine();
-        }
-
-        static void RunTest(int[] nums, int k, int[] expected)
-        {
-            Console.WriteLine($"Input: nums = [{string.Join(",", nums)}], k = {k}");
-            Console.WriteLine($"Expected: [{string.Join(",", expected)}]");
-
-            Solution solution = new();
-
-            Stopwatch stopwatch = new();
-            stopwatch.Start();
-            int[] result = solution.TopKFrequent(nums, k);
-            stopwatch.Stop();
-
-            Console.WriteLine($"Method: TopKFrequent");
-            Console.WriteLine($"Time: {stopwatch.ElapsedTicks} ticks");
-            Console.WriteLine($"Result: `[{string.Join(",", result)}]`");
-            Console.WriteLine($"Expected: `[{string.Join(",", expected)}]`");
+            var scenarios = new[]
+            {
+                new Scenario("Example 1", new[] { 1,1,1,2,2,3 }, 2, "1,2"),
+                new Scenario("Example 2", new[] { 1 }, 1, "1"),
+                new Scenario("All same", new[] { 3,3,3 }, 1, "3"),
+                new Scenario("Distinct", new[] { 1,2,3,4 }, 2, "1,2"),
+            };
+            foreach (var scenario in scenarios) RunScenario(scenario);
             Console.WriteLine();
         }
+        private static void RunScenario(Scenario scenario)
+        {
+            Console.WriteLine($"\n=== {scenario.Name} ===");
+            var solution = new Solution();
+            var methods = typeof(Solution).GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName).Where(m => m.GetParameters().Length == 2)
+                .Where(m => m.GetParameters()[0].ParameterType == typeof(int[]))
+                .Where(m => m.GetParameters()[1].ParameterType == typeof(int))
+                .Where(m => m.ReturnType == typeof(int[])).OrderBy(m => m.Name).ToArray();
+            foreach (var method in methods)
+            {
+                var inputCopy = (int[])scenario.Nums.Clone();
+                var sw = Stopwatch.StartNew(); object? result = null; Exception? ex = null;
+                try { result = method.Invoke(method.IsStatic ? null : solution, new object?[] { inputCopy, scenario.K }); }
+                catch (Exception e) { ex = e; } finally { sw.Stop(); }
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
+                if (ex != null) { Console.WriteLine($"ERROR: {ex.GetBaseException().Message}"); continue; }
+                var actual = result is int[] arr ? string.Join(",", arr.OrderBy(x => x)) : result?.ToString() ?? "null";
+                Console.WriteLine($"{actual} | Expected {scenario.Expected} | {(actual == scenario.Expected ? "\u2705 PASS" : "\u274c FAIL")}");
+            }
+        }
+        private sealed record Scenario(string Name, int[] Nums, int K, string Expected);
     }
 }

@@ -1,219 +1,81 @@
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace CopyListWithRandomPointerNeetCode;
 
-internal static class Program
+internal class Program
 {
-    private static void Main()
+    private static void Main(string[] args)
     {
-        Console.WriteLine("138. Copy List With Random Pointer");
-        Console.WriteLine("====================================================================");
+        Console.WriteLine("138. Copy List with Random Pointer\n");
 
-        RunScenario(
-            "Example: five node reference graph",
-            () =>
-            {
-                var head = BuildRandomList((7, null), (13, 0), (11, 4), (10, 2), (1, 0));
-                var clone = Solution.CopyRandomList(head);
-                return FormatRandomList(clone);
-            },
-            "[(7,null)->(13,0)->(11,4)->(10,2)->(1,0)]"
-        );
+        // Example: [(7,null),(13,0),(11,4),(10,2),(1,0)]
+        var head1 = BuildRandomList((7, null), (13, 0), (11, 4), (10, 2), (1, 0));
+        var scenarios = new[]
+        {
+            ("Five nodes", head1, "[(7,null),(13,7),(11,1),(10,11),(1,7)]"),
+            ("Single self-ref", BuildRandomList((1, 0)), "[(1,1)]"),
+            ("Two mutual", BuildRandomList((1, 1), (2, 0)), "[(1,2),(2,1)]"),
+            ("Empty", (Node?)null, "[]"),
+        };
 
-        RunScenario(
-            "Edge: empty list",
-            () =>
-            {
-                var head = BuildRandomList();
-                var clone = Solution.CopyRandomList(head);
-                return FormatRandomList(clone);
-            },
-            "[]"
-        );
+        foreach (var (name, input, _) in scenarios)
+        {
+            Console.WriteLine($"\n=== {name} ===");
+            var methods = typeof(Solution)
+                .GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName && m.GetParameters().Length == 1 && m.ReturnType == typeof(Node))
+                .OrderBy(m => m.Name)
+                .ToArray();
 
-        RunScenario(
-            "Edge: single node self reference",
-            () =>
+            foreach (var method in methods)
             {
-                var head = BuildRandomList((1, 0));
-                var clone = Solution.CopyRandomList(head);
-                return FormatRandomList(clone);
-            },
-            "[(1,0)]"
-        );
+                var sw = Stopwatch.StartNew();
+                object? result = null;
+                Exception? exception = null;
 
-        RunScenario(
-            "Edge: single node no random",
-            () =>
-            {
-                var head = BuildRandomList((42, null));
-                var clone = Solution.CopyRandomList(head);
-                return FormatRandomList(clone);
-            },
-            "[(42,null)]"
-        );
+                try { result = method.Invoke(null, new object?[] { input }); }
+                catch (Exception ex) { exception = ex; }
+                finally { sw.Stop(); }
 
-        RunScenario(
-            "Edge: two nodes mutual reference",
-            () =>
-            {
-                var head = BuildRandomList((1, 1), (2, 0));
-                var clone = Solution.CopyRandomList(head);
-                return FormatRandomList(clone);
-            },
-            "[(1,1)->(2,0)]"
-        );
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
 
-        RunScenario(
-            "Edge: all random pointers null",
-            () =>
-            {
-                var head = BuildRandomList((1, null), (2, null), (3, null), (4, null));
-                var clone = Solution.CopyRandomList(head);
-                return FormatRandomList(clone);
-            },
-            "[(1,null)->(2,null)->(3,null)->(4,null)]"
-        );
+                if (exception != null) { Console.WriteLine($"ERROR: {exception.GetBaseException().Message}"); continue; }
 
-        RunScenario(
-            "Edge: all random pointers to head",
-            () =>
-            {
-                var head = BuildRandomList((1, 0), (2, 0), (3, 0), (4, 0));
-                var clone = Solution.CopyRandomList(head);
-                return FormatRandomList(clone);
-            },
-            "[(1,0)->(2,0)->(3,0)->(4,0)]"
-        );
+                var actual = Format((Node?)result);
+                Console.WriteLine($"{actual}");
+            }
+        }
 
-        RunScenario(
-            "Edge: all random pointers to tail",
-            () =>
-            {
-                var head = BuildRandomList((1, 3), (2, 3), (3, 3), (4, 3));
-                var clone = Solution.CopyRandomList(head);
-                return FormatRandomList(clone);
-            },
-            "[(1,3)->(2,3)->(3,3)->(4,3)]"
-        );
-
-        RunScenario(
-            "Long: alternating random links",
-            () =>
-            {
-                var head = BuildRandomList((1, 3), (2, 0), (3, null), (4, 2), (5, 1), (6, 4));
-                var clone = Solution.CopyRandomList(head);
-                return FormatRandomList(clone);
-            },
-            "[(1,3)->(2,0)->(3,null)->(4,2)->(5,1)->(6,4)]"
-        );
-
-        RunScenario(
-            "Long: backward chain of random pointers",
-            () =>
-            {
-                var head = BuildRandomList((1, null), (2, 0), (3, 1), (4, 2), (5, 3));
-                var clone = Solution.CopyRandomList(head);
-                return FormatRandomList(clone);
-            },
-            "[(1,null)->(2,0)->(3,1)->(4,2)->(5,3)]"
-        );
-
-        RunScenario(
-            "Long: forward chain of random pointers",
-            () =>
-            {
-                var head = BuildRandomList((1, 1), (2, 2), (3, 3), (4, 4), (5, null));
-                var clone = Solution.CopyRandomList(head);
-                return FormatRandomList(clone);
-            },
-            "[(1,1)->(2,2)->(3,3)->(4,4)->(5,null)]"
-        );
-
-        RunScenario(
-            "Long: complex random graph",
-            () =>
-            {
-                var head = BuildRandomList((10, 2), (20, 4), (30, 1), (40, 0), (50, 3));
-                var clone = Solution.CopyRandomList(head);
-                return FormatRandomList(clone);
-            },
-            "[(10,2)->(20,4)->(30,1)->(40,0)->(50,3)]"
-        );
+        Console.WriteLine();
     }
 
-    private static void RunScenario(string name, Func<string> action, string expected)
+    private static string Format(Node? head)
     {
-        var stopwatch = Stopwatch.StartNew();
-        try
+        if (head is null) return "[]";
+        // collect nodes in order
+        var nodes = new List<Node>();
+        var cur = head;
+        while (cur != null) { nodes.Add(cur); cur = cur.next; }
+        var parts = nodes.Select(n =>
         {
-            string result = action();
-            stopwatch.Stop();
-            bool passed = result == expected;
-            string status = passed ? "✓" : "✗";
-            Console.WriteLine($"Scenario: {name} {status}");
-            Console.WriteLine($"  Time: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine($"  Result: {result}");
-            Console.WriteLine($"  Expected: {expected}");
-        }
-        catch (NotImplementedException)
-        {
-            stopwatch.Stop();
-            Console.WriteLine($"Scenario: {name}");
-            Console.WriteLine($"  Status: NOT IMPLEMENTED [{stopwatch.Elapsed.TotalMilliseconds:F4} ms]");
-            Console.WriteLine($"  Expected: {expected}");
-        }
-        catch (Exception ex)
-        {
-            stopwatch.Stop();
-            Console.WriteLine($"Scenario: {name}");
-            Console.WriteLine($"  Status: ERROR [{stopwatch.Elapsed.TotalMilliseconds:F4} ms]");
-            Console.WriteLine($"  Message: {ex.Message}");
-        }
+            var ri = n.random is null ? "null" : nodes.IndexOf(n.random).ToString();
+            return $"({n.val},{ri})";
+        });
+        return "[" + string.Join(",", parts) + "]";
     }
 
-    private static Node? BuildRandomList(params (int value, int? randomIndex)[] nodes)
+    // (val, randomIndex?) - null means no random
+    private static Node? BuildRandomList(params (int val, int? randIdx)[] items)
     {
-        if (nodes.Length == 0)
-        {
-            return null;
-        }
-
-        var created = nodes.Select(node => new Node(node.value)).ToArray();
-        for (int i = 0; i < created.Length; i++)
-        {
-            created[i].next = i + 1 < created.Length ? created[i + 1] : null;
-            created[i].random = nodes[i].randomIndex.HasValue ? created[nodes[i].randomIndex.Value] : null;
-        }
-
-        return created[0];
-    }
-
-    private static string FormatRandomList(Node? head)
-    {
-        if (head is null)
-        {
-            return "[]";
-        }
-
-        var order = new List<Node>();
-        var indices = new Dictionary<Node, int>();
-        Node? current = head;
-        int index = 0;
-        while (current is not null)
-        {
-            order.Add(current);
-            indices[current] = index++;
-            current = current.next;
-        }
-
-        var parts = new List<string>(order.Count);
-        foreach (Node node in order)
-        {
-            string randomIndex = node.random is null ? "null" : indices[node.random].ToString();
-            parts.Add($"({node.val},{randomIndex})");
-        }
-
-        return $"[{string.Join("->", parts)}]";
+        if (items.Length == 0) return null;
+        var nodes = items.Select(i => new Node(i.val)).ToArray();
+        for (int i = 0; i < nodes.Length - 1; i++) nodes[i].next = nodes[i + 1];
+        for (int i = 0; i < items.Length; i++)
+            if (items[i].randIdx.HasValue) nodes[i].random = nodes[items[i].randIdx!.Value];
+        return nodes[0];
     }
 }

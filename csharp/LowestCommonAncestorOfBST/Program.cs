@@ -1,165 +1,95 @@
-﻿using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace LowestCommonAncestorOfBST;
 
-internal static class Program
+internal class Program
 {
-    private static void Main()
+    private static void Main(string[] args)
     {
-        Console.WriteLine("Lowest Common Ancestor of BST");
-        Console.WriteLine(new string('=', 34) + "\n");
-
-        var solution = new Solution();
+        var t1 = BuildTree(new int?[]{6,2,8,0,4,7,9,null,null,3,5});
+        var t2 = BuildTree(new int?[]{6,2,8,0,4,7,9,null,null,3,5});
+        var t3 = BuildTree(new int?[]{2,1,3});
 
         var scenarios = new[]
         {
-            // Very simple cases - 2-3 nodes
-            (Name: "2 Nodes: Root and Left Child", Values: [2, 1], P: 1, Q: 2, Expected: 2),
-            (Name: "2 Nodes: Root and Right Child", Values: [2, null, 3], P: 2, Q: 3, Expected: 2),
-            (Name: "3 Nodes: Balanced", Values: [2, 1, 3], P: 1, Q: 3, Expected: 2),
-            // Simple cases - small trees with straightforward LCA
-            (Name: "Root as Ancestor", Values: [2, 1, 3], P: 1, Q: 3, Expected: 2),
-            (
-                Name: "Example 2",
-                Values: [6, 2, 8, 0, 4, 7, 9, null, null, 3, 5],
-                P: 2,
-                Q: 4,
-                Expected: 2
-            ),
-            // Moderate cases - medium complexity trees
-            (
-                Name: "Example 1",
-                Values: new int?[] { 6, 2, 8, 0, 4, 7, 9, null, null, 3, 5 },
-                P: 2,
-                Q: 8,
-                Expected: 6
-            ),
-            // Complex cases - deep or unbalanced trees
-            (
-                Name: "Deep Nodes",
-                Values: [10, 5, 15, 2, 7, 12, 20, 1, 3, 6, 8, 11, 13, 18, 25],
-                P: 3,
-                Q: 8,
-                Expected: 5
-            ),
-            // Edge cases - run last
-            (Name: "Edge: Same Node", Values: [5, 3, 7, 2, 4, 6, 8], P: 4, Q: 4, Expected: 4),
-            (Name: "Left Heavy", Values: [5, 3, null, 2, null, 1], P: 1, Q: 3, Expected: 3),
-            (
-                Name: "Right Heavy",
-                Values: [5, null, 8, null, 10, null, 12],
-                P: 8,
-                Q: 12,
-                Expected: 8
-            ),
+            new Scenario("Example 1 p=2 q=8 -> 6",  t1, FindNode(t1, 2), FindNode(t1, 8),  6),
+            new Scenario("Example 2 p=2 q=4 -> 2",  t2, FindNode(t2, 2), FindNode(t2, 4),  2),
+            new Scenario("Balanced p=1 q=3 -> 2",   t3, FindNode(t3, 1), FindNode(t3, 3),  2),
         };
 
         foreach (var scenario in scenarios)
-        {
-            Console.WriteLine($"Scenario: {scenario.Name}");
-            Console.WriteLine($"Method: {nameof(Solution.LowestCommonAncestor)}");
-            Console.WriteLine($"Tree: {FormatArray(scenario.Values)}");
-            Console.WriteLine($"Inputs: p = {scenario.P}, q = {scenario.Q}");
+            RunScenario(scenario);
 
-            var root = BuildTree(scenario.Values);
-            var pNode = FindNode(root, scenario.P);
-            var qNode = FindNode(root, scenario.Q);
-
-            var stopwatch = Stopwatch.StartNew();
-            var result = solution.LowestCommonAncestor(root, pNode, qNode);
-            stopwatch.Stop();
-
-            var passMark = result?.val == scenario.Expected ? " ✓" : string.Empty;
-            Console.WriteLine(
-                $"Result: {FormatNode(result)}, Expected: {scenario.Expected}{passMark}"
-            );
-            Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine(new string('-', 60));
-        }
+        Console.WriteLine();
     }
 
-    private static TreeNode? BuildTree(IReadOnlyList<int?> values)
+    private static void RunScenario(Scenario scenario)
     {
-        if (values.Count == 0)
-        {
-            return null;
-        }
+        Console.WriteLine($"\n=== {scenario.Name} ===");
 
-        var nodes = new TreeNode?[values.Count];
-        for (var i = 0; i < values.Count; i++)
+        var solution = new Solution();
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length == 3)
+            .Where(m => m.ReturnType == typeof(TreeNode))
+            .OrderBy(m => m.Name)
+            .ToArray();
+
+        foreach (var method in methods)
         {
-            if (values[i].HasValue)
+            var stopwatch = Stopwatch.StartNew();
+            object? result = null;
+            Exception? exception = null;
+
+            try
             {
-                nodes[i] = new TreeNode(values[i]!.Value);
+                result = method.Invoke(solution, new object?[] { scenario.Root, scenario.P, scenario.Q });
             }
-        }
+            catch (Exception ex) { exception = ex; }
+            finally { stopwatch.Stop(); }
 
-        for (var i = 0; i < values.Count; i++)
-        {
-            var current = nodes[i];
-            if (current is null)
+            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
+
+            if (exception != null)
             {
+                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
                 continue;
             }
 
-            var leftIndex = 2 * i + 1;
-            var rightIndex = 2 * i + 2;
-
-            if (leftIndex < values.Count)
-            {
-                current.left = nodes[leftIndex];
-            }
-
-            if (rightIndex < values.Count)
-            {
-                current.right = nodes[rightIndex];
-            }
+            var node = (TreeNode?)result;
+            var actual   = node?.val.ToString() ?? "null";
+            var expected = scenario.Expected.ToString();
+            Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "✅ PASS" : "❌ FAIL")}");
         }
+    }
 
+    private static TreeNode? FindNode(TreeNode? root, int val)
+    {
+        if (root is null) return null;
+        if (root.val == val) return root;
+        return FindNode(root.left, val) ?? FindNode(root.right, val);
+    }
+
+    private static TreeNode? BuildTree(int?[] values)
+    {
+        if (values.Length == 0) return null;
+        var nodes = new TreeNode?[values.Length];
+        for (int i = 0; i < values.Length; i++)
+            if (values[i].HasValue) nodes[i] = new TreeNode(values[i]!.Value);
+        for (int i = 0; i < values.Length; i++)
+        {
+            if (nodes[i] is null) continue;
+            int l = 2 * i + 1, r = 2 * i + 2;
+            if (l < values.Length) nodes[i]!.left = nodes[l];
+            if (r < values.Length) nodes[i]!.right = nodes[r];
+        }
         return nodes[0];
     }
 
-    private static TreeNode? FindNode(TreeNode? root, int value)
-    {
-        if (root is null)
-        {
-            return null;
-        }
-
-        var queue = new Queue<TreeNode?>();
-        queue.Enqueue(root);
-        while (queue.Count > 0)
-        {
-            var node = queue.Dequeue();
-            if (node is null)
-            {
-                continue;
-            }
-
-            if (node.val == value)
-            {
-                return node;
-            }
-
-            queue.Enqueue(node.left);
-            queue.Enqueue(node.right);
-        }
-
-        return null;
-    }
-
-    private static string FormatArray(IReadOnlyList<int?> values)
-    {
-        if (values.Count == 0)
-        {
-            return "[]";
-        }
-
-        return "[" + string.Join(",", values.Select(v => v?.ToString() ?? "null")) + "]";
-    }
-
-    private static string FormatNode(TreeNode? node)
-    {
-        return node?.val.ToString() ?? "null";
-    }
+    private sealed record Scenario(string Name, TreeNode? Root, TreeNode? P, TreeNode? Q, int Expected);
 }

@@ -1,79 +1,75 @@
+using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace LinkedListCycleNeetCode;
 
-internal static class Program
+internal class Program
 {
-    private static void Main()
+    private static void Main(string[] args)
     {
-        Console.WriteLine("141. Linked List Cycle");
-        Console.WriteLine("====================================================================");
+        var scenarios = new[]
+        {
+            new Scenario("Cycle at index 1 [3,2,0,-4]", BuildWithCycle(new[]{3,2,0,-4}, 1), true),
+            new Scenario("No cycle single node [1]",     BuildWithCycle(new[]{1}, -1),        false),
+            new Scenario("Cycle at 0 [1,2]",             BuildWithCycle(new[]{1,2}, 0),       true),
+            new Scenario("No cycle [1,2,3]",             BuildWithCycle(new[]{1,2,3}, -1),    false),
+        };
 
-        RunScenario(
-            "Example: cycle at index 1",
-            () => Solution.HasCycle(BuildListWithCycle(new[] { 3, 2, 0, -4 }, 1)),
-            "True"
-        );
+        foreach (var scenario in scenarios)
+            RunScenario(scenario);
 
-        RunScenario(
-            "Edge: no cycle single node",
-            () => Solution.HasCycle(BuildListWithCycle(new[] { 1 }, -1)),
-            "False"
-        );
-
-        RunScenario(
-            "Long: 100 nodes cycle at index 50",
-            () => Solution.HasCycle(BuildListWithCycle(Enumerable.Range(1, 100).ToArray(), 50)),
-            "True"
-        );
+        Console.WriteLine();
     }
 
-    private static void RunScenario(string name, Func<bool> action, string expected)
+    private static void RunScenario(Scenario scenario)
     {
-        var stopwatch = Stopwatch.StartNew();
-        try
+        Console.WriteLine($"\n=== {scenario.Name} ===");
+
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length == 1)
+            .Where(m => m.ReturnType == typeof(bool))
+            .OrderBy(m => m.Name)
+            .ToArray();
+
+        foreach (var method in methods)
         {
-            bool result = action();
-            stopwatch.Stop();
-            Console.WriteLine($"Scenario: {name}");
-            Console.WriteLine($"  Time: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine($"  Result: {result}");
-            Console.WriteLine($"  Expected: {expected}");
-        }
-        catch (NotImplementedException)
-        {
-            stopwatch.Stop();
-            Console.WriteLine($"Scenario: {name}");
-            Console.WriteLine($"  Status: NOT IMPLEMENTED [{stopwatch.Elapsed.TotalMilliseconds:F4} ms]");
-            Console.WriteLine($"  Expected: {expected}");
-        }
-        catch (Exception ex)
-        {
-            stopwatch.Stop();
-            Console.WriteLine($"Scenario: {name}");
-            Console.WriteLine($"  Status: ERROR [{stopwatch.Elapsed.TotalMilliseconds:F4} ms]");
-            Console.WriteLine($"  Message: {ex.Message}");
+            var stopwatch = Stopwatch.StartNew();
+            object? result = null;
+            Exception? exception = null;
+
+            try
+            {
+                result = method.Invoke(null, new object?[] { scenario.Head });
+            }
+            catch (Exception ex) { exception = ex; }
+            finally { stopwatch.Stop(); }
+
+            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
+
+            if (exception != null)
+            {
+                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
+                continue;
+            }
+
+            var actual   = result!.ToString()!;
+            var expected = scenario.Expected.ToString();
+            Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "✅ PASS" : "❌ FAIL")}");
         }
     }
 
-    private static ListNode? BuildListWithCycle(IReadOnlyList<int> values, int pos)
+    private static ListNode? BuildWithCycle(int[] vals, int pos)
     {
-        if (values.Count == 0)
-        {
-            return null;
-        }
-
-        var nodes = values.Select(value => new ListNode(value)).ToArray();
-        for (int i = 0; i < nodes.Length - 1; i++)
-        {
-            nodes[i].Next = nodes[i + 1];
-        }
-
-        if (pos >= 0 && pos < nodes.Length)
-        {
-            nodes[^1].Next = nodes[pos];
-        }
-
+        if (vals.Length == 0) return null;
+        var nodes = vals.Select(v => new ListNode(v)).ToArray();
+        for (int i = 0; i < nodes.Length - 1; i++) nodes[i].Next = nodes[i + 1];
+        if (pos >= 0) nodes[^1].Next = nodes[pos];
         return nodes[0];
     }
+
+    private sealed record Scenario(string Name, ListNode? Head, bool Expected);
 }

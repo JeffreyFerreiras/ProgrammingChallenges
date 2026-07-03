@@ -1,33 +1,47 @@
-﻿
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-/*
-Amazon's AWS provides fast and efficient server solutions.
-The Developers want to stress-test the quality of the server's
-channels. They must ensure the following:
+class Program
+{
+    private static void Main(string[] args)
+    {
+        Console.WriteLine("Amazon Assessment - Maximum Quality\n");
 
-- Each of the packets must be sent via a single channel.
-- Each of the channels must be used by exactly one packet.
+        var scenarios = new[]
+        {
+            ("packets=[1,2,3,4,5] ch=2", new List<int>{1,2,3,4,5}, 2, new int[]{1,2,3,4,5}, 2),
+            ("packets=[1,2,3] ch=2",      new List<int>{1,2,3},     2, new int[]{1,2,3},     2),
+            ("packets=[5] ch=1",           new List<int>{5},          1, new int[]{5},          1),
+        };
 
-The quality of the transfer for a channel is defined by the 
-median of the sizes of all the data packets sent through that
-channel.
+        var solution = new Solution();
 
-Note: The median of an array is the middle element if the array 
-if the array is sorted in non-decreasing order. If the number of elements 
-in the array is even, the median is the average of the two middle elements.
+        foreach (var (name, packets, channels, packetsArr, channelsInt) in scenarios)
+        {
+            Console.WriteLine($"\n=== {name} ===");
 
-Find the maximum possible sum of the qualities of all channels. If the answer is a floating-point
-number, round it to the nearest integer.
+            // maximumQuality (static, List<int>, int)
+            {
+                var sw = Stopwatch.StartNew();
+                long result = 0;
+                try { result = Solution.maximumQuality(new List<int>(packets), channels); }
+                finally { sw.Stop(); }
+                Console.WriteLine($"maximumQuality | {sw.Elapsed.TotalMilliseconds:0.0000} ms | {result}");
+            }
 
-Example
-packets = [1, 2, 3, 4, 5]
-channels = 2
+            // MaxQualitySum (static, int[], int)
+            {
+                var sw = Stopwatch.StartNew();
+                int result2 = 0;
+                try { result2 = Solution.MaxQualitySum((int[])packetsArr.Clone(), channelsInt); }
+                finally { sw.Stop(); }
+                Console.WriteLine($"MaxQualitySum  | {sw.Elapsed.TotalMilliseconds:0.0000} ms | {result2}");
+            }
+        }
 
-*/
-
-List<int> packets = new List<int> { 1, 2, 3, 4, 5 };
-int channels = 2;
-
-Console.WriteLine(Solution.maximumQuality(packets, channels));
-
-
+        Console.WriteLine();
+    }
+}

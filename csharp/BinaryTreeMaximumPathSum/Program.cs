@@ -1,95 +1,90 @@
-﻿using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace BinaryTreeMaximumPathSum;
 
-internal static class Program
+internal class Program
 {
-    private static void Main()
+    private static void Main(string[] args)
     {
-        Console.WriteLine("Binary Tree Maximum Path Sum");
-        Console.WriteLine(new string('=', 32) + "\n");
-
-        var solution = new Solution();
-
         var scenarios = new[]
         {
-            (Name: "Example 1", Values: new int?[] { 1, 2, 3 }, Expected: 6),
-            (Name: "Example 2", Values: [-10, 9, 20, null, null, 15, 7], Expected: 42),
-            (Name: "Edge: Single Negative", Values: [-3], Expected: -3),
-            (Name: "All Negative", Values: [-2, -1], Expected: -1),
-            (Name: "Mixed", Values: [5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1], Expected: 53),
-            (Name: "Skewed", Values: [1, 2, null, 3, null, null, null, 4], Expected: 10),
-            (Name: "Balanced", Values: [2, -1, -2, 3, 4, -5, 6], Expected: 9)
+            new Scenario("Example 1 [1,2,3]",       BuildTree(new int?[]{1,2,3}),          6),
+            new Scenario("Example 2 [-10,9,20,n,n,15,7]", BuildTree(new int?[]{-10,9,20,null,null,15,7}), 42),
+            new Scenario("Single negative [-3]",     BuildTree(new int?[]{-3}),             -3),
+            new Scenario("All negative [-2,-1]",     BuildTree(new int?[]{-2,-1}),          -1),
+            new Scenario("Mixed [5,4,8,11,n,13,4,7,2,n,n,5,1]",
+                BuildTree(new int?[]{5,4,8,11,null,13,4,7,2,null,null,5,1}), 53),
         };
 
         foreach (var scenario in scenarios)
-        {
-            var root = BuildTree(scenario.Values);
+            RunScenario(scenario);
 
-            var stopwatch = Stopwatch.StartNew();
-            var result = solution.MaxPathSum(root);
-            stopwatch.Stop();
-
-            var passed = result == scenario.Expected;
-            var status = passed ? "✔" : "✘";
-
-            Console.WriteLine($"Scenario: {scenario.Name}");
-            Console.WriteLine($"Method: {nameof(Solution.MaxPathSum)}");
-            Console.WriteLine($"Tree: {FormatArray(scenario.Values)}");
-            Console.WriteLine($"Result: {result}, Expected: {scenario.Expected} {status}");
-            Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine(new string('-', 60));
-        }
+        Console.WriteLine();
     }
 
-    private static TreeNode? BuildTree(IReadOnlyList<int?> values)
+    private static void RunScenario(Scenario scenario)
     {
-        if (values.Count == 0)
-        {
-            return null;
-        }
+        Console.WriteLine($"\n=== {scenario.Name} ===");
 
-        var nodes = new TreeNode?[values.Count];
-        for (var i = 0; i < values.Count; i++)
+        var solution = new Solution();
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length >= 1)
+            .Where(m => m.ReturnType == typeof(int))
+            .OrderBy(m => m.Name)
+            .ToArray();
+
+        foreach (var method in methods)
         {
-            if (values[i].HasValue)
+            var stopwatch = Stopwatch.StartNew();
+            object? result = null;
+            Exception? exception = null;
+
+            try
             {
-                nodes[i] = new TreeNode(values[i]!.Value);
+                // MaxPathSum has optional int parameter; invoke with just root
+                var args2 = method.GetParameters().Length == 1
+                    ? new object?[] { scenario.Root }
+                    : new object?[] { scenario.Root, 0 };
+                result = method.Invoke(solution, args2);
             }
-        }
+            catch (Exception ex) { exception = ex; }
+            finally { stopwatch.Stop(); }
 
-        for (var i = 0; i < values.Count; i++)
-        {
-            var current = nodes[i];
-            if (current is null)
+            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
+
+            if (exception != null)
             {
+                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
                 continue;
             }
 
-            var leftIndex = 2 * i + 1;
-            var rightIndex = 2 * i + 2;
-
-            if (leftIndex < values.Count)
-            {
-                current.left = nodes[leftIndex];
-            }
-
-            if (rightIndex < values.Count)
-            {
-                current.right = nodes[rightIndex];
-            }
+            var actual   = result!.ToString()!;
+            var expected = scenario.Expected.ToString();
+            Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "✅ PASS" : "❌ FAIL")}");
         }
+    }
 
+    private static TreeNode? BuildTree(int?[] values)
+    {
+        if (values.Length == 0) return null;
+        var nodes = new TreeNode?[values.Length];
+        for (int i = 0; i < values.Length; i++)
+            if (values[i].HasValue) nodes[i] = new TreeNode(values[i]!.Value);
+        for (int i = 0; i < values.Length; i++)
+        {
+            if (nodes[i] is null) continue;
+            int l = 2 * i + 1, r = 2 * i + 2;
+            if (l < values.Length) nodes[i]!.left = nodes[l];
+            if (r < values.Length) nodes[i]!.right = nodes[r];
+        }
         return nodes[0];
     }
 
-    private static string FormatArray(IReadOnlyList<int?> values)
-    {
-        if (values.Count == 0)
-        {
-            return "[]";
-        }
-
-        return "[" + string.Join(",", values.Select(v => v?.ToString() ?? "null")) + "]";
-    }
+    private sealed record Scenario(string Name, TreeNode? Root, int Expected);
 }

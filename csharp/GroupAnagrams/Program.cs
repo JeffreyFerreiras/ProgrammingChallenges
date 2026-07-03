@@ -1,71 +1,72 @@
-﻿using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-namespace GroupAnagrams
+namespace GroupAnagrams;
+
+internal class Program
 {
-    /*
-     * Group Anagrams Problem
-     * ----------------------
-     * Given an array of strings strs, group the anagrams together.
-     * An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase,
-     * typically using all the original letters exactly once.
-     * 
-     * Example 1:
-     * Input: strs = ["eat","tea","tan","ate","nat","bat"]
-     * Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
-     * 
-     * Example 2:
-     * Input: strs = [""]
-     * Output: [[""]]
-     * 
-     * Example 3:
-     * Input: strs = ["a"]
-     * Output: [["a"]]
-     * 
-     * Constraints:
-     * 1 <= strs.length <= 10^4
-     * 0 <= strs[i].length <= 100
-     * strs[i] consists of lowercase English letters
-     */
-    class Program
+    private static void Main(string[] args)
     {
-        static void Main(string[] args)
+        var scenarios = new[]
         {
-            Console.WriteLine("Group Anagrams Problem");
-            Console.WriteLine("----------------------");
+            new Scenario("Example 1", new string[] { "eat","tea","tan","ate","nat","bat" }, "[[ate,eat,tea],[bat],[nat,tan]]"),
+            new Scenario("Empty string", new string[] { "" },                               "[[]]"),
+            new Scenario("Single",       new string[] { "a" },                              "[[a]]"),
+        };
 
-            // Test cases
-            RunTest(["eat", "tea", "tan", "ate", "nat", "bat"],
-                    "[[\"bat\"],[\"nat\",\"tan\"],[\"ate\",\"eat\",\"tea\"]]");
-            RunTest([""],
-                    "[[\"\"]]");
-            RunTest(["a"],
-                    "[[\"a\"]]");
-        }
+        foreach (var scenario in scenarios)
+            RunScenario(scenario);
 
-        static void RunTest(string[] input, string expectedOutput)
+        Console.WriteLine();
+    }
+
+    private static void RunScenario(Scenario scenario)
+    {
+        Console.WriteLine($"\n=== {scenario.Name} ===");
+
+        var solution = new Solution();
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length == 1)
+            .Where(m => m.GetParameters()[0].ParameterType == typeof(string[]))
+            .Where(m => m.ReturnType == typeof(IList<IList<string>>))
+            .OrderBy(m => m.Name)
+            .ToArray();
+
+        foreach (var method in methods)
         {
-            Solution solution = new();
-            Stopwatch stopwatch = new();
+            var stopwatch = Stopwatch.StartNew();
+            object? result = null;
+            Exception? exception = null;
 
-            Console.WriteLine($"Testing input: [{string.Join(", ", input.Select(s => $"\"{s}\""))}]");
+            try
+            {
+                result = method.Invoke(solution, new object?[] { scenario.Strs });
+            }
+            catch (Exception ex) { exception = ex; }
+            finally { stopwatch.Stop(); }
 
-            stopwatch.Start();
-            IList<IList<string>> result = solution.GroupAnagrams(input);
-            stopwatch.Stop();
+            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
 
-            string resultStr = ConvertResultToString(result);
+            if (exception != null)
+            {
+                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
+                continue;
+            }
 
-            Console.WriteLine($"Method: GroupAnagrams");
-            Console.WriteLine($"Time taken: {stopwatch.ElapsedTicks} ticks");
-            Console.WriteLine($"Result: `{resultStr}`");
-            Console.WriteLine($"Expected: `{expectedOutput}`");
-            Console.WriteLine();
-        }
-
-        static string ConvertResultToString(IList<IList<string>> result)
-        {
-            return "[" + string.Join(",", result.Select(group =>
-                "[" + string.Join(",", group.Select(s => $"\"{s}\"")) + "]")) + "]";
+            var actual = FormatGroups((IList<IList<string>>)result!);
+            Console.WriteLine($"{actual} | Expected {scenario.Expected} | {(actual == scenario.Expected ? "✅ PASS" : "❌ FAIL")}");
         }
     }
+
+    private static string FormatGroups(IList<IList<string>> groups) =>
+        "[" + string.Join(",", groups
+            .Select(g => "[" + string.Join(",", g.OrderBy(s => s)) + "]")
+            .OrderBy(s => s)) + "]";
+
+    private sealed record Scenario(string Name, string[] Strs, string Expected);
 }

@@ -1,95 +1,59 @@
-﻿using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Running;
+﻿// LeetCode 217 - Contains Duplicate
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace ContainsDuplicate
 {
-    public class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            //var rand = new Random();
-            //int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 16 };
-            //arr with 100 random numbers
-            //int[] arr = Enumerable.Range(0, 1000000).Select(x => rand.Next(0, 1000000)).ToArray();
-            //var timer = Stopwatch.StartNew();
-            //bool result;
-            //bool expected = Solution.ContainsDuplicate_InsertionSort(arr);
-            //timer.Restart();
-            //result = Solution.ContainsDuplicate_SelectionSort(arr);
-            //Console.WriteLine($"{nameof(Solution.ContainsDuplicate_SelectionSort)} \t\tresult: {result} expected: {expected} time: {timer.Elapsed} ms");
+            var scenarios = new[]
+            {
+                new Scenario("Has duplicate\u2014adjacent", new[] { 1, 1, 2, 3 }, true),
+                new Scenario("Has duplicate\u2014non-adjacent", new[] { 1, 2, 3, 1 }, true),
+                new Scenario("No duplicate", new[] { 1, 2, 3, 4 }, false),
+                new Scenario("Single element", new[] { 42 }, false),
+                new Scenario("All same", new[] { 7, 7, 7 }, true),
+                new Scenario("Large no-dup", Enumerable.Range(1, 1000).ToArray(), false),
+                new Scenario("Large dup-at-end", Enumerable.Range(1, 999).Append(500).ToArray(), true),
+            };
 
-            //timer.Restart();
-            //result = Solution.ContainsDuplicate_InsertionSort(arr);
-            //Console.WriteLine($"{nameof(Solution.ContainsDuplicate_InsertionSort)} \t\tresult: {result} expected: {expected} time: {timer.Elapsed} ms");
-
-            //timer.Restart();
-            //result = Solution.ContainsDuplicate_QuickSort(arr);
-            //Console.WriteLine($"{nameof(Solution.ContainsDuplicate_QuickSort)} \t\t\tresult: {result} expected: {expected} time: {timer.Elapsed} ms");
-
-            //timer.Restart();
-            //result = Solution.ContainsDuplicate_HashSet(arr);
-            //Console.WriteLine($"{nameof(Solution.ContainsDuplicate_HashSet)} \t\t\tresult: {result} expected: {expected} time: {timer.Elapsed} ms");
-
-            //timer.Restart();
-            //result = Solution.ContainsDuplicate_HashSet2(arr);
-            //Console.WriteLine($"{nameof(Solution.ContainsDuplicate_HashSet2)}  \t\t\tresult: {result} expected: {expected} time: {timer.Elapsed} ms");
-
-            //timer.Restart();
-            //result = Solution.ContainsDuplicate_NetSort(arr);
-            //Console.WriteLine($"{nameof(Solution.ContainsDuplicate_NetSort)}  \t\t\tresult: {result} expected: {expected} time: {timer.Elapsed} ms");
-
-
-            BenchmarkRunner.Run<SolutionBenchmark>();
-
-            Console.ReadKey();
-        }
-    }
-
-    [MemoryDiagnoser(false)]
-    //[Orderer(BenchmarkDotNet.Order.SummaryOrderPolicy.SlowestToFastest)]
-    [RankColumn]
-    public class SolutionBenchmark
-    {
-        private readonly Solution solution = new();
-        private static readonly Random rand = new(420);
-        int[] ints = [.. Enumerable.Range(0, 100).Select(x => rand.Next(0, 100))];
-        //int[] ints1 = Enumerable.Range(0, 10).Select(x => rand.Next(0, 10000)).ToArray();
-        //int[] ints2 = Enumerable.Range(0, 15).Select(x => rand.Next(0, 50)).ToArray();
-        public IEnumerable<int[]> Data()
-        {
-
-            yield return ints;
-            //yield return ints1;
-            //yield return ints2;
+            foreach (var scenario in scenarios)
+                RunScenario(scenario);
+            Console.WriteLine();
         }
 
-        //public int[] Data()
-        //{
-        //	return ints;
-        //}
+        private static void RunScenario(Scenario scenario)
+        {
+            Console.WriteLine($"\n=== {scenario.Name} ===");
+            var solution = new Solution();
+            var methods = typeof(Solution)
+                .GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName)
+                .Where(m => m.GetParameters().Length == 1)
+                .Where(m => m.GetParameters()[0].ParameterType == typeof(int[]))
+                .Where(m => m.ReturnType == typeof(bool))
+                .OrderBy(m => m.Name)
+                .ToArray();
 
-        [Benchmark]
-        [ArgumentsSource(nameof(Data))]
-        public void NetSort(int[] nums) => solution.ContainsDuplicate_NetSort(nums);
+            foreach (var method in methods)
+            {
+                var inputCopy = (int[])scenario.Nums.Clone();
+                var sw = Stopwatch.StartNew();
+                object? result = null; Exception? ex = null;
+                try { result = method.Invoke(method.IsStatic ? null : solution, new object?[] { inputCopy }); }
+                catch (Exception e) { ex = e; } finally { sw.Stop(); }
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
+                if (ex != null) { Console.WriteLine($"ERROR: {ex.GetBaseException().Message}"); continue; }
+                var actual = result?.ToString() ?? "null";
+                var expected = scenario.Expected.ToString();
+                Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "\u2705 PASS" : "\u274c FAIL")}");
+            }
+        }
 
-        [Benchmark]
-        [ArgumentsSource(nameof(Data))]
-        public void SelectionSort(int[] nums) => solution.ContainsDuplicate_SelectionSort(nums);
-
-        [Benchmark]
-        [ArgumentsSource(nameof(Data))]
-        public void InsertionSort(int[] nums) => solution.ContainsDuplicate_InsertionSort(nums);
-
-        [Benchmark]
-        [ArgumentsSource(nameof(Data))]
-        public void QuickSort(int[] nums) => solution.ContainsDuplicate_QuickSort(nums);
-
-        [Benchmark]
-        [ArgumentsSource(nameof(Data))]
-        public void HashSet(int[] nums) => solution.ContainsDuplicate_HashSet(nums);
-
-        [Benchmark]
-        [ArgumentsSource(nameof(Data))]
-        public void HashSet2(int[] nums) => solution.ContainsDuplicate_HashSet2(nums);
+        private sealed record Scenario(string Name, int[] Nums, bool Expected);
     }
 }

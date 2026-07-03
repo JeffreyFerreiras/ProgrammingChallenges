@@ -4,7 +4,18 @@ public static class Solution
 {
     public static ListNode? ReverseList(ListNode? head)
     {
-        throw new NotImplementedException();
+        ListNode? previous = null;
+        ListNode? current = head;
+
+        while (current is not null)
+        {
+            ListNode? next = current.Next;
+            current.Next = previous;
+            previous = current;
+            current = next;
+        }
+
+        return previous;
     }
 }
 

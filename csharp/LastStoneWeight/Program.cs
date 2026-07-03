@@ -1,112 +1,57 @@
+// LeetCode 1046 - Last Stone Weight
+using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-namespace LastStoneWeight;
-
-internal record TestScenario(string Name, int[] Stones, int Expected);
-
-internal static class Program
+namespace LastStoneWeight
 {
-    public static void Main()
+    internal class Program
     {
-        var solution = new Solution();
-        var methodName = nameof(Solution.LastStoneWeight);
-
-        TestScenario[] scenarios =
-        [
-            new(
-                "Example 1",
-                [2, 7, 4, 1, 8, 1],
-                1
-            ),
-            new(
-                "Single Stone",
-                [1],
-                1
-            ),
-            new(
-                "Even Smash",
-                [9, 3, 2, 10],
-                0
-            ),
-            new(
-                "All Equal",
-                Enumerable.Repeat(5, 6).ToArray(),
-                0
-            ),
-            new(
-                "Large Input",
-                GenerateDescendingSequence(100_000),
-                1
-            ),
-        ];
-
-        foreach (TestScenario scenario in scenarios)
+        private static void Main(string[] args)
         {
-            RunScenario(solution, methodName, scenario);
-        }
-    }
+            var scenarios = new[]
+            {
+                new Scenario("Example 1", new[] { 2, 7, 4, 1, 8, 1 }, 1),
+                new Scenario("Single Stone", new[] { 1 }, 1),
+                new Scenario("Even Smash", new[] { 9, 3, 2, 10 }, 0),
+                new Scenario("All Equal", Enumerable.Repeat(5, 6).ToArray(), 0),
+                new Scenario("Two stones", new[] { 3, 7 }, 4),
+            };
 
-    private static int[] GenerateDescendingSequence(int length)
-    {
-        int[] stones = new int[length];
-        for (int i = 0; i < length; i++)
-        {
-            stones[i] = length - i;
-        }
-        return stones;
-    }
-
-    private static void RunScenario(Solution solution, string methodName, TestScenario scenario)
-    {
-        Console.WriteLine($"Scenario: {scenario.Name}");
-        Console.WriteLine($"Method: {methodName}");
-        Console.WriteLine($"Stones: {FormatArrayPreview(scenario.Stones)}");
-        Console.WriteLine($"Expected: {scenario.Expected}");
-
-        Stopwatch stopwatch = Stopwatch.StartNew();
-        string resultDisplay;
-
-        try
-        {
-            int result = solution.LastStoneWeight((int[])scenario.Stones.Clone());
-            stopwatch.Stop();
-            resultDisplay = result.ToString();
-        }
-        catch (NotImplementedException ex)
-        {
-            stopwatch.Stop();
-            resultDisplay = $"Not Implemented ({ex.Message})";
-        }
-        catch (Exception ex)
-        {
-            stopwatch.Stop();
-            resultDisplay = $"Error ({ex.GetType().Name}: {ex.Message})";
+            foreach (var scenario in scenarios)
+                RunScenario(scenario);
+            Console.WriteLine();
         }
 
-        Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-        Console.WriteLine($"Result: {resultDisplay}");
-        Console.WriteLine();
-    }
-
-    private static string FormatArrayPreview(int[] numbers)
-    {
-        const int previewCount = 12;
-        if (numbers.Length == 0)
+        private static void RunScenario(Scenario scenario)
         {
-            return "[]";
+            Console.WriteLine($"\n=== {scenario.Name} ===");
+            var solution = new Solution();
+            var methods = typeof(Solution)
+                .GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName)
+                .Where(m => m.GetParameters().Length == 1)
+                .Where(m => m.GetParameters()[0].ParameterType == typeof(int[]))
+                .Where(m => m.ReturnType == typeof(int))
+                .OrderBy(m => m.Name)
+                .ToArray();
+
+            foreach (var method in methods)
+            {
+                var inputCopy = (int[])scenario.Stones.Clone();
+                var sw = Stopwatch.StartNew();
+                object? result = null; Exception? ex = null;
+                try { result = method.Invoke(method.IsStatic ? null : solution, new object?[] { inputCopy }); }
+                catch (Exception e) { ex = e; } finally { sw.Stop(); }
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
+                if (ex != null) { Console.WriteLine($"ERROR: {ex.GetBaseException().Message}"); continue; }
+                var actual = result?.ToString() ?? "null";
+                var expected = scenario.Expected.ToString();
+                Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "\u2705 PASS" : "\u274c FAIL")}");
+            }
         }
 
-        if (numbers.Length <= previewCount)
-        {
-            return $"[{string.Join(",", numbers)}]";
-        }
-
-        string[] preview = new string[previewCount + 1];
-        for (int i = 0; i < previewCount; i++)
-        {
-            preview[i] = numbers[i].ToString();
-        }
-        preview[previewCount] = $"..., {numbers[^1]}";
-        return $"[{string.Join(",", preview)}]";
+        private sealed record Scenario(string Name, int[] Stones, int Expected);
     }
 }

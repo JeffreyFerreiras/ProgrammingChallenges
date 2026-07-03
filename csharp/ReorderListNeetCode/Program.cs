@@ -1,210 +1,93 @@
+using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace ReorderListNeetCode;
 
-internal static class Program
+internal class Program
 {
-    private static void Main()
+    private static void Main(string[] args)
     {
-        Console.WriteLine("143. Reorder List");
-        Console.WriteLine("====================================================================");
+        var scenarios = new[]
+        {
+            new Scenario("Example 1 [1,2,3,4]",   Build(1,2,3,4),   "[1,4,2,3]"),
+            new Scenario("Example 2 [1,2,3,4,5]", Build(1,2,3,4,5), "[1,5,2,4,3]"),
+            new Scenario("Single [42]",             Build(42),         "[42]"),
+            new Scenario("Two [1,2]",               Build(1,2),        "[1,2]"),
+            new Scenario("Three [1,2,3]",           Build(1,2,3),      "[1,3,2]"),
+            new Scenario("Six [1,2,3,4,5,6]",       Build(1,2,3,4,5,6),"[1,6,2,5,3,4]"),
+        };
 
-        // Basic Examples
-        RunScenario(
-            "Example 1: [1,2,3,4]",
-            BuildList(1, 2, 3, 4),
-            "[1,4,2,3]"
-        );
+        foreach (var scenario in scenarios)
+            RunScenario(scenario);
 
-        RunScenario(
-            "Example 2: [1,2,3,4,5]",
-            BuildList(1, 2, 3, 4, 5),
-            "[1,5,2,4,3]"
-        );
-
-        // Edge Cases
-        RunScenario(
-            "Edge: empty list",
-            BuildList(),
-            "[]"
-        );
-
-        RunScenario(
-            "Edge: single node",
-            BuildList(42),
-            "[42]"
-        );
-
-        RunScenario(
-            "Edge: two nodes",
-            BuildList(1, 2),
-            "[1,2]"
-        );
-
-        RunScenario(
-            "Edge: three nodes",
-            BuildList(1, 2, 3),
-            "[1,3,2]"
-        );
-
-        // Various Lengths
-        RunScenario(
-            "Length 6: [1,2,3,4,5,6]",
-            BuildList(1, 2, 3, 4, 5, 6),
-            "[1,6,2,5,3,4]"
-        );
-
-        RunScenario(
-            "Length 7: [1,2,3,4,5,6,7]",
-            BuildList(1, 2, 3, 4, 5, 6, 7),
-            "[1,7,2,6,3,5,4]"
-        );
-
-        RunScenario(
-            "Length 8: eight nodes",
-            BuildList(Enumerable.Range(1, 8)),
-            "[1,8,2,7,3,6,4,5]"
-        );
-
-        // Different Value Patterns
-        RunScenario(
-            "Negative values: [-1,-2,-3,-4]",
-            BuildList(-1, -2, -3, -4),
-            "[-1,-4,-2,-3]"
-        );
-
-        RunScenario(
-            "Mixed values: [0,1,-1,2]",
-            BuildList(0, 1, -1, 2),
-            "[0,2,1,-1]"
-        );
-
-        RunScenario(
-            "Large values: [100,200,300,400,500]",
-            BuildList(100, 200, 300, 400, 500),
-            "[100,500,200,400,300]"
-        );
-
-        RunScenario(
-            "Duplicate values: [1,1,2,2]",
-            BuildList(1, 1, 2, 2),
-            "[1,2,1,2]"
-        );
-
-        // Longer Lists
-        RunScenario(
-            "Length 10: [1..10]",
-            BuildList(Enumerable.Range(1, 10)),
-            "[1,10,2,9,3,8,4,7,5,6]"
-        );
-
-        // Test to demonstrate failure case
-        RunScenario(
-            "Demo: Failure case",
-            BuildList(1, 2),
-            "[2,1]" // Deliberately wrong expected result
-        );
-
-        Console.WriteLine("\n====================================================================");
-        Console.WriteLine("Test Summary:");
-        Console.WriteLine("- ✅ = Test passed");
-        Console.WriteLine("- ❌ = Test failed"); 
-        Console.WriteLine("- ⚠️  = Not implemented");
-        Console.WriteLine("- 💥 = Runtime error");
+        Console.WriteLine();
     }
 
-    private static void RunScenario(string name, ListNode? head, string expected)
+    private static void RunScenario(Scenario scenario)
     {
-        var stopwatch = Stopwatch.StartNew();
-        try
+        Console.WriteLine($"\n=== {scenario.Name} ===");
+
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length == 1)
+            .Where(m => m.ReturnType == typeof(void))
+            .OrderBy(m => m.Name)
+            .ToArray();
+
+        foreach (var method in methods)
         {
-            ListNode? clone = CloneList(head);
-            Solution.ReorderList(clone);
-            stopwatch.Stop();
-            
-            string result = FormatList(clone);
-            bool passed = result == expected;
-            string status = passed ? "✅ PASS" : "❌ FAIL";
-            
-            Console.WriteLine($"Scenario: {name}");
-            Console.WriteLine($"  Status: {status} [{stopwatch.Elapsed.TotalMilliseconds:F4} ms]");
-            Console.WriteLine($"  Result: {result}");
-            Console.WriteLine($"  Expected: {expected}");
-        }
-        catch (NotImplementedException)
-        {
-            stopwatch.Stop();
-            Console.WriteLine($"Scenario: {name}");
-            Console.WriteLine($"  Status: ⚠️  NOT IMPLEMENTED [{stopwatch.Elapsed.TotalMilliseconds:F4} ms]");
-            Console.WriteLine($"  Expected: {expected}");
-        }
-        catch (Exception ex)
-        {
-            stopwatch.Stop();
-            Console.WriteLine($"Scenario: {name}");
-            Console.WriteLine($"  Status: 💥 ERROR [{stopwatch.Elapsed.TotalMilliseconds:F4} ms]");
-            Console.WriteLine($"  Message: {ex.Message}");
-            Console.WriteLine($"  Expected: {expected}");
+            var headCopy = Clone(scenario.Head);
+            var stopwatch = Stopwatch.StartNew();
+            Exception? exception = null;
+
+            try
+            {
+                method.Invoke(null, new object?[] { headCopy });
+            }
+            catch (Exception ex) { exception = ex; }
+            finally { stopwatch.Stop(); }
+
+            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
+
+            if (exception != null)
+            {
+                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
+                continue;
+            }
+
+            var actual = Format(headCopy);
+            Console.WriteLine($"{actual} | Expected {scenario.Expected} | {(actual == scenario.Expected ? "✅ PASS" : "❌ FAIL")}");
         }
     }
 
-    private static ListNode? BuildList(IEnumerable<int> values)
+    private static string Format(ListNode? node)
     {
-        ListNode? head = null;
-        ListNode? tail = null;
-        foreach (int value in values)
-        {
-            var node = new ListNode(value);
-            if (head is null)
-            {
-                head = node;
-            }
-            else
-            {
-                tail!.next = node;
-            }
+        var parts = new System.Collections.Generic.List<int>();
+        while (node != null) { parts.Add(node.val); node = node.next; }
+        return "[" + string.Join(",", parts) + "]";
+    }
 
-            tail = node;
-        }
-
+    private static ListNode? Build(params int[] vals)
+    {
+        if (vals.Length == 0) return null;
+        var head = new ListNode(vals[0]);
+        var cur = head;
+        for (int i = 1; i < vals.Length; i++) { cur.next = new ListNode(vals[i]); cur = cur.next; }
         return head;
     }
 
-    private static ListNode? BuildList(params int[] values) => BuildList((IEnumerable<int>)values);
-
-    private static ListNode? CloneList(ListNode? head)
+    private static ListNode? Clone(ListNode? node)
     {
-        if (head is null)
-        {
-            return null;
-        }
-
-        var values = new List<int>();
-        ListNode? current = head;
-        while (current is not null)
-        {
-            values.Add(current.val);
-            current = current.next;
-        }
-
-        return BuildList(values);
+        if (node is null) return null;
+        var head = new ListNode(node.val);
+        var cur = head;
+        node = node.next;
+        while (node != null) { cur.next = new ListNode(node.val); cur = cur.next; node = node.next; }
+        return head;
     }
 
-    private static string FormatList(ListNode? head)
-    {
-        if (head is null)
-        {
-            return "[]";
-        }
-
-        var values = new List<int>();
-        ListNode? current = head;
-        while (current is not null)
-        {
-            values.Add(current.val);
-            current = current.next;
-        }
-
-        return $"[{string.Join(",", values)}]";
-    }
+    private sealed record Scenario(string Name, ListNode? Head, string Expected);
 }

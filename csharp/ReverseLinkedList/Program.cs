@@ -1,114 +1,79 @@
-﻿using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-namespace ReverseLinkedList
+namespace ReverseLinkedList;
+
+internal class Program
 {
-    class Program
+    private static void Main(string[] args)
     {
-        /*
-        Reverse a .NET LinkedList while maintaining the best time and space complexity. 
-        */
+        Console.WriteLine("206. Reverse Linked List\n");
 
-        static void Main(string[] args)
+        // Static ListNode-based methods
+        var listMethods = typeof(Solution)
+            .GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => m.GetParameters().Length == 1 && m.GetParameters()[0].ParameterType == typeof(ListNode))
+            .Where(m => m.ReturnType == typeof(ListNode))
+            .OrderBy(m => m.Name)
+            .ToArray();
+
+        var scenarios = new[]
         {
-            // .NET LinkedList reversal scenario
-            var list = new LinkedList<string>();
-            list.AddLast("one");
-            list.AddLast("two");
-            list.AddLast("three");
-            var expectedLinked = new List<string> { "three", "two", "one" };
-            var sw = Stopwatch.StartNew();
-            list.ReverseLinkedList(); // assumed extension method
-            sw.Stop();
-            Console.WriteLine($"Method: LinkedList.ReverseLinkedList, Time: {sw.ElapsedTicks} ticks, Result: {string.Join(',', list)}, Expected: {string.Join(',', expectedLinked)}");
+            ("Scenario 1 - [1,2,3]",    Build(1,2,3),  "[3,2,1]"),
+            ("Scenario 2 - empty",       (ListNode?)null, "[]"),
+            ("Scenario 3 - single [5]",  Build(5),      "[5]"),
+        };
 
-            // Node iterative reversal scenario
-            var testNode = PopulateTestCase();
-            sw.Restart();
-            var reversedIterative = ReverseLinkedList(testNode);
-            sw.Stop();
-            Console.WriteLine($"Method: ReverseLinkedList (iterative), Time: {sw.ElapsedTicks} ticks, Result: {GetValues(reversedIterative)}, Expected: 3,2,1");
-
-            // Node recursive reversal scenario
-            testNode = PopulateTestCase();
-            sw.Restart();
-            var reversedRecursive = ReverseLinkedListRecursive(testNode);
-            sw.Stop();
-            Console.WriteLine($"Method: ReverseLinkedListRecursive (recursive), Time: {sw.ElapsedTicks} ticks, Result: {GetValues(reversedRecursive)}, Expected: 3,2,1");
-
-            Console.ReadLine();
-        }
-
-        private static string GetValues(Node node)
+        foreach (var (name, head, expected) in scenarios)
         {
-            var values = new List<string>();
-            while (node != null)
+            Console.WriteLine($"\n=== {name} ===");
+            foreach (var method in listMethods)
             {
-                values.Add(node.Value.ToString());
-                node = node.Next;
-            }
-            return string.Join(",", values);
-        }
+                var copy = Clone(head);
+                var sw = Stopwatch.StartNew();
+                object? result = null;
+                Exception? exception = null;
 
-        private static void Print(Node testNode)
-        {
-            do
-            {
-                Console.WriteLine(testNode?.Value);
-                testNode = testNode.Next;
-            } while (testNode != null);
-        }
+                try { result = method.Invoke(null, new object?[] { copy }); }
+                catch (Exception ex) { exception = ex; }
+                finally { sw.Stop(); }
 
-        private static Node PopulateTestCase()
-        {
-            // Changed: using fixed test case values for consistency.
-            var node = new Node(1);
-            node.Next = new Node(2);
-            node.Next.Next = new Node(3);
-            return node;
-        }
-
-        private static Node ReverseLinkedListRecursive(Node root)
-        {
-            Node next = root.Next;
-            root.Next = null;
-
-            return Recursive(root, next);
-
-            Node Recursive(Node node, Node nex)
-            {
-                if (nex is null)
-                {
-                    return node;
-                }
-
-                Node nextToNext = nex.Next;
-                nex.Next = node;
-
-                return Recursive(nex, nextToNext);
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
+                if (exception != null) { Console.WriteLine($"ERROR: {exception.GetBaseException().Message}"); continue; }
+                var actual = Format((ListNode?)result);
+                Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "✅ PASS" : "❌ FAIL")}");
             }
         }
 
-        private static Node ReverseLinkedList(Node root)
-        {
-            Node current = root;
-            Node previous = null;
+        Console.WriteLine();
+    }
 
-            while (current != null)
-            {
-                Node next = current.Next;       //define a container for the next node
-                current.Next = previous;        // assign the previous node to next
-                previous = current;             // assign the current node to previous
-                current = next;                 // assign the next node to current
-            }
+    private static string Format(ListNode? node)
+    {
+        var parts = new List<int>();
+        while (node != null) { parts.Add(node.val); node = node.next; }
+        return "[" + string.Join(",", parts) + "]";
+    }
 
-            return previous;
-        }
+    private static ListNode? Build(params int[] vals)
+    {
+        if (vals.Length == 0) return null;
+        var head = new ListNode(vals[0]);
+        var cur = head;
+        for (int i = 1; i < vals.Length; i++) { cur.next = new ListNode(vals[i]); cur = cur.next; }
+        return head;
+    }
 
-        public class Node(int value)
-        {
-            public int Value { get; set; } = value;
-
-            public Node Next { get; set; }
-        }
+    private static ListNode? Clone(ListNode? node)
+    {
+        if (node is null) return null;
+        var head = new ListNode(node.val);
+        var cur = head;
+        node = node.next;
+        while (node != null) { cur.next = new ListNode(node.val); cur = cur.next; node = node.next; }
+        return head;
     }
 }

@@ -1,97 +1,46 @@
-﻿/*
- * Valid Parentheses
- *
- * Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
-
-An input string is valid if:
-
-Open brackets must be closed by the same type of brackets.
-Open brackets must be closed in the correct order.
-Every close bracket has a corresponding open bracket of the same type.
- 
-
-Example 1:
-
-Input: s = "()"
-
-Output: true
-
-Example 2:
-
-Input: s = "()[]{}"
-
-Output: true
-
-Example 3:
-
-Input: s = "(]"
-
-Output: false
-
-Example 4:
-
-Input: s = "([])"
-
-Output: true
-
-
-
-
-Constraints:
-
-1 <= s.length <= 104
-s consists of parentheses only '()[]{}'.*/
+// LeetCode 20 - Valid Parentheses
+using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-namespace ValidParentheses;
-
-internal class Program
+namespace ValidParentheses
 {
-    static void Main(string[] args)
+    internal class Program
     {
-        var testCases = new Dictionary<string, bool>
+        private static void Main(string[] args)
         {
-            // Basic examples
-            { "()", true },
-            { "()[]{}", true },
-            { "(]", false },
-            { "([])", true },
-            // Edge cases
-            { "", true }, // Empty string
-            { "(", false }, // Single opening bracket
-            { ")", false }, // Single closing bracket
-            { "((", false }, // Only opening brackets
-            { "))", false }, // Only closing brackets
-            // Complex nesting
-            { "{[()]}", true }, // Proper nested brackets
-            { "([)]", false }, // Improper nesting
-            { "{[({})]}", true }, // Deep nesting
-            { "[({})]", true }, // Mixed proper nesting
-            // Mismatch cases
-            { "(}", false }, // Wrong closing bracket
-            { "[)", false }, // Wrong closing bracket
-            { "{]", false }, // Wrong closing bracket
-            // Longer sequences
-            { "()[]{}()", true }, // Multiple pairs
-            { "((()))", true }, // Nested same type
-            { "[[[]]]]", false }, // Extra closing bracket
-            { "((([))))", false }, // Wrong order closing
-            // Complex valid cases
-            { "{[()]}[{}](([])){()}", true }, // Mixed complex nesting
-            { "(){}[]", true }, // Simple sequence
-            { "(((())))[[[[]]]]{{{{}}}})", false }, // Missing opening
-            { "(((())))[[[[]]]][{{{}}}]", true }, // Complex balanced
-        };
-
-        foreach (var testCase in testCases)
-        {
-            var stopwatch = Stopwatch.StartNew();
-            var result = Solution.IsValid(testCase.Key);
-            stopwatch.Stop();
-
-            Console.WriteLine(
-                $"Method: IsValid, Input: {testCase.Key}, Result: {result}, Expected: {testCase.Value}, Time: {stopwatch.ElapsedTicks} ticks"
-            );
+            var scenarios = new[]
+            {
+                new Scenario("Example 1", "()", true),
+                new Scenario("Example 2", "()[]{}", true),
+                new Scenario("Example 3", "(]", false),
+                new Scenario("Nested", "({[]})", true),
+                new Scenario("Unmatched open", "((", false),
+                new Scenario("Unmatched close", "))", false),
+            };
+            foreach (var scenario in scenarios) RunScenario(scenario);
+            Console.WriteLine();
         }
+        private static void RunScenario(Scenario scenario)
+        {
+            Console.WriteLine($"\n=== {scenario.Name} ===");
+            var solution = new Solution();
+            var methods = typeof(Solution).GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName).Where(m => m.GetParameters().Length == 1)
+                .Where(m => m.GetParameters()[0].ParameterType == typeof(string))
+                .Where(m => m.ReturnType == typeof(bool)).OrderBy(m => m.Name).ToArray();
+            foreach (var method in methods)
+            {
+                var sw = Stopwatch.StartNew(); object? result = null; Exception? ex = null;
+                try { result = method.Invoke(method.IsStatic ? null : solution, new object?[] { scenario.S }); }
+                catch (Exception e) { ex = e; } finally { sw.Stop(); }
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
+                if (ex != null) { Console.WriteLine($"ERROR: {ex.GetBaseException().Message}"); continue; }
+                var actual = result?.ToString() ?? "null"; var expected = scenario.Expected.ToString();
+                Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "\u2705 PASS" : "\u274c FAIL")}");
+            }
+        }
+        private sealed record Scenario(string Name, string S, bool Expected);
     }
 }

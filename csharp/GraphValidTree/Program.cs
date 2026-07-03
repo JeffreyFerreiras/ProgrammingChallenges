@@ -1,51 +1,56 @@
-﻿using System.Diagnostics;
+﻿// LeetCode 261 - Graph Valid Tree
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace GraphValidTree
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Console.WriteLine("Graph Valid Tree Challenge");
-            Console.WriteLine("=========================");
+            var scenarios = new[]
+            {
+                new Scenario("Example 1", 5, new int[][] { new[]{0,1}, new[]{0,2}, new[]{0,3}, new[]{1,4} }, true),
+                new Scenario("Example 2", 5, new int[][] { new[]{0,1}, new[]{1,2}, new[]{2,3}, new[]{1,3}, new[]{1,4} }, false),
+                new Scenario("Single Node", 1, new int[][] { }, true),
+                new Scenario("Disconnected", 3, new int[][] { new[]{0,1} }, false),
+            };
 
-            Solution solution = new();
-
-            // Test cases
-            RunTest(solution, "Example 1", 5, [
-                [0, 1],
-                [0, 2],
-                [0, 3],
-                [1, 4]
-            ], true);
-
-            RunTest(solution, "Example 2", 5, [
-                [0, 1],
-                [1, 2],
-                [2, 3],
-                [1, 3],
-                [1, 4]
-            ], false);
-
-            Console.WriteLine("\nPress any key to exit...");
-            Console.ReadKey();
+            foreach (var scenario in scenarios)
+                RunScenario(scenario);
+            Console.WriteLine();
         }
 
-        static void RunTest(Solution solution, string testName, int n, int[][] edges, bool expected)
+        private static void RunScenario(Scenario scenario)
         {
-            Console.WriteLine($"\nRunning test: {testName}");
+            Console.WriteLine($"\n=== {scenario.Name} ===");
+            var solution = new Solution();
+            var methods = typeof(Solution)
+                .GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName)
+                .Where(m => m.GetParameters().Length == 2)
+                .Where(m => m.GetParameters()[0].ParameterType == typeof(int))
+                .Where(m => m.GetParameters()[1].ParameterType == typeof(int[][]))
+                .Where(m => m.ReturnType == typeof(bool))
+                .OrderBy(m => m.Name)
+                .ToArray();
 
-            Stopwatch stopwatch = new();
-            stopwatch.Start();
-
-            bool result = solution.ValidTree(n, edges);
-
-            stopwatch.Stop();
-
-            Console.WriteLine($"Method: ValidTree");
-            Console.WriteLine($"Execution Time: {stopwatch.ElapsedTicks} ticks");
-            Console.WriteLine($"Result: `{result}`");
-            Console.WriteLine($"Expected: `{expected}`");
+            foreach (var method in methods)
+            {
+                var sw = Stopwatch.StartNew();
+                object? result = null; Exception? ex = null;
+                try { result = method.Invoke(method.IsStatic ? null : solution, new object?[] { scenario.N, scenario.Edges }); }
+                catch (Exception e) { ex = e; } finally { sw.Stop(); }
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
+                if (ex != null) { Console.WriteLine($"ERROR: {ex.GetBaseException().Message}"); continue; }
+                var actual = result?.ToString() ?? "null";
+                var expected = scenario.Expected.ToString();
+                Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "\u2705 PASS" : "\u274c FAIL")}");
+            }
         }
+
+        private sealed record Scenario(string Name, int N, int[][] Edges, bool Expected);
     }
 }

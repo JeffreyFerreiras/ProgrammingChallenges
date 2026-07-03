@@ -1,107 +1,93 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-namespace ValidSudoku
+namespace ValidSudoku;
+
+internal class Program
 {
-    class Program
+    private static void Main(string[] args)
     {
-        static void Main(string[] args)
+        var valid = new char[][]
         {
-            Console.WriteLine("LeetCode 36: Valid Sudoku");
-            Console.WriteLine("========================");
+            new[]{'5','3','.','.','7','.','.','.','.'},
+            new[]{'6','.','.','1','9','5','.','.','.'},
+            new[]{'.','9','8','.','.','.','.','6','.'},
+            new[]{'8','.','.','.','6','.','.','.','3'},
+            new[]{'4','.','.','8','.','3','.','.','1'},
+            new[]{'7','.','.','.','2','.','.','.','6'},
+            new[]{'.','6','.','.','.','.','2','8','.'},
+            new[]{'.','.','.','4','1','9','.','.','5'},
+            new[]{'.','.','.','.','8','.','.','7','9'},
+        };
+        var invalid = new char[][]
+        {
+            new[]{'8','3','.','.','7','.','.','.','.'},
+            new[]{'6','.','.','1','9','5','.','.','.'},
+            new[]{'.','9','8','.','.','.','.','6','.'},
+            new[]{'8','.','.','.','6','.','.','.','3'},
+            new[]{'4','.','.','8','.','3','.','.','1'},
+            new[]{'7','.','.','.','2','.','.','.','6'},
+            new[]{'.','6','.','.','.','.','2','8','.'},
+            new[]{'.','.','.','4','1','9','.','.','5'},
+            new[]{'.','.','.','.','8','.','.','7','9'},
+        };
 
-            var solution = new Solution();
+        var scenarios = new[]
+        {
+            new Scenario("Valid board",   valid,   true),
+            new Scenario("Invalid board", invalid, false),
+        };
 
-            // Test Case 1: Valid Sudoku board
-            char[][] validBoard =
-            [
-                ['5', '3', '.', '.', '7', '.', '.', '.', '.'],
-                ['6', '.', '.', '1', '9', '5', '.', '.', '.'],
-                ['.', '9', '8', '.', '.', '.', '.', '6', '.'],
-                ['8', '.', '.', '.', '6', '.', '.', '.', '3'],
-                ['4', '.', '.', '8', '.', '3', '.', '.', '1'],
-                ['7', '.', '.', '.', '2', '.', '.', '.', '6'],
-                ['.', '6', '.', '.', '.', '.', '2', '8', '.'],
-                ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
-                ['.', '.', '.', '.', '8', '.', '.', '7', '9'],
-            ];
+        foreach (var scenario in scenarios)
+            RunScenario(scenario);
 
-            // Test Case 2: Invalid Sudoku board (duplicate 8 in top-left 3x3 box)
-            char[][] invalidBoard =
-            [
-                ['8', '3', '.', '.', '7', '.', '.', '.', '.'],
-                ['6', '.', '.', '1', '9', '5', '.', '.', '.'],
-                ['.', '9', '8', '.', '.', '.', '.', '6', '.'],
-                ['8', '.', '.', '.', '6', '.', '.', '.', '3'],
-                ['4', '.', '.', '8', '.', '3', '.', '.', '1'],
-                ['7', '.', '.', '.', '2', '.', '.', '.', '6'],
-                ['.', '6', '.', '.', '.', '.', '2', '8', '.'],
-                ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
-                ['.', '.', '.', '.', '8', '.', '.', '7', '9'],
-            ];
+        Console.WriteLine();
+    }
 
-            // Test Case 3: Invalid board with duplicate in row
-            char[][] invalidRowBoard =
-            [
-                ['5', '3', '5', '.', '7', '.', '.', '.', '.'],
-                ['6', '.', '.', '1', '9', '5', '.', '.', '.'],
-                ['.', '9', '8', '.', '.', '.', '.', '6', '.'],
-                ['8', '.', '.', '.', '6', '.', '.', '.', '3'],
-                ['4', '.', '.', '8', '.', '3', '.', '.', '1'],
-                ['7', '.', '.', '.', '2', '.', '.', '.', '6'],
-                ['.', '6', '.', '.', '.', '.', '2', '8', '.'],
-                ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
-                ['.', '.', '.', '.', '8', '.', '.', '7', '9'],
-            ];
+    private static void RunScenario(Scenario scenario)
+    {
+        Console.WriteLine($"\n=== {scenario.Name} ===");
 
-            // Test Case 4: Invalid board with duplicate in column
-            char[][] invalidColumnBoard =
-            [
-                ['5', '3', '.', '.', '7', '.', '.', '.', '.'],
-                ['6', '.', '.', '1', '9', '5', '.', '.', '.'],
-                ['.', '9', '8', '.', '.', '.', '.', '6', '.'],
-                ['8', '.', '.', '.', '6', '.', '.', '.', '3'],
-                ['4', '.', '.', '8', '.', '3', '.', '.', '1'],
-                ['7', '.', '.', '.', '2', '.', '.', '.', '6'],
-                ['.', '6', '.', '.', '.', '.', '2', '8', '.'],
-                ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
-                ['5', '.', '.', '.', '8', '.', '.', '7', '9'],
-            ];
+        var solution = new Solution();
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length == 1)
+            .Where(m => m.GetParameters()[0].ParameterType == typeof(char[][]))
+            .Where(m => m.ReturnType == typeof(bool))
+            .OrderBy(m => m.Name)
+            .ToArray();
+
+        foreach (var method in methods)
+        {
+            var boardCopy = scenario.Board.Select(r => (char[])r.Clone()).ToArray();
+            var stopwatch = Stopwatch.StartNew();
+            object? result = null;
+            Exception? exception = null;
 
             try
             {
-                Console.WriteLine("\nRunning test cases...");
-
-                Console.Write("Test Case 1 (Valid board): ");
-                bool result1 = solution.IsValidSudoku(validBoard);
-                Console.WriteLine($"Expected: True, Got: {result1}");
-
-                Console.Write("Test Case 2 (Invalid - duplicate in 3x3 box): ");
-                bool result2 = solution.IsValidSudoku(invalidBoard);
-                Console.WriteLine($"Expected: False, Got: {result2}");
-
-                Console.Write("Test Case 3 (Invalid - duplicate in row): ");
-                bool result3 = solution.IsValidSudoku(invalidRowBoard);
-                Console.WriteLine($"Expected: False, Got: {result3}");
-
-                Console.Write("Test Case 4 (Invalid - duplicate in column): ");
-                bool result4 = solution.IsValidSudoku(invalidColumnBoard);
-                Console.WriteLine($"Expected: False, Got: {result4}");
-
-                Console.WriteLine("\nAll test cases completed!");
+                result = method.Invoke(solution, new object?[] { boardCopy });
             }
-            catch (NotImplementedException)
+            catch (Exception ex) { exception = ex; }
+            finally { stopwatch.Stop(); }
+
+            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
+
+            if (exception != null)
             {
-                Console.WriteLine(
-                    "\nSolution not implemented yet. Please implement the IsValidSudoku method."
-                );
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"\nError occurred: {ex.Message}");
+                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
+                continue;
             }
 
-            Console.WriteLine("\nPress any key to exit...");
-            Console.ReadKey();
+            var actual   = result!.ToString()!;
+            var expected = scenario.Expected.ToString();
+            Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "✅ PASS" : "❌ FAIL")}");
         }
     }
+
+    private sealed record Scenario(string Name, char[][] Board, bool Expected);
 }

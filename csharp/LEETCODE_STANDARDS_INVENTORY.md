@@ -10,41 +10,22 @@ Verification performed:
 - Ran `dotnet build .\ProgrammingChallenges.sln --no-restore`: build passed with 0 errors and 71 warnings.
 - Spot-checked conflicting subagent findings directly before including them.
 
+Update 2026-07-03:
+- Fixed 23 critical placeholder/missing primary solution entries.
+- Re-ran `dotnet build .\ProgrammingChallenges.sln --no-restore`: build passed with 0 errors and 0 warnings after the first fix pass.
+
 ## Critical: incomplete or missing primary solution
 
 These projects have a public primary entry point that is unimplemented, placeholder-only, or missing source.
 
 | Project | Evidence | Issue |
 | --- | --- | --- |
-| AddTwoNumbersNeetCode | `AddTwoNumbersNeetCode/Solution.cs:7` | Throws `NotImplementedException`. |
-| AsteroidCollision | `AsteroidCollision/Solution.cs:7` | Throws `NotImplementedException`. |
-| BinarySearch | `BinarySearch/Solution.cs:7` | Throws `NotImplementedException`. |
-| ClimbingStairsNeetCode | `ClimbingStairsNeetCode/Solution.cs:11` | Placeholder returns `0`. |
-| CoinChangeNeetCode | `CoinChangeNeetCode/Solution.cs:11` | Placeholder returns `-1`. |
-| CombinationSumIV | `CombinationSumIV/Solution.cs:11` | Placeholder returns `0`. |
 | CourseScheduleII | `CourseScheduleII/` | Folder is empty: no project source or runnable example. |
-| DecodeWaysNeetCode | `DecodeWaysNeetCode/Solution.cs:11` | Placeholder returns `0`. |
 | DesignTwitter | `DesignTwitter/Solution.cs:9` | Solution and core operations throw `NotImplementedException`. |
-| FindAllAnagramsInAString | `FindAllAnagramsInAString/Solution.cs:11` | Always returns an empty list. |
-| HouseRobber | `HouseRobber/Solution.cs:11` | Placeholder returns `0`. |
-| HouseRobberII | `HouseRobberII/Solution.cs:11` | Placeholder returns `0`. |
 | JumpGame | `JumpGame/Solution.cs:11` | Placeholder returns `false`. |
 | JumpGameII | `JumpGameII/Solution.cs:11` | Placeholder returns `0`. |
-| KClosestPointsToOrigin | `KClosestPointsToOrigin/Solution.cs:7` | Throws `NotImplementedException`. |
-| KthLargestElementInAnArray | `KthLargestElementInAnArray/Solution.cs:7` | Throws `NotImplementedException`. |
-| KthLargestElementInAStream | `KthLargestElementInAStream/Solution.cs:7` | Throws `NotImplementedException`. |
-| LastStoneWeight | `LastStoneWeight/Solution.cs:7` | Throws `NotImplementedException`. |
-| LinkedListCycleNeetCode | `LinkedListCycleNeetCode/Solution.cs:7` | Throws `NotImplementedException`. |
 | LongestIncreasingSubsequence | `LongestIncreasingSubsequence/Solution.cs:11` | Placeholder returns `0`. |
-| MaximumProductSubarray | `MaximumProductSubarray/Solution.cs:11` | Placeholder returns `0`. |
-| MinCostClimbingStairs | `MinCostClimbingStairs/Solution.cs:11` | Placeholder returns `0`. |
-| PartitionEqualSubsetSum | `PartitionEqualSubsetSum/Solution.cs:11` | Placeholder returns `false`. |
-| ReverseLinkedListNeetCode | `ReverseLinkedListNeetCode/Solution.cs:7` | Throws `NotImplementedException`. |
 | ReverseNodesInKGroupNeetCode | `ReverseNodesInKGroupNeetCode/` | Folder contains only generated artifacts, no source project files. |
-| SearchA2DMatrix | `SearchA2DMatrix/Solution.cs:7` | Throws `NotImplementedException`. |
-| TaskScheduler | `TaskScheduler/Solution.cs:7` | Throws `NotImplementedException`. |
-| ValidAnagram | `ValidAnagram/Solution.cs:33` | Public `Solution.IsAnagram` throws `NotImplementedException`. |
-| WordBreak | `WordBreak/Solution.cs:11` | Always returns `false`. |
 | WordSearchII | `WordSearchII/Solution.cs:41` | Primary optimized method throws `NotImplementedException`; brute-force fallback is not suitable for LeetCode II constraints. |
 
 ## Correctness or edge-case failures
@@ -123,8 +104,8 @@ These projects appear to have plausible core logic, but the runnable example doe
 
 ## Summary Counts
 
-- Critical incomplete or missing primary solution: 30 projects.
+- Critical incomplete or missing primary solution: 7 projects.
 - Correctness or edge-case failures: 32 projects.
 - Complexity/API/side-effect mismatches: 10 projects.
 - Weak or non-verifying runners: 11 projects.
-- Total unique projects flagged: 83.
+- Total unique projects flagged: 60.

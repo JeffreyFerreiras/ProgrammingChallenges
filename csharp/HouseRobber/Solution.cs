@@ -4,10 +4,19 @@ public class Solution
 {
     /// <summary>
     /// Determines the maximum money that can be robbed without alerting the police.
-    /// TODO: Track running include/exclude sums across the houses.
     /// </summary>
     public int Rob(int[] nums)
     {
-        return 0;
+        var twoBack = 0;
+        var oneBack = 0;
+
+        foreach (var num in nums)
+        {
+            var current = Math.Max(oneBack, twoBack + num);
+            twoBack = oneBack;
+            oneBack = current;
+        }
+
+        return oneBack;
     }
 }

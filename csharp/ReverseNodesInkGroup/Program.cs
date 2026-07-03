@@ -1,153 +1,93 @@
-// Program.cs
 using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-namespace ReverseNodesInkGroup
+namespace ReverseNodesInkGroup;
+
+internal class Program
 {
-    class Program
+    private static void Main(string[] args)
     {
-        /*
-         * Problem Description:
-         * Level: Hard
-         * Given a linked list, reverse the nodes of a linked list k at a time and return its modified list.
-         * k is a positive integer and is less than or equal to the length of the linked list.
-         * If the number of nodes is not a multiple of k then left-out nodes in the end should remain as it is.
-         * You may not alter the values in the list's nodes, only nodes themselves may be changed.
-         * 
-         * Example:
-         * Input: head = [1,2,3,4,5], k = 2
-         * Output: [2,1,4,3,5]
-         * 
-         * Input: head = [1,2,3,4,5], k = 3
-         * Output: [3,2,1,4,5]
-         * 
-         * Constraints:
-         * The number of nodes in the list is in the range [0, 5000].
-         * 0 <= Node.val <= 1000
-         * The value of k is in the range [1, 5000].
-         */
-
-        static void Main(string[] args)
+        var scenarios = new[]
         {
-            Stopwatch sw = new Stopwatch();
+            new Scenario("[1,2,3,4,5] k=2", Build(1,2,3,4,5), 2, "[2,1,4,3,5]"),
+            new Scenario("[1,2,3,4,5] k=3", Build(1,2,3,4,5), 3, "[3,2,1,4,5]"),
+            new Scenario("[1,2,3,4,5] k=1", Build(1,2,3,4,5), 1, "[1,2,3,4,5]"),
+            new Scenario("[1] k=1",          Build(1),          1, "[1]"),
+        };
 
-            // Scenario 1: Linked list 1->2->3->4->5, k = 2
-            // Input: 1 -> 2 -> 3 -> 4 -> 5, k = 2
-            // Expected result: 2 -> 1 -> 4 -> 3 -> 5
-            ListNode head1 = CreateTestList();
-            Console.WriteLine("Scenario 1: Linked list 1 -> 2 -> 3 -> 4 -> 5, k = 2");
-            sw.Start();
-            head1 = Solution.ReverseKGroup(head1, 2);
-            sw.Stop();
-            Console.WriteLine($"[Solution.ReverseKGroup] Execution Time: {sw.ElapsedMilliseconds} ms");
-            PrintList(head1);
-            Console.WriteLine("[2 1 4 3 5]");
+        foreach (var scenario in scenarios)
+            RunScenario(scenario);
 
-            // Scenario 2: Linked list 1->2->3->4->5, k = 3
-            // Input: 1 -> 2 -> 3 -> 4 -> 5, k = 3
-            // Expected result: 3 -> 2 -> 1 -> 4 -> 5
-            ListNode head2 = CreateTestList();
-            Console.WriteLine("\nScenario 2: Linked list 1 -> 2 -> 3 -> 4 -> 5, k = 3");
-            sw.Restart();
-            head2 = Solution.ReverseKGroup(head2, 3);
-            sw.Stop();
-            Console.WriteLine($"[Solution.ReverseKGroup] Execution Time: {sw.ElapsedMilliseconds} ms");
-            PrintList(head2);
-            Console.WriteLine("[3 2 1 4 5]");
+        Console.WriteLine();
+    }
 
-            // Scenario 3: Linked list 1->2->3->4->5, k = 1 (should remain unchanged)
-            // Input: 1 -> 2 -> 3 -> 4 -> 5, k = 1
-            // Expected result: 1 -> 2 -> 3 -> 4 -> 5
-            ListNode head3 = CreateTestList();
-            Console.WriteLine("\nScenario 3: Linked list 1 -> 2 -> 3 -> 4 -> 5, k = 1");
-            sw.Restart();
-            head3 = Solution.ReverseKGroup(head3, 1);
-            sw.Stop();
-            Console.WriteLine($"[Solution.ReverseKGroup] Execution Time: {sw.ElapsedMilliseconds} ms");
-            PrintList(head3);
-            Console.WriteLine("[1 2 3 4 5]");
+    private static void RunScenario(Scenario scenario)
+    {
+        Console.WriteLine($"\n=== {scenario.Name} ===");
 
-            // Scenario 4: Linked list 1->2->3->4->5, k = 6 (incomplete group)
-            // Input: 1 -> 2 -> 3 -> 4 -> 5, k = 6
-            // Expected result: 1 -> 2 -> 3 -> 4 -> 5
-            ListNode head4 = CreateTestList();
-            Console.WriteLine("\nScenario 4: Linked list 1 -> 2 -> 3 -> 4 -> 5, k = 6");
-            sw.Restart();
-            head4 = Solution.ReverseKGroup(head4, 6);
-            sw.Stop();
-            Console.WriteLine($"[Solution.ReverseKGroup] Execution Time: {sw.ElapsedMilliseconds} ms");
-            PrintList(head4);
-            Console.WriteLine("[1 2 3 4 5]");
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length == 2)
+            .Where(m => m.GetParameters()[1].ParameterType == typeof(int))
+            .Where(m => m.ReturnType == typeof(ListNode))
+            .OrderBy(m => m.Name)
+            .ToArray();
 
-            // Additional Scenario 5: Empty list, k = 3
-            // Input: Empty list, k = 3
-            // Expected result: Empty list
-            ListNode head5 = null;
-            Console.WriteLine("\nScenario 5: Empty list, k = 3");
-            sw.Restart();
-            head5 = Solution.ReverseKGroup(head5, 3);
-            sw.Stop();
-            Console.WriteLine($"[Solution.ReverseKGroup] Execution Time: {sw.ElapsedMilliseconds} ms");
-            PrintList(head5);
-            Console.WriteLine("[Empty list]");
-
-            // Additional Scenario 6: Single node list, k = 2
-            // Input: 100, k = 2
-            // Expected result: 100
-            ListNode head6 = new ListNode(100);
-            Console.WriteLine("\nScenario 6: Single node list, k = 2");
-            sw.Restart();
-            head6 = Solution.ReverseKGroup(head6, 2);
-            sw.Stop();
-            Console.WriteLine($"[Solution.ReverseKGroup] Execution Time: {sw.ElapsedMilliseconds} ms");
-            PrintList(head6);
-            Console.WriteLine("[100]");
-
-            // Expected Console Output (execution times may vary):
-            // Scenario 1:
-            //    2 1 4 3 5 
-            // Scenario 2:
-            //    3 2 1 4 5
-            // Scenario 3:
-            //    1 2 3 4 5
-            // Scenario 4:
-            //    1 2 3 4 5
-            // Scenario 5:
-            //    Empty list
-            // Scenario 6:
-            //    100
-        }
-
-        // Helper method to create a test linked list 1->2->3->4->5
-        private static ListNode CreateTestList()
+        foreach (var method in methods)
         {
-            ListNode head = new ListNode(1);
-            ListNode current = head;
-            for (int i = 2; i <= 5; i++)
-            {
-                current.next = new ListNode(i);
-                current = current.next;
-            }
-            return head;
-        }
+            var headCopy = Clone(scenario.Head);
+            var stopwatch = Stopwatch.StartNew();
+            object? result = null;
+            Exception? exception = null;
 
-        // Helper method to print the linked list
-        private static void PrintList(ListNode head)
-        {
-            if (head == null)
+            try
             {
-                Console.WriteLine("Empty list");
-                return;
+                result = method.Invoke(null, new object?[] { headCopy, scenario.K });
             }
-            ListNode current = head;
-            while (current != null)
+            catch (Exception ex) { exception = ex; }
+            finally { stopwatch.Stop(); }
+
+            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
+
+            if (exception != null)
             {
-                Console.Write(current.val + " ");
-                current = current.next;
+                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
+                continue;
             }
-            Console.WriteLine();
+
+            var actual = Format((ListNode?)result);
+            Console.WriteLine($"{actual} | Expected {scenario.Expected} | {(actual == scenario.Expected ? "✅ PASS" : "❌ FAIL")}");
         }
     }
 
+    private static string Format(ListNode? node)
+    {
+        var parts = new System.Collections.Generic.List<int>();
+        while (node != null) { parts.Add(node.val); node = node.next; }
+        return "[" + string.Join(",", parts) + "]";
+    }
 
+    private static ListNode? Build(params int[] vals)
+    {
+        if (vals.Length == 0) return null;
+        var head = new ListNode(vals[0]);
+        var cur = head;
+        for (int i = 1; i < vals.Length; i++) { cur.next = new ListNode(vals[i]); cur = cur.next; }
+        return head;
+    }
+
+    private static ListNode? Clone(ListNode? node)
+    {
+        if (node is null) return null;
+        var head = new ListNode(node.val);
+        var cur = head;
+        node = node.next;
+        while (node != null) { cur.next = new ListNode(node.val); cur = cur.next; node = node.next; }
+        return head;
+    }
+
+    private sealed record Scenario(string Name, ListNode? Head, int K, string Expected);
 }

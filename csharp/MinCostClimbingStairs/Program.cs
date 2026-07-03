@@ -1,54 +1,45 @@
-﻿using System.Diagnostics;
+// LeetCode 746 - Min Cost Climbing Stairs
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-namespace MinCostClimbingStairs;
-
-internal static class Program
+namespace MinCostClimbingStairs
 {
-    private static void Main()
+    internal class Program
     {
-        Console.WriteLine("Min Cost Climbing Stairs");
-        Console.WriteLine(new string('=', 26) + "\n");
-
-        var solution = new Solution();
-
-        var scenarios = new[]
+        private static void Main(string[] args)
         {
-            (Name: "Example 1", Cost: [10, 15, 20], Expected: 15),
-            (Name: "Example 2", Cost: [1, 100, 1, 1, 1, 100, 1, 1, 100, 1], Expected: 6),
-            (Name: "Edge: Zero Cost", Cost: [0, 0], Expected: 0),
-            (Name: "Alternating", Cost: [1, 100, 1, 100, 1, 100], Expected: 203),
-            (Name: "Large Values", Cost: [100, 200, 300, 1], Expected: 101),
-            (Name: "Long Input", Cost: BuildLongInput(20), Expected: 10)
-        };
-
-        foreach (var scenario in scenarios)
-        {
-            var stopwatch = Stopwatch.StartNew();
-            var result = solution.MinCostClimbingStairs(scenario.Cost);
-            stopwatch.Stop();
-
-            Console.WriteLine($"Scenario: {scenario.Name}");
-            Console.WriteLine($"Method: {nameof(Solution.MinCostClimbingStairs)}");
-            Console.WriteLine($"Input: cost = {FormatArray(scenario.Cost)}");
-            Console.WriteLine($"Result: {result}, Expected: {scenario.Expected}");
-            Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine(new string('-', 60));
+            var scenarios = new[]
+            {
+                new Scenario("Example 1", new[] { 10,15,20 }, 15),
+                new Scenario("Example 2", new[] { 1,100,1,1,1,100,1,1,100,1 }, 6),
+                new Scenario("Two steps", new[] { 0,0,0,1 }, 1),
+            };
+            foreach (var scenario in scenarios) RunScenario(scenario);
+            Console.WriteLine();
         }
-    }
-
-    private static int[] BuildLongInput(int length)
-    {
-        var result = new int[length];
-        for (var i = 0; i < length; i++)
+        private static void RunScenario(Scenario scenario)
         {
-            result[i] = i % 2;
+            Console.WriteLine($"\n=== {scenario.Name} ===");
+            var solution = new Solution();
+            var methods = typeof(Solution).GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName)
+                .Where(m => m.GetParameters().Length == 1)
+                .Where(m => m.GetParameters()[0].ParameterType == typeof(int[]))
+                .Where(m => m.ReturnType == typeof(int))
+                .OrderBy(m => m.Name).ToArray();
+            foreach (var method in methods)
+            {
+                var sw = Stopwatch.StartNew(); object? result = null; Exception? ex = null;
+                try { result = method.Invoke(method.IsStatic ? null : solution, new object?[] { scenario.Cost }); }
+                catch (Exception e) { ex = e; } finally { sw.Stop(); }
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
+                if (ex != null) { Console.WriteLine($"ERROR: {ex.GetBaseException().Message}"); continue; }
+                var actual = result?.ToString() ?? "null"; var expected = scenario.Expected.ToString();
+                Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "\u2705 PASS" : "\u274c FAIL")}");
+            }
         }
-
-        return result;
-    }
-
-    private static string FormatArray(int[] values)
-    {
-        return "[" + string.Join(",", values) + "]";
+        private sealed record Scenario(string Name, int[] Cost, int Expected);
     }
 }

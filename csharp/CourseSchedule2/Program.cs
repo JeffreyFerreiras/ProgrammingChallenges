@@ -1,106 +1,81 @@
-﻿using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace CourseSchedule2;
 
-class Program
+internal class Program
 {
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
-        Console.WriteLine("210. Course Schedule II - LeetCode Problem");
-        Console.WriteLine(@"
-There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.
+        // Note: topological sort allows multiple valid orderings; expected shows one valid answer
+        var scenarios = new[]
+        {
+            new Scenario("2 courses [1,0]",          2, new int[][] { new[]{1,0} },                    "0,1"),
+            new Scenario("4 courses complex",         4, new int[][] { new[]{1,0},new[]{2,0},new[]{3,1},new[]{3,2} }, "0,1,2,3"),
+            new Scenario("1 course []",               1, new int[][] { },                               "0"),
+            new Scenario("Cycle - impossible",        2, new int[][] { new[]{1,0},new[]{0,1} },         ""),
+            new Scenario("3 courses chain",           3, new int[][] { new[]{1,0},new[]{2,1} },         "0,1,2"),
+        };
 
-For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
-Return the ordering of courses you should take to finish all courses. If there are many valid answers, return any of them. If it is impossible to finish all courses, return an empty array.
+        foreach (var scenario in scenarios)
+            RunScenario(scenario);
 
-Example 1:
-Input: numCourses = 2, prerequisites = [[1,0]]
-Output: [0,1]
-Explanation: There are a total of 2 courses to take. To take course 1 you should have finished course 0. So the correct course order is [0,1].
-
-Example 2:
-Input: numCourses = 4, prerequisites = [[1,0],[2,0],[3,1],[3,2]]
-Output: [0,2,1,3] or [0,1,2,3]
-Explanation: There are a total of 4 courses to take. To take course 3 you should have finished both courses 1 and 2. Both courses 1 and 2 should be taken after you finished course 0.
-So one correct course order is [0,1,2,3]. Another correct ordering is [0,2,1,3].
-
-Example 3:
-Input: numCourses = 1, prerequisites = []
-Output: [0]
-
-Example 4:
-Input: numCourses = 2, prerequisites = [[1,0],[0,1]]
-Output: []
-Explanation: It is impossible to finish all courses.
-");
-
-        Solution solution = new();
-
-        // Test cases
-        RunTestCase(solution, 2, [[1, 0]], [0, 1]);
-        RunTestCase(solution, 4, [[1, 0], [2, 0], [3, 1], [3, 2]], [0, 2, 1, 3]);
-        RunTestCase(solution, 1, [], [0]);
-        RunTestCase(solution, 2, [[1, 0], [0, 1]], []);
-        RunTestCase(solution, 3, [[1, 0], [2, 1]], [0, 1, 2]);
-    }
-
-    static void RunTestCase(Solution solution, int numCourses, int[][] prerequisites, int[] expected)
-    {
-        Console.WriteLine($"Test Case: numCourses = {numCourses}, prerequisites = {GetPrerequisitesString(prerequisites)} => Expected: {GetArrayString(expected)}");
-
-        // Run DFS algorithm and report results
-        RunAlgorithm(
-            "DFS",
-            () => solution.FindOrderTopologicalDFS(numCourses, prerequisites),
-            expected
-        );
-
-        // Run BFS algorithm and report results
-        RunAlgorithm(
-            "BFS (Kahn's algorithm)",
-            () => solution.FindOrderTopologicalBFS(numCourses, prerequisites),
-            expected
-        );
-
-        // Run Adj algorithm and report results
-        RunAlgorithm(
-            "Adj List",
-            () => solution.FindOrderAdjDfs(numCourses, prerequisites),
-            expected
-        );
-
-        Console.WriteLine(new string('-', 50));
-    }
-
-    static void RunAlgorithm(string algorithmName, Func<int[]> algorithmFunction, int[] expected)
-    {
-        Stopwatch sw = new();
-        sw.Start();
-        int[] result = algorithmFunction();
-        sw.Stop();
-
-        Console.WriteLine($"Find Order {algorithmName}: {sw.ElapsedTicks} ticks");
-        Console.WriteLine($"Result: `{GetArrayString(result)}`");
-        Console.WriteLine($"Expected: `{GetArrayString(expected)}`");
         Console.WriteLine();
     }
 
-    static string GetArrayString(int[] array)
+    private static void RunScenario(Scenario scenario)
     {
-        return "[" + string.Join(",", array) + "]";
-    }
+        Console.WriteLine($"\n=== {scenario.Name} ===");
 
-    static string GetPrerequisitesString(int[][] prerequisites)
-    {
-        if (prerequisites.Length == 0)
-            return "[]";
+        var solution = new Solution();
+        var methods = typeof(Solution)
+            .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+            .Where(m => !m.IsSpecialName)
+            .Where(m => m.GetParameters().Length == 2)
+            .Where(m => m.GetParameters()[0].ParameterType == typeof(int))
+            .Where(m => m.GetParameters()[1].ParameterType == typeof(int[][]))
+            .Where(m => m.ReturnType == typeof(int[]))
+            .OrderBy(m => m.Name)
+            .ToArray();
 
-        List<string> pairs = new();
-        foreach (var pair in prerequisites)
+        foreach (var method in methods)
         {
-            pairs.Add($"[{pair[0]},{pair[1]}]");
-        }
+            var stopwatch = Stopwatch.StartNew();
+            object? result = null;
+            Exception? exception = null;
 
-        return "[" + string.Join(",", pairs) + "]";
+            try
+            {
+                result = method.Invoke(solution, new object?[] { scenario.NumCourses, scenario.Prerequisites });
+            }
+            catch (Exception ex) { exception = ex; }
+            finally { stopwatch.Stop(); }
+
+            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
+
+            if (exception != null)
+            {
+                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
+                continue;
+            }
+
+            var actual   = string.Join(",", (int[])result!);
+            Console.WriteLine($"{actual} | Expected {scenario.Expected} (order may vary) | {(IsValid((int[])result!, scenario.NumCourses, scenario.Prerequisites, scenario.Expected) ? "✅ PASS" : "❌ FAIL")}");
+        }
     }
+
+    private static bool IsValid(int[] order, int n, int[][] prereqs, string expectedStr)
+    {
+        if (expectedStr == "" && order.Length == 0) return true;
+        if (order.Length != n) return false;
+        if (order.Distinct().Count() != n) return false;
+        var pos = new int[n];
+        for (int i = 0; i < n; i++) pos[order[i]] = i;
+        return prereqs.All(p => pos[p[1]] < pos[p[0]]);
+    }
+
+    private sealed record Scenario(string Name, int NumCourses, int[][] Prerequisites, string Expected);
 }

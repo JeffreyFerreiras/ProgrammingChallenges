@@ -4,19 +4,34 @@ public class Solution
 {
     public KthLargest CreateKthLargest(int k, int[] nums)
     {
-        throw new NotImplementedException("Instantiate and return a heap-backed KthLargest tracker.");
+        return new KthLargest(k, nums);
     }
 
     public class KthLargest
     {
+        private readonly int k;
+        private readonly PriorityQueue<int, int> largest = new();
+
         public KthLargest(int k, int[] nums)
         {
-            throw new NotImplementedException("Initialize internal state to track the kth largest value.");
+            this.k = k;
+
+            foreach (int num in nums)
+            {
+                Add(num);
+            }
         }
 
         public int Add(int val)
         {
-            throw new NotImplementedException("Incorporate the new value and return the current kth largest element.");
+            largest.Enqueue(val, val);
+
+            if (largest.Count > k)
+            {
+                largest.Dequeue();
+            }
+
+            return largest.Peek();
         }
     }
 }

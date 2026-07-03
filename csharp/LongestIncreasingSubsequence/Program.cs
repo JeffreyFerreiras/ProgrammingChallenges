@@ -1,40 +1,44 @@
-﻿using System.Diagnostics;
+// LeetCode 300 - Longest Increasing Subsequence
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-namespace LongestIncreasingSubsequence;
-
-internal static class Program
+namespace LongestIncreasingSubsequence
 {
-    private static void Main()
+    internal class Program
     {
-        Console.WriteLine("Longest Increasing Subsequence");
-        Console.WriteLine(new string('=', 34) + "\n");
-
-        var solution = new Solution();
-
-        var scenarios = new[]
+        private static void Main(string[] args)
         {
-            (Name: "Example 1", Nums: new[] { 10, 9, 2, 5, 3, 7, 101, 18 }, Expected: 4),
-            (Name: "Example 2", Nums: [0, 1, 0, 3, 2, 3], Expected: 4),
-            (Name: "Example 3", Nums: [7, 7, 7, 7, 7, 7, 7], Expected: 1),
-            (Name: "Edge: Single", Nums: [1], Expected: 1),
-            (Name: "Increasing", Nums: [1, 2, 3, 4, 5], Expected: 5),
-            (Name: "Decreasing", Nums: [5, 4, 3, 2, 1], Expected: 1)
-        };
-
-        foreach (var scenario in scenarios)
-        {
-            var stopwatch = Stopwatch.StartNew();
-            var result = solution.LengthOfLIS(scenario.Nums);
-            stopwatch.Stop();
-
-            Console.WriteLine($"Scenario: {scenario.Name}");
-            Console.WriteLine($"Method: {nameof(Solution.LengthOfLIS)}");
-            Console.WriteLine($"Input: nums = {FormatArray(scenario.Nums)}");
-            Console.WriteLine($"Result: {result}, Expected: {scenario.Expected}");
-            Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine(new string('-', 60));
+            var scenarios = new[]
+            {
+                new Scenario("Example 1", new[] { 10,9,2,5,3,7,101,18 }, 4),
+                new Scenario("Example 2", new[] { 0,1,0,3,2,3 }, 4),
+                new Scenario("Example 3", new[] { 7,7,7,7,7,7,7 }, 1),
+                new Scenario("Single", new[] { 1 }, 1),
+            };
+            foreach (var scenario in scenarios) RunScenario(scenario);
+            Console.WriteLine();
         }
+        private static void RunScenario(Scenario scenario)
+        {
+            Console.WriteLine($"\n=== {scenario.Name} ===");
+            var solution = new Solution();
+            var methods = typeof(Solution).GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName).Where(m => m.GetParameters().Length == 1)
+                .Where(m => m.GetParameters()[0].ParameterType == typeof(int[])).Where(m => m.ReturnType == typeof(int))
+                .OrderBy(m => m.Name).ToArray();
+            foreach (var method in methods)
+            {
+                var sw = Stopwatch.StartNew(); object? result = null; Exception? ex = null;
+                try { result = method.Invoke(method.IsStatic ? null : solution, new object?[] { scenario.Nums }); }
+                catch (Exception e) { ex = e; } finally { sw.Stop(); }
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
+                if (ex != null) { Console.WriteLine($"ERROR: {ex.GetBaseException().Message}"); continue; }
+                var actual = result?.ToString() ?? "null"; var expected = scenario.Expected.ToString();
+                Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "\u2705 PASS" : "\u274c FAIL")}");
+            }
+        }
+        private sealed record Scenario(string Name, int[] Nums, int Expected);
     }
-
-    private static string FormatArray(int[] values) => "[" + string.Join(",", values) + "]";
 }
