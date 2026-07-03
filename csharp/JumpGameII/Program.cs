@@ -1,51 +1,57 @@
-﻿using System.Diagnostics;
+﻿// LeetCode 45 - Jump Game II
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-namespace JumpGameII;
-
-internal static class Program
+namespace JumpGameII
 {
-    private static void Main()
+    internal class Program
     {
-        Console.WriteLine("Jump Game II");
-        Console.WriteLine(new string('=', 12) + "\n");
-
-        var solution = new Solution();
-
-        var scenarios = new[]
+        private static void Main(string[] args)
         {
-            (Name: "Example 1", Nums: [2, 3, 1, 1, 4], Expected: 2),
-            (Name: "Example 2", Nums: [2, 3, 0, 1, 4], Expected: 2),
-            (Name: "Edge: Single", Nums: [0], Expected: 0),
-            (Name: "Single Jump", Nums: [5, 0, 0, 0], Expected: 1),
-            (Name: "Increasing Reach", Nums: [1, 2, 3, 4, 5], Expected: 3),
-            (Name: "Long Array", Nums: BuildRange(10), Expected: 3)
-        };
+            var scenarios = new[]
+            {
+                new Scenario("Example 1", new[] { 2, 3, 1, 1, 4 }, 2),
+                new Scenario("Example 2", new[] { 2, 3, 0, 1, 4 }, 2),
+                new Scenario("Edge: Single", new[] { 0 }, 0),
+                new Scenario("Single Jump", new[] { 5, 0, 0, 0 }, 1),
+                new Scenario("Increasing Reach", new[] { 1, 2, 3, 4, 5 }, 3),
+                new Scenario("Long Array", new[] { 1,2,3,4,1,2,3,4,1,2 }, 3),
+            };
 
-        foreach (var scenario in scenarios)
-        {
-            var stopwatch = Stopwatch.StartNew();
-            var result = solution.Jump(scenario.Nums);
-            stopwatch.Stop();
-
-            Console.WriteLine($"Scenario: {scenario.Name}");
-            Console.WriteLine($"Method: {nameof(Solution.Jump)}");
-            Console.WriteLine($"Input: nums = {FormatArray(scenario.Nums)}");
-            Console.WriteLine($"Result: {result}, Expected: {scenario.Expected}");
-            Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine(new string('-', 60));
-        }
-    }
-
-    private static int[] BuildRange(int length)
-    {
-        var array = new int[length];
-        for (var i = 0; i < length; i++)
-        {
-            array[i] = i % 4 + 1;
+            foreach (var scenario in scenarios)
+                RunScenario(scenario);
+            Console.WriteLine();
         }
 
-        return array;
-    }
+        private static void RunScenario(Scenario scenario)
+        {
+            Console.WriteLine($"\n=== {scenario.Name} ===");
+            var solution = new Solution();
+            var methods = typeof(Solution)
+                .GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName)
+                .Where(m => m.GetParameters().Length == 1)
+                .Where(m => m.GetParameters()[0].ParameterType == typeof(int[]))
+                .Where(m => m.ReturnType == typeof(int))
+                .OrderBy(m => m.Name)
+                .ToArray();
 
-    private static string FormatArray(int[] values) => "[" + string.Join(",", values) + "]";
+            foreach (var method in methods)
+            {
+                var sw = Stopwatch.StartNew();
+                object? result = null; Exception? ex = null;
+                try { result = method.Invoke(method.IsStatic ? null : solution, new object?[] { scenario.Nums }); }
+                catch (Exception e) { ex = e; } finally { sw.Stop(); }
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
+                if (ex != null) { Console.WriteLine($"ERROR: {ex.GetBaseException().Message}"); continue; }
+                var actual = result?.ToString() ?? "null";
+                var expected = scenario.Expected.ToString();
+                Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "\u2705 PASS" : "\u274c FAIL")}");
+            }
+        }
+
+        private sealed record Scenario(string Name, int[] Nums, int Expected);
+    }
 }

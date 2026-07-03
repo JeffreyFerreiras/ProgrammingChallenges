@@ -1,40 +1,58 @@
-﻿using System.Diagnostics;
+﻿// LeetCode 322 - Coin Change
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-namespace CoinChangeNeetCode;
-
-internal static class Program
+namespace CoinChangeNeetCode
 {
-    private static void Main()
+    internal class Program
     {
-        Console.WriteLine("Coin Change");
-        Console.WriteLine(new string('=', 11) + "\n");
-
-        var solution = new Solution();
-
-        var scenarios = new[]
+        private static void Main(string[] args)
         {
-            (Name: "Example 1", Coins: new[] { 1, 2, 5 }, Amount: 11, Expected: 3),
-            (Name: "Example 2", Coins: [2], Amount: 3, Expected: -1),
-            (Name: "Example 3", Coins: [1], Amount: 0, Expected: 0),
-            (Name: "Edge: Single Coin", Coins: [1], Amount: 1, Expected: 1),
-            (Name: "Impossible", Coins: [5, 10], Amount: 3, Expected: -1),
-            (Name: "Large Amount", Coins: [1, 3, 4], Amount: 27, Expected: 7)
-        };
+            var scenarios = new[]
+            {
+                new Scenario("Example 1", new[] { 1, 2, 5 }, 11, 3),
+                new Scenario("Example 2", new[] { 2 }, 3, -1),
+                new Scenario("Example 3", new[] { 1 }, 0, 0),
+                new Scenario("Edge: Single Coin", new[] { 1 }, 1, 1),
+                new Scenario("Impossible", new[] { 5, 10 }, 3, -1),
+                new Scenario("Large Amount", new[] { 1, 3, 4 }, 27, 7),
+            };
 
-        foreach (var scenario in scenarios)
-        {
-            var stopwatch = Stopwatch.StartNew();
-            var result = solution.CoinChange(scenario.Coins, scenario.Amount);
-            stopwatch.Stop();
-
-            Console.WriteLine($"Scenario: {scenario.Name}");
-            Console.WriteLine($"Method: {nameof(Solution.CoinChange)}");
-            Console.WriteLine($"Input: coins = {FormatArray(scenario.Coins)}, amount = {scenario.Amount}");
-            Console.WriteLine($"Result: {result}, Expected: {scenario.Expected}");
-            Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine(new string('-', 60));
+            foreach (var scenario in scenarios)
+                RunScenario(scenario);
+            Console.WriteLine();
         }
-    }
 
-    private static string FormatArray(int[] values) => "[" + string.Join(",", values) + "]";
+        private static void RunScenario(Scenario scenario)
+        {
+            Console.WriteLine($"\n=== {scenario.Name} ===");
+            var solution = new Solution();
+            var methods = typeof(Solution)
+                .GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName)
+                .Where(m => m.GetParameters().Length == 2)
+                .Where(m => m.GetParameters()[0].ParameterType == typeof(int[]))
+                .Where(m => m.GetParameters()[1].ParameterType == typeof(int))
+                .Where(m => m.ReturnType == typeof(int))
+                .OrderBy(m => m.Name)
+                .ToArray();
+
+            foreach (var method in methods)
+            {
+                var sw = Stopwatch.StartNew();
+                object? result = null; Exception? ex = null;
+                try { result = method.Invoke(method.IsStatic ? null : solution, new object?[] { scenario.Coins, scenario.Amount }); }
+                catch (Exception e) { ex = e; } finally { sw.Stop(); }
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
+                if (ex != null) { Console.WriteLine($"ERROR: {ex.GetBaseException().Message}"); continue; }
+                var actual = result?.ToString() ?? "null";
+                var expected = scenario.Expected.ToString();
+                Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "\u2705 PASS" : "\u274c FAIL")}");
+            }
+        }
+
+        private sealed record Scenario(string Name, int[] Coins, int Amount, int Expected);
+    }
 }

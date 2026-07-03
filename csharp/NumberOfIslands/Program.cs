@@ -1,104 +1,119 @@
-﻿/*
-LeetCode #200 - Number of Islands
+﻿// LeetCode #200 - Number of Islands
+// Given an m x n 2D binary grid of '1's (land) and '0's (water), return the number of islands.
 
-Given an m x n 2D binary grid 'grid' which represents a map of '1's (land) and '0's (water), 
-return the number of islands.
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. 
-You may assume all four edges of the grid are all surrounded by water.
-
-Example 1:
-Input: grid = [
-  ["1","1","1","1","0"],
-  ["1","1","0","1","0"],
-  ["1","1","0","0","0"],
-  ["0","0","0","0","0"]
-]
-Output: 1
-
-Example 2:
-Input: grid = [
-  ["1","1","0","0","0"],
-  ["1","1","0","0","0"],
-  ["0","0","1","0","0"],
-  ["0","0","0","1","1"]
-]
-Output: 3
-*/
-class Program
+namespace NumberOfIslands
 {
-    static void Main(string[] args)
+    internal class Program
     {
-        var solution = new Solution();
+        private static void Main(string[] args)
+        {
+            var scenarios = new[]
+            {
+                new Scenario(
+                    "Scenario 1 - Single island",
+                    [
+                        "11110".ToCharArray(),
+                        "11010".ToCharArray(),
+                        "11000".ToCharArray(),
+                        "00000".ToCharArray()
+                    ],
+                    1),
+                new Scenario(
+                    "Scenario 2 - Three islands",
+                    [
+                        "11000".ToCharArray(),
+                        "11000".ToCharArray(),
+                        "00100".ToCharArray(),
+                        "00011".ToCharArray()
+                    ],
+                    3),
+                new Scenario(
+                    "Scenario 3 - 16 islands (4 repeating blocks separated by water rows)",
+                    [
+                        "11110111101111011110".ToCharArray(),
+                        "11010110101101011010".ToCharArray(),
+                        "11000110001100011000".ToCharArray(),
+                        "00000000000000000000".ToCharArray(),
+                        "11110111101111011110".ToCharArray(),
+                        "11010110101101011010".ToCharArray(),
+                        "11000110001100011000".ToCharArray(),
+                        "00000000000000000000".ToCharArray(),
+                        "11110111101111011110".ToCharArray(),
+                        "11010110101101011010".ToCharArray(),
+                        "11000110001100011000".ToCharArray(),
+                        "00000000000000000000".ToCharArray(),
+                        "11110111101111011110".ToCharArray(),
+                        "11010110101101011010".ToCharArray(),
+                        "11000110001100011000".ToCharArray(),
+                        "00000000000000000000".ToCharArray()
+                    ],
+                    16),
+            };
 
-        Console.WriteLine("=========================================");
-        Console.WriteLine("  Number of Islands Challenge Results");
-        Console.WriteLine("=========================================\n");
+            foreach (var scenario in scenarios)
+                RunScenario(scenario);
 
-        var sw = System.Diagnostics.Stopwatch.StartNew();
+            Console.WriteLine();
+        }
 
-        // Scenario 1
-        Console.WriteLine("---------- Scenario 1 ----------");
-        char[][] grid1 = [
-            "11110".ToCharArray(),
-            "11010".ToCharArray(),
-            "11000".ToCharArray(),
-            "00000".ToCharArray()
-        ];
-        Console.WriteLine("Input: grid1");
-        Console.WriteLine("Expected Output: 1");
-        sw.Restart();
-        int result1 = solution.NumIslands(grid1);
-        sw.Stop();
-        Console.WriteLine($"Result: {result1}");
-        Console.WriteLine($"Time: {sw.ElapsedTicks} tics\n");
+        private static void RunScenario(Scenario scenario)
+        {
+            Console.WriteLine($"\n=== {scenario.Name} ===");
+            Console.WriteLine($"Grid: {scenario.Grid.Length}x{scenario.Grid[0].Length}");
 
-        // Scenario 2
-        Console.WriteLine("---------- Scenario 2 ----------");
-        char[][] grid2 = [
-            "11000".ToCharArray(),
-            "11000".ToCharArray(),
-            "00100".ToCharArray(),
-            "00011".ToCharArray()
-        ];
-        Console.WriteLine("Input: grid2");
-        Console.WriteLine("Expected Output: 3");
-        sw.Restart();
-        int result2 = solution.NumIslands(grid2);
-        sw.Stop();
-        Console.WriteLine($"Result: {result2}");
-        Console.WriteLine($"Time: {sw.ElapsedTicks} tics\n");
+            var solution = new Solution();
+            var methods = typeof(Solution)
+                .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName)
+                .Where(m => m.GetParameters().Length == 1)
+                .Where(m => m.GetParameters()[0].ParameterType == typeof(char[][]))
+                .Where(m => m.ReturnType == typeof(int))
+                .OrderBy(m => m.Name)
+                .ToArray();
 
-        // Scenario 3
-        // The grid is divided by water-only rows (rows 4, 8, 12, and 16),
-        // resulting in 4 separate connected blocks (islands)
-        Console.WriteLine("---------- Scenario 3 ----------");
-        char[][] grid3 = [
-            "11110111101111011110".ToCharArray(),
-            "11010110101101011010".ToCharArray(),
-            "11000110001100011000".ToCharArray(),
-            "00000000000000000000".ToCharArray(), // separator
-            "11110111101111011110".ToCharArray(),
-            "11010110101101011010".ToCharArray(),
-            "11000110001100011000".ToCharArray(),
-            "00000000000000000000".ToCharArray(), // separator
-            "11110111101111011110".ToCharArray(),
-            "11010110101101011010".ToCharArray(),
-            "11000110001100011000".ToCharArray(),
-            "00000000000000000000".ToCharArray(), // separator
-            "11110111101111011110".ToCharArray(),
-            "11010110101101011010".ToCharArray(),
-            "11000110001100011000".ToCharArray(),
-            "00000000000000000000".ToCharArray()  // separator (optional last water row)
-        ];
-        Console.WriteLine("Input: grid3");
-        Console.WriteLine("Expected Output: 16");
-        sw.Restart();
-        int result3 = solution.NumIslands(grid3);
-        sw.Stop();
-        Console.WriteLine($"Result: {result3}");
-        Console.WriteLine($"Time: {sw.ElapsedTicks} tics\n");
+            foreach (var method in methods)
+            {
+                // Deep-copy the grid: DFS/BFS mutates cells to '0' during traversal
+                var gridCopy = scenario.Grid.Select(row => (char[])row.Clone()).ToArray();
 
-        Console.WriteLine("=========================================");
+                var stopwatch = Stopwatch.StartNew();
+                object? result = null;
+                Exception? exception = null;
+
+                try
+                {
+                    result = method.Invoke(solution, new object?[] { gridCopy });
+                }
+                catch (Exception ex)
+                {
+                    exception = ex;
+                }
+                finally
+                {
+                    stopwatch.Stop();
+                }
+
+                var elapsed = stopwatch.Elapsed.TotalMilliseconds;
+                Console.Write($"{method.Name} | {elapsed:0.0000} ms | ");
+
+                if (exception != null)
+                {
+                    Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
+                    continue;
+                }
+
+                var actual   = result?.ToString() ?? "null";
+                var expected = scenario.Expected.ToString();
+                var passed   = actual == expected;
+                Console.WriteLine($"{actual} | Expected {expected} | {(passed ? "✅ PASS" : "❌ FAIL")}");
+            }
+        }
+
+        private sealed record Scenario(string Name, char[][] Grid, int Expected);
     }
 }

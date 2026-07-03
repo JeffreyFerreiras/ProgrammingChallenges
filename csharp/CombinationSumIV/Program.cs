@@ -1,40 +1,58 @@
-﻿using System.Diagnostics;
+﻿// LeetCode 377 - Combination Sum IV
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-namespace CombinationSumIV;
-
-internal static class Program
+namespace CombinationSumIV
 {
-    private static void Main()
+    internal class Program
     {
-        Console.WriteLine("Combination Sum IV");
-        Console.WriteLine(new string('=', 18) + "\n");
-
-        var solution = new Solution();
-
-        var scenarios = new[]
+        private static void Main(string[] args)
         {
-            (Name: "Example 1", Nums: new[] { 1, 2, 3 }, Target: 4, Expected: 7),
-            (Name: "Example 2", Nums: [9], Target: 3, Expected: 0),
-            (Name: "Edge: Exact", Nums: [4], Target: 4, Expected: 1),
-            (Name: "No Combination", Nums: [5, 6], Target: 3, Expected: 0),
-            (Name: "Large Target", Nums: [1, 2], Target: 10, Expected: 89),
-            (Name: "Multiple Paths", Nums: [2, 3, 5], Target: 8, Expected: 6)
-        };
+            var scenarios = new[]
+            {
+                new Scenario("Example 1", new[] { 1, 2, 3 }, 4, 7),
+                new Scenario("Example 2", new[] { 9 }, 3, 0),
+                new Scenario("Edge: Exact", new[] { 4 }, 4, 1),
+                new Scenario("No Combination", new[] { 5, 6 }, 3, 0),
+                new Scenario("Large Target", new[] { 1, 2 }, 10, 89),
+                new Scenario("Multiple Paths", new[] { 2, 3, 5 }, 8, 6),
+            };
 
-        foreach (var scenario in scenarios)
-        {
-            var stopwatch = Stopwatch.StartNew();
-            var result = solution.CombinationSum4(scenario.Nums, scenario.Target);
-            stopwatch.Stop();
-
-            Console.WriteLine($"Scenario: {scenario.Name}");
-            Console.WriteLine($"Method: {nameof(Solution.CombinationSum4)}");
-            Console.WriteLine($"Input: nums = {FormatArray(scenario.Nums)}, target = {scenario.Target}");
-            Console.WriteLine($"Result: {result}, Expected: {scenario.Expected}");
-            Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine(new string('-', 60));
+            foreach (var scenario in scenarios)
+                RunScenario(scenario);
+            Console.WriteLine();
         }
-    }
 
-    private static string FormatArray(int[] values) => "[" + string.Join(",", values) + "]";
+        private static void RunScenario(Scenario scenario)
+        {
+            Console.WriteLine($"\n=== {scenario.Name} ===");
+            var solution = new Solution();
+            var methods = typeof(Solution)
+                .GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName)
+                .Where(m => m.GetParameters().Length == 2)
+                .Where(m => m.GetParameters()[0].ParameterType == typeof(int[]))
+                .Where(m => m.GetParameters()[1].ParameterType == typeof(int))
+                .Where(m => m.ReturnType == typeof(int))
+                .OrderBy(m => m.Name)
+                .ToArray();
+
+            foreach (var method in methods)
+            {
+                var sw = Stopwatch.StartNew();
+                object? result = null; Exception? ex = null;
+                try { result = method.Invoke(method.IsStatic ? null : solution, new object?[] { scenario.Nums, scenario.Target }); }
+                catch (Exception e) { ex = e; } finally { sw.Stop(); }
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
+                if (ex != null) { Console.WriteLine($"ERROR: {ex.GetBaseException().Message}"); continue; }
+                var actual = result?.ToString() ?? "null";
+                var expected = scenario.Expected.ToString();
+                Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "\u2705 PASS" : "\u274c FAIL")}");
+            }
+        }
+
+        private sealed record Scenario(string Name, int[] Nums, int Target, int Expected);
+    }
 }

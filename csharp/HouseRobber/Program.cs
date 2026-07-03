@@ -1,51 +1,57 @@
-﻿using System.Diagnostics;
+﻿// LeetCode 198 - House Robber
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
-namespace HouseRobber;
-
-internal static class Program
+namespace HouseRobber
 {
-    private static void Main()
+    internal class Program
     {
-        Console.WriteLine("House Robber");
-        Console.WriteLine(new string('=', 12) + "\n");
-
-        var solution = new Solution();
-
-        var scenarios = new[]
+        private static void Main(string[] args)
         {
-            (Name: "Example 1", Houses: [1, 2, 3, 1], Expected: 4),
-            (Name: "Example 2", Houses: [2, 7, 9, 3, 1], Expected: 12),
-            (Name: "Edge: Zero", Houses: [0], Expected: 0),
-            (Name: "Single House", Houses: [10], Expected: 10),
-            (Name: "Large Values", Houses: [100, 1, 1, 100], Expected: 200),
-            (Name: "Long Street", Houses: BuildAlternating(12), Expected: 66)
-        };
+            var scenarios = new[]
+            {
+                new Scenario("Example 1", new[] { 1, 2, 3, 1 }, 4),
+                new Scenario("Example 2", new[] { 2, 7, 9, 3, 1 }, 12),
+                new Scenario("Edge: Zero", new[] { 0 }, 0),
+                new Scenario("Single House", new[] { 10 }, 10),
+                new Scenario("Large Values", new[] { 100, 1, 1, 100 }, 200),
+                new Scenario("Long Street", new[] { 11,0,11,0,11,0,11,0,11,0,11,0 }, 66),
+            };
 
-        foreach (var scenario in scenarios)
-        {
-            var stopwatch = Stopwatch.StartNew();
-            var result = solution.Rob(scenario.Houses);
-            stopwatch.Stop();
-
-            Console.WriteLine($"Scenario: {scenario.Name}");
-            Console.WriteLine($"Method: {nameof(Solution.Rob)}");
-            Console.WriteLine($"Input: nums = {FormatArray(scenario.Houses)}");
-            Console.WriteLine($"Result: {result}, Expected: {scenario.Expected}");
-            Console.WriteLine($"Elapsed: {stopwatch.Elapsed.TotalMilliseconds:F4} ms");
-            Console.WriteLine(new string('-', 60));
-        }
-    }
-
-    private static int[] BuildAlternating(int length)
-    {
-        var array = new int[length];
-        for (var i = 0; i < length; i++)
-        {
-            array[i] = i % 2 == 0 ? 11 : 0;
+            foreach (var scenario in scenarios)
+                RunScenario(scenario);
+            Console.WriteLine();
         }
 
-        return array;
-    }
+        private static void RunScenario(Scenario scenario)
+        {
+            Console.WriteLine($"\n=== {scenario.Name} ===");
+            var solution = new Solution();
+            var methods = typeof(Solution)
+                .GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .Where(m => !m.IsSpecialName)
+                .Where(m => m.GetParameters().Length == 1)
+                .Where(m => m.GetParameters()[0].ParameterType == typeof(int[]))
+                .Where(m => m.ReturnType == typeof(int))
+                .OrderBy(m => m.Name)
+                .ToArray();
 
-    private static string FormatArray(int[] values) => "[" + string.Join(",", values) + "]";
+            foreach (var method in methods)
+            {
+                var sw = Stopwatch.StartNew();
+                object? result = null; Exception? ex = null;
+                try { result = method.Invoke(method.IsStatic ? null : solution, new object?[] { scenario.Nums }); }
+                catch (Exception e) { ex = e; } finally { sw.Stop(); }
+                Console.Write($"{method.Name} | {sw.Elapsed.TotalMilliseconds:0.0000} ms | ");
+                if (ex != null) { Console.WriteLine($"ERROR: {ex.GetBaseException().Message}"); continue; }
+                var actual = result?.ToString() ?? "null";
+                var expected = scenario.Expected.ToString();
+                Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "\u2705 PASS" : "\u274c FAIL")}");
+            }
+        }
+
+        private sealed record Scenario(string Name, int[] Nums, int Expected);
+    }
 }
