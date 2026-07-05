@@ -2,8 +2,12 @@ namespace SingleNumber;
 
 public class Solution
 {
-    // Brute Force — O(n²) time, O(1) space
-    // For each element, scan the rest of the array to check if a duplicate exists.
+    /// <summary>
+    /// Brute Force — O(n²) time, O(1) space
+    /// For each element, scan the rest of the array to check if a duplicate exists.
+    /// </summary>
+    /// <param name="nums">Array of integers</param>
+    /// <returns>The single number that appears only once</returns>
     public int SingleNumber_BruteForce(int[] nums)
     {
         if (nums.Length == 1)
@@ -27,8 +31,12 @@ public class Solution
         return -1; // unreachable given valid input
     }
 
-    // Hash Map — O(n) time, O(n) space
-    // Count occurrences; return the element appearing exactly once.
+    /// <summary>
+    /// Hash Map — O(n) time, O(n) space
+    /// Count occurrences; return the element appearing exactly once.
+    /// </summary>
+    /// <param name="nums">Array of integers</param>
+    /// <returns>The single number that appears only once</returns>
     public int SingleNumber_HashMap(int[] nums)
     {
         Dictionary<int, int> counts = [];
@@ -43,8 +51,13 @@ public class Solution
         return -1; // unreachable given valid input
     }
 
-    // XOR — O(n) time, O(1) space
-    // TODO: XOR all elements together. Duplicates cancel (a ^ a = 0), leaving the single number.
+    /// <summary>
+    /// XOR — O(n) time, O(1) space
+    /// XOR all elements together. Duplicates cancel (a ^ a = 0), 
+    /// leaving the single number.   
+    /// </summary>
+    /// <param name="nums">Array of integers</param>
+    /// <returns>The single number that appears only once</returns>
     public int SingleNumber_XOR(int[] nums)
     {
         for (int i = 1; i < nums.Length; i++)

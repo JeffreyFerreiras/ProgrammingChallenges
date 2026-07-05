@@ -12,9 +12,9 @@ internal class Program
     {
         var scenarios = new[]
         {
-            new Scenario("Scenario 1 - [2,7,11,15] t=9", new int[] { 2, 7, 11, 15 }, 9, new int[] { 0, 1 }),
-            new Scenario("Scenario 2 - [3,2,4] t=6",     new int[] { 3, 2, 4 },       6, new int[] { 1, 2 }),
-            new Scenario("Scenario 3 - [3,3] t=6",       new int[] { 3, 3 },           6, new int[] { 0, 1 }),
+            new Scenario("Scenario 1 - [2,7,11,15] t=9", [2, 7, 11, 15], 9, [0, 1]),
+            new Scenario("Scenario 2 - [3,2,4] t=6", [3, 2, 4], 6, [1, 2]),
+            new Scenario("Scenario 3 - [3,3] t=6", [3, 3], 6, [0, 1]),
         };
 
         foreach (var scenario in scenarios)
@@ -43,28 +43,31 @@ internal class Program
             var inputCopy = (int[])scenario.Input.Clone();
             var stopwatch = Stopwatch.StartNew();
             object? result = null;
-            Exception? exception = null;
 
             try
             {
-                result = method.Invoke(solution, new object?[] { inputCopy, scenario.Target });
+                result = method.Invoke(solution, [inputCopy, scenario.Target]);
             }
-            catch (Exception ex) { exception = ex; }
-            finally { stopwatch.Stop(); }
-
-            Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
-
-            if (exception != null)
+            catch (Exception ex) 
             {
-                Console.WriteLine($"ERROR: {exception.GetBaseException().Message}");
+                Console.WriteLine($"ERROR: {ex.GetBaseException().Message}");
                 continue;
             }
+            finally 
+            {
+                stopwatch.Stop();
+                Console.Write($"{method.Name} | {stopwatch.Elapsed.TotalMilliseconds:0.0000} ms | ");
+            }
 
-            var actual   = string.Join(",", (int[])result!);
-            var expected = string.Join(",", scenario.Expected);
-            Console.WriteLine($"{actual} | Expected {expected} | {(actual == expected ? "✅ PASS" : "❌ FAIL")}");
+            var formattedResult   = string.Join(",", (int[])result!);
+            var expectedResult = string.Join(",", scenario.Expected);
+            Console.WriteLine($"{formattedResult} | Expected {expectedResult} | {(formattedResult == expectedResult ? "✅ PASS" : "❌ FAIL")}");
         }
     }
 
-    private sealed record Scenario(string Name, int[] Input, int Target, int[] Expected);
+    private sealed record Scenario(
+        string Name,
+        int[] Input,
+        int Target,
+        int[] Expected);
 }
