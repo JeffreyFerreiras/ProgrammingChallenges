@@ -8,37 +8,154 @@ public class Solution
 {
     public class TrieNode(char value)
     {
+        private const char NullChar = '\0';
         public Dictionary<char, TrieNode> Trie = [];
 
-        public bool IsWord {get; set;}
+        public bool IsWord { get; set; }
 
-        public char Value {get; private set; } = value;
+        public char Value { get; } = value;
 
-        void AddWord(string word)
+        public string Word { get; set; } = string.Empty;
+
+        public void AddWord(string word, string fullWord = "")
         {
-            if(string.IsNullOrEmpty(word))
+            if (string.IsNullOrEmpty(word))
             {
                 return;
             }
-
-            Value = word[0];
-
-            foreach(char character in word[1..])
+            if (string.IsNullOrEmpty(fullWord) && Value == NullChar)
             {
-                Trie[character] = new TrieNode(character);
-                Trie[character].AddWord(word[1..]);
+                fullWord = word;
             }
+            char firstChar = word[0];
+            Trie[firstChar] = new TrieNode(firstChar);
+            Trie[firstChar].AddWord(word[1..], fullWord);
 
-            if(Trie.Count == 0) // No more characters to add, mark this node as a complete word
+            if (Trie[firstChar].Trie.Count == 0)
             {
                 IsWord = true;
+                Word = fullWord;
             }
+        }
+
+        public bool ContainsWord(string word)
+        {
+            if (string.IsNullOrEmpty(word))
+            {
+                return false;
+            }
+
+            TrieNode currentNode = this;
+
+            foreach (char character in word)
+            {
+                if (!currentNode.Trie.TryGetValue(character, out var nextNode))
+                {
+                    return false;
+                }
+
+                currentNode = nextNode;
+            }
+
+            return currentNode.IsWord;
+        }
+
+        public string[] FindWords(string prefix)
+        {
+            if (string.IsNullOrEmpty(prefix))
+                return [];
+
+            TrieNode currentNode = this;
+            List<string> words = [];
+
+            foreach (char character in prefix)
+            {
+                if (!currentNode.Trie.TryGetValue(character, out var nextNode))
+                {
+                    return [];
+                }
+
+                currentNode = nextNode;
+            }
+
+            // At this point, currentNode is the node corresponding to the last character of the prefix
+            // We need to collect all words that can be formed from this node
+            HashSet<TrieNode> seen = [];
+            Queue<TrieNode> queue = new();
+            queue.Enqueue(currentNode);
+
+            while (queue.Count > 0)
+            {
+                currentNode = queue.Dequeue();
+
+                if (currentNode.IsWord)
+                {
+                    words.Add(currentNode.Word);
+                }
+
+                foreach (var nextNode in currentNode.Trie.Values)
+                {
+                    if (!seen.Contains(nextNode))
+                    {
+                        seen.Add(nextNode);
+                        queue.Enqueue(nextNode);
+                    }
+                }
+            }
+
+            return [.. words];
         }
     }
 
     public IList<string> FindWords(char[][] board, string[] words)
     {
-        throw new NotImplementedException("Implement the trie-based solution here.");
+        var trieRoot = new TrieNode('\0');
+        foreach (var word in words)
+        {
+            trieRoot.AddWord(word);
+        }
+
+        // BFS to find all words in the board
+        var found = new HashSet<string>(StringComparer.Ordinal);
+        HashSet<(int, int)> visited = [];
+        Queue<(int, int)> queue = new();
+
+        queue.Enqueue((0, 0));
+
+        while (queue.Count > 0)
+        {
+            var (row, col) = queue.Dequeue();
+
+            if (row < 0 || col < 0 || row >= board.Length || col >= board[0].Length)
+            {
+                continue;
+            }
+
+            if (visited.Contains((row, col)))
+            {
+                continue;
+            }
+
+            var prefix = board[row][col].ToString();
+            for (var r = 0; r < board.Length; r++)
+            {
+                for (var c = 0; c < board[0].Length; c++)
+                {
+                    var prefix = board[r][c].ToString();
+                    var wordsWithPrefix = trieRoot.FindWords(prefix);
+                    foreach (var word in wordsWithPrefix)
+                    {
+                        if (word.StartsWith(prefix))
+                        {
+                            found.Add(word);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        return [.. found];
     }
 
     public IList<string> FindWords_BruteForce(char[][] board, string[] words)
@@ -83,8 +200,15 @@ public class Solution
         }
 
         return matches.OrderBy(word => word).ToList();
-    
-        static bool Search(char[][] board, int row, int col, string word, int index, bool[,] visited)
+
+        static bool Search(
+            char[][] board,
+            int row,
+            int col,
+            string word,
+            int index,
+            bool[,] visited
+        )
         {
             if (index == word.Length)
             {
@@ -103,13 +227,7 @@ public class Solution
 
             visited[row, col] = true;
 
-            var directions = new[]
-            {
-                (-1, 0),
-                (1, 0),
-                (0, -1),
-                (0, 1)
-            };
+            var directions = new[] { (-1, 0), (1, 0), (0, -1), (0, 1) };
 
             foreach (var (deltaRow, deltaCol) in directions)
             {

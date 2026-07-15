@@ -19,28 +19,23 @@ namespace WordSearchII
                         new[] { 'o', 'a', 'a', 'n' },
                         new[] { 'e', 't', 'a', 'e' },
                         new[] { 'i', 'h', 'k', 'r' },
-                        new[] { 'i', 'f', 'l', 'v' }
+                        new[] { 'i', 'f', 'l', 'v' },
                     },
                     new[] { "oath", "pea", "eat", "rain" },
-                    new[] { "eat", "oath" }),
+                    new[] { "eat", "oath" }
+                ),
                 new Scenario(
                     "Scenario 2 - Empty search set",
-                    new[]
-                    {
-                        new[] { 'a', 'b' },
-                        new[] { 'c', 'd' }
-                    },
+                    new[] { new[] { 'a', 'b' }, new[] { 'c', 'd' } },
                     Array.Empty<string>(),
-                    Array.Empty<string>()),
+                    Array.Empty<string>()
+                ),
                 new Scenario(
                     "Scenario 3 - No matching words",
-                    new[]
-                    {
-                        new[] { 'a', 'b' },
-                        new[] { 'c', 'd' }
-                    },
+                    new[] { new[] { 'a', 'b' }, new[] { 'c', 'd' } },
                     new[] { "zz" },
-                    Array.Empty<string>())
+                    Array.Empty<string>()
+                ),
             };
 
             foreach (var scenario in scenarios)
@@ -76,7 +71,10 @@ namespace WordSearchII
 
                 try
                 {
-                    result = method.Invoke(solution, new object?[] { scenario.Board, scenario.Words });
+                    result = method.Invoke(
+                        solution,
+                        new object?[] { scenario.Board, scenario.Words }
+                    );
                 }
                 catch (Exception ex)
                 {
@@ -101,15 +99,20 @@ namespace WordSearchII
                     .OrderBy(word => word)
                     .ToArray();
 
-                var expectedWords = scenario.ExpectedWords
-                    .OrderBy(word => word)
-                    .ToArray();
+                var expectedWords = scenario.ExpectedWords.OrderBy(word => word).ToArray();
 
                 var passed = actualWords.SequenceEqual(expectedWords);
-                Console.WriteLine($"{string.Join(", ", actualWords)} | Expected {string.Join(", ", expectedWords)} | {(passed ? "✅ PASS" : "❌ FAIL")}");
+                Console.WriteLine(
+                    $"{string.Join(", ", actualWords)} | Expected {string.Join(", ", expectedWords)} | {(passed ? "✅ PASS" : "❌ FAIL")}"
+                );
             }
         }
 
-        private sealed record Scenario(string Name, char[][] Board, string[] Words, string[] ExpectedWords);
+        private sealed record Scenario(
+            string Name,
+            char[][] Board,
+            string[] Words,
+            string[] ExpectedWords
+        );
     }
 }
